@@ -1,0 +1,12 @@
+'use strict';
+
+enum UserType{
+
+    HUMAN_USER = 'HUMAN_USER',
+    SINGLE_SIGNON_USER = 'SINGLE_SIGNON_USER',
+    APPLICATION_USER = 'APPLICATION_USER',
+    ANONYMOUS_USER = 'ANONYMOUS_USER',
+    SERVER_USER = 'SERVER_USER',
+}
+
+export { UserType }

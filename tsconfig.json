@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "declaration": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "lib": ["es7", "es6", "dom"]
+    },
+    "include":[
+        "./src/**/*",
+        "./tests/*",
+        "./index.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "./node_modules",
+        "./node_modules/*",
+        "./node_modules/@types/node/index.d.ts",
+        "./tests/*.d.ts"
+    ]
+}

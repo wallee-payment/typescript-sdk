@@ -1,0 +1,42 @@
+{
+    "name": "wallee",
+    "title": "wallee",
+    "version": "1.0.0",
+    "description": "TypeScript/JavaScript client for wallee",
+    "homepage": "http://github.com/wallee-payment/typescript-sdk",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/wallee-payment/typescript-sdk.git"
+    },
+    "bugs": {
+        "url": "http://github.com/wallee-payment/typescript-sdk/issues"
+    },
+    "main": "index.js",
+    "types": "index.d.ts",
+    "scripts": {
+        "clean": "rm -Rfv ./node_modules/ ./src/**/*.js ./tests/*.d.ts ./tests/*.js",
+        "build": "tsc --project ./tsconfig.json",
+        "test": "mocha --require ts-node/register tests/*.ts tests/*.js",
+        "prepublishOnly": "npm run clean && npm i && npm run build && rm -frv ./tests/*.d.ts && npm test"
+    },
+    "author": "customweb GmbH",
+    "license": "Apache-2.0",
+    "keywords": ["wallee", "Payment", "Payment Integration"],
+    "dependencies": {
+        "bluebird": "^3.5.0",
+        "crypto-js": "^3.1.8",
+        "request": "^2.81.0",
+        "@types/bluebird": "*",
+        "@types/crypto-js": "*",
+        "@types/request": "*"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.2.1",
+        "@types/mocha": "^5.2.7",
+        "chai": "^4.2.0",
+        "form-data": "^2.5.1",
+        "mocha": "^6.2.0",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.1"
+    }
+}
