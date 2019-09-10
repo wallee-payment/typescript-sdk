@@ -35,9 +35,6 @@ transaction.lineItems=[lineItem];
 transaction.autoConfirmationEnabled=true;
 transaction.currency='EUR';
 
-// default transaction id
-let globalTransactionId: number = 1;
-
 
 describe('PaymentMethodServiceTest', () => {
     describe('paymentMethodServiceAllTest', () => {
@@ -57,7 +54,6 @@ describe('TestTransactionService', () => {
         it('Should count 1 transaction', function(done) {
             transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
-                globalTransactionId = <number> transactionCreate.id;
                 let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
                 entityQueryFilter.fieldName = 'id';
                 entityQueryFilter.value = transactionCreate.id;

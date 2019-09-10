@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wallee-payment/typescript-sdk.svg?branch=master)](https://travis-ci.org/wallee-payment/typescript-sdk)
+
 # wallee
 TypeScript SDK
 
@@ -24,34 +26,35 @@ let spaceId: number = 405;
 let userId: number = 512;
 let apiSecret: string = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
-function getTransactionService(): Wallee.api.TransactionService {
-    let transactionService: Wallee.api.TransactionService = new Wallee.api.TransactionService({
-        mac_version: macVersion,
-        space_id: spaceId,
-        user_id: userId,
-        api_secret: apiSecret
-    });
-    return transactionService;
+let config = {
+mac_version: macVersion,
+space_id: spaceId,
+user_id: userId,
+api_secret: apiSecret
 }
 
-function getTransaction(): Wallee.model.TransactionCreate {
-    let lineItem: Wallee.model.LineItemCreate = new Wallee.model.LineItemCreate();
-    lineItem.name='Red T-Shirt';
-    lineItem.uniqueId='5412';
-    lineItem.sku='red-t-shirt-123';
-    lineItem.quantity=1;
-    lineItem.amountIncludingTax=3.50;
-    lineItem.type=Wallee.model.LineItemType.PRODUCT;
+// Get Transaction
+let transactionService: Wallee.api.TransactionService = new Wallee.api.TransactionService(config);
 
-    let transaction: Wallee.model.TransactionCreate = new Wallee.model.TransactionCreate();
-    transaction.lineItems=[lineItem];
-    transaction.autoConfirmationEnabled=true;
-    transaction.currency='EUR';
-    return transaction;
-}
+// Get PaymentMethod Service
+let paymentMethodService: Wallee.api.PaymentMethodService = new Wallee.api.PaymentMethodService(config);
 
+// default line item for tests
+let lineItem: Wallee.model.LineItemCreate = new Wallee.model.LineItemCreate();
+lineItem.name='Red T-Shirt';
+lineItem.uniqueId='5412';
+lineItem.sku='red-t-shirt-123';
+lineItem.quantity=1;
+lineItem.amountIncludingTax=3.50;
+lineItem.type=Wallee.model.LineItemType.PRODUCT;
 
-let transactionService: Wallee.api.TransactionService = getTransactionService();
+// default transaction for tests
+let transaction: Wallee.model.TransactionCreate = new Wallee.model.TransactionCreate();
+transaction.lineItems=[lineItem];
+transaction.autoConfirmationEnabled=true;
+transaction.currency='EUR';
+
+// Count the number of the transactions by id
 transactionService.transactionServiceCreate(spaceId, getTransaction()).then(function (response) {
     let transactionCreate: Wallee.model.Transaction = response.body;
     let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
@@ -66,16 +69,12 @@ transactionService.transactionServiceCreate(spaceId, getTransaction()).then(func
 });
 
 
-
-let transactionService: Wallee.api.TransactionService = getTransactionService();
 transactionService.transactionServiceCreate(spaceId, getTransaction()).then(function (response) {
     let transactionCreate: Wallee.model.Transaction = response.body;
     // expect transactionCreate.state to equal Wallee.model.TransactionState.PENDING
 });
 
-
-
-let transactionService: Wallee.api.TransactionService = getTransactionService();
+// Fetch an existing transaction by id
 transactionService.transactionServiceCreate(spaceId, getTransaction()).then(function (response) {
     let transactionCreate: Wallee.model.Transaction = response.body;
     transactionService.transactionServiceRead(spaceId, <number>transactionCreate.id).then(function (response) {
@@ -85,28 +84,25 @@ transactionService.transactionServiceCreate(spaceId, getTransaction()).then(func
 });
 
 
-
-let transactionService: Wallee.api.TransactionService  = getTransactionService();
+ // search for a transaction by id
 transactionService.transactionServiceCreate(spaceId, getTransaction()).then(function (response) {
-let transactionCreate: Wallee.model.Transaction = response.body;
-let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
-entityQueryFilter.fieldName = 'id';
-entityQueryFilter.value = transactionCreate.id;
-entityQueryFilter.type = Wallee.model.EntityQueryFilterType.LEAF;
-entityQueryFilter.operator = Wallee.model.CriteriaOperator.EQUALS;
-let entityQuery = new Wallee.model.EntityQuery();
-entityQuery.filter = entityQueryFilter;
-transactionService.transactionServiceSearch(spaceId, entityQuery).then(function (response) {
-    let transactionSearch = response.body;
-    transactionSearch.forEach(function (entry) {
-        // expect entry state to equal Wallee.model.TransactionState.PENDING
-    });
+    let transactionCreate: Wallee.model.Transaction = response.body;
+    let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
+    entityQueryFilter.fieldName = 'id';
+    entityQueryFilter.value = transactionCreate.id;
+    entityQueryFilter.type = Wallee.model.EntityQueryFilterType.LEAF;
+    entityQueryFilter.operator = Wallee.model.CriteriaOperator.EQUALS;
+    let entityQuery = new Wallee.model.EntityQuery();
+    entityQuery.filter = entityQueryFilter;
+    transactionService.transactionServiceSearch(spaceId, entityQuery).then(function (response) {
+        let transactionSearch = response.body;
+        transactionSearch.forEach(function (entry) {
+            // expect entry.state to equal Wallee.model.TransactionState.PENDING
+        });
     });
 });
 
-
-
-let transactionService: Wallee.api.TransactionService = getTransactionService();
+// Edit transaction language
 transactionService.transactionServiceCreate(spaceId, getTransaction()).then(function (response) {
     let transactionCreate: Wallee.model.Transaction = response.body;
     transactionCreate.language = 'en-US';

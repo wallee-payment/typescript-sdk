@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 10.16.3
+script: npm test
+deploy:
+    provider: npm
+    email: victor.ndambakuwa@customweb.com
+    api_key:
+        secure: qiZwJBgl3cTUizak5Lute/D/eO/p0MkPUlCfzYeICL3shfDiHvnntJ6soeoyCd9xre/Cfo65Ceg7GXA/dKwLSvtn/QeQTqvkGwWPPgxUy77slYfv5AQAnHMavPU9yJmylyi0G4VMdMLsDjLhgiB4bRhpUWfCrfXxFAuUvysTNPUp/7hN8QAvnzmhTdohaUoVt/qlPQIAXBTAduF4OEEXQd873JTdg2ZxDFdYIIkWCiK98MkumHarDuUuEPfuVlLfLjCWekaCIS1/u+C1Pd6DDDnKa0UCIDUIYMsBZYCPBtLyJDcGbMM4GpKDXY4Km3MOmy6QA7PKp4NSCtWEvZ4XlA/kv8MwLqXJI/qJMYK0meKmmR77GCJh9ZjAW9fAx6k/0Iq2YqVzrC3pqR4xKV7EJ36N/ypK6eZ53e2bB5RFUMWUp1fo/e831Kl5wGn+8eUMQSajOdU12eaqCwHLpkTKAFU/FjVziffeOHSglJk3kwKaM/Nm+RLjXrSplJOJHIeROFalpCg4SKfma5N90MwCG2ymvLotSbngpfEM5ZhSodBIINF6LcVIyvDJINRMlJ+QDF/IDTGwNAz1yjAGdzCS4g4MHJ4HEnxRHmEubnD3vXv9HMcEACar10fo6EUikBjtSrCib3WxlQ4yKKlGrk7qh2bsPfNCxUMq5amAHZYMzLs=
+    on:
+        tags: true
+        repo: wallee-payment/typescript-sdk
+    skip_cleanup: true
