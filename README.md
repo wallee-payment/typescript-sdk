@@ -47,7 +47,7 @@ let transactionService: Wallee.api.TransactionService = new Wallee.api.Transacti
 
 ```
 
-To get stated with sending transactions please review the example below:
+To get started with sending transactions, please review the example below:
 
 ```typescript
 'use strict';
