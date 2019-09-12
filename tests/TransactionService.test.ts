@@ -14,10 +14,13 @@ let config = {
     api_secret: apiSecret
 }
 
-// Get Transaction
+// Transaction Service
 let transactionService: Wallee.api.TransactionService = new Wallee.api.TransactionService(config);
 
-// Get PaymentMethod Service
+// TransactionPaymentPage Service
+let transactionPaymentPageService: Wallee.api.TransactionPaymentPageService = new Wallee.api.TransactionPaymentPageService(config);
+
+// TransactionPaymentPage Service
 let paymentMethodService: Wallee.api.PaymentMethodService = new Wallee.api.PaymentMethodService(config);
 
 // default line item for tests
@@ -35,11 +38,26 @@ transaction.lineItems=[lineItem];
 transaction.autoConfirmationEnabled=true;
 transaction.currency='EUR';
 
+describe('TransactionPaymentPageService', () => {
+    describe('paymentPageUrl', () => {
+        it('expect a string', function(done) {
+            transactionService.create(spaceId, transaction).then(function (response) {
+                let transactionCreate: Wallee.model.Transaction = response.body;
+                transactionPaymentPageService.paymentPageUrl(spaceId, <number> transactionCreate.id).then(function (response) {
+                    let pageUrl: string = response.body;
+                    expect(pageUrl).to.be.a('string');
+                    done();
+                });
+            });
+        });
+    });
+});
 
-describe('PaymentMethodServiceTest', () => {
-    describe('paymentMethodServiceAllTest', () => {
+
+describe('PaymentMethodService', () => {
+    describe('all', () => {
         it('Should count payment methods to be greater than one', function(done) {
-            paymentMethodService.paymentMethodServiceAll().then(function (response) {
+            paymentMethodService.all().then(function (response) {
                 let variable: Array<Wallee.model.PaymentMethod> = response.body;
                 expect(variable.length).to.greaterThan(0);
                 done();
@@ -48,18 +66,18 @@ describe('PaymentMethodServiceTest', () => {
     });
 });
 
-describe('TestTransactionService', () => {
+describe('TransactionService', () => {
 
-    describe('transactionServiceCount', () => {
+    describe('count', () => {
         it('Should count 1 transaction', function(done) {
-            transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
+            transactionService.create(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
                 let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
                 entityQueryFilter.fieldName = 'id';
                 entityQueryFilter.value = transactionCreate.id;
                 entityQueryFilter.type = Wallee.model.EntityQueryFilterType.LEAF;
                 entityQueryFilter.operator = Wallee.model.CriteriaOperator.EQUALS;
-                transactionService.transactionServiceCount(spaceId, entityQueryFilter).then(function (response) {
+                transactionService.count(spaceId, entityQueryFilter).then(function (response) {
                     let transactionCount: number = response.body;
                     expect(transactionCount).to.equal(1);
                     done();
@@ -68,9 +86,9 @@ describe('TestTransactionService', () => {
         });
     });
 
-    describe('transactionServiceCreate', () => {
+    describe('create', () => {
         it('transaction.state should be an instance of TransactionState', function(done) {
-            transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
+            transactionService.create(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
                 expect(transactionCreate.state).to.equal(Wallee.model.TransactionState.PENDING);
                 done();
@@ -78,11 +96,11 @@ describe('TestTransactionService', () => {
         });
     });
 
-    describe('transactionServiceRead', () => {
+    describe('read', () => {
         it('transaction.state should be an instance of TransactionState', function (done) {
-            transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
+            transactionService.create(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
-                transactionService.transactionServiceRead(spaceId, <number>transactionCreate.id).then(function (response) {
+                transactionService.read(spaceId, <number>transactionCreate.id).then(function (response) {
                     let transactionRead = response.body;
                     expect(transactionRead.state).to.equal(Wallee.model.TransactionState.PENDING);
                     done();
@@ -91,9 +109,9 @@ describe('TestTransactionService', () => {
         });
     });
 
-    describe('transactionServiceSearch', () => {
+    describe('search', () => {
         it('transaction.state should be an instance of TransactionState', function (done) {
-            transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
+            transactionService.create(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
                 let entityQueryFilter: Wallee.model.EntityQueryFilter = new Wallee.model.EntityQueryFilter();
                 entityQueryFilter.fieldName = 'id';
@@ -102,7 +120,7 @@ describe('TestTransactionService', () => {
                 entityQueryFilter.operator = Wallee.model.CriteriaOperator.EQUALS;
                 let entityQuery = new Wallee.model.EntityQuery();
                 entityQuery.filter = entityQueryFilter;
-                transactionService.transactionServiceSearch(spaceId, entityQuery).then(function (response) {
+                transactionService.search(spaceId, entityQuery).then(function (response) {
                     let transactionSearch: Array<Wallee.model.Transaction> = response.body;
                     transactionSearch.forEach(function (entry) {
                         expect(entry.state).to.equal(Wallee.model.TransactionState.PENDING);
@@ -113,12 +131,12 @@ describe('TestTransactionService', () => {
         });
     });
 
-    describe('transactionServiceUpdate', () => {
+    describe('update', () => {
         it('transactionUpdate.language should equal to en-US', function (done) {
-            transactionService.transactionServiceCreate(spaceId, transaction).then(function (response) {
+            transactionService.create(spaceId, transaction).then(function (response) {
                 let transactionCreate: Wallee.model.Transaction = response.body;
                 transactionCreate.language = 'en-US';
-                transactionService.transactionServiceUpdate(spaceId, <Wallee.model.TransactionPending> transactionCreate).then(function (response) {
+                transactionService.update(spaceId, <Wallee.model.TransactionPending> transactionCreate).then(function (response) {
                     let transactionUpdate: Wallee.model.Transaction = response.body;
                     expect(transactionUpdate.language).to.equal('en-US');
                     done();

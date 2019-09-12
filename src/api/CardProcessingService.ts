@@ -3,7 +3,6 @@
 import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
-import CryptoJS = require("crypto-js");
 
 import { Authentication } from '../auth/Authentication';
 import { VoidAuth } from '../auth/VoidAuth';
@@ -17,19 +16,14 @@ import { UnencryptedCardDataCreate } from  '../models/UnencryptedCardDataCreate'
 class CardProcessingService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
-    protected configuration : any = {};
     protected _useQuerystring : boolean = false;
-    static errors: {[index: string]: any} = {
-        "ClientError": ClientError,
-        "ServerError": ServerError,
-    };
 
     protected authentications = {
-        'default': <Authentication>new VoidAuth(),
+        'default': <Authentication>new VoidAuth({})
     }
 
     constructor(configuration: any) {
-        this.configuration = configuration;
+        this.setDefaultAuthentication(new VoidAuth(configuration))
     }
 
     set useQuerystring(value: boolean) {
@@ -44,43 +38,8 @@ class CardProcessingService {
         return this._basePath;
     }
 
-    public setDefaultAuthentication(auth: Authentication) {
+    protected setDefaultAuthentication(auth: Authentication) {
         this.authentications.default = auth;
-    }
-
-    protected getAuthHeaders(method: string, resourcePath: string, queryParams: any) : any {
-
-        if (Object.keys(queryParams).length != 0) {
-            resourcePath += '?' + Object.keys(queryParams).map(
-                (key) => {
-                    return encodeURIComponent(key) + '=' + encodeURIComponent(queryParams[key])
-                }
-            ).join('&');
-        }
-
-        resourcePath = '/api' + resourcePath;
-
-        let timestamp: number = Math.trunc(+new Date / 1000);
-
-        let headers: any = {
-            'x-mac-userid': this.configuration.user_id,
-            'x-mac-version': this.configuration.mac_version,
-            'x-mac-timestamp': timestamp,
-            'x-mac-value': this.getSignature(method, resourcePath, timestamp)
-        };
-        return headers;
-    }
-
-    protected getSignature(method: string, resourcePath: string, timestamp: number) : string {
-        let data: string = [
-            this.configuration.mac_version,
-            this.configuration.user_id,
-            timestamp,
-            method,
-            resourcePath
-        ].join('|');
-        let api_secret_base64 = CryptoJS.enc.Base64.parse(this.configuration.api_secret);
-        return CryptoJS.HmacSHA512(data, api_secret_base64).toString(CryptoJS.enc.Base64);
     }
 
     /**
@@ -92,7 +51,7 @@ class CardProcessingService {
     * @param cardData The card details as JSON in plain which should be used to authorize the payment.
     * @param {*} [options] Override http request options.
     */
-    public cardProcessingServiceProcess (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
+    public process (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
         const localVarPath = this.basePath + '/card-processing/process';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -100,22 +59,22 @@ class CardProcessingService {
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling cardProcessingServiceProcess.');
+                throw new Error('Required parameter spaceId was null or undefined when calling process.');
             }
 
             // verify required parameter 'transactionId' is not null or undefined
             if (transactionId === null || transactionId === undefined) {
-                throw new Error('Required parameter transactionId was null or undefined when calling cardProcessingServiceProcess.');
+                throw new Error('Required parameter transactionId was null or undefined when calling process.');
             }
 
             // verify required parameter 'paymentMethodConfigurationId' is not null or undefined
             if (paymentMethodConfigurationId === null || paymentMethodConfigurationId === undefined) {
-                throw new Error('Required parameter paymentMethodConfigurationId was null or undefined when calling cardProcessingServiceProcess.');
+                throw new Error('Required parameter paymentMethodConfigurationId was null or undefined when calling process.');
             }
 
             // verify required parameter 'cardData' is not null or undefined
             if (cardData === null || cardData === undefined) {
-                throw new Error('Required parameter cardData was null or undefined when calling cardProcessingServiceProcess.');
+                throw new Error('Required parameter cardData was null or undefined when calling process.');
             }
 
         if (spaceId !== undefined) {
@@ -130,11 +89,6 @@ class CardProcessingService {
             localVarQueryParameters['paymentMethodConfigurationId'] = ObjectSerializer.serialize(paymentMethodConfigurationId, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'POST',
-            '/card-processing/process',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -166,6 +120,18 @@ class CardProcessingService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "Transaction");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }
@@ -182,7 +148,7 @@ class CardProcessingService {
     * @param cardData The card details as JSON in plain which should be used to authorize the payment.
     * @param {*} [options] Override http request options.
     */
-    public cardProcessingServiceProcessWith3DSecure (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
+    public processWith3DSecure (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/card-processing/processWith3DSecure';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -190,22 +156,22 @@ class CardProcessingService {
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling cardProcessingServiceProcessWith3DSecure.');
+                throw new Error('Required parameter spaceId was null or undefined when calling processWith3DSecure.');
             }
 
             // verify required parameter 'transactionId' is not null or undefined
             if (transactionId === null || transactionId === undefined) {
-                throw new Error('Required parameter transactionId was null or undefined when calling cardProcessingServiceProcessWith3DSecure.');
+                throw new Error('Required parameter transactionId was null or undefined when calling processWith3DSecure.');
             }
 
             // verify required parameter 'paymentMethodConfigurationId' is not null or undefined
             if (paymentMethodConfigurationId === null || paymentMethodConfigurationId === undefined) {
-                throw new Error('Required parameter paymentMethodConfigurationId was null or undefined when calling cardProcessingServiceProcessWith3DSecure.');
+                throw new Error('Required parameter paymentMethodConfigurationId was null or undefined when calling processWith3DSecure.');
             }
 
             // verify required parameter 'cardData' is not null or undefined
             if (cardData === null || cardData === undefined) {
-                throw new Error('Required parameter cardData was null or undefined when calling cardProcessingServiceProcessWith3DSecure.');
+                throw new Error('Required parameter cardData was null or undefined when calling processWith3DSecure.');
             }
 
         if (spaceId !== undefined) {
@@ -220,11 +186,6 @@ class CardProcessingService {
             localVarQueryParameters['paymentMethodConfigurationId'] = ObjectSerializer.serialize(paymentMethodConfigurationId, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'POST',
-            '/card-processing/processWith3DSecure',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -256,6 +217,18 @@ class CardProcessingService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "string");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }

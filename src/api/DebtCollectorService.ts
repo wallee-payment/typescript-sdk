@@ -3,7 +3,6 @@
 import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
-import CryptoJS = require("crypto-js");
 
 import { Authentication } from '../auth/Authentication';
 import { VoidAuth } from '../auth/VoidAuth';
@@ -16,19 +15,14 @@ import { ServerError } from  '../models/ServerError';
 class DebtCollectorService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
-    protected configuration : any = {};
     protected _useQuerystring : boolean = false;
-    static errors: {[index: string]: any} = {
-        "ClientError": ClientError,
-        "ServerError": ServerError,
-    };
 
     protected authentications = {
-        'default': <Authentication>new VoidAuth(),
+        'default': <Authentication>new VoidAuth({})
     }
 
     constructor(configuration: any) {
-        this.configuration = configuration;
+        this.setDefaultAuthentication(new VoidAuth(configuration))
     }
 
     set useQuerystring(value: boolean) {
@@ -43,43 +37,8 @@ class DebtCollectorService {
         return this._basePath;
     }
 
-    public setDefaultAuthentication(auth: Authentication) {
+    protected setDefaultAuthentication(auth: Authentication) {
         this.authentications.default = auth;
-    }
-
-    protected getAuthHeaders(method: string, resourcePath: string, queryParams: any) : any {
-
-        if (Object.keys(queryParams).length != 0) {
-            resourcePath += '?' + Object.keys(queryParams).map(
-                (key) => {
-                    return encodeURIComponent(key) + '=' + encodeURIComponent(queryParams[key])
-                }
-            ).join('&');
-        }
-
-        resourcePath = '/api' + resourcePath;
-
-        let timestamp: number = Math.trunc(+new Date / 1000);
-
-        let headers: any = {
-            'x-mac-userid': this.configuration.user_id,
-            'x-mac-version': this.configuration.mac_version,
-            'x-mac-timestamp': timestamp,
-            'x-mac-value': this.getSignature(method, resourcePath, timestamp)
-        };
-        return headers;
-    }
-
-    protected getSignature(method: string, resourcePath: string, timestamp: number) : string {
-        let data: string = [
-            this.configuration.mac_version,
-            this.configuration.user_id,
-            timestamp,
-            method,
-            resourcePath
-        ].join('|');
-        let api_secret_base64 = CryptoJS.enc.Base64.parse(this.configuration.api_secret);
-        return CryptoJS.HmacSHA512(data, api_secret_base64).toString(CryptoJS.enc.Base64);
     }
 
     /**
@@ -87,17 +46,12 @@ class DebtCollectorService {
     * @summary All
     * @param {*} [options] Override http request options.
     */
-    public debtCollectorServiceAll (options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<DebtCollector>;  }> {
+    public all (options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<DebtCollector>;  }> {
         const localVarPath = this.basePath + '/debt-collector/all';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'GET',
-            '/debt-collector/all',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -128,6 +82,18 @@ class DebtCollectorService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "Array<DebtCollector>");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }
@@ -141,7 +107,7 @@ class DebtCollectorService {
     * @param id The id of the collector which should be returned.
     * @param {*} [options] Override http request options.
     */
-    public debtCollectorServiceRead (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollector;  }> {
+    public read (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollector;  }> {
         const localVarPath = this.basePath + '/debt-collector/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -149,18 +115,13 @@ class DebtCollectorService {
 
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling debtCollectorServiceRead.');
+                throw new Error('Required parameter id was null or undefined when calling read.');
             }
 
         if (id !== undefined) {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'GET',
-            '/debt-collector/read',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -191,6 +152,18 @@ class DebtCollectorService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "DebtCollector");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }

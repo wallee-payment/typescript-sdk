@@ -3,7 +3,6 @@
 import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
-import CryptoJS = require("crypto-js");
 
 import { Authentication } from '../auth/Authentication';
 import { VoidAuth } from '../auth/VoidAuth';
@@ -16,19 +15,14 @@ import { UserSpaceRole } from  '../models/UserSpaceRole';
 class UserSpaceRoleService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
-    protected configuration : any = {};
     protected _useQuerystring : boolean = false;
-    static errors: {[index: string]: any} = {
-        "ClientError": ClientError,
-        "ServerError": ServerError,
-    };
 
     protected authentications = {
-        'default': <Authentication>new VoidAuth(),
+        'default': <Authentication>new VoidAuth({})
     }
 
     constructor(configuration: any) {
-        this.configuration = configuration;
+        this.setDefaultAuthentication(new VoidAuth(configuration))
     }
 
     set useQuerystring(value: boolean) {
@@ -43,43 +37,8 @@ class UserSpaceRoleService {
         return this._basePath;
     }
 
-    public setDefaultAuthentication(auth: Authentication) {
+    protected setDefaultAuthentication(auth: Authentication) {
         this.authentications.default = auth;
-    }
-
-    protected getAuthHeaders(method: string, resourcePath: string, queryParams: any) : any {
-
-        if (Object.keys(queryParams).length != 0) {
-            resourcePath += '?' + Object.keys(queryParams).map(
-                (key) => {
-                    return encodeURIComponent(key) + '=' + encodeURIComponent(queryParams[key])
-                }
-            ).join('&');
-        }
-
-        resourcePath = '/api' + resourcePath;
-
-        let timestamp: number = Math.trunc(+new Date / 1000);
-
-        let headers: any = {
-            'x-mac-userid': this.configuration.user_id,
-            'x-mac-version': this.configuration.mac_version,
-            'x-mac-timestamp': timestamp,
-            'x-mac-value': this.getSignature(method, resourcePath, timestamp)
-        };
-        return headers;
-    }
-
-    protected getSignature(method: string, resourcePath: string, timestamp: number) : string {
-        let data: string = [
-            this.configuration.mac_version,
-            this.configuration.user_id,
-            timestamp,
-            method,
-            resourcePath
-        ].join('|');
-        let api_secret_base64 = CryptoJS.enc.Base64.parse(this.configuration.api_secret);
-        return CryptoJS.HmacSHA512(data, api_secret_base64).toString(CryptoJS.enc.Base64);
     }
 
     /**
@@ -90,7 +49,7 @@ class UserSpaceRoleService {
     * @param roleId The role which is mapped to the user and space.
     * @param {*} [options] Override http request options.
     */
-    public userSpaceRoleServiceAddRole (userId: number, spaceId: number, roleId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: UserSpaceRole;  }> {
+    public addRole (userId: number, spaceId: number, roleId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: UserSpaceRole;  }> {
         const localVarPath = this.basePath + '/user-space-role/addRole';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -98,17 +57,17 @@ class UserSpaceRoleService {
 
             // verify required parameter 'userId' is not null or undefined
             if (userId === null || userId === undefined) {
-                throw new Error('Required parameter userId was null or undefined when calling userSpaceRoleServiceAddRole.');
+                throw new Error('Required parameter userId was null or undefined when calling addRole.');
             }
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling userSpaceRoleServiceAddRole.');
+                throw new Error('Required parameter spaceId was null or undefined when calling addRole.');
             }
 
             // verify required parameter 'roleId' is not null or undefined
             if (roleId === null || roleId === undefined) {
-                throw new Error('Required parameter roleId was null or undefined when calling userSpaceRoleServiceAddRole.');
+                throw new Error('Required parameter roleId was null or undefined when calling addRole.');
             }
 
         if (userId !== undefined) {
@@ -123,11 +82,6 @@ class UserSpaceRoleService {
             localVarQueryParameters['roleId'] = ObjectSerializer.serialize(roleId, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'POST',
-            '/user-space-role/addRole',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -158,6 +112,18 @@ class UserSpaceRoleService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "UserSpaceRole");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }
@@ -172,7 +138,7 @@ class UserSpaceRoleService {
     * @param spaceId The space to which the role is mapped.
     * @param {*} [options] Override http request options.
     */
-    public userSpaceRoleServiceList (userId: number, spaceId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<UserSpaceRole>;  }> {
+    public list (userId: number, spaceId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<UserSpaceRole>;  }> {
         const localVarPath = this.basePath + '/user-space-role/list';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -180,12 +146,12 @@ class UserSpaceRoleService {
 
             // verify required parameter 'userId' is not null or undefined
             if (userId === null || userId === undefined) {
-                throw new Error('Required parameter userId was null or undefined when calling userSpaceRoleServiceList.');
+                throw new Error('Required parameter userId was null or undefined when calling list.');
             }
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling userSpaceRoleServiceList.');
+                throw new Error('Required parameter spaceId was null or undefined when calling list.');
             }
 
         if (userId !== undefined) {
@@ -196,11 +162,6 @@ class UserSpaceRoleService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'POST',
-            '/user-space-role/list',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -231,6 +192,18 @@ class UserSpaceRoleService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
                         body = ObjectSerializer.deserialize(body, "Array<UserSpaceRole>");
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }
@@ -244,7 +217,7 @@ class UserSpaceRoleService {
     * @param id The id of user space role which should be removed
     * @param {*} [options] Override http request options.
     */
-    public userSpaceRoleServiceRemoveRole (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public removeRole (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/user-space-role/removeRole';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -252,18 +225,13 @@ class UserSpaceRoleService {
 
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling userSpaceRoleServiceRemoveRole.');
+                throw new Error('Required parameter id was null or undefined when calling removeRole.');
             }
 
         if (id !== undefined) {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
-        (<any>Object).assign(localVarHeaderParams, this.getAuthHeaders(
-            'POST',
-            '/user-space-role/removeRole',
-            localVarQueryParameters
-        ));
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let localVarUseFormData = false;
@@ -294,6 +262,18 @@ class UserSpaceRoleService {
                     if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
 
                         resolve({ response: response, body: body });
+                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
+                        let clientError = new ClientError();
+                        clientError.date = (new Date()).toDateString();
+                        clientError.id = <string> <any> response.statusCode;
+                        clientError.message = response.statusMessage;
+                        throw clientError;
+                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
+                        let serverError = new ServerError();
+                        serverError.date = (new Date()).toDateString();
+                        serverError.id = <string> <any> response.statusCode;
+                        serverError.message = response.statusMessage;
+                        throw serverError;
                     } else {
                         reject({ response: response, body: body });
                     }

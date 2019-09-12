@@ -1,5 +1,5 @@
 'use strict';
-import * as localVarRequest from 'request';
+import localVarRequest = require("request");
 
 interface Authentication {
     /**

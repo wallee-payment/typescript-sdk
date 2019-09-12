@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
@@ -16,8 +16,8 @@
     "scripts": {
         "clean": "rm -Rfv ./node_modules/ ./src/**/*.js ./tests/*.d.ts ./tests/*.js",
         "build": "tsc --project ./tsconfig.json",
-        "test": "mocha --require ts-node/register tests/*.ts tests/*.js",
-        "prepublishOnly": "npm run clean && npm i && npm run build && rm -frv ./tests/*.d.ts && npm test"
+        "test": "rm -frv ./tests/*.d.ts && mocha --require ts-node/register --timeout 3000 tests/*.ts tests/*.js",
+        "prepublishOnly": "npm run clean && npm i && npm run build && npm test"
     },
     "author": "customweb GmbH",
     "license": "Apache-2.0",

@@ -2,7 +2,7 @@
 import { AddressCreate } from "./AddressCreate";
 import { LineItemCreate } from "./LineItemCreate";
 import { PaymentMethodBrand } from "./PaymentMethodBrand";
-import { TokenizationnMode } from "./TokenizationnMode";
+import { TokenizationMode } from "./TokenizationMode";
 
 
 class AbstractTransactionPending {
@@ -95,7 +95,7 @@ class AbstractTransactionPending {
         /**
         * The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
         */
-    'tokenizationMode'?: TokenizationnMode;
+    'tokenizationMode'?: TokenizationMode;
 
 
     static discriminator: string | undefined = undefined;
@@ -207,7 +207,7 @@ class AbstractTransactionPending {
         {
         "name": "tokenizationMode",
         "baseName": "tokenizationMode",
-        "type": "TokenizationnMode"
+        "type": "TokenizationMode"
         }        
     ];
 

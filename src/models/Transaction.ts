@@ -8,7 +8,7 @@ import { LineItem } from "./LineItem";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
 import { PaymentMethodBrand } from "./PaymentMethodBrand";
 import { Token } from "./Token";
-import { TokenizationnMode } from "./TokenizationnMode";
+import { TokenizationMode } from "./TokenizationMode";
 import { TransactionEnvironmentSelectionStrategy } from "./TransactionEnvironmentSelectionStrategy";
 import { TransactionGroup } from "./TransactionGroup";
 import { TransactionState } from "./TransactionState";
@@ -280,7 +280,7 @@ class Transaction {
         /**
         * The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
         */
-    'tokenizationMode'?: TokenizationnMode;
+    'tokenizationMode'?: TokenizationMode;
 
         /**
         * The user agent header provides the exact string which contains the user agent of the buyer.
@@ -622,7 +622,7 @@ class Transaction {
         {
         "name": "tokenizationMode",
         "baseName": "tokenizationMode",
-        "type": "TokenizationnMode"
+        "type": "TokenizationMode"
         },
         
         {

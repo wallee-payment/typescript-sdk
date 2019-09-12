@@ -1,6 +1,6 @@
 'use strict';
 
-enum TokenizationnMode{
+enum TokenizationMode{
 
     FORCE_UPDATE = 'FORCE_UPDATE',
     FORCE_CREATION = 'FORCE_CREATION',
@@ -8,4 +8,4 @@ enum TokenizationnMode{
     ALLOW_ONE_CLICK_PAYMENT = 'ALLOW_ONE_CLICK_PAYMENT',
 }
 
-export { TokenizationnMode }
+export { TokenizationMode }

@@ -6,6 +6,7 @@ import { ConnectorInvocation } from "./ConnectorInvocation";
 import { FailureReason } from "./FailureReason";
 import { Label } from "./Label";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
+import { PaymentTerminal } from "./PaymentTerminal";
 import { TokenVersion } from "./TokenVersion";
 import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
@@ -91,6 +92,11 @@ class ChargeAttempt extends TransactionAwareEntity {
         * 
         */
     'succeededOn'?: Date;
+
+        /**
+        * 
+        */
+    'terminal'?: PaymentTerminal;
 
         /**
         * 
@@ -216,6 +222,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "succeededOn",
         "baseName": "succeededOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "terminal",
+        "baseName": "terminal",
+        "type": "PaymentTerminal"
         },
         
         {

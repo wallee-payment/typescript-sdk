@@ -115,6 +115,23 @@ import { PaymentMethodConfiguration } from "../models/PaymentMethodConfiguration
 import { PaymentPrimaryRiskTaker } from "../models/PaymentPrimaryRiskTaker";
 import { PaymentProcessor } from "../models/PaymentProcessor";
 import { PaymentProcessorConfiguration } from "../models/PaymentProcessorConfiguration";
+import { PaymentTerminal } from "../models/PaymentTerminal";
+import { PaymentTerminalAddress } from "../models/PaymentTerminalAddress";
+import { PaymentTerminalConfiguration } from "../models/PaymentTerminalConfiguration";
+import { PaymentTerminalConfigurationState } from "../models/PaymentTerminalConfigurationState";
+import { PaymentTerminalConfigurationVersion } from "../models/PaymentTerminalConfigurationVersion";
+import { PaymentTerminalConfigurationVersionState } from "../models/PaymentTerminalConfigurationVersionState";
+import { PaymentTerminalDevice } from "../models/PaymentTerminalDevice";
+import { PaymentTerminalDeviceManufacturer } from "../models/PaymentTerminalDeviceManufacturer";
+import { PaymentTerminalDeviceModel } from "../models/PaymentTerminalDeviceModel";
+import { PaymentTerminalDeviceState } from "../models/PaymentTerminalDeviceState";
+import { PaymentTerminalLocation } from "../models/PaymentTerminalLocation";
+import { PaymentTerminalLocationState } from "../models/PaymentTerminalLocationState";
+import { PaymentTerminalLocationVersion } from "../models/PaymentTerminalLocationVersion";
+import { PaymentTerminalLocationVersionState } from "../models/PaymentTerminalLocationVersionState";
+import { PaymentTerminalReference } from "../models/PaymentTerminalReference";
+import { PaymentTerminalState } from "../models/PaymentTerminalState";
+import { PaymentTerminalType } from "../models/PaymentTerminalType";
 import { Permission } from "../models/Permission";
 import { PersistableCurrencyAmount } from "../models/PersistableCurrencyAmount";
 import { PersistableCurrencyAmountUpdate } from "../models/PersistableCurrencyAmountUpdate";
@@ -206,7 +223,7 @@ import { Token } from "../models/Token";
 import { TokenVersion } from "../models/TokenVersion";
 import { TokenVersionState } from "../models/TokenVersionState";
 import { TokenVersionType } from "../models/TokenVersionType";
-import { TokenizationnMode } from "../models/TokenizationnMode";
+import { TokenizationMode } from "../models/TokenizationMode";
 import { Transaction } from "../models/Transaction";
 import { TransactionAwareEntity } from "../models/TransactionAwareEntity";
 import { TransactionComment } from "../models/TransactionComment";
@@ -332,6 +349,12 @@ class ObjectSerializer {
         "PaymentContractState": PaymentContractState,
         "PaymentLinkProtectionMode": PaymentLinkProtectionMode,
         "PaymentPrimaryRiskTaker": PaymentPrimaryRiskTaker,
+        "PaymentTerminalConfigurationState": PaymentTerminalConfigurationState,
+        "PaymentTerminalConfigurationVersionState": PaymentTerminalConfigurationVersionState,
+        "PaymentTerminalDeviceState": PaymentTerminalDeviceState,
+        "PaymentTerminalLocationState": PaymentTerminalLocationState,
+        "PaymentTerminalLocationVersionState": PaymentTerminalLocationVersionState,
+        "PaymentTerminalState": PaymentTerminalState,
         "ProductFeeType": ProductFeeType,
         "ProductMeteredTierPricing": ProductMeteredTierPricing,
         "RefundState": RefundState,
@@ -353,7 +376,7 @@ class ObjectSerializer {
         "SubscriptionSuspensionState": SubscriptionSuspensionState,
         "SubscriptionVersionState": SubscriptionVersionState,
         "TokenVersionState": TokenVersionState,
-        "TokenizationnMode": TokenizationnMode,
+        "TokenizationMode": TokenizationMode,
         "TransactionCompletionMode": TransactionCompletionMode,
         "TransactionCompletionState": TransactionCompletionState,
         "TransactionEnvironmentSelectionStrategy": TransactionEnvironmentSelectionStrategy,
@@ -452,6 +475,17 @@ class ObjectSerializer {
                 "PaymentMethodConfiguration": PaymentMethodConfiguration,
                 "PaymentProcessor": PaymentProcessor,
                 "PaymentProcessorConfiguration": PaymentProcessorConfiguration,
+                "PaymentTerminal": PaymentTerminal,
+                "PaymentTerminalAddress": PaymentTerminalAddress,
+                "PaymentTerminalConfiguration": PaymentTerminalConfiguration,
+                "PaymentTerminalConfigurationVersion": PaymentTerminalConfigurationVersion,
+                "PaymentTerminalDevice": PaymentTerminalDevice,
+                "PaymentTerminalDeviceManufacturer": PaymentTerminalDeviceManufacturer,
+                "PaymentTerminalDeviceModel": PaymentTerminalDeviceModel,
+                "PaymentTerminalLocation": PaymentTerminalLocation,
+                "PaymentTerminalLocationVersion": PaymentTerminalLocationVersion,
+                "PaymentTerminalReference": PaymentTerminalReference,
+                "PaymentTerminalType": PaymentTerminalType,
                 "Permission": Permission,
                 "PersistableCurrencyAmount": PersistableCurrencyAmount,
                 "PersistableCurrencyAmountUpdate": PersistableCurrencyAmountUpdate,
