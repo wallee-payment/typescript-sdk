@@ -1,8 +1,14 @@
 'use strict';
+import { SubscriptionComponentReferenceConfiguration } from "./SubscriptionComponentReferenceConfiguration";
 import { SubscriptionProductComponentReference } from "./SubscriptionProductComponentReference";
 
 
 class SubscriptionChangeRequest {
+
+        /**
+        * 
+        */
+    'componentConfigurations'?: Array<SubscriptionComponentReferenceConfiguration>;
 
         /**
         * 
@@ -34,6 +40,12 @@ class SubscriptionChangeRequest {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "componentConfigurations",
+        "baseName": "componentConfigurations",
+        "type": "Array<SubscriptionComponentReferenceConfiguration>"
+        },
+        
         {
         "name": "currency",
         "baseName": "currency",

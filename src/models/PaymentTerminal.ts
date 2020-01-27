@@ -50,11 +50,6 @@ class PaymentTerminal {
         /**
         * 
         */
-    'terminalDeviceId'?: number;
-
-        /**
-        * 
-        */
     'type'?: PaymentTerminalType;
 
         /**
@@ -113,12 +108,6 @@ class PaymentTerminal {
         "name": "state",
         "baseName": "state",
         "type": "PaymentTerminalState"
-        },
-        
-        {
-        "name": "terminalDeviceId",
-        "baseName": "terminalDeviceId",
-        "type": "number"
         },
         
         {

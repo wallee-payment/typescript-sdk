@@ -12,7 +12,7 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate {
         /**
         * 
         */
-    'reference'?: string;
+    'reference': string;
 
 
     static discriminator: string | undefined = undefined;

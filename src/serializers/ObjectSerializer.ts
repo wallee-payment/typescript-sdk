@@ -1,6 +1,9 @@
 'use strict';
 import { AbstractAccountUpdate } from "../models/AbstractAccountUpdate";
 import { AbstractApplicationUserUpdate } from "../models/AbstractApplicationUserUpdate";
+import { AbstractCustomerActive } from "../models/AbstractCustomerActive";
+import { AbstractCustomerAddressActive } from "../models/AbstractCustomerAddressActive";
+import { AbstractCustomerCommentActive } from "../models/AbstractCustomerCommentActive";
 import { AbstractDebtCollectionCaseUpdate } from "../models/AbstractDebtCollectionCaseUpdate";
 import { AbstractHumanUserUpdate } from "../models/AbstractHumanUserUpdate";
 import { AbstractPaymentLinkUpdate } from "../models/AbstractPaymentLinkUpdate";
@@ -38,6 +41,12 @@ import { ConditionType } from "../models/ConditionType";
 import { ConnectorInvocationStage } from "../models/ConnectorInvocationStage";
 import { CreationEntityState } from "../models/CreationEntityState";
 import { CriteriaOperator } from "../models/CriteriaOperator";
+import { Customer } from "../models/Customer";
+import { CustomerAddress } from "../models/CustomerAddress";
+import { CustomerAddressType } from "../models/CustomerAddressType";
+import { CustomerComment } from "../models/CustomerComment";
+import { CustomerPostalAddress } from "../models/CustomerPostalAddress";
+import { CustomerPostalAddressCreate } from "../models/CustomerPostalAddressCreate";
 import { CustomersPresence } from "../models/CustomersPresence";
 import { DataCollectionType } from "../models/DataCollectionType";
 import { DatabaseTranslatedString } from "../models/DatabaseTranslatedString";
@@ -121,15 +130,10 @@ import { PaymentTerminalConfiguration } from "../models/PaymentTerminalConfigura
 import { PaymentTerminalConfigurationState } from "../models/PaymentTerminalConfigurationState";
 import { PaymentTerminalConfigurationVersion } from "../models/PaymentTerminalConfigurationVersion";
 import { PaymentTerminalConfigurationVersionState } from "../models/PaymentTerminalConfigurationVersionState";
-import { PaymentTerminalDevice } from "../models/PaymentTerminalDevice";
-import { PaymentTerminalDeviceManufacturer } from "../models/PaymentTerminalDeviceManufacturer";
-import { PaymentTerminalDeviceModel } from "../models/PaymentTerminalDeviceModel";
-import { PaymentTerminalDeviceState } from "../models/PaymentTerminalDeviceState";
 import { PaymentTerminalLocation } from "../models/PaymentTerminalLocation";
 import { PaymentTerminalLocationState } from "../models/PaymentTerminalLocationState";
 import { PaymentTerminalLocationVersion } from "../models/PaymentTerminalLocationVersion";
 import { PaymentTerminalLocationVersionState } from "../models/PaymentTerminalLocationVersionState";
-import { PaymentTerminalReference } from "../models/PaymentTerminalReference";
 import { PaymentTerminalState } from "../models/PaymentTerminalState";
 import { PaymentTerminalType } from "../models/PaymentTerminalType";
 import { Permission } from "../models/Permission";
@@ -151,6 +155,7 @@ import { RefundCreate } from "../models/RefundCreate";
 import { RefundState } from "../models/RefundState";
 import { RefundType } from "../models/RefundType";
 import { RenderedDocument } from "../models/RenderedDocument";
+import { RenderedTerminalReceipt } from "../models/RenderedTerminalReceipt";
 import { ResourcePath } from "../models/ResourcePath";
 import { ResourceState } from "../models/ResourceState";
 import { RestAddressFormat } from "../models/RestAddressFormat";
@@ -180,6 +185,8 @@ import { SubscriptionChargeCreate } from "../models/SubscriptionChargeCreate";
 import { SubscriptionChargeProcessingType } from "../models/SubscriptionChargeProcessingType";
 import { SubscriptionChargeState } from "../models/SubscriptionChargeState";
 import { SubscriptionChargeType } from "../models/SubscriptionChargeType";
+import { SubscriptionComponentConfiguration } from "../models/SubscriptionComponentConfiguration";
+import { SubscriptionComponentReferenceConfiguration } from "../models/SubscriptionComponentReferenceConfiguration";
 import { SubscriptionCreateRequest } from "../models/SubscriptionCreateRequest";
 import { SubscriptionLedgerEntry } from "../models/SubscriptionLedgerEntry";
 import { SubscriptionLedgerEntryCreate } from "../models/SubscriptionLedgerEntryCreate";
@@ -261,6 +268,12 @@ import { Charge } from "../models/Charge";
 import { ChargeAttempt } from "../models/ChargeAttempt";
 import { ChargeFlowLevel } from "../models/ChargeFlowLevel";
 import { ConnectorInvocation } from "../models/ConnectorInvocation";
+import { CustomerActive } from "../models/CustomerActive";
+import { CustomerAddressActive } from "../models/CustomerAddressActive";
+import { CustomerAddressCreate } from "../models/CustomerAddressCreate";
+import { CustomerCommentActive } from "../models/CustomerCommentActive";
+import { CustomerCommentCreate } from "../models/CustomerCommentCreate";
+import { CustomerCreate } from "../models/CustomerCreate";
 import { DebtCollectionCaseCreate } from "../models/DebtCollectionCaseCreate";
 import { DebtCollectionCaseUpdate } from "../models/DebtCollectionCaseUpdate";
 import { DeliveryIndication } from "../models/DeliveryIndication";
@@ -329,6 +342,7 @@ class ObjectSerializer {
         "ConnectorInvocationStage": ConnectorInvocationStage,
         "CreationEntityState": CreationEntityState,
         "CriteriaOperator": CriteriaOperator,
+        "CustomerAddressType": CustomerAddressType,
         "CustomersPresence": CustomersPresence,
         "DataCollectionType": DataCollectionType,
         "DebtCollectionCaseState": DebtCollectionCaseState,
@@ -351,7 +365,6 @@ class ObjectSerializer {
         "PaymentPrimaryRiskTaker": PaymentPrimaryRiskTaker,
         "PaymentTerminalConfigurationState": PaymentTerminalConfigurationState,
         "PaymentTerminalConfigurationVersionState": PaymentTerminalConfigurationVersionState,
-        "PaymentTerminalDeviceState": PaymentTerminalDeviceState,
         "PaymentTerminalLocationState": PaymentTerminalLocationState,
         "PaymentTerminalLocationVersionState": PaymentTerminalLocationVersionState,
         "PaymentTerminalState": PaymentTerminalState,
@@ -392,6 +405,9 @@ class ObjectSerializer {
     static typeMap: {[index: string]: any} = {
                 "AbstractAccountUpdate": AbstractAccountUpdate,
                 "AbstractApplicationUserUpdate": AbstractApplicationUserUpdate,
+                "AbstractCustomerActive": AbstractCustomerActive,
+                "AbstractCustomerAddressActive": AbstractCustomerAddressActive,
+                "AbstractCustomerCommentActive": AbstractCustomerCommentActive,
                 "AbstractDebtCollectionCaseUpdate": AbstractDebtCollectionCaseUpdate,
                 "AbstractHumanUserUpdate": AbstractHumanUserUpdate,
                 "AbstractPaymentLinkUpdate": AbstractPaymentLinkUpdate,
@@ -418,6 +434,11 @@ class ObjectSerializer {
                 "CompletionLineItemCreate": CompletionLineItemCreate,
                 "Condition": Condition,
                 "ConditionType": ConditionType,
+                "Customer": Customer,
+                "CustomerAddress": CustomerAddress,
+                "CustomerComment": CustomerComment,
+                "CustomerPostalAddress": CustomerPostalAddress,
+                "CustomerPostalAddressCreate": CustomerPostalAddressCreate,
                 "DatabaseTranslatedString": DatabaseTranslatedString,
                 "DatabaseTranslatedStringCreate": DatabaseTranslatedStringCreate,
                 "DatabaseTranslatedStringItem": DatabaseTranslatedStringItem,
@@ -479,12 +500,8 @@ class ObjectSerializer {
                 "PaymentTerminalAddress": PaymentTerminalAddress,
                 "PaymentTerminalConfiguration": PaymentTerminalConfiguration,
                 "PaymentTerminalConfigurationVersion": PaymentTerminalConfigurationVersion,
-                "PaymentTerminalDevice": PaymentTerminalDevice,
-                "PaymentTerminalDeviceManufacturer": PaymentTerminalDeviceManufacturer,
-                "PaymentTerminalDeviceModel": PaymentTerminalDeviceModel,
                 "PaymentTerminalLocation": PaymentTerminalLocation,
                 "PaymentTerminalLocationVersion": PaymentTerminalLocationVersion,
-                "PaymentTerminalReference": PaymentTerminalReference,
                 "PaymentTerminalType": PaymentTerminalType,
                 "Permission": Permission,
                 "PersistableCurrencyAmount": PersistableCurrencyAmount,
@@ -501,6 +518,7 @@ class ObjectSerializer {
                 "RefundComment": RefundComment,
                 "RefundCreate": RefundCreate,
                 "RenderedDocument": RenderedDocument,
+                "RenderedTerminalReceipt": RenderedTerminalReceipt,
                 "ResourcePath": ResourcePath,
                 "RestAddressFormat": RestAddressFormat,
                 "RestCountry": RestCountry,
@@ -524,6 +542,8 @@ class ObjectSerializer {
                 "SubscriptionChangeRequest": SubscriptionChangeRequest,
                 "SubscriptionCharge": SubscriptionCharge,
                 "SubscriptionChargeCreate": SubscriptionChargeCreate,
+                "SubscriptionComponentConfiguration": SubscriptionComponentConfiguration,
+                "SubscriptionComponentReferenceConfiguration": SubscriptionComponentReferenceConfiguration,
                 "SubscriptionCreateRequest": SubscriptionCreateRequest,
                 "SubscriptionLedgerEntry": SubscriptionLedgerEntry,
                 "SubscriptionLedgerEntryCreate": SubscriptionLedgerEntryCreate,
@@ -583,6 +603,12 @@ class ObjectSerializer {
                 "ChargeAttempt": ChargeAttempt,
                 "ChargeFlowLevel": ChargeFlowLevel,
                 "ConnectorInvocation": ConnectorInvocation,
+                "CustomerActive": CustomerActive,
+                "CustomerAddressActive": CustomerAddressActive,
+                "CustomerAddressCreate": CustomerAddressCreate,
+                "CustomerCommentActive": CustomerCommentActive,
+                "CustomerCommentCreate": CustomerCommentCreate,
+                "CustomerCreate": CustomerCreate,
                 "DebtCollectionCaseCreate": DebtCollectionCaseCreate,
                 "DebtCollectionCaseUpdate": DebtCollectionCaseUpdate,
                 "DeliveryIndication": DeliveryIndication,

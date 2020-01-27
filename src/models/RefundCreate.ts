@@ -8,6 +8,11 @@ class RefundCreate {
         /**
         * 
         */
+    'amount'?: number;
+
+        /**
+        * 
+        */
     'completion'?: number;
 
         /**
@@ -23,7 +28,7 @@ class RefundCreate {
         /**
         * 
         */
-    'reductions': Array<LineItemReductionCreate>;
+    'reductions'?: Array<LineItemReductionCreate>;
 
         /**
         * 
@@ -40,6 +45,12 @@ class RefundCreate {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "amount",
+        "baseName": "amount",
+        "type": "number"
+        },
+        
         {
         "name": "completion",
         "baseName": "completion",

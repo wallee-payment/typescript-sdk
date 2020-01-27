@@ -75,6 +75,11 @@ class Subscription {
         /**
         * 
         */
+    'terminatedBy'?: number;
+
+        /**
+        * 
+        */
     'terminatedOn'?: Date;
 
         /**
@@ -173,6 +178,12 @@ class Subscription {
         "name": "subscriber",
         "baseName": "subscriber",
         "type": "Subscriber"
+        },
+        
+        {
+        "name": "terminatedBy",
+        "baseName": "terminatedBy",
+        "type": "number"
         },
         
         {

@@ -1,5 +1,6 @@
 'use strict';
 import { Subscription } from "./Subscription";
+import { SubscriptionComponentConfiguration } from "./SubscriptionComponentConfiguration";
 import { SubscriptionProductComponent } from "./SubscriptionProductComponent";
 import { SubscriptionProductVersion } from "./SubscriptionProductVersion";
 import { SubscriptionVersionState } from "./SubscriptionVersionState";
@@ -16,6 +17,11 @@ class SubscriptionVersion {
         * The subscriber is charged in the billing currency. The billing currency has to be one of the enabled currencies on the subscription product.
         */
     'billingCurrency'?: string;
+
+        /**
+        * 
+        */
+    'componentConfigurations'?: Array<SubscriptionComponentConfiguration>;
 
         /**
         * 
@@ -112,6 +118,12 @@ class SubscriptionVersion {
         "name": "billingCurrency",
         "baseName": "billingCurrency",
         "type": "string"
+        },
+        
+        {
+        "name": "componentConfigurations",
+        "baseName": "componentConfigurations",
+        "type": "Array<SubscriptionComponentConfiguration>"
         },
         
         {

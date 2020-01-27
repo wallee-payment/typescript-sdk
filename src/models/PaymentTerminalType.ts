@@ -1,8 +1,12 @@
 'use strict';
-import { PaymentConnector } from "./PaymentConnector";
 
 
 class PaymentTerminalType {
+
+        /**
+        * 
+        */
+    'activeAccountRequired'?: boolean;
 
         /**
         * 
@@ -19,16 +23,17 @@ class PaymentTerminalType {
         */
     'name'?: { [key: string]: string; };
 
-        /**
-        * 
-        */
-    'supportedConnectors'?: Array<PaymentConnector>;
-
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "activeAccountRequired",
+        "baseName": "activeAccountRequired",
+        "type": "boolean"
+        },
+        
         {
         "name": "description",
         "baseName": "description",
@@ -45,12 +50,6 @@ class PaymentTerminalType {
         "name": "name",
         "baseName": "name",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "supportedConnectors",
-        "baseName": "supportedConnectors",
-        "type": "Array<PaymentConnector>"
         }        
     ];
 

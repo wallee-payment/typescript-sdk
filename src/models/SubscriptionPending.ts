@@ -7,11 +7,6 @@ class SubscriptionPending extends SubscriptionUpdate {
         /**
         * 
         */
-    'affiliate'?: number;
-
-        /**
-        * 
-        */
     'reference'?: string;
 
         /**
@@ -29,12 +24,6 @@ class SubscriptionPending extends SubscriptionUpdate {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
-        {
-        "name": "affiliate",
-        "baseName": "affiliate",
-        "type": "number"
-        },
-        
         {
         "name": "reference",
         "baseName": "reference",

@@ -16,6 +16,11 @@ class SubscriptionUpdate {
         /**
         * 
         */
+    'affiliate'?: number;
+
+        /**
+        * 
+        */
     'description'?: string;
 
         /**
@@ -37,6 +42,12 @@ class SubscriptionUpdate {
         {
         "name": "version",
         "baseName": "version",
+        "type": "number"
+        },
+        
+        {
+        "name": "affiliate",
+        "baseName": "affiliate",
         "type": "number"
         },
         

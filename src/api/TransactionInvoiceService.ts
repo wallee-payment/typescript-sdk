@@ -95,24 +95,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "number");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "number");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -175,24 +189,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "RenderedDocument");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "RenderedDocument");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -265,24 +293,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "RenderedDocument");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "RenderedDocument");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -345,24 +387,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "boolean");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "boolean");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -425,24 +481,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "TransactionInvoice");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionInvoice");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -505,24 +575,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "TransactionInvoice");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionInvoice");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -585,24 +669,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "TransactionInvoice");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionInvoice");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -672,24 +770,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "TransactionInvoice");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "TransactionInvoice");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -749,24 +861,38 @@ class TransactionInvoiceService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "Array<TransactionInvoice>");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Array<TransactionInvoice>");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });

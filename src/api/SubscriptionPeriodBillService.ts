@@ -12,7 +12,7 @@ import { ClientError } from  '../models/ClientError';
 import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
 import { ServerError } from  '../models/ServerError';
-import { SubscriptionVersion } from  '../models/SubscriptionVersion';
+import { SubscriptionPeriodBill } from  '../models/SubscriptionPeriodBill';
 
 class SubscriptionPeriodBillService {
     protected _basePath = 'https://app-wallee.com:443/api';
@@ -93,24 +93,38 @@ class SubscriptionPeriodBillService {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "number");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "number");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -122,7 +136,7 @@ class SubscriptionPeriodBillService {
     * @param id The id of the subscription period bill which should be returned.
     * @param {*} [options] Override http request options.
     */
-    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionVersion;  }> {
+    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionPeriodBill;  }> {
         const localVarPath = this.basePath + '/subscription-period-bill/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -168,29 +182,43 @@ class SubscriptionPeriodBillService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: SubscriptionVersion;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SubscriptionPeriodBill;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "SubscriptionVersion");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "SubscriptionPeriodBill");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });
@@ -202,7 +230,7 @@ class SubscriptionPeriodBillService {
     * @param query The query restricts the subscription period bills which are returned by the search.
     * @param {*} [options] Override http request options.
     */
-    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<SubscriptionVersion>;  }> {
+    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<SubscriptionPeriodBill>;  }> {
         const localVarPath = this.basePath + '/subscription-period-bill/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -245,29 +273,43 @@ class SubscriptionPeriodBillService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: Array<SubscriptionVersion>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<SubscriptionPeriodBill>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
                 } else {
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        body = ObjectSerializer.deserialize(body, "Array<SubscriptionVersion>");
-                        resolve({ response: response, body: body });
-                    } else if (response.statusCode && response.statusCode >= 400 && response.statusCode <= 499) {
-                        let clientError = new ClientError();
-                        clientError.date = (new Date()).toDateString();
-                        clientError.id = <string> <any> response.statusCode;
-                        clientError.message = response.statusMessage;
-                        throw clientError;
-                    } else if (response.statusCode && response.statusCode >= 500 && response.statusCode <= 599) {
-                        let serverError = new ServerError();
-                        serverError.date = (new Date()).toDateString();
-                        serverError.id = <string> <any> response.statusCode;
-                        serverError.message = response.statusMessage;
-                        throw serverError;
-                    } else {
-                        reject({ response: response, body: body });
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Array<SubscriptionPeriodBill>");
+                            resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
                     }
+                    reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
                 }
             });
         });

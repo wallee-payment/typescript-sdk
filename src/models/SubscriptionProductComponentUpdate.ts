@@ -35,9 +35,24 @@ class SubscriptionProductComponentUpdate {
     'description'?: DatabaseTranslatedStringCreate;
 
         /**
+        * The maximum quantity defines the maximum value which must be entered for the quantity.
+        */
+    'maximalQuantity'?: number;
+
+        /**
+        * The minimal quantity defines the minimum value which must be entered for the quantity.
+        */
+    'minimalQuantity'?: number;
+
+        /**
         * The component name is shown to the subscriber. It should describe in few words what the component does contain.
         */
     'name'?: DatabaseTranslatedStringCreate;
+
+        /**
+        * The quantity step defines at which interval the quantity can be increased.
+        */
+    'quantityStep'?: number;
 
         /**
         * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
@@ -96,9 +111,27 @@ class SubscriptionProductComponentUpdate {
         },
         
         {
+        "name": "maximalQuantity",
+        "baseName": "maximalQuantity",
+        "type": "number"
+        },
+        
+        {
+        "name": "minimalQuantity",
+        "baseName": "minimalQuantity",
+        "type": "number"
+        },
+        
+        {
         "name": "name",
         "baseName": "name",
         "type": "DatabaseTranslatedStringCreate"
+        },
+        
+        {
+        "name": "quantityStep",
+        "baseName": "quantityStep",
+        "type": "number"
         },
         
         {
