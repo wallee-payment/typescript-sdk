@@ -114,6 +114,8 @@ import { PaymentConnectorFeature as PaymentConnectorFeatureModelImport } from ".
 import { PaymentContract as PaymentContractModelImport } from "./src/models/PaymentContract";
 import { PaymentContractState as PaymentContractStateModelImport } from "./src/models/PaymentContractState";
 import { PaymentContractType as PaymentContractTypeModelImport } from "./src/models/PaymentContractType";
+import { PaymentInformationHash as PaymentInformationHashModelImport } from "./src/models/PaymentInformationHash";
+import { PaymentInformationHashType as PaymentInformationHashTypeModelImport } from "./src/models/PaymentInformationHashType";
 import { PaymentLink as PaymentLinkModelImport } from "./src/models/PaymentLink";
 import { PaymentLinkProtectionMode as PaymentLinkProtectionModeModelImport } from "./src/models/PaymentLinkProtectionMode";
 import { PaymentLinkUpdate as PaymentLinkUpdateModelImport } from "./src/models/PaymentLinkUpdate";
@@ -632,6 +634,10 @@ export namespace Wallee {
         export const PaymentContractState = PaymentContractStateModelImport;
         export type PaymentContractType = PaymentContractTypeModelImport;
         export const PaymentContractType = PaymentContractTypeModelImport;
+        export type PaymentInformationHash = PaymentInformationHashModelImport;
+        export const PaymentInformationHash = PaymentInformationHashModelImport;
+        export type PaymentInformationHashType = PaymentInformationHashTypeModelImport;
+        export const PaymentInformationHashType = PaymentInformationHashTypeModelImport;
         export type PaymentLink = PaymentLinkModelImport;
         export const PaymentLink = PaymentLinkModelImport;
         export type PaymentLinkProtectionMode = PaymentLinkProtectionModeModelImport;

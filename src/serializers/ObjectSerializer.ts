@@ -115,6 +115,8 @@ import { PaymentConnectorFeature } from "../models/PaymentConnectorFeature";
 import { PaymentContract } from "../models/PaymentContract";
 import { PaymentContractState } from "../models/PaymentContractState";
 import { PaymentContractType } from "../models/PaymentContractType";
+import { PaymentInformationHash } from "../models/PaymentInformationHash";
+import { PaymentInformationHashType } from "../models/PaymentInformationHashType";
 import { PaymentLink } from "../models/PaymentLink";
 import { PaymentLinkProtectionMode } from "../models/PaymentLinkProtectionMode";
 import { PaymentLinkUpdate } from "../models/PaymentLinkUpdate";
@@ -489,6 +491,8 @@ class ObjectSerializer {
                 "PaymentConnectorFeature": PaymentConnectorFeature,
                 "PaymentContract": PaymentContract,
                 "PaymentContractType": PaymentContractType,
+                "PaymentInformationHash": PaymentInformationHash,
+                "PaymentInformationHashType": PaymentInformationHashType,
                 "PaymentLink": PaymentLink,
                 "PaymentLinkUpdate": PaymentLinkUpdate,
                 "PaymentMethod": PaymentMethod,

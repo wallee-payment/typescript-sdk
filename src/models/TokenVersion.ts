@@ -3,6 +3,7 @@ import { Address } from "./Address";
 import { ChargeAttemptEnvironment } from "./ChargeAttemptEnvironment";
 import { Label } from "./Label";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
+import { PaymentInformationHash } from "./PaymentInformationHash";
 import { Token } from "./Token";
 import { TokenVersionState } from "./TokenVersionState";
 import { TokenVersionType } from "./TokenVersionType";
@@ -69,6 +70,11 @@ class TokenVersion {
         * 
         */
     'paymentConnectorConfiguration'?: PaymentConnectorConfiguration;
+
+        /**
+        * The payment information hash set contains hashes of the payment information represented by this token version.
+        */
+    'paymentInformationHashes'?: Array<PaymentInformationHash>;
 
         /**
         * 
@@ -190,6 +196,12 @@ class TokenVersion {
         "name": "paymentConnectorConfiguration",
         "baseName": "paymentConnectorConfiguration",
         "type": "PaymentConnectorConfiguration"
+        },
+        
+        {
+        "name": "paymentInformationHashes",
+        "baseName": "paymentInformationHashes",
+        "type": "Array<PaymentInformationHash>"
         },
         
         {
