@@ -6,8 +6,8 @@ script: npm test
 deploy:
     edge: true
     provider: npm
-    email: victor.ndambakuwa@customweb.com
-    api_token: "$NPM_API_KEY"
+    email: "NPM_EMAIL"
+    api_token: "$NPM_TOKEN"
     on:
         tags: true
         repo: wallee-payment/typescript-sdk
