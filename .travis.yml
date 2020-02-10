@@ -1,12 +1,13 @@
 language: node_js
+os: linux
 node_js:
 - 10.16.3
 script: npm test
 deploy:
+    edge: true
     provider: npm
     email: victor.ndambakuwa@customweb.com
-    api_key:
-        secure: RgwUPLodARJSfCWcK/J9yNapSFgQkHOgdTF2bYHGaN6EqtbqnJxaex8N0UkGDBIDs6z6uIlI+DPj3gGPWexVXSNDqoydR2DeitbyPIwFZ6D4qXuhBlG6H1OBt2oyOV18pjQdAXtVVrAFCxYX3eCKUG6c1R8RbqaeB3FEljBxgpaT28egXVKA87JVzwbaWKlDofimFxQ8Lm5kHEGdg0LYkeGAVxAlDqIWHDcUQbkkG5YZ6Rfjwri+SxbyYs3y2+IxvA8jDO4yl4iZKUjgXuZrioBSTCUrEylEexw3HcsjXm5D0V8mbmBHn/OXgXi3iOJYf8ADfbKvGGrVshDyxTtrf5Kd/YZlpl+JRKmoZqOLht+k2Pkjnl/rdtB2nwZwlqQ15Xz/0aoNpz3N2XFlLNOnZEB7O2XW2Qkm5nuF+vSIs65a5YwVTFXQFZnjIGK1KkO/91aMs6LPCnIIIgq9cRBE17mQ02nLns9eUxm/aBGXF/YrI6343BRLJ/99IqOMJv3bwahPPJUoYSmM3bCisKWTJUxDioVDtM96OquweBD+cbGLjhGC1198MoWfnUGbOrmRAAv7ADr9QgdW0JDE+h4ilSMvp6Xd0CCytwIZscj66LmTgZwU63ZmnD9GO4sCrRGbPj1IC1MDTNBJkhVA6nMiu1ng/rGfJm7DpnRBn6UVGaY=
+    api_token: "$NPM_API_KEY"
     on:
         tags: true
         repo: wallee-payment/typescript-sdk
