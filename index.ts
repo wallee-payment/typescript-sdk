@@ -356,6 +356,7 @@ import { PaymentMethodConfigurationService as PaymentMethodConfigurationServiceA
 import { PaymentMethodService as PaymentMethodServiceApiImport } from "./src/api/PaymentMethodService";
 import { PaymentProcessorConfigurationService as PaymentProcessorConfigurationServiceApiImport } from "./src/api/PaymentProcessorConfigurationService";
 import { PaymentProcessorService as PaymentProcessorServiceApiImport } from "./src/api/PaymentProcessorService";
+import { PaymentTerminalService as PaymentTerminalServiceApiImport } from "./src/api/PaymentTerminalService";
 import { PermissionService as PermissionServiceApiImport } from "./src/api/PermissionService";
 import { RefundCommentService as RefundCommentServiceApiImport } from "./src/api/RefundCommentService";
 import { RefundService as RefundServiceApiImport } from "./src/api/RefundService";
@@ -1119,6 +1120,8 @@ export namespace Wallee {
         export const PaymentProcessorConfigurationService = PaymentProcessorConfigurationServiceApiImport;
         export type PaymentProcessorService = PaymentProcessorServiceApiImport;
         export const PaymentProcessorService = PaymentProcessorServiceApiImport;
+        export type PaymentTerminalService = PaymentTerminalServiceApiImport;
+        export const PaymentTerminalService = PaymentTerminalServiceApiImport;
         export type PermissionService = PermissionServiceApiImport;
         export const PermissionService = PermissionServiceApiImport;
         export type RefundCommentService = RefundCommentServiceApiImport;

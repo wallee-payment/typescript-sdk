@@ -41,12 +41,12 @@ class SpaceAddress {
         /**
         * 
         */
-    'postCode'?: string;
+    'postalState'?: string;
 
         /**
         * 
         */
-    'postalState'?: string;
+    'postcode'?: string;
 
         /**
         * 
@@ -116,14 +116,14 @@ class SpaceAddress {
         },
         
         {
-        "name": "postCode",
-        "baseName": "postCode",
+        "name": "postalState",
+        "baseName": "postalState",
         "type": "string"
         },
         
         {
-        "name": "postalState",
-        "baseName": "postalState",
+        "name": "postcode",
+        "baseName": "postcode",
         "type": "string"
         },
         

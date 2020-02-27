@@ -73,12 +73,12 @@ class CustomerPostalAddress {
         /**
         * 
         */
-    'postCode'?: string;
+    'postalState'?: string;
 
         /**
         * 
         */
-    'postalState'?: string;
+    'postcode'?: string;
 
         /**
         * 
@@ -189,14 +189,14 @@ class CustomerPostalAddress {
         },
         
         {
-        "name": "postCode",
-        "baseName": "postCode",
+        "name": "postalState",
+        "baseName": "postalState",
         "type": "string"
         },
         
         {
-        "name": "postalState",
-        "baseName": "postalState",
+        "name": "postcode",
+        "baseName": "postcode",
         "type": "string"
         },
         

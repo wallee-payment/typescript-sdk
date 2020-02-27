@@ -77,12 +77,12 @@ class ConditionTypeService {
         return new Promise<{ response: http.IncomingMessage; body: Array<ConditionType>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<ConditionType>");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -92,7 +92,7 @@ class ConditionTypeService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -102,7 +102,7 @@ class ConditionTypeService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -161,12 +161,12 @@ class ConditionTypeService {
         return new Promise<{ response: http.IncomingMessage; body: ConditionType;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "ConditionType");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -176,7 +176,7 @@ class ConditionTypeService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -186,7 +186,7 @@ class ConditionTypeService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",

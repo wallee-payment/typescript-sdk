@@ -92,12 +92,12 @@ class SubscriptionProductRetirementService {
         return new Promise<{ response: http.IncomingMessage; body: number;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "number");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -107,7 +107,7 @@ class SubscriptionProductRetirementService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -117,7 +117,7 @@ class SubscriptionProductRetirementService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -183,12 +183,12 @@ class SubscriptionProductRetirementService {
         return new Promise<{ response: http.IncomingMessage; body: SubscriptionProductRetirement;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "SubscriptionProductRetirement");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -198,7 +198,7 @@ class SubscriptionProductRetirementService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -208,7 +208,7 @@ class SubscriptionProductRetirementService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -277,12 +277,12 @@ class SubscriptionProductRetirementService {
         return new Promise<{ response: http.IncomingMessage; body: SubscriptionProductRetirement;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "SubscriptionProductRetirement");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -292,7 +292,7 @@ class SubscriptionProductRetirementService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -302,7 +302,7 @@ class SubscriptionProductRetirementService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -368,12 +368,12 @@ class SubscriptionProductRetirementService {
         return new Promise<{ response: http.IncomingMessage; body: Array<SubscriptionProductRetirement>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<SubscriptionProductRetirement>");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -383,7 +383,7 @@ class SubscriptionProductRetirementService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -393,7 +393,7 @@ class SubscriptionProductRetirementService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",

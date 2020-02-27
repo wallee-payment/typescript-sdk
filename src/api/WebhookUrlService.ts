@@ -98,12 +98,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
 
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -113,7 +113,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -123,7 +123,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -184,12 +184,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body: number;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "number");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -199,7 +199,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -209,7 +209,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -275,12 +275,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body: WebhookUrl;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "WebhookUrl");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -290,7 +290,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -300,7 +300,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -369,12 +369,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body: WebhookUrl;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "WebhookUrl");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -384,7 +384,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -394,7 +394,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -460,12 +460,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body: Array<WebhookUrl>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<WebhookUrl>");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -475,7 +475,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -485,7 +485,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",
@@ -551,12 +551,12 @@ class WebhookUrlService {
         return new Promise<{ response: http.IncomingMessage; body: WebhookUrl;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
-                    reject(error);
+                    return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "WebhookUrl");
-                            resolve({ response: response, body: body });
+                            return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
                             if (response.statusCode >= 400 && response.statusCode <= 499) {
@@ -566,7 +566,7 @@ class WebhookUrlService {
                             } else {
                                 errorObject = new Object();
                             }
-                            reject({
+                            return reject({
                                 errorType: errorObject.constructor.name,
                                 date: (new Date()).toDateString(),
                                 statusCode: <string> <any> response.statusCode,
@@ -576,7 +576,7 @@ class WebhookUrlService {
                             });
                         }
                     }
-                    reject({
+                    return reject({
                         errorType: "Unknown",
                         date: (new Date()).toDateString(),
                         statusCode: "Unknown",

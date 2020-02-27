@@ -11,10 +11,10 @@ import { ObjectSerializer } from '../serializers/ObjectSerializer';
 import { ClientError } from  '../models/ClientError';
 import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
-import { InstallmentPaymentSlice } from  '../models/InstallmentPaymentSlice';
+import { PaymentTerminal } from  '../models/PaymentTerminal';
 import { ServerError } from  '../models/ServerError';
 
-class InstallmentPaymentSliceService {
+class PaymentTerminalService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
@@ -47,11 +47,11 @@ class InstallmentPaymentSliceService {
     * Counts the number of items in the database as restricted by the given filter.
     * @summary Count
     * @param spaceId 
-    * @param filter The filter which restricts the installment payment slices which are used to calculate the count.
+    * @param filter The filter which restricts the entities which are used to calculate the count.
     * @param {*} [options] Override http request options.
     */
-    public count (spaceId: number, filter: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/installment-payment-slice/count';
+    public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
+        const localVarPath = this.basePath + '/payment-terminal/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -59,11 +59,6 @@ class InstallmentPaymentSliceService {
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
                 throw new Error('Required parameter spaceId was null or undefined when calling count.');
-            }
-
-            // verify required parameter 'filter' is not null or undefined
-            if (filter === null || filter === undefined) {
-                throw new Error('Required parameter filter was null or undefined when calling count.');
             }
 
         if (spaceId !== undefined) {
@@ -138,11 +133,11 @@ class InstallmentPaymentSliceService {
     * Reads the entity with the given 'id' and returns it.
     * @summary Read
     * @param spaceId 
-    * @param id The id of the installment payment slice which should be returned.
+    * @param id The id of the payment terminal which should be returned.
     * @param {*} [options] Override http request options.
     */
-    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: InstallmentPaymentSlice;  }> {
-        const localVarPath = this.basePath + '/installment-payment-slice/read';
+    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentTerminal;  }> {
+        const localVarPath = this.basePath + '/payment-terminal/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -187,14 +182,14 @@ class InstallmentPaymentSliceService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: InstallmentPaymentSlice;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PaymentTerminal;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "InstallmentPaymentSlice");
+                            body = ObjectSerializer.deserialize(body, "PaymentTerminal");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -232,11 +227,11 @@ class InstallmentPaymentSliceService {
     * Searches for the entities as specified by the given query.
     * @summary Search
     * @param spaceId 
-    * @param query The query restricts the installment payment slices which are returned by the search.
+    * @param query The query restricts the payment terminals which are returned by the search.
     * @param {*} [options] Override http request options.
     */
-    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<InstallmentPaymentSlice>;  }> {
-        const localVarPath = this.basePath + '/installment-payment-slice/search';
+    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentTerminal>;  }> {
+        const localVarPath = this.basePath + '/payment-terminal/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -278,14 +273,14 @@ class InstallmentPaymentSliceService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: Array<InstallmentPaymentSlice>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<PaymentTerminal>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<InstallmentPaymentSlice>");
+                            body = ObjectSerializer.deserialize(body, "Array<PaymentTerminal>");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -321,4 +316,4 @@ class InstallmentPaymentSliceService {
     }
 }
 
-export { InstallmentPaymentSliceService }
+export { PaymentTerminalService }
