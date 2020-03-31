@@ -1,7 +1,7 @@
 'use strict';
 
 
-class PaymentTerminalType {
+class SalesChannel {
 
         /**
         * 
@@ -43,8 +43,8 @@ class PaymentTerminalType {
     ];
 
     static getAttributeTypeMap() {
-        return PaymentTerminalType.attributeTypeMap;
+        return SalesChannel.attributeTypeMap;
     }
 }
 
-export { PaymentTerminalType }
+export { SalesChannel }

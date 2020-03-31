@@ -16,6 +16,11 @@ class ChargeFlowLevelConfigurationType {
         /**
         * 
         */
+    'label'?: { [key: string]: string; };
+
+        /**
+        * 
+        */
     'name'?: { [key: string]: string; };
 
 
@@ -33,6 +38,12 @@ class ChargeFlowLevelConfigurationType {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "label",
+        "baseName": "label",
+        "type": "{ [key: string]: string; }"
         },
         
         {

@@ -1,7 +1,7 @@
 'use strict';
 
 
-class PaymentTerminalType {
+class FeatureCategory {
 
         /**
         * 
@@ -17,6 +17,11 @@ class PaymentTerminalType {
         * 
         */
     'name'?: { [key: string]: string; };
+
+        /**
+        * 
+        */
+    'orderWeight'?: number;
 
 
     static discriminator: string | undefined = undefined;
@@ -39,12 +44,18 @@ class PaymentTerminalType {
         "name": "name",
         "baseName": "name",
         "type": "{ [key: string]: string; }"
+        },
+        
+        {
+        "name": "orderWeight",
+        "baseName": "orderWeight",
+        "type": "number"
         }        
     ];
 
     static getAttributeTypeMap() {
-        return PaymentTerminalType.attributeTypeMap;
+        return FeatureCategory.attributeTypeMap;
     }
 }
 
-export { PaymentTerminalType }
+export { FeatureCategory }

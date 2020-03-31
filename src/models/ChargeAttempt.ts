@@ -81,6 +81,11 @@ class ChargeAttempt extends TransactionAwareEntity {
         /**
         * 
         */
+    'salesChannel'?: number;
+
+        /**
+        * 
+        */
     'spaceViewId'?: number;
 
         /**
@@ -204,6 +209,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "redirectionUrl",
         "baseName": "redirectionUrl",
         "type": "string"
+        },
+        
+        {
+        "name": "salesChannel",
+        "baseName": "salesChannel",
+        "type": "number"
         },
         
         {

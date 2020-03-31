@@ -1,4 +1,5 @@
 'use strict';
+import { FeatureCategory } from "./FeatureCategory";
 
 
 class Feature {
@@ -7,6 +8,11 @@ class Feature {
         * 
         */
     'beta'?: boolean;
+
+        /**
+        * 
+        */
+    'category'?: FeatureCategory;
 
         /**
         * 
@@ -52,6 +58,12 @@ class Feature {
         "name": "beta",
         "baseName": "beta",
         "type": "boolean"
+        },
+        
+        {
+        "name": "category",
+        "baseName": "category",
+        "type": "FeatureCategory"
         },
         
         {

@@ -48,6 +48,11 @@ class Transaction {
     'authorizationEnvironment'?: ChargeAttemptEnvironment;
 
         /**
+        * The sales channel through which the transaction was placed.
+        */
+    'authorizationSalesChannel'?: number;
+
+        /**
         * This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
         */
     'authorizationTimeoutOn'?: Date;
@@ -341,6 +346,12 @@ class Transaction {
         "name": "authorizationEnvironment",
         "baseName": "authorizationEnvironment",
         "type": "ChargeAttemptEnvironment"
+        },
+        
+        {
+        "name": "authorizationSalesChannel",
+        "baseName": "authorizationSalesChannel",
+        "type": "number"
         },
         
         {
