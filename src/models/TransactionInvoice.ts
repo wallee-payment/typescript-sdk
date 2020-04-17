@@ -30,6 +30,11 @@ class TransactionInvoice extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
+        * The id of the user which marked the invoice as derecognized.
+        */
+    'derecognizedBy'?: number;
+
+        /**
         * The date on which the invoice is marked as derecognized.
         */
     'derecognizedOn'?: Date;
@@ -131,6 +136,12 @@ class TransactionInvoice extends TransactionAwareEntity {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "derecognizedBy",
+        "baseName": "derecognizedBy",
+        "type": "number"
         },
         
         {

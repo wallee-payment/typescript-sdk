@@ -143,6 +143,11 @@ class Transaction {
     'deviceSessionIdentifier'?: string;
 
         /**
+        * Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+        */
+    'emailsDisabled'?: boolean;
+
+        /**
         * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
         */
     'endOfLife'?: Date;
@@ -460,6 +465,12 @@ class Transaction {
         "name": "deviceSessionIdentifier",
         "baseName": "deviceSessionIdentifier",
         "type": "string"
+        },
+        
+        {
+        "name": "emailsDisabled",
+        "baseName": "emailsDisabled",
+        "type": "boolean"
         },
         
         {

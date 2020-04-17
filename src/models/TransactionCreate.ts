@@ -28,6 +28,11 @@ class TransactionCreate extends AbstractTransactionPending {
     'deviceSessionIdentifier'?: string;
 
         /**
+        * Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+        */
+    'emailsDisabled'?: boolean;
+
+        /**
         * 
         */
     'environment'?: Environment;
@@ -69,6 +74,12 @@ class TransactionCreate extends AbstractTransactionPending {
         "name": "deviceSessionIdentifier",
         "baseName": "deviceSessionIdentifier",
         "type": "string"
+        },
+        
+        {
+        "name": "emailsDisabled",
+        "baseName": "emailsDisabled",
+        "type": "boolean"
         },
         
         {

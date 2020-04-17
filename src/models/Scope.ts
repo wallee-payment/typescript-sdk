@@ -21,6 +21,11 @@ class Scope {
     'id'?: number;
 
         /**
+        * 
+        */
+    'machineName'?: string;
+
+        /**
         * The name of the scope is shown to the user where the user should select a scope.
         */
     'name'?: string;
@@ -81,6 +86,12 @@ class Scope {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "machineName",
+        "baseName": "machineName",
+        "type": "string"
         },
         
         {

@@ -30,13 +30,11 @@ account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user
 'use strict';
 import { Wallee } from 'wallee';
 
-let macVersion: number = 1;
 let spaceId: number = 405;
 let userId: number = 512;
 let apiSecret: string = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 let config = {
-    mac_version: macVersion,
     space_id: spaceId,
     user_id: userId,
     api_secret: apiSecret
@@ -53,13 +51,11 @@ To get started with sending transactions, please review the example below:
 'use strict';
 import { Wallee } from 'wallee';
 
-let macVersion: number = 1;
 let spaceId: number = 405;
 let userId: number = 512;
 let apiSecret: string = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
 
 let config = {
-    mac_version: macVersion,
     space_id: spaceId,
     user_id: userId,
     api_secret: apiSecret
@@ -86,7 +82,7 @@ transaction.lineItems=[lineItem];
 transaction.autoConfirmationEnabled=true;
 transaction.currency='EUR';
 
-transactionService.create(spaceId, transaction).then(function (response) {
+transactionService.create(spaceId, transaction).then((response) => {
     let transactionCreate: Wallee.model.Transaction = response.body;
     transactionPaymentPageService.paymentPageUrl(spaceId, <number> transactionCreate.id).then(function (response) {
         let pageUrl: string = response.body;

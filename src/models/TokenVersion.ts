@@ -37,6 +37,11 @@ class TokenVersion {
     'expiresOn'?: Date;
 
         /**
+        * 
+        */
+    'iconUrl'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -154,6 +159,12 @@ class TokenVersion {
         "name": "expiresOn",
         "baseName": "expiresOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "iconUrl",
+        "baseName": "iconUrl",
+        "type": "string"
         },
         
         {

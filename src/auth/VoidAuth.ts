@@ -7,6 +7,7 @@ class VoidAuth implements Authentication {
 
     protected _basePath = 'https://app-wallee.com:443/api';
     protected configuration : any = {};
+    protected mac_version = 1;
 
     constructor(configuration: any) {
         this.configuration = configuration;
@@ -38,7 +39,7 @@ class VoidAuth implements Authentication {
 
         let headers: any = {
             'x-mac-userid': this.configuration.user_id,
-            'x-mac-version': this.configuration.mac_version,
+            'x-mac-version': this.mac_version,
             'x-mac-timestamp': timestamp,
             'x-mac-value': this.getSignature(method, resourcePath, timestamp)
         };
@@ -47,7 +48,7 @@ class VoidAuth implements Authentication {
 
     protected getSignature(method: string, resourcePath: string, timestamp: number) : string {
         let data: string = [
-            this.configuration.mac_version,
+            this.mac_version,
             this.configuration.user_id,
             timestamp,
             method,

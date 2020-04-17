@@ -21,7 +21,7 @@ class ChargeAttemptService {
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
-    }
+    };
 
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration))
