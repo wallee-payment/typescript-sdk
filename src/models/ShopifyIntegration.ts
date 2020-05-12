@@ -32,6 +32,11 @@ class ShopifyIntegration {
     'id'?: number;
 
         /**
+        * 
+        */
+    'installed'?: boolean;
+
+        /**
         * Enabling the integrated payment form will embed the payment form in the Shopify shop. The app needs to be installed for this to be possible.
         */
     'integratedPaymentFormEnabled'?: boolean;
@@ -134,6 +139,12 @@ class ShopifyIntegration {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "installed",
+        "baseName": "installed",
+        "type": "boolean"
         },
         
         {

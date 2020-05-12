@@ -164,8 +164,19 @@ describe('TransactionService', () => {
      * @param id The id of the transaction which should be returned.
      * @param {*} [options] Override http request options.
      */
-    describe('fetchPossiblePaymentMethods', () => {
-
+    describe('fetchPaymentMethods', () => {
+        it('fetchPaymentMethods successful', () => {
+            let transaction: Wallee.model.Transaction;
+            transactionService.create(config.space_id, getTransactionPayload())
+            .then((response: { response: http.IncomingMessage, body: Wallee.model.Transaction }) => {
+                transaction = response.body;
+                return transactionService.fetchPaymentMethods(config.space_id, <number>transaction.id, "payment_page");
+            })
+            .done((response: { response: http.IncomingMessage, body: Array<Wallee.model.PaymentMethodConfiguration> }) => {
+                let paymentMethods: Array<Wallee.model.PaymentMethodConfiguration> = response.body;
+                expect(paymentMethods).to.be.an('array');
+            });
+        });
     });
 
     /**
@@ -174,7 +185,7 @@ describe('TransactionService', () => {
      * @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
      * @param {*} [options] Override http request options.
      */
-    describe('fetchPossiblePaymentMethodsWithCredentials', () => {
+    describe('fetchPaymentMethodsWithCredentials', () => {
 
     });
 

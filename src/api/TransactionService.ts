@@ -687,22 +687,28 @@ class TransactionService {
     * @summary Fetch Possible Payment Methods
     * @param spaceId 
     * @param id The id of the transaction which should be returned.
+    * @param integrationMode The integration mode defines the type of integration that is applied on the transaction.
     * @param {*} [options] Override http request options.
     */
-    public fetchPossiblePaymentMethods (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = this.basePath + '/transaction/fetchPossiblePaymentMethods';
+    public fetchPaymentMethods (spaceId: number, id: number, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
+        const localVarPath = this.basePath + '/transaction/fetch-payment-methods';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling fetchPossiblePaymentMethods.');
+                throw new Error('Required parameter spaceId was null or undefined when calling fetchPaymentMethods.');
             }
 
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling fetchPossiblePaymentMethods.');
+                throw new Error('Required parameter id was null or undefined when calling fetchPaymentMethods.');
+            }
+
+            // verify required parameter 'integrationMode' is not null or undefined
+            if (integrationMode === null || integrationMode === undefined) {
+                throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethods.');
             }
 
         if (spaceId !== undefined) {
@@ -711,6 +717,10 @@ class TransactionService {
 
         if (id !== undefined) {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+        }
+
+        if (integrationMode !== undefined) {
+            localVarQueryParameters['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -780,21 +790,31 @@ class TransactionService {
     * This operation allows to get the payment method configurations which can be used with the provided transaction.
     * @summary Fetch Possible Payment Methods with Credentials
     * @param credentials The credentials identifies the transaction and contains the security details which grants the access this operation.
+    * @param integrationMode The integration mode defines the type of integration that is applied on the transaction.
     * @param {*} [options] Override http request options.
     */
-    public fetchPossiblePaymentMethodsWithCredentials (credentials: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = this.basePath + '/transaction/fetchPossiblePaymentMethodsWithCredentials';
+    public fetchPaymentMethodsWithCredentials (credentials: string, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
+        const localVarPath = this.basePath + '/transaction/fetch-payment-methods-with-credentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
             // verify required parameter 'credentials' is not null or undefined
             if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling fetchPossiblePaymentMethodsWithCredentials.');
+                throw new Error('Required parameter credentials was null or undefined when calling fetchPaymentMethodsWithCredentials.');
+            }
+
+            // verify required parameter 'integrationMode' is not null or undefined
+            if (integrationMode === null || integrationMode === undefined) {
+                throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethodsWithCredentials.');
             }
 
         if (credentials !== undefined) {
             localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+        }
+
+        if (integrationMode !== undefined) {
+            localVarQueryParameters['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);

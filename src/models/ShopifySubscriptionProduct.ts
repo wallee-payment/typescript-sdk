@@ -143,6 +143,11 @@ class ShopifySubscriptionProduct {
     'terminationBillingCycles'?: number;
 
         /**
+        * 
+        */
+    'updatedAt'?: Date;
+
+        /**
         * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
         */
     'version'?: number;
@@ -312,6 +317,12 @@ class ShopifySubscriptionProduct {
         "name": "terminationBillingCycles",
         "baseName": "terminationBillingCycles",
         "type": "number"
+        },
+        
+        {
+        "name": "updatedAt",
+        "baseName": "updatedAt",
+        "type": "Date"
         },
         
         {

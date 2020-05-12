@@ -28,6 +28,16 @@ class Space {
     'database'?: TenantDatabase;
 
         /**
+        * The ID of a user that deleted this entity.
+        */
+    'deletedBy'?: number;
+
+        /**
+        * The date and time when this entity was deleted.
+        */
+    'deletedOn'?: Date;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -109,6 +119,18 @@ class Space {
         "name": "database",
         "baseName": "database",
         "type": "TenantDatabase"
+        },
+        
+        {
+        "name": "deletedBy",
+        "baseName": "deletedBy",
+        "type": "number"
+        },
+        
+        {
+        "name": "deletedOn",
+        "baseName": "deletedOn",
+        "type": "Date"
         },
         
         {
