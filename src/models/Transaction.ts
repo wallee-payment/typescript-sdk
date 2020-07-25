@@ -293,6 +293,16 @@ class Transaction {
     'tokenizationMode'?: TokenizationMode;
 
         /**
+        * The total applied fees is the sum of all fees that have been applied so far.
+        */
+    'totalAppliedFees'?: number;
+
+        /**
+        * The total settled amount is the total amount which has been settled so far.
+        */
+    'totalSettledAmount'?: number;
+
+        /**
         * The user agent header provides the exact string which contains the user agent of the buyer.
         */
     'userAgentHeader'?: string;
@@ -645,6 +655,18 @@ class Transaction {
         "name": "tokenizationMode",
         "baseName": "tokenizationMode",
         "type": "TokenizationMode"
+        },
+        
+        {
+        "name": "totalAppliedFees",
+        "baseName": "totalAppliedFees",
+        "type": "number"
+        },
+        
+        {
+        "name": "totalSettledAmount",
+        "baseName": "totalSettledAmount",
+        "type": "number"
         },
         
         {

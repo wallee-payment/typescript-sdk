@@ -90,6 +90,11 @@ class Subscription {
         /**
         * 
         */
+    'terminationScheduledOn'?: Date;
+
+        /**
+        * 
+        */
     'token'?: Token;
 
         /**
@@ -195,6 +200,12 @@ class Subscription {
         {
         "name": "terminatingOn",
         "baseName": "terminatingOn",
+        "type": "Date"
+        },
+        
+        {
+        "name": "terminationScheduledOn",
+        "baseName": "terminationScheduledOn",
         "type": "Date"
         },
         

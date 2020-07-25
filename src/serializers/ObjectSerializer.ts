@@ -315,6 +315,7 @@ import { HumanUserUpdate } from "../models/HumanUserUpdate";
 import { InstallmentPaymentSlice } from "../models/InstallmentPaymentSlice";
 import { PaymentLinkActive } from "../models/PaymentLinkActive";
 import { PaymentLinkCreate } from "../models/PaymentLinkCreate";
+import { PaymentTerminalContactAddress } from "../models/PaymentTerminalContactAddress";
 import { RefundCommentActive } from "../models/RefundCommentActive";
 import { RefundCommentCreate } from "../models/RefundCommentCreate";
 import { ShopifyRecurringOrder } from "../models/ShopifyRecurringOrder";
@@ -688,6 +689,7 @@ class ObjectSerializer {
                 "InstallmentPaymentSlice": InstallmentPaymentSlice,
                 "PaymentLinkActive": PaymentLinkActive,
                 "PaymentLinkCreate": PaymentLinkCreate,
+                "PaymentTerminalContactAddress": PaymentTerminalContactAddress,
                 "RefundCommentActive": RefundCommentActive,
                 "RefundCommentCreate": RefundCommentCreate,
                 "ShopifyRecurringOrder": ShopifyRecurringOrder,

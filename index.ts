@@ -314,6 +314,7 @@ import { HumanUserUpdate as HumanUserUpdateModelImport } from "./src/models/Huma
 import { InstallmentPaymentSlice as InstallmentPaymentSliceModelImport } from "./src/models/InstallmentPaymentSlice";
 import { PaymentLinkActive as PaymentLinkActiveModelImport } from "./src/models/PaymentLinkActive";
 import { PaymentLinkCreate as PaymentLinkCreateModelImport } from "./src/models/PaymentLinkCreate";
+import { PaymentTerminalContactAddress as PaymentTerminalContactAddressModelImport } from "./src/models/PaymentTerminalContactAddress";
 import { RefundCommentActive as RefundCommentActiveModelImport } from "./src/models/RefundCommentActive";
 import { RefundCommentCreate as RefundCommentCreateModelImport } from "./src/models/RefundCommentCreate";
 import { ShopifyRecurringOrder as ShopifyRecurringOrderModelImport } from "./src/models/ShopifyRecurringOrder";
@@ -403,6 +404,7 @@ import { ShopifySubscriptionProductService as ShopifySubscriptionProductServiceA
 import { ShopifySubscriptionService as ShopifySubscriptionServiceApiImport } from "./src/api/ShopifySubscriptionService";
 import { ShopifySubscriptionSuspensionService as ShopifySubscriptionSuspensionServiceApiImport } from "./src/api/ShopifySubscriptionSuspensionService";
 import { ShopifySubscriptionVersionService as ShopifySubscriptionVersionServiceApiImport } from "./src/api/ShopifySubscriptionVersionService";
+import { ShopifyTransactionService as ShopifyTransactionServiceApiImport } from "./src/api/ShopifyTransactionService";
 import { SpaceService as SpaceServiceApiImport } from "./src/api/SpaceService";
 import { StaticValueService as StaticValueServiceApiImport } from "./src/api/StaticValueService";
 import { SubscriberService as SubscriberServiceApiImport } from "./src/api/SubscriberService";
@@ -1078,6 +1080,8 @@ export namespace Wallee {
         export const PaymentLinkActive = PaymentLinkActiveModelImport;
         export type PaymentLinkCreate = PaymentLinkCreateModelImport;
         export const PaymentLinkCreate = PaymentLinkCreateModelImport;
+        export type PaymentTerminalContactAddress = PaymentTerminalContactAddressModelImport;
+        export const PaymentTerminalContactAddress = PaymentTerminalContactAddressModelImport;
         export type RefundCommentActive = RefundCommentActiveModelImport;
         export const RefundCommentActive = RefundCommentActiveModelImport;
         export type RefundCommentCreate = RefundCommentCreateModelImport;
@@ -1257,6 +1261,8 @@ export namespace Wallee {
         export const ShopifySubscriptionSuspensionService = ShopifySubscriptionSuspensionServiceApiImport;
         export type ShopifySubscriptionVersionService = ShopifySubscriptionVersionServiceApiImport;
         export const ShopifySubscriptionVersionService = ShopifySubscriptionVersionServiceApiImport;
+        export type ShopifyTransactionService = ShopifyTransactionServiceApiImport;
+        export const ShopifyTransactionService = ShopifyTransactionServiceApiImport;
         export type SpaceService = SpaceServiceApiImport;
         export const SpaceService = SpaceServiceApiImport;
         export type StaticValueService = StaticValueServiceApiImport;

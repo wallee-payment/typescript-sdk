@@ -1,5 +1,6 @@
 'use strict';
 import { SubscriptionComponentReferenceConfiguration } from "./SubscriptionComponentReferenceConfiguration";
+import { SubscriptionPending } from "./SubscriptionPending";
 import { SubscriptionProductComponentReference } from "./SubscriptionProductComponentReference";
 
 
@@ -28,7 +29,7 @@ class SubscriptionCreateRequest {
         /**
         * 
         */
-    'subscription': number;
+    'subscription': SubscriptionPending;
 
 
     static discriminator: string | undefined = undefined;
@@ -62,7 +63,7 @@ class SubscriptionCreateRequest {
         {
         "name": "subscription",
         "baseName": "subscription",
-        "type": "number"
+        "type": "SubscriptionPending"
         }        
     ];
 

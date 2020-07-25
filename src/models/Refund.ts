@@ -143,6 +143,16 @@ class Refund {
     'timeoutOn'?: Date;
 
         /**
+        * The total applied fees is the sum of all fees that have been applied so far.
+        */
+    'totalAppliedFees'?: number;
+
+        /**
+        * The total settled amount is the total amount which has been settled so far.
+        */
+    'totalSettledAmount'?: number;
+
+        /**
         * 
         */
     'transaction'?: Transaction;
@@ -321,6 +331,18 @@ class Refund {
         "name": "timeoutOn",
         "baseName": "timeoutOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "totalAppliedFees",
+        "baseName": "totalAppliedFees",
+        "type": "number"
+        },
+        
+        {
+        "name": "totalSettledAmount",
+        "baseName": "totalSettledAmount",
+        "type": "number"
         },
         
         {

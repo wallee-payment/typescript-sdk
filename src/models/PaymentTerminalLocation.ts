@@ -1,10 +1,16 @@
 'use strict';
 import { PaymentTerminalAddress } from "./PaymentTerminalAddress";
 import { PaymentTerminalConfiguration } from "./PaymentTerminalConfiguration";
+import { PaymentTerminalContactAddress } from "./PaymentTerminalContactAddress";
 import { PaymentTerminalLocationState } from "./PaymentTerminalLocationState";
 
 
 class PaymentTerminalLocation {
+
+        /**
+        * 
+        */
+    'contactAddress'?: PaymentTerminalContactAddress;
 
         /**
         * 
@@ -51,6 +57,12 @@ class PaymentTerminalLocation {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "contactAddress",
+        "baseName": "contactAddress",
+        "type": "PaymentTerminalContactAddress"
+        },
+        
         {
         "name": "defaultConfiguration",
         "baseName": "defaultConfiguration",
