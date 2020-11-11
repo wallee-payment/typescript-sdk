@@ -2,6 +2,7 @@
 import { CreationEntityState } from "./CreationEntityState";
 import { PaymentMethodConfiguration } from "./PaymentMethodConfiguration";
 import { PaymentProcessorConfiguration } from "./PaymentProcessorConfiguration";
+import { SalesChannel } from "./SalesChannel";
 
 
 class PaymentConnectorConfiguration {
@@ -20,6 +21,11 @@ class PaymentConnectorConfiguration {
         * 
         */
     'connector'?: number;
+
+        /**
+        * Defines the sales channels the connector configuration is enabled for. In case the set is empty, the connector configuration is enabled for all sales channels.
+        */
+    'enabledSalesChannels'?: Array<SalesChannel>;
 
         /**
         * The connector configuration is only enabled for the selected space views. In case the set is empty the connector configuration is enabled for all space views.
@@ -92,6 +98,12 @@ class PaymentConnectorConfiguration {
         "name": "connector",
         "baseName": "connector",
         "type": "number"
+        },
+        
+        {
+        "name": "enabledSalesChannels",
+        "baseName": "enabledSalesChannels",
+        "type": "Array<SalesChannel>"
         },
         
         {

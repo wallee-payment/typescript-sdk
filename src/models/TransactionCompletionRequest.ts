@@ -10,6 +10,11 @@ class TransactionCompletionRequest {
     'externalId': string;
 
         /**
+        * 
+        */
+    'invoiceMerchantReference'?: string;
+
+        /**
         * The last completion flag indicates if this is the last completion. After the last completion is created no further completions can be issued.
         */
     'lastCompletion': boolean;
@@ -32,6 +37,12 @@ class TransactionCompletionRequest {
         {
         "name": "externalId",
         "baseName": "externalId",
+        "type": "string"
+        },
+        
+        {
+        "name": "invoiceMerchantReference",
+        "baseName": "invoiceMerchantReference",
         "type": "string"
         },
         

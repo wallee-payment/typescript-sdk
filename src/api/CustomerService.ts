@@ -83,7 +83,7 @@ class CustomerService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(id, "number")
+            body: ObjectSerializer.serialize(id, "number"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -169,7 +169,7 @@ class CustomerService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -260,7 +260,7 @@ class CustomerService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerCreate")
+            body: ObjectSerializer.serialize(entity, "CustomerCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -445,7 +445,7 @@ class CustomerService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -536,7 +536,7 @@ class CustomerService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerActive")
+            body: ObjectSerializer.serialize(entity, "CustomerActive"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

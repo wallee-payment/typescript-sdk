@@ -48,6 +48,11 @@ class TransactionCompletion extends TransactionAwareEntity {
         /**
         * 
         */
+    'invoiceMerchantReference'?: string;
+
+        /**
+        * 
+        */
     'labels'?: Array<Label>;
 
         /**
@@ -185,6 +190,12 @@ class TransactionCompletion extends TransactionAwareEntity {
         "name": "failureReason",
         "baseName": "failureReason",
         "type": "FailureReason"
+        },
+        
+        {
+        "name": "invoiceMerchantReference",
+        "baseName": "invoiceMerchantReference",
+        "type": "string"
         },
         
         {

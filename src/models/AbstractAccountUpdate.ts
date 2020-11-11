@@ -4,6 +4,11 @@
 class AbstractAccountUpdate {
 
         /**
+        * 
+        */
+    'lastModifiedDate'?: Date;
+
+        /**
         * The name of the account identifies the account within the administrative interface.
         */
     'name'?: string;
@@ -18,6 +23,12 @@ class AbstractAccountUpdate {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "lastModifiedDate",
+        "baseName": "lastModifiedDate",
+        "type": "Date"
+        },
+        
         {
         "name": "name",
         "baseName": "name",

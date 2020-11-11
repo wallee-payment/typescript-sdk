@@ -16,6 +16,16 @@ class Account {
     'activeOrRestrictedActive'?: boolean;
 
         /**
+        * The ID of the user who created this entity.
+        */
+    'createdBy'?: number;
+
+        /**
+        * The date and time when this entity was created.
+        */
+    'createdOn'?: Date;
+
+        /**
         * The ID of a user that deleted this entity.
         */
     'deletedBy'?: number;
@@ -29,6 +39,11 @@ class Account {
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
+
+        /**
+        * 
+        */
+    'lastModifiedDate'?: Date;
 
         /**
         * The name of the account identifies the account within the administrative interface.
@@ -93,6 +108,18 @@ class Account {
         },
         
         {
+        "name": "createdBy",
+        "baseName": "createdBy",
+        "type": "number"
+        },
+        
+        {
+        "name": "createdOn",
+        "baseName": "createdOn",
+        "type": "Date"
+        },
+        
+        {
         "name": "deletedBy",
         "baseName": "deletedBy",
         "type": "number"
@@ -108,6 +135,12 @@ class Account {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "lastModifiedDate",
+        "baseName": "lastModifiedDate",
+        "type": "Date"
         },
         
         {

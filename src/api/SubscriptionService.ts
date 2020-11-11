@@ -16,6 +16,7 @@ import { Subscription } from  '../models/Subscription';
 import { SubscriptionChangeRequest } from  '../models/SubscriptionChangeRequest';
 import { SubscriptionCharge } from  '../models/SubscriptionCharge';
 import { SubscriptionCreateRequest } from  '../models/SubscriptionCreateRequest';
+import { SubscriptionUpdateRequest } from  '../models/SubscriptionUpdateRequest';
 import { SubscriptionVersion } from  '../models/SubscriptionVersion';
 import { TransactionInvoice } from  '../models/TransactionInvoice';
 
@@ -86,7 +87,7 @@ class SubscriptionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(request, "SubscriptionChangeRequest")
+            body: ObjectSerializer.serialize(request, "SubscriptionChangeRequest"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -172,7 +173,7 @@ class SubscriptionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -263,7 +264,7 @@ class SubscriptionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(createRequest, "SubscriptionCreateRequest")
+            body: ObjectSerializer.serialize(createRequest, "SubscriptionCreateRequest"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -646,7 +647,7 @@ class SubscriptionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -747,7 +748,7 @@ class SubscriptionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -871,6 +872,107 @@ class SubscriptionService {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
 
+                            return resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            return reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
+                    }
+                    return reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
+                }
+            });
+        });
+    }
+    /**
+    * This operation allows to update the subscription.
+    * @summary update
+    * @param spaceId 
+    * @param subscriptionId 
+    * @param request 
+    * @param {*} [options] Override http request options.
+    */
+    public update (spaceId: number, subscriptionId: number, request: SubscriptionUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Subscription;  }> {
+        const localVarPath = this.basePath + '/subscription/update';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+            // verify required parameter 'spaceId' is not null or undefined
+            if (spaceId === null || spaceId === undefined) {
+                throw new Error('Required parameter spaceId was null or undefined when calling update.');
+            }
+
+            // verify required parameter 'subscriptionId' is not null or undefined
+            if (subscriptionId === null || subscriptionId === undefined) {
+                throw new Error('Required parameter subscriptionId was null or undefined when calling update.');
+            }
+
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling update.');
+            }
+
+        if (spaceId !== undefined) {
+            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+        }
+
+        if (subscriptionId !== undefined) {
+            localVarQueryParameters['subscriptionId'] = ObjectSerializer.serialize(subscriptionId, "number");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(request, "SubscriptionUpdateRequest"),
+        };
+
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                (<any>localVarRequestOptions).formData = localVarFormParams;
+            } else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise<{ response: http.IncomingMessage; body: Subscription;  }>((resolve, reject) => {
+            localVarRequest(localVarRequestOptions, (error, response, body) => {
+                if (error) {
+                    return reject(error);
+                } else {
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Subscription");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;

@@ -1,11 +1,10 @@
 'use strict';
 import { ShopifySubscriptionBillingIntervalUnit } from "./ShopifySubscriptionBillingIntervalUnit";
 import { ShopifySubscriptionProductPricingOption } from "./ShopifySubscriptionProductPricingOption";
-import { ShopifySubscriptionProductState } from "./ShopifySubscriptionProductState";
 import { ShopifySubscriptionWeekday } from "./ShopifySubscriptionWeekday";
 
 
-class AbstractShopifySubscriptionProductActive {
+class AbstractShopifySubscriptionProductUpdate {
 
         /**
         * 
@@ -61,11 +60,6 @@ class AbstractShopifySubscriptionProductActive {
         * 
         */
     'relativePriceAdjustment'?: number;
-
-        /**
-        * 
-        */
-    'state'?: ShopifySubscriptionProductState;
 
         /**
         * Define whether the order confirmation email of the Shopify shop is sent to the customer for recurring orders.
@@ -154,12 +148,6 @@ class AbstractShopifySubscriptionProductActive {
         },
         
         {
-        "name": "state",
-        "baseName": "state",
-        "type": "ShopifySubscriptionProductState"
-        },
-        
-        {
         "name": "storeOrderConfirmationEmailEnabled",
         "baseName": "storeOrderConfirmationEmailEnabled",
         "type": "boolean"
@@ -179,8 +167,8 @@ class AbstractShopifySubscriptionProductActive {
     ];
 
     static getAttributeTypeMap() {
-        return AbstractShopifySubscriptionProductActive.attributeTypeMap;
+        return AbstractShopifySubscriptionProductUpdate.attributeTypeMap;
     }
 }
 
-export { AbstractShopifySubscriptionProductActive }
+export { AbstractShopifySubscriptionProductUpdate }

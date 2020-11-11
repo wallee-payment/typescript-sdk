@@ -1,30 +1,14 @@
 'use strict';
-import { ShopifySubscriptionBillingIntervalUnit } from "./ShopifySubscriptionBillingIntervalUnit";
-import { ShopifySubscriptionEditModelItem } from "./ShopifySubscriptionEditModelItem";
-import { ShopifySubscriptionWeekday } from "./ShopifySubscriptionWeekday";
+import { ShopifySubscriptionModelBillingConfiguration } from "./ShopifySubscriptionModelBillingConfiguration";
+import { ShopifySubscriptionModelItem } from "./ShopifySubscriptionModelItem";
 
 
 class ShopifySubscriptionUpdateRequest {
 
         /**
-        * Define the day of the month on which the recurring orders should be created.
-        */
-    'billingDayOfMonth'?: number;
-
-        /**
         * 
         */
-    'billingIntervalAmount'?: number;
-
-        /**
-        * Define how frequently recurring orders should be created.
-        */
-    'billingIntervalUnit'?: ShopifySubscriptionBillingIntervalUnit;
-
-        /**
-        * Define the weekday on which the recurring orders should be created.
-        */
-    'billingWeekday'?: ShopifySubscriptionWeekday;
+    'billingConfiguration'?: ShopifySubscriptionModelBillingConfiguration;
 
         /**
         * 
@@ -34,22 +18,7 @@ class ShopifySubscriptionUpdateRequest {
         /**
         * 
         */
-    'items'?: Array<ShopifySubscriptionEditModelItem>;
-
-        /**
-        * Define the maximum number of orders the subscription will run for.
-        */
-    'maximalBillingCycles'?: number;
-
-        /**
-        * Define the maximum number of orders the subscription can be suspended for at a time.
-        */
-    'maximalSuspendableCycles'?: number;
-
-        /**
-        * Define the minimal number of orders the subscription will run for.
-        */
-    'minimalBillingCycles'?: number;
+    'items'?: Array<ShopifySubscriptionModelItem>;
 
         /**
         * 
@@ -61,38 +30,15 @@ class ShopifySubscriptionUpdateRequest {
         */
     'subscriberSuspensionAllowed'?: boolean;
 
-        /**
-        * Define the number of orders the subscription will keep running for after its termination has been requested.
-        */
-    'terminationBillingCycles'?: number;
-
 
     static discriminator: string | undefined = undefined;
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
         {
-        "name": "billingDayOfMonth",
-        "baseName": "billingDayOfMonth",
-        "type": "number"
-        },
-        
-        {
-        "name": "billingIntervalAmount",
-        "baseName": "billingIntervalAmount",
-        "type": "number"
-        },
-        
-        {
-        "name": "billingIntervalUnit",
-        "baseName": "billingIntervalUnit",
-        "type": "ShopifySubscriptionBillingIntervalUnit"
-        },
-        
-        {
-        "name": "billingWeekday",
-        "baseName": "billingWeekday",
-        "type": "ShopifySubscriptionWeekday"
+        "name": "billingConfiguration",
+        "baseName": "billingConfiguration",
+        "type": "ShopifySubscriptionModelBillingConfiguration"
         },
         
         {
@@ -104,25 +50,7 @@ class ShopifySubscriptionUpdateRequest {
         {
         "name": "items",
         "baseName": "items",
-        "type": "Array<ShopifySubscriptionEditModelItem>"
-        },
-        
-        {
-        "name": "maximalBillingCycles",
-        "baseName": "maximalBillingCycles",
-        "type": "number"
-        },
-        
-        {
-        "name": "maximalSuspendableCycles",
-        "baseName": "maximalSuspendableCycles",
-        "type": "number"
-        },
-        
-        {
-        "name": "minimalBillingCycles",
-        "baseName": "minimalBillingCycles",
-        "type": "number"
+        "type": "Array<ShopifySubscriptionModelItem>"
         },
         
         {
@@ -135,12 +63,6 @@ class ShopifySubscriptionUpdateRequest {
         "name": "subscriberSuspensionAllowed",
         "baseName": "subscriberSuspensionAllowed",
         "type": "boolean"
-        },
-        
-        {
-        "name": "terminationBillingCycles",
-        "baseName": "terminationBillingCycles",
-        "type": "number"
         }        
     ];
 

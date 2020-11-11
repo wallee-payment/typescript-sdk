@@ -1,10 +1,17 @@
 'use strict';
 import { CreationEntityState } from "./CreationEntityState";
 import { PaymentMethodConfiguration } from "./PaymentMethodConfiguration";
-import { ShopifyIntegrationAppVersion } from "./ShopifyIntegrationAppVersion";
+import { ShopifyAdditionalLineItemData } from "./ShopifyAdditionalLineItemData";
+import { ShopifyIntegrationPaymentAppVersion } from "./ShopifyIntegrationPaymentAppVersion";
+import { ShopifyIntegrationSubscriptionAppVersion } from "./ShopifyIntegrationSubscriptionAppVersion";
 
 
 class ShopifyIntegration {
+
+        /**
+        * 
+        */
+    'additionalLineItemData'?: Array<ShopifyAdditionalLineItemData>;
 
         /**
         * 
@@ -19,22 +26,12 @@ class ShopifyIntegration {
         /**
         * 
         */
-    'appVersion'?: ShopifyIntegrationAppVersion;
-
-        /**
-        * 
-        */
     'currency'?: string;
 
         /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
-
-        /**
-        * 
-        */
-    'installed'?: boolean;
 
         /**
         * Enabling the integrated payment form will embed the payment form in the Shopify shop. The app needs to be installed for this to be possible.
@@ -57,14 +54,24 @@ class ShopifyIntegration {
     'name'?: string;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * 
         */
-    'plannedPurgeDate'?: Date;
+    'paymentAppVersion'?: ShopifyIntegrationPaymentAppVersion;
+
+        /**
+        * 
+        */
+    'paymentInstalled'?: boolean;
 
         /**
         * Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
         */
-    'proxyPath'?: string;
+    'paymentProxyPath'?: string;
+
+        /**
+        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        */
+    'plannedPurgeDate'?: Date;
 
         /**
         * 
@@ -102,6 +109,21 @@ class ShopifyIntegration {
     'state'?: CreationEntityState;
 
         /**
+        * 
+        */
+    'subscriptionAppVersion'?: ShopifyIntegrationSubscriptionAppVersion;
+
+        /**
+        * 
+        */
+    'subscriptionInstalled'?: boolean;
+
+        /**
+        * Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+        */
+    'subscriptionProxyPath'?: string;
+
+        /**
         * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
         */
     'version'?: number;
@@ -111,6 +133,12 @@ class ShopifyIntegration {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "additionalLineItemData",
+        "baseName": "additionalLineItemData",
+        "type": "Array<ShopifyAdditionalLineItemData>"
+        },
+        
         {
         "name": "allowInvoiceDownload",
         "baseName": "allowInvoiceDownload",
@@ -124,12 +152,6 @@ class ShopifyIntegration {
         },
         
         {
-        "name": "appVersion",
-        "baseName": "appVersion",
-        "type": "ShopifyIntegrationAppVersion"
-        },
-        
-        {
         "name": "currency",
         "baseName": "currency",
         "type": "string"
@@ -139,12 +161,6 @@ class ShopifyIntegration {
         "name": "id",
         "baseName": "id",
         "type": "number"
-        },
-        
-        {
-        "name": "installed",
-        "baseName": "installed",
-        "type": "boolean"
         },
         
         {
@@ -172,15 +188,27 @@ class ShopifyIntegration {
         },
         
         {
-        "name": "plannedPurgeDate",
-        "baseName": "plannedPurgeDate",
-        "type": "Date"
+        "name": "paymentAppVersion",
+        "baseName": "paymentAppVersion",
+        "type": "ShopifyIntegrationPaymentAppVersion"
         },
         
         {
-        "name": "proxyPath",
-        "baseName": "proxyPath",
+        "name": "paymentInstalled",
+        "baseName": "paymentInstalled",
+        "type": "boolean"
+        },
+        
+        {
+        "name": "paymentProxyPath",
+        "baseName": "paymentProxyPath",
         "type": "string"
+        },
+        
+        {
+        "name": "plannedPurgeDate",
+        "baseName": "plannedPurgeDate",
+        "type": "Date"
         },
         
         {
@@ -223,6 +251,24 @@ class ShopifyIntegration {
         "name": "state",
         "baseName": "state",
         "type": "CreationEntityState"
+        },
+        
+        {
+        "name": "subscriptionAppVersion",
+        "baseName": "subscriptionAppVersion",
+        "type": "ShopifyIntegrationSubscriptionAppVersion"
+        },
+        
+        {
+        "name": "subscriptionInstalled",
+        "baseName": "subscriptionInstalled",
+        "type": "boolean"
+        },
+        
+        {
+        "name": "subscriptionProxyPath",
+        "baseName": "subscriptionProxyPath",
+        "type": "string"
         },
         
         {

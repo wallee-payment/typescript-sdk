@@ -269,7 +269,7 @@ class TransactionCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "TransactionCommentCreate")
+            body: ObjectSerializer.serialize(entity, "TransactionCommentCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -642,7 +642,7 @@ class TransactionCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "TransactionCommentActive")
+            body: ObjectSerializer.serialize(entity, "TransactionCommentActive"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

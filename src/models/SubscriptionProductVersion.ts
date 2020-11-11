@@ -2,6 +2,7 @@
 import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { SubscriptionProduct } from "./SubscriptionProduct";
 import { SubscriptionProductVersionState } from "./SubscriptionProductVersionState";
+import { TaxCalculation } from "./TaxCalculation";
 
 
 class SubscriptionProductVersion {
@@ -100,6 +101,11 @@ class SubscriptionProductVersion {
         * 
         */
     'state'?: SubscriptionProductVersionState;
+
+        /**
+        * Strategy that is used for tax calculation in fees.
+        */
+    'taxCalculation'?: TaxCalculation;
 
         /**
         * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
@@ -223,6 +229,12 @@ class SubscriptionProductVersion {
         "name": "state",
         "baseName": "state",
         "type": "SubscriptionProductVersionState"
+        },
+        
+        {
+        "name": "taxCalculation",
+        "baseName": "taxCalculation",
+        "type": "TaxCalculation"
         },
         
         {

@@ -1,6 +1,7 @@
 'use strict';
 import { Subscriber } from "./Subscriber";
 import { SubscriptionAffiliate } from "./SubscriptionAffiliate";
+import { SubscriptionProductVersion } from "./SubscriptionProductVersion";
 import { SubscriptionState } from "./SubscriptionState";
 import { Token } from "./Token";
 
@@ -21,6 +22,11 @@ class Subscription {
         * 
         */
     'createdOn'?: Date;
+
+        /**
+        * 
+        */
+    'currentProductVersion'?: SubscriptionProductVersion;
 
         /**
         * 
@@ -123,6 +129,12 @@ class Subscription {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "currentProductVersion",
+        "baseName": "currentProductVersion",
+        "type": "SubscriptionProductVersion"
         },
         
         {

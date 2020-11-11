@@ -3,6 +3,7 @@ import { AddressCreate } from "./AddressCreate";
 import { LineItemCreate } from "./LineItemCreate";
 import { PaymentMethodBrand } from "./PaymentMethodBrand";
 import { TokenizationMode } from "./TokenizationMode";
+import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 
 
 class AbstractTransactionPending {
@@ -21,6 +22,11 @@ class AbstractTransactionPending {
         * 
         */
     'billingAddress'?: AddressCreate;
+
+        /**
+        * The completion behavior controls when the transaction is completed.
+        */
+    'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
         * 
@@ -118,6 +124,12 @@ class AbstractTransactionPending {
         "name": "billingAddress",
         "baseName": "billingAddress",
         "type": "AddressCreate"
+        },
+        
+        {
+        "name": "completionBehavior",
+        "baseName": "completionBehavior",
+        "type": "TransactionCompletionBehavior"
         },
         
         {

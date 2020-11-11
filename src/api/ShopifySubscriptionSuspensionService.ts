@@ -77,7 +77,7 @@ class ShopifySubscriptionSuspensionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -356,7 +356,7 @@ class ShopifySubscriptionSuspensionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -447,7 +447,7 @@ class ShopifySubscriptionSuspensionService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(suspension, "ShopifySubscriptionSuspensionCreate")
+            body: ObjectSerializer.serialize(suspension, "ShopifySubscriptionSuspensionCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

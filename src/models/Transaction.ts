@@ -7,8 +7,10 @@ import { FailureReason } from "./FailureReason";
 import { LineItem } from "./LineItem";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
 import { PaymentMethodBrand } from "./PaymentMethodBrand";
+import { PaymentTerminal } from "./PaymentTerminal";
 import { Token } from "./Token";
 import { TokenizationMode } from "./TokenizationMode";
+import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 import { TransactionEnvironmentSelectionStrategy } from "./TransactionEnvironmentSelectionStrategy";
 import { TransactionGroup } from "./TransactionGroup";
 import { TransactionState } from "./TransactionState";
@@ -86,6 +88,11 @@ class Transaction {
         * 
         */
     'completedOn'?: Date;
+
+        /**
+        * The completion behavior controls when the transaction is completed.
+        */
+    'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
         * 
@@ -278,6 +285,11 @@ class Transaction {
     'successUrl'?: string;
 
         /**
+        * The terminal on which the payment was processed.
+        */
+    'terminal'?: PaymentTerminal;
+
+        /**
         * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
         */
     'timeZone'?: string;
@@ -409,6 +421,12 @@ class Transaction {
         "name": "completedOn",
         "baseName": "completedOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "completionBehavior",
+        "baseName": "completionBehavior",
+        "type": "TransactionCompletionBehavior"
         },
         
         {
@@ -637,6 +655,12 @@ class Transaction {
         "name": "successUrl",
         "baseName": "successUrl",
         "type": "string"
+        },
+        
+        {
+        "name": "terminal",
+        "baseName": "terminal",
+        "type": "PaymentTerminal"
         },
         
         {

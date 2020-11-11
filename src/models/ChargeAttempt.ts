@@ -9,6 +9,7 @@ import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
 import { PaymentTerminal } from "./PaymentTerminal";
 import { TokenVersion } from "./TokenVersion";
 import { TransactionAwareEntity } from "./TransactionAwareEntity";
+import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 
 
 class ChargeAttempt extends TransactionAwareEntity {
@@ -17,6 +18,11 @@ class ChargeAttempt extends TransactionAwareEntity {
         * 
         */
     'charge'?: Charge;
+
+        /**
+        * 
+        */
+    'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
         * 
@@ -137,6 +143,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "charge",
         "baseName": "charge",
         "type": "Charge"
+        },
+        
+        {
+        "name": "completionBehavior",
+        "baseName": "completionBehavior",
+        "type": "TransactionCompletionBehavior"
         },
         
         {

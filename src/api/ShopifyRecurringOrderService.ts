@@ -77,7 +77,7 @@ class ShopifyRecurringOrderService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -262,7 +262,7 @@ class ShopifyRecurringOrderService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -353,7 +353,7 @@ class ShopifyRecurringOrderService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(updateRequest, "ShopifyRecurringOrderUpdateRequest")
+            body: ObjectSerializer.serialize(updateRequest, "ShopifyRecurringOrderUpdateRequest"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

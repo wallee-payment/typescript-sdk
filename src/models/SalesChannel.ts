@@ -9,6 +9,11 @@ class SalesChannel {
     'description'?: { [key: string]: string; };
 
         /**
+        * 
+        */
+    'icon'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -17,6 +22,16 @@ class SalesChannel {
         * 
         */
     'name'?: { [key: string]: string; };
+
+        /**
+        * 
+        */
+    'parent'?: SalesChannel;
+
+        /**
+        * 
+        */
+    'sortOrder'?: number;
 
 
     static discriminator: string | undefined = undefined;
@@ -30,6 +45,12 @@ class SalesChannel {
         },
         
         {
+        "name": "icon",
+        "baseName": "icon",
+        "type": "string"
+        },
+        
+        {
         "name": "id",
         "baseName": "id",
         "type": "number"
@@ -39,6 +60,18 @@ class SalesChannel {
         "name": "name",
         "baseName": "name",
         "type": "{ [key: string]: string; }"
+        },
+        
+        {
+        "name": "parent",
+        "baseName": "parent",
+        "type": "SalesChannel"
+        },
+        
+        {
+        "name": "sortOrder",
+        "baseName": "sortOrder",
+        "type": "number"
         }        
     ];
 

@@ -1,13 +1,13 @@
 'use strict';
-import { AbstractShopifySubscriptionProductActive } from "./AbstractShopifySubscriptionProductActive";
+import { AbstractShopifySubscriptionProductUpdate } from "./AbstractShopifySubscriptionProductUpdate";
 
 
-class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProductActive {
+class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProductUpdate {
 
         /**
         * The ID of the Shopify product that is enabled to be ordered as subscription.
         */
-    'productId'?: string;
+    'productId': string;
 
         /**
         * 
@@ -17,7 +17,7 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
         /**
         * 
         */
-    'shop'?: number;
+    'shop': number;
 
 
     static discriminator: string | undefined = undefined;

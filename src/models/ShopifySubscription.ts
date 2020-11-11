@@ -16,6 +16,11 @@ class ShopifySubscription {
     'createdOn'?: Date;
 
         /**
+        * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+        */
+    'externalId'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -23,7 +28,12 @@ class ShopifySubscription {
         /**
         * 
         */
-    'initialTransaction'?: number;
+    'initialPaymentTransaction'?: number;
+
+        /**
+        * 
+        */
+    'initialShopifyTransaction'?: number;
 
         /**
         * 
@@ -93,14 +103,26 @@ class ShopifySubscription {
         },
         
         {
+        "name": "externalId",
+        "baseName": "externalId",
+        "type": "string"
+        },
+        
+        {
         "name": "id",
         "baseName": "id",
         "type": "number"
         },
         
         {
-        "name": "initialTransaction",
-        "baseName": "initialTransaction",
+        "name": "initialPaymentTransaction",
+        "baseName": "initialPaymentTransaction",
+        "type": "number"
+        },
+        
+        {
+        "name": "initialShopifyTransaction",
+        "baseName": "initialShopifyTransaction",
         "type": "number"
         },
         

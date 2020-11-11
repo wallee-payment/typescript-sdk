@@ -23,6 +23,16 @@ class Space {
     'activeOrRestrictedActive'?: boolean;
 
         /**
+        * The ID of the user who created this entity.
+        */
+    'createdBy'?: number;
+
+        /**
+        * The date and time when this entity was created.
+        */
+    'createdOn'?: Date;
+
+        /**
         * The database in which the space's data are stored in.
         */
     'database'?: TenantDatabase;
@@ -41,6 +51,11 @@ class Space {
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
+
+        /**
+        * 
+        */
+    'lastModifiedDate'?: Date;
 
         /**
         * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
@@ -116,6 +131,18 @@ class Space {
         },
         
         {
+        "name": "createdBy",
+        "baseName": "createdBy",
+        "type": "number"
+        },
+        
+        {
+        "name": "createdOn",
+        "baseName": "createdOn",
+        "type": "Date"
+        },
+        
+        {
         "name": "database",
         "baseName": "database",
         "type": "TenantDatabase"
@@ -137,6 +164,12 @@ class Space {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "lastModifiedDate",
+        "baseName": "lastModifiedDate",
+        "type": "Date"
         },
         
         {

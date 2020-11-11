@@ -100,7 +100,7 @@ class CardProcessingService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate")
+            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -211,7 +211,7 @@ class CardProcessingService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate")
+            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

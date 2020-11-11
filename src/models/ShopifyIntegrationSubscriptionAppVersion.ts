@@ -1,10 +1,10 @@
 'use strict';
 
-enum ShopifyIntegrationAppVersion{
+enum ShopifyIntegrationSubscriptionAppVersion{
 
     BASIC = 'BASIC',
     SUBSCRIPTION = 'SUBSCRIPTION',
     API_2019_07 = 'API_2019_07',
 }
 
-export { ShopifyIntegrationAppVersion }
+export { ShopifyIntegrationSubscriptionAppVersion }

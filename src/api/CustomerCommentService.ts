@@ -83,7 +83,7 @@ class CustomerCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(id, "number")
+            body: ObjectSerializer.serialize(id, "number"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -169,7 +169,7 @@ class CustomerCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -260,7 +260,7 @@ class CustomerCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerCommentCreate")
+            body: ObjectSerializer.serialize(entity, "CustomerCommentCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -539,7 +539,7 @@ class CustomerCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -724,7 +724,7 @@ class CustomerCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerCommentActive")
+            body: ObjectSerializer.serialize(entity, "CustomerCommentActive"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

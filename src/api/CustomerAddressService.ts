@@ -83,7 +83,7 @@ class CustomerAddressService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(id, "number")
+            body: ObjectSerializer.serialize(id, "number"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -169,7 +169,7 @@ class CustomerAddressService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -260,7 +260,7 @@ class CustomerAddressService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerAddressCreate")
+            body: ObjectSerializer.serialize(entity, "CustomerAddressCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -445,7 +445,7 @@ class CustomerAddressService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -630,7 +630,7 @@ class CustomerAddressService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "CustomerAddressActive")
+            body: ObjectSerializer.serialize(entity, "CustomerAddressActive"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

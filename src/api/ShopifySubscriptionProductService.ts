@@ -13,8 +13,8 @@ import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
 import { ServerError } from  '../models/ServerError';
 import { ShopifySubscriptionProduct } from  '../models/ShopifySubscriptionProduct';
-import { ShopifySubscriptionProductActive } from  '../models/ShopifySubscriptionProductActive';
 import { ShopifySubscriptionProductCreate } from  '../models/ShopifySubscriptionProductCreate';
+import { ShopifySubscriptionProductUpdate } from  '../models/ShopifySubscriptionProductUpdate';
 
 class ShopifySubscriptionProductService {
     protected _basePath = 'https://app-wallee.com:443/api';
@@ -78,7 +78,7 @@ class ShopifySubscriptionProductService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -169,7 +169,7 @@ class ShopifySubscriptionProductService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "ShopifySubscriptionProductCreate")
+            body: ObjectSerializer.serialize(entity, "ShopifySubscriptionProductCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -354,7 +354,7 @@ class ShopifySubscriptionProductService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -414,7 +414,7 @@ class ShopifySubscriptionProductService {
     * @param entity The Shopify subscription product object with all the properties which should be updated. The id and the version are required properties.
     * @param {*} [options] Override http request options.
     */
-    public update (spaceId: number, entity: ShopifySubscriptionProductActive, options: any = {}) : Promise<{ response: http.IncomingMessage; body: ShopifySubscriptionProduct;  }> {
+    public update (spaceId: number, entity: ShopifySubscriptionProductUpdate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: ShopifySubscriptionProduct;  }> {
         const localVarPath = this.basePath + '/shopify-subscription-product/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -445,7 +445,7 @@ class ShopifySubscriptionProductService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "ShopifySubscriptionProductActive")
+            body: ObjectSerializer.serialize(entity, "ShopifySubscriptionProductUpdate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

@@ -82,7 +82,7 @@ class SubscriptionProductComponentGroupService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(id, "number")
+            body: ObjectSerializer.serialize(id, "number"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -168,7 +168,7 @@ class SubscriptionProductComponentGroupService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -259,7 +259,7 @@ class SubscriptionProductComponentGroupService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "SubscriptionProductComponentGroupUpdate")
+            body: ObjectSerializer.serialize(entity, "SubscriptionProductComponentGroupUpdate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -444,7 +444,7 @@ class SubscriptionProductComponentGroupService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -535,7 +535,7 @@ class SubscriptionProductComponentGroupService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "SubscriptionProductComponentGroupUpdate")
+            body: ObjectSerializer.serialize(entity, "SubscriptionProductComponentGroupUpdate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

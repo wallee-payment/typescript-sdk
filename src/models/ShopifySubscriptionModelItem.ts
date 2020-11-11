@@ -1,8 +1,8 @@
 'use strict';
-import { ShopifySubscriptionEditModelTaxLine } from "./ShopifySubscriptionEditModelTaxLine";
+import { ShopifySubscriptionModelTaxLine } from "./ShopifySubscriptionModelTaxLine";
 
 
-class ShopifySubscriptionEditModelItem {
+class ShopifySubscriptionModelItem {
 
         /**
         * 
@@ -27,7 +27,7 @@ class ShopifySubscriptionEditModelItem {
         /**
         * 
         */
-    'taxLines'?: Array<ShopifySubscriptionEditModelTaxLine>;
+    'taxLines'?: Array<ShopifySubscriptionModelTaxLine>;
 
 
     static discriminator: string | undefined = undefined;
@@ -61,13 +61,13 @@ class ShopifySubscriptionEditModelItem {
         {
         "name": "taxLines",
         "baseName": "taxLines",
-        "type": "Array<ShopifySubscriptionEditModelTaxLine>"
+        "type": "Array<ShopifySubscriptionModelTaxLine>"
         }        
     ];
 
     static getAttributeTypeMap() {
-        return ShopifySubscriptionEditModelItem.attributeTypeMap;
+        return ShopifySubscriptionModelItem.attributeTypeMap;
     }
 }
 
-export { ShopifySubscriptionEditModelItem }
+export { ShopifySubscriptionModelItem }

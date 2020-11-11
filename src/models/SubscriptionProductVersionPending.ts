@@ -1,6 +1,7 @@
 'use strict';
 import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 import { SubscriptionProductVersionState } from "./SubscriptionProductVersionState";
+import { TaxCalculation } from "./TaxCalculation";
 
 
 class SubscriptionProductVersionPending {
@@ -59,6 +60,11 @@ class SubscriptionProductVersionPending {
         * 
         */
     'state'?: SubscriptionProductVersionState;
+
+        /**
+        * Strategy that is used for tax calculation in fees.
+        */
+    'taxCalculation'?: TaxCalculation;
 
 
     static discriminator: string | undefined = undefined;
@@ -129,6 +135,12 @@ class SubscriptionProductVersionPending {
         "name": "state",
         "baseName": "state",
         "type": "SubscriptionProductVersionState"
+        },
+        
+        {
+        "name": "taxCalculation",
+        "baseName": "taxCalculation",
+        "type": "TaxCalculation"
         }        
     ];
 

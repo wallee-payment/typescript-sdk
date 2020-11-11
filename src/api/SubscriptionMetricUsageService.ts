@@ -77,7 +77,7 @@ class SubscriptionMetricUsageService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -168,7 +168,7 @@ class SubscriptionMetricUsageService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(usageReport, "SubscriptionMetricUsageReportCreate")
+            body: ObjectSerializer.serialize(usageReport, "SubscriptionMetricUsageReportCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -353,7 +353,7 @@ class SubscriptionMetricUsageService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

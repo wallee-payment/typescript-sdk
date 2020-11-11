@@ -1,8 +1,8 @@
 'use strict';
-import { AbstractShopifySubscriptionProductActive } from "./AbstractShopifySubscriptionProductActive";
+import { AbstractShopifySubscriptionProductUpdate } from "./AbstractShopifySubscriptionProductUpdate";
 
 
-class ShopifySubscriptionProductActive extends AbstractShopifySubscriptionProductActive {
+class ShopifySubscriptionProductUpdate extends AbstractShopifySubscriptionProductUpdate {
 
         /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -33,8 +33,8 @@ class ShopifySubscriptionProductActive extends AbstractShopifySubscriptionProduc
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ShopifySubscriptionProductActive.attributeTypeMap);
+        return super.getAttributeTypeMap().concat(ShopifySubscriptionProductUpdate.attributeTypeMap);
     }
 }
 
-export { ShopifySubscriptionProductActive }
+export { ShopifySubscriptionProductUpdate }

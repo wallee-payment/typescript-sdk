@@ -269,7 +269,7 @@ class RefundCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "RefundCommentCreate")
+            body: ObjectSerializer.serialize(entity, "RefundCommentCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -642,7 +642,7 @@ class RefundCommentService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "RefundCommentActive")
+            body: ObjectSerializer.serialize(entity, "RefundCommentActive"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

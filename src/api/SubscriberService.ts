@@ -83,7 +83,7 @@ class SubscriberService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(id, "number")
+            body: ObjectSerializer.serialize(id, "number"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -169,7 +169,7 @@ class SubscriberService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -229,7 +229,7 @@ class SubscriberService {
     * @param entity The customer object with the properties which should be created.
     * @param {*} [options] Override http request options.
     */
-    public create (spaceId: number, entity: SubscriberCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriberCreate;  }> {
+    public create (spaceId: number, entity: SubscriberCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Subscriber;  }> {
         const localVarPath = this.basePath + '/subscriber/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -260,7 +260,7 @@ class SubscriberService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "SubscriberCreate")
+            body: ObjectSerializer.serialize(entity, "SubscriberCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -272,14 +272,14 @@ class SubscriberService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: SubscriberCreate;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Subscriber;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "SubscriberCreate");
+                            body = ObjectSerializer.deserialize(body, "Subscriber");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -445,7 +445,7 @@ class SubscriberService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -536,7 +536,7 @@ class SubscriberService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(entity, "SubscriberUpdate")
+            body: ObjectSerializer.serialize(entity, "SubscriberUpdate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

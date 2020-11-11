@@ -6,6 +6,11 @@ import { SpaceAddressCreate } from "./SpaceAddressCreate";
 class AbstractSpaceUpdate {
 
         /**
+        * 
+        */
+    'lastModifiedDate'?: Date;
+
+        /**
         * The space name is used internally to identify the space in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
         */
     'name'?: string;
@@ -45,6 +50,12 @@ class AbstractSpaceUpdate {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "lastModifiedDate",
+        "baseName": "lastModifiedDate",
+        "type": "Date"
+        },
+        
         {
         "name": "name",
         "baseName": "name",

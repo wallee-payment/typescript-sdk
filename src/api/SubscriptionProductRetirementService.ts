@@ -77,7 +77,7 @@ class SubscriptionProductRetirementService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -168,7 +168,7 @@ class SubscriptionProductRetirementService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(retirement, "SubscriptionProductRetirementCreate")
+            body: ObjectSerializer.serialize(retirement, "SubscriptionProductRetirementCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -353,7 +353,7 @@ class SubscriptionProductRetirementService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

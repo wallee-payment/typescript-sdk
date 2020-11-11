@@ -77,7 +77,7 @@ class SubscriptionChargeService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter")
+            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -168,7 +168,7 @@ class SubscriptionChargeService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(charge, "SubscriptionChargeCreate")
+            body: ObjectSerializer.serialize(charge, "SubscriptionChargeCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -447,7 +447,7 @@ class SubscriptionChargeService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery")
+            body: ObjectSerializer.serialize(query, "EntityQuery"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
