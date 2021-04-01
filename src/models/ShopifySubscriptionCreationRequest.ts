@@ -30,6 +30,11 @@ class ShopifySubscriptionCreationRequest {
         /**
         * 
         */
+    'initialExecutionDate'?: Date;
+
+        /**
+        * 
+        */
     'integration': number;
 
         /**
@@ -99,6 +104,12 @@ class ShopifySubscriptionCreationRequest {
         "name": "externalId",
         "baseName": "externalId",
         "type": "string"
+        },
+        
+        {
+        "name": "initialExecutionDate",
+        "baseName": "initialExecutionDate",
+        "type": "Date"
         },
         
         {

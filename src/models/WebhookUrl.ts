@@ -5,6 +5,11 @@ import { CreationEntityState } from "./CreationEntityState";
 class WebhookUrl {
 
         /**
+        * The webhook URL is managed by the application and cannot be changed via the user interface.
+        */
+    'applicationManaged'?: boolean;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -44,6 +49,12 @@ class WebhookUrl {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "applicationManaged",
+        "baseName": "applicationManaged",
+        "type": "boolean"
+        },
+        
         {
         "name": "id",
         "baseName": "id",

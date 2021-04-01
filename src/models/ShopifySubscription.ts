@@ -28,6 +28,11 @@ class ShopifySubscription {
         /**
         * 
         */
+    'initialExecutionDate'?: Date;
+
+        /**
+        * 
+        */
     'initialPaymentTransaction'?: number;
 
         /**
@@ -112,6 +117,12 @@ class ShopifySubscription {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "initialExecutionDate",
+        "baseName": "initialExecutionDate",
+        "type": "Date"
         },
         
         {

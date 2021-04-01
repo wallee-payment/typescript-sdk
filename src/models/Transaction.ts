@@ -212,6 +212,11 @@ class Transaction {
         /**
         * 
         */
+    'javaEnabled'?: boolean;
+
+        /**
+        * 
+        */
     'language'?: string;
 
         /**
@@ -258,6 +263,21 @@ class Transaction {
         * The refunded amount is the total amount which has been refunded so far.
         */
     'refundedAmount'?: number;
+
+        /**
+        * 
+        */
+    'screenColorDepth'?: string;
+
+        /**
+        * 
+        */
+    'screenHeight'?: string;
+
+        /**
+        * 
+        */
+    'screenWidth'?: string;
 
         /**
         * 
@@ -333,6 +353,16 @@ class Transaction {
         * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
         */
     'version'?: number;
+
+        /**
+        * 
+        */
+    'windowHeight'?: string;
+
+        /**
+        * 
+        */
+    'windowWidth'?: string;
 
 
     static discriminator: string | undefined = undefined;
@@ -568,6 +598,12 @@ class Transaction {
         },
         
         {
+        "name": "javaEnabled",
+        "baseName": "javaEnabled",
+        "type": "boolean"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
@@ -625,6 +661,24 @@ class Transaction {
         "name": "refundedAmount",
         "baseName": "refundedAmount",
         "type": "number"
+        },
+        
+        {
+        "name": "screenColorDepth",
+        "baseName": "screenColorDepth",
+        "type": "string"
+        },
+        
+        {
+        "name": "screenHeight",
+        "baseName": "screenHeight",
+        "type": "string"
+        },
+        
+        {
+        "name": "screenWidth",
+        "baseName": "screenWidth",
+        "type": "string"
         },
         
         {
@@ -715,6 +769,18 @@ class Transaction {
         "name": "version",
         "baseName": "version",
         "type": "number"
+        },
+        
+        {
+        "name": "windowHeight",
+        "baseName": "windowHeight",
+        "type": "string"
+        },
+        
+        {
+        "name": "windowWidth",
+        "baseName": "windowWidth",
+        "type": "string"
         }        
     ];
 

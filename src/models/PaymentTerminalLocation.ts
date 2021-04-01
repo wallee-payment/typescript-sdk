@@ -1,7 +1,6 @@
 'use strict';
 import { PaymentTerminalAddress } from "./PaymentTerminalAddress";
 import { PaymentTerminalConfiguration } from "./PaymentTerminalConfiguration";
-import { PaymentTerminalContactAddress } from "./PaymentTerminalContactAddress";
 import { PaymentTerminalLocationState } from "./PaymentTerminalLocationState";
 
 
@@ -10,17 +9,12 @@ class PaymentTerminalLocation {
         /**
         * 
         */
-    'contactAddress'?: PaymentTerminalContactAddress;
+    'contactAddress'?: PaymentTerminalAddress;
 
         /**
         * 
         */
     'defaultConfiguration'?: PaymentTerminalConfiguration;
-
-        /**
-        * 
-        */
-    'deliveryAddress'?: PaymentTerminalAddress;
 
         /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -60,19 +54,13 @@ class PaymentTerminalLocation {
         {
         "name": "contactAddress",
         "baseName": "contactAddress",
-        "type": "PaymentTerminalContactAddress"
+        "type": "PaymentTerminalAddress"
         },
         
         {
         "name": "defaultConfiguration",
         "baseName": "defaultConfiguration",
         "type": "PaymentTerminalConfiguration"
-        },
-        
-        {
-        "name": "deliveryAddress",
-        "baseName": "deliveryAddress",
-        "type": "PaymentTerminalAddress"
         },
         
         {

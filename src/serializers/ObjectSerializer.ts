@@ -25,6 +25,23 @@ import { AccountState } from "../models/AccountState";
 import { AccountType } from "../models/AccountType";
 import { Address } from "../models/Address";
 import { AddressCreate } from "../models/AddressCreate";
+import { AuthenticatedCardDataCreate } from "../models/AuthenticatedCardDataCreate";
+import { BankAccount } from "../models/BankAccount";
+import { BankAccountEnvironment } from "../models/BankAccountEnvironment";
+import { BankAccountState } from "../models/BankAccountState";
+import { BankAccountType } from "../models/BankAccountType";
+import { BankTransaction } from "../models/BankTransaction";
+import { BankTransactionFlowDirection } from "../models/BankTransactionFlowDirection";
+import { BankTransactionSource } from "../models/BankTransactionSource";
+import { BankTransactionState } from "../models/BankTransactionState";
+import { BankTransactionType } from "../models/BankTransactionType";
+import { CardAuthenticationResponse } from "../models/CardAuthenticationResponse";
+import { CardAuthenticationVersion } from "../models/CardAuthenticationVersion";
+import { CardCryptogram } from "../models/CardCryptogram";
+import { CardCryptogramCreate } from "../models/CardCryptogramCreate";
+import { CardCryptogramType } from "../models/CardCryptogramType";
+import { CardholderAuthentication } from "../models/CardholderAuthentication";
+import { CardholderAuthenticationCreate } from "../models/CardholderAuthenticationCreate";
 import { ChargeAttemptEnvironment } from "../models/ChargeAttemptEnvironment";
 import { ChargeAttemptState } from "../models/ChargeAttemptState";
 import { ChargeFlow } from "../models/ChargeFlow";
@@ -42,6 +59,7 @@ import { ConditionType } from "../models/ConditionType";
 import { ConnectorInvocationStage } from "../models/ConnectorInvocationStage";
 import { CreationEntityState } from "../models/CreationEntityState";
 import { CriteriaOperator } from "../models/CriteriaOperator";
+import { CurrencyBankAccount } from "../models/CurrencyBankAccount";
 import { Customer } from "../models/Customer";
 import { CustomerAddress } from "../models/CustomerAddress";
 import { CustomerAddressType } from "../models/CustomerAddressType";
@@ -77,6 +95,7 @@ import { EntityQueryFilterType } from "../models/EntityQueryFilterType";
 import { EntityQueryOrderBy } from "../models/EntityQueryOrderBy";
 import { EntityQueryOrderByType } from "../models/EntityQueryOrderByType";
 import { Environment } from "../models/Environment";
+import { ExternalTransferBankTransaction } from "../models/ExternalTransferBankTransaction";
 import { FailureCategory } from "../models/FailureCategory";
 import { FailureReason } from "../models/FailureReason";
 import { Feature } from "../models/Feature";
@@ -90,6 +109,7 @@ import { InstallmentPaymentSliceState } from "../models/InstallmentPaymentSliceS
 import { InstallmentPaymentState } from "../models/InstallmentPaymentState";
 import { InstallmentPlanConfiguration } from "../models/InstallmentPlanConfiguration";
 import { InstallmentPlanSliceConfiguration } from "../models/InstallmentPlanSliceConfiguration";
+import { InternalTransferBankTransaction } from "../models/InternalTransferBankTransaction";
 import { Label } from "../models/Label";
 import { LabelDescriptor } from "../models/LabelDescriptor";
 import { LabelDescriptorCategory } from "../models/LabelDescriptorCategory";
@@ -111,6 +131,8 @@ import { ManualTaskState } from "../models/ManualTaskState";
 import { ManualTaskType } from "../models/ManualTaskType";
 import { MetricUsage } from "../models/MetricUsage";
 import { OneClickPaymentMode } from "../models/OneClickPaymentMode";
+import { PaymentAdjustment } from "../models/PaymentAdjustment";
+import { PaymentAdjustmentType } from "../models/PaymentAdjustmentType";
 import { PaymentConnector } from "../models/PaymentConnector";
 import { PaymentConnectorConfiguration } from "../models/PaymentConnectorConfiguration";
 import { PaymentConnectorFeature } from "../models/PaymentConnectorFeature";
@@ -120,6 +142,7 @@ import { PaymentContractType } from "../models/PaymentContractType";
 import { PaymentInformationHash } from "../models/PaymentInformationHash";
 import { PaymentInformationHashType } from "../models/PaymentInformationHashType";
 import { PaymentLink } from "../models/PaymentLink";
+import { PaymentLinkAddressHandlingMode } from "../models/PaymentLinkAddressHandlingMode";
 import { PaymentLinkProtectionMode } from "../models/PaymentLinkProtectionMode";
 import { PaymentLinkUpdate } from "../models/PaymentLinkUpdate";
 import { PaymentMethod } from "../models/PaymentMethod";
@@ -138,6 +161,7 @@ import { PaymentTerminalLocation } from "../models/PaymentTerminalLocation";
 import { PaymentTerminalLocationState } from "../models/PaymentTerminalLocationState";
 import { PaymentTerminalLocationVersion } from "../models/PaymentTerminalLocationVersion";
 import { PaymentTerminalLocationVersionState } from "../models/PaymentTerminalLocationVersionState";
+import { PaymentTerminalReceiptType } from "../models/PaymentTerminalReceiptType";
 import { PaymentTerminalState } from "../models/PaymentTerminalState";
 import { PaymentTerminalType } from "../models/PaymentTerminalType";
 import { Permission } from "../models/Permission";
@@ -153,6 +177,7 @@ import { ProductPeriodFee } from "../models/ProductPeriodFee";
 import { ProductPeriodFeeUpdate } from "../models/ProductPeriodFeeUpdate";
 import { ProductSetupFee } from "../models/ProductSetupFee";
 import { ProductSetupFeeUpdate } from "../models/ProductSetupFeeUpdate";
+import { RecurringIndicator } from "../models/RecurringIndicator";
 import { Refund } from "../models/Refund";
 import { RefundComment } from "../models/RefundComment";
 import { RefundCreate } from "../models/RefundCreate";
@@ -179,6 +204,7 @@ import { ShopifyIntegrationSubscriptionAppVersion } from "../models/ShopifyInteg
 import { ShopifyRecurringOrderState } from "../models/ShopifyRecurringOrderState";
 import { ShopifyRecurringOrderUpdateRequest } from "../models/ShopifyRecurringOrderUpdateRequest";
 import { ShopifySubscriber } from "../models/ShopifySubscriber";
+import { ShopifySubscriberActive } from "../models/ShopifySubscriberActive";
 import { ShopifySubscriberCreation } from "../models/ShopifySubscriberCreation";
 import { ShopifySubscriberState } from "../models/ShopifySubscriberState";
 import { ShopifySubscription } from "../models/ShopifySubscription";
@@ -267,11 +293,15 @@ import { TaxCalculation } from "../models/TaxCalculation";
 import { TaxClass } from "../models/TaxClass";
 import { TaxCreate } from "../models/TaxCreate";
 import { TenantDatabase } from "../models/TenantDatabase";
+import { TerminalReceiptFetchRequest } from "../models/TerminalReceiptFetchRequest";
+import { TerminalReceiptFormat } from "../models/TerminalReceiptFormat";
 import { Token } from "../models/Token";
 import { TokenVersion } from "../models/TokenVersion";
 import { TokenVersionState } from "../models/TokenVersionState";
 import { TokenVersionType } from "../models/TokenVersionType";
 import { TokenizationMode } from "../models/TokenizationMode";
+import { TokenizedCardData } from "../models/TokenizedCardData";
+import { TokenizedCardDataCreate } from "../models/TokenizedCardDataCreate";
 import { Transaction } from "../models/Transaction";
 import { TransactionAwareEntity } from "../models/TransactionAwareEntity";
 import { TransactionComment } from "../models/TransactionComment";
@@ -291,12 +321,12 @@ import { TransactionUserInterfaceType } from "../models/TransactionUserInterface
 import { TransactionVoidMode } from "../models/TransactionVoidMode";
 import { TransactionVoidState } from "../models/TransactionVoidState";
 import { TwoFactorAuthenticationType } from "../models/TwoFactorAuthenticationType";
-import { UnencryptedCardData } from "../models/UnencryptedCardData";
-import { UnencryptedCardDataCreate } from "../models/UnencryptedCardDataCreate";
 import { User } from "../models/User";
 import { UserAccountRole } from "../models/UserAccountRole";
 import { UserSpaceRole } from "../models/UserSpaceRole";
 import { UserType } from "../models/UserType";
+import { WebAppConfirmationRequest } from "../models/WebAppConfirmationRequest";
+import { WebAppConfirmationResponse } from "../models/WebAppConfirmationResponse";
 import { WebhookIdentity } from "../models/WebhookIdentity";
 import { WebhookListener } from "../models/WebhookListener";
 import { WebhookListenerEntity } from "../models/WebhookListenerEntity";
@@ -306,8 +336,10 @@ import { AccountUpdate } from "../models/AccountUpdate";
 import { ApplicationUser } from "../models/ApplicationUser";
 import { ApplicationUserCreate } from "../models/ApplicationUserCreate";
 import { ApplicationUserUpdate } from "../models/ApplicationUserUpdate";
+import { AuthenticatedCardData } from "../models/AuthenticatedCardData";
 import { Charge } from "../models/Charge";
 import { ChargeAttempt } from "../models/ChargeAttempt";
+import { ChargeBankTransaction } from "../models/ChargeBankTransaction";
 import { ChargeFlowLevel } from "../models/ChargeFlowLevel";
 import { ChargeFlowLevelPaymentLink } from "../models/ChargeFlowLevelPaymentLink";
 import { ConnectorInvocation } from "../models/ConnectorInvocation";
@@ -325,9 +357,10 @@ import { HumanUserUpdate } from "../models/HumanUserUpdate";
 import { InstallmentPaymentSlice } from "../models/InstallmentPaymentSlice";
 import { PaymentLinkActive } from "../models/PaymentLinkActive";
 import { PaymentLinkCreate } from "../models/PaymentLinkCreate";
-import { PaymentTerminalContactAddress } from "../models/PaymentTerminalContactAddress";
+import { RefundBankTransaction } from "../models/RefundBankTransaction";
 import { RefundCommentActive } from "../models/RefundCommentActive";
 import { RefundCommentCreate } from "../models/RefundCommentCreate";
+import { RefundRecoveryBankTransaction } from "../models/RefundRecoveryBankTransaction";
 import { ShopifyRecurringOrder } from "../models/ShopifyRecurringOrder";
 import { ShopifySubscriptionAddress } from "../models/ShopifySubscriptionAddress";
 import { ShopifySubscriptionProductCreate } from "../models/ShopifySubscriptionProductCreate";
@@ -382,6 +415,13 @@ class ObjectSerializer {
     static enumsMap: {[index: string]: any} = {
         "AccountState": AccountState,
         "AccountType": AccountType,
+        "BankAccountEnvironment": BankAccountEnvironment,
+        "BankAccountState": BankAccountState,
+        "BankTransactionFlowDirection": BankTransactionFlowDirection,
+        "BankTransactionState": BankTransactionState,
+        "CardAuthenticationResponse": CardAuthenticationResponse,
+        "CardAuthenticationVersion": CardAuthenticationVersion,
+        "CardCryptogramType": CardCryptogramType,
         "ChargeAttemptEnvironment": ChargeAttemptEnvironment,
         "ChargeAttemptState": ChargeAttemptState,
         "ChargeFlowLevelState": ChargeFlowLevelState,
@@ -410,6 +450,7 @@ class ObjectSerializer {
         "ManualTaskState": ManualTaskState,
         "OneClickPaymentMode": OneClickPaymentMode,
         "PaymentContractState": PaymentContractState,
+        "PaymentLinkAddressHandlingMode": PaymentLinkAddressHandlingMode,
         "PaymentLinkProtectionMode": PaymentLinkProtectionMode,
         "PaymentPrimaryRiskTaker": PaymentPrimaryRiskTaker,
         "PaymentTerminalConfigurationState": PaymentTerminalConfigurationState,
@@ -419,6 +460,7 @@ class ObjectSerializer {
         "PaymentTerminalState": PaymentTerminalState,
         "ProductFeeType": ProductFeeType,
         "ProductMeteredTierPricing": ProductMeteredTierPricing,
+        "RecurringIndicator": RecurringIndicator,
         "RefundState": RefundState,
         "RefundType": RefundType,
         "ResourceState": ResourceState,
@@ -454,6 +496,7 @@ class ObjectSerializer {
         "SubscriptionSuspensionState": SubscriptionSuspensionState,
         "SubscriptionVersionState": SubscriptionVersionState,
         "TaxCalculation": TaxCalculation,
+        "TerminalReceiptFormat": TerminalReceiptFormat,
         "TokenVersionState": TokenVersionState,
         "TokenizationMode": TokenizationMode,
         "TransactionCompletionBehavior": TransactionCompletionBehavior,
@@ -494,6 +537,16 @@ class ObjectSerializer {
                 "Account": Account,
                 "Address": Address,
                 "AddressCreate": AddressCreate,
+                "AuthenticatedCardDataCreate": AuthenticatedCardDataCreate,
+                "BankAccount": BankAccount,
+                "BankAccountType": BankAccountType,
+                "BankTransaction": BankTransaction,
+                "BankTransactionSource": BankTransactionSource,
+                "BankTransactionType": BankTransactionType,
+                "CardCryptogram": CardCryptogram,
+                "CardCryptogramCreate": CardCryptogramCreate,
+                "CardholderAuthentication": CardholderAuthentication,
+                "CardholderAuthenticationCreate": CardholderAuthenticationCreate,
                 "ChargeFlow": ChargeFlow,
                 "ChargeFlowLevelConfiguration": ChargeFlowLevelConfiguration,
                 "ChargeFlowLevelConfigurationType": ChargeFlowLevelConfigurationType,
@@ -502,6 +555,7 @@ class ObjectSerializer {
                 "CompletionLineItemCreate": CompletionLineItemCreate,
                 "Condition": Condition,
                 "ConditionType": ConditionType,
+                "CurrencyBankAccount": CurrencyBankAccount,
                 "Customer": Customer,
                 "CustomerAddress": CustomerAddress,
                 "CustomerComment": CustomerComment,
@@ -528,6 +582,7 @@ class ObjectSerializer {
                 "EntityQuery": EntityQuery,
                 "EntityQueryFilter": EntityQueryFilter,
                 "EntityQueryOrderBy": EntityQueryOrderBy,
+                "ExternalTransferBankTransaction": ExternalTransferBankTransaction,
                 "FailureReason": FailureReason,
                 "Feature": Feature,
                 "FeatureCategory": FeatureCategory,
@@ -537,6 +592,7 @@ class ObjectSerializer {
                 "InstallmentPayment": InstallmentPayment,
                 "InstallmentPlanConfiguration": InstallmentPlanConfiguration,
                 "InstallmentPlanSliceConfiguration": InstallmentPlanSliceConfiguration,
+                "InternalTransferBankTransaction": InternalTransferBankTransaction,
                 "Label": Label,
                 "LabelDescriptor": LabelDescriptor,
                 "LabelDescriptorGroup": LabelDescriptorGroup,
@@ -553,6 +609,8 @@ class ObjectSerializer {
                 "ManualTaskAction": ManualTaskAction,
                 "ManualTaskType": ManualTaskType,
                 "MetricUsage": MetricUsage,
+                "PaymentAdjustment": PaymentAdjustment,
+                "PaymentAdjustmentType": PaymentAdjustmentType,
                 "PaymentConnector": PaymentConnector,
                 "PaymentConnectorConfiguration": PaymentConnectorConfiguration,
                 "PaymentConnectorFeature": PaymentConnectorFeature,
@@ -573,6 +631,7 @@ class ObjectSerializer {
                 "PaymentTerminalConfigurationVersion": PaymentTerminalConfigurationVersion,
                 "PaymentTerminalLocation": PaymentTerminalLocation,
                 "PaymentTerminalLocationVersion": PaymentTerminalLocationVersion,
+                "PaymentTerminalReceiptType": PaymentTerminalReceiptType,
                 "PaymentTerminalType": PaymentTerminalType,
                 "Permission": Permission,
                 "PersistableCurrencyAmount": PersistableCurrencyAmount,
@@ -603,6 +662,7 @@ class ObjectSerializer {
                 "ShopifyIntegration": ShopifyIntegration,
                 "ShopifyRecurringOrderUpdateRequest": ShopifyRecurringOrderUpdateRequest,
                 "ShopifySubscriber": ShopifySubscriber,
+                "ShopifySubscriberActive": ShopifySubscriberActive,
                 "ShopifySubscriberCreation": ShopifySubscriberCreation,
                 "ShopifySubscription": ShopifySubscription,
                 "ShopifySubscriptionAddressCreate": ShopifySubscriptionAddressCreate,
@@ -664,9 +724,12 @@ class ObjectSerializer {
                 "TaxClass": TaxClass,
                 "TaxCreate": TaxCreate,
                 "TenantDatabase": TenantDatabase,
+                "TerminalReceiptFetchRequest": TerminalReceiptFetchRequest,
                 "Token": Token,
                 "TokenVersion": TokenVersion,
                 "TokenVersionType": TokenVersionType,
+                "TokenizedCardData": TokenizedCardData,
+                "TokenizedCardDataCreate": TokenizedCardDataCreate,
                 "Transaction": Transaction,
                 "TransactionAwareEntity": TransactionAwareEntity,
                 "TransactionComment": TransactionComment,
@@ -676,11 +739,11 @@ class ObjectSerializer {
                 "TransactionInvoiceReplacement": TransactionInvoiceReplacement,
                 "TransactionLineItemUpdateRequest": TransactionLineItemUpdateRequest,
                 "TwoFactorAuthenticationType": TwoFactorAuthenticationType,
-                "UnencryptedCardData": UnencryptedCardData,
-                "UnencryptedCardDataCreate": UnencryptedCardDataCreate,
                 "User": User,
                 "UserAccountRole": UserAccountRole,
                 "UserSpaceRole": UserSpaceRole,
+                "WebAppConfirmationRequest": WebAppConfirmationRequest,
+                "WebAppConfirmationResponse": WebAppConfirmationResponse,
                 "WebhookIdentity": WebhookIdentity,
                 "WebhookListener": WebhookListener,
                 "WebhookListenerEntity": WebhookListenerEntity,
@@ -690,8 +753,10 @@ class ObjectSerializer {
                 "ApplicationUser": ApplicationUser,
                 "ApplicationUserCreate": ApplicationUserCreate,
                 "ApplicationUserUpdate": ApplicationUserUpdate,
+                "AuthenticatedCardData": AuthenticatedCardData,
                 "Charge": Charge,
                 "ChargeAttempt": ChargeAttempt,
+                "ChargeBankTransaction": ChargeBankTransaction,
                 "ChargeFlowLevel": ChargeFlowLevel,
                 "ChargeFlowLevelPaymentLink": ChargeFlowLevelPaymentLink,
                 "ConnectorInvocation": ConnectorInvocation,
@@ -709,9 +774,10 @@ class ObjectSerializer {
                 "InstallmentPaymentSlice": InstallmentPaymentSlice,
                 "PaymentLinkActive": PaymentLinkActive,
                 "PaymentLinkCreate": PaymentLinkCreate,
-                "PaymentTerminalContactAddress": PaymentTerminalContactAddress,
+                "RefundBankTransaction": RefundBankTransaction,
                 "RefundCommentActive": RefundCommentActive,
                 "RefundCommentCreate": RefundCommentCreate,
+                "RefundRecoveryBankTransaction": RefundRecoveryBankTransaction,
                 "ShopifyRecurringOrder": ShopifyRecurringOrder,
                 "ShopifySubscriptionAddress": ShopifySubscriptionAddress,
                 "ShopifySubscriptionProductCreate": ShopifySubscriptionProductCreate,

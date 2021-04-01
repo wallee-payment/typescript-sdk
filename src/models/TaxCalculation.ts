@@ -2,8 +2,8 @@
 
 enum TaxCalculation{
 
-    INCLUDED = 'TAX_INCLUDED',
-    NOT_INCLUDED = 'TAX_NOT_INCLUDED',
+    TAX_INCLUDED = 'TAX_INCLUDED',
+    TAX_NOT_INCLUDED = 'TAX_NOT_INCLUDED',
 }
 
 export { TaxCalculation }

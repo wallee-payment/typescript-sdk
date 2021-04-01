@@ -26,6 +26,11 @@ class PaymentTerminalConfigurationVersion {
     'createdOn'?: Date;
 
         /**
+        * The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+        */
+    'defaultCurrency'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -97,6 +102,12 @@ class PaymentTerminalConfigurationVersion {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "defaultCurrency",
+        "baseName": "defaultCurrency",
+        "type": "string"
         },
         
         {

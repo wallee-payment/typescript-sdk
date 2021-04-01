@@ -1,7 +1,9 @@
 'use strict';
+import { CardCryptogramCreate } from "./CardCryptogramCreate";
+import { RecurringIndicator } from "./RecurringIndicator";
 
 
-class UnencryptedCardData {
+class TokenizedCardDataCreate {
 
         /**
         * The card holder name is the name printed onto the card. It identifies the person who owns the card.
@@ -14,6 +16,11 @@ class UnencryptedCardData {
     'cardVerificationCode'?: string;
 
         /**
+        * The additional authentication value used to secure the tokenized card transactions.
+        */
+    'cryptogram'?: CardCryptogramCreate;
+
+        /**
         * The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
         */
     'expiryDate'?: string;
@@ -21,7 +28,22 @@ class UnencryptedCardData {
         /**
         * The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
         */
-    'primaryAccountNumber'?: string;
+    'primaryAccountNumber': string;
+
+        /**
+        * 
+        */
+    'recurringIndicator'?: RecurringIndicator;
+
+        /**
+        * 
+        */
+    'schemeTransactionReference'?: string;
+
+        /**
+        * 
+        */
+    'tokenRequestorId'?: string;
 
 
     static discriminator: string | undefined = undefined;
@@ -41,6 +63,12 @@ class UnencryptedCardData {
         },
         
         {
+        "name": "cryptogram",
+        "baseName": "cryptogram",
+        "type": "CardCryptogramCreate"
+        },
+        
+        {
         "name": "expiryDate",
         "baseName": "expiryDate",
         "type": "string"
@@ -50,12 +78,30 @@ class UnencryptedCardData {
         "name": "primaryAccountNumber",
         "baseName": "primaryAccountNumber",
         "type": "string"
+        },
+        
+        {
+        "name": "recurringIndicator",
+        "baseName": "recurringIndicator",
+        "type": "RecurringIndicator"
+        },
+        
+        {
+        "name": "schemeTransactionReference",
+        "baseName": "schemeTransactionReference",
+        "type": "string"
+        },
+        
+        {
+        "name": "tokenRequestorId",
+        "baseName": "tokenRequestorId",
+        "type": "string"
         }        
     ];
 
     static getAttributeTypeMap() {
-        return UnencryptedCardData.attributeTypeMap;
+        return TokenizedCardDataCreate.attributeTypeMap;
     }
 }
 
-export { UnencryptedCardData }
+export { TokenizedCardDataCreate }

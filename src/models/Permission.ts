@@ -53,6 +53,11 @@ class Permission {
         */
     'twoFactorRequired'?: boolean;
 
+        /**
+        * 
+        */
+    'webAppEnabled'?: boolean;
+
 
     static discriminator: string | undefined = undefined;
 
@@ -115,6 +120,12 @@ class Permission {
         {
         "name": "twoFactorRequired",
         "baseName": "twoFactorRequired",
+        "type": "boolean"
+        },
+        
+        {
+        "name": "webAppEnabled",
+        "baseName": "webAppEnabled",
         "type": "boolean"
         }        
     ];

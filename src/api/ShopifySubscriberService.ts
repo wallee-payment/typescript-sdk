@@ -13,6 +13,7 @@ import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
 import { ServerError } from  '../models/ServerError';
 import { ShopifySubscriber } from  '../models/ShopifySubscriber';
+import { ShopifySubscriberActive } from  '../models/ShopifySubscriberActive';
 
 class ShopifySubscriberService {
     protected _basePath = 'https://app-wallee.com:443/api';
@@ -281,6 +282,97 @@ class ShopifySubscriberService {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Array<ShopifySubscriber>");
+                            return resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            return reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
+                    }
+                    return reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
+                }
+            });
+        });
+    }
+    /**
+    * This updates the entity with the given properties. Only those properties which should be updated can be provided. The 'id' and 'version' are required to identify the entity.
+    * @summary Update
+    * @param spaceId 
+    * @param query The Shopify subscriber object with all the properties which should be updated. The id and the version are required properties.
+    * @param {*} [options] Override http request options.
+    */
+    public update (spaceId: number, query: ShopifySubscriberActive, options: any = {}) : Promise<{ response: http.IncomingMessage; body: ShopifySubscriber;  }> {
+        const localVarPath = this.basePath + '/shopify-subscriber/update';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+            // verify required parameter 'spaceId' is not null or undefined
+            if (spaceId === null || spaceId === undefined) {
+                throw new Error('Required parameter spaceId was null or undefined when calling update.');
+            }
+
+            // verify required parameter 'query' is not null or undefined
+            if (query === null || query === undefined) {
+                throw new Error('Required parameter query was null or undefined when calling update.');
+            }
+
+        if (spaceId !== undefined) {
+            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            body: ObjectSerializer.serialize(query, "ShopifySubscriberActive"),
+        };
+
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                (<any>localVarRequestOptions).formData = localVarFormParams;
+            } else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise<{ response: http.IncomingMessage; body: ShopifySubscriber;  }>((resolve, reject) => {
+            localVarRequest(localVarRequestOptions, (error, response, body) => {
+                if (error) {
+                    return reject(error);
+                } else {
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "ShopifySubscriber");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;

@@ -1,5 +1,6 @@
 'use strict';
 import { LineItemCreate } from "./LineItemCreate";
+import { PaymentLinkAddressHandlingMode } from "./PaymentLinkAddressHandlingMode";
 import { PaymentMethodConfiguration } from "./PaymentMethodConfiguration";
 
 
@@ -36,9 +37,9 @@ class PaymentLinkUpdate {
     'availableUntil'?: Date;
 
         /**
-        * By making the billing address required the transaction can only be created when a billing address is provided within the request.
+        * The billing address handling mode controls if the address is collected or not and how it is collected.
         */
-    'billingAddressRequired'?: boolean;
+    'billingAddressHandlingMode'?: PaymentLinkAddressHandlingMode;
 
         /**
         * The currency defines in which currency the payment is executed in. If no currency is defined it has to be specified within the request parameter 'currency'.
@@ -66,9 +67,9 @@ class PaymentLinkUpdate {
     'name'?: string;
 
         /**
-        * By making the shipping address required the transaction can only be created when a shipping address is provided within the request.
+        * The shipping address handling mode controls if the address is collected or not and how it is collected.
         */
-    'shippingAddressRequired'?: boolean;
+    'shippingAddressHandlingMode'?: PaymentLinkAddressHandlingMode;
 
 
     static discriminator: string | undefined = undefined;
@@ -112,9 +113,9 @@ class PaymentLinkUpdate {
         },
         
         {
-        "name": "billingAddressRequired",
-        "baseName": "billingAddressRequired",
-        "type": "boolean"
+        "name": "billingAddressHandlingMode",
+        "baseName": "billingAddressHandlingMode",
+        "type": "PaymentLinkAddressHandlingMode"
         },
         
         {
@@ -148,9 +149,9 @@ class PaymentLinkUpdate {
         },
         
         {
-        "name": "shippingAddressRequired",
-        "baseName": "shippingAddressRequired",
-        "type": "boolean"
+        "name": "shippingAddressHandlingMode",
+        "baseName": "shippingAddressHandlingMode",
+        "type": "PaymentLinkAddressHandlingMode"
         }        
     ];
 

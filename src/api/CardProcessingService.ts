@@ -8,10 +8,11 @@ import { Authentication } from '../auth/Authentication';
 import { VoidAuth } from '../auth/VoidAuth';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
+import { AuthenticatedCardDataCreate } from  '../models/AuthenticatedCardDataCreate';
 import { ClientError } from  '../models/ClientError';
 import { ServerError } from  '../models/ServerError';
+import { TokenizedCardDataCreate } from  '../models/TokenizedCardDataCreate';
 import { Transaction } from  '../models/Transaction';
-import { UnencryptedCardDataCreate } from  '../models/UnencryptedCardDataCreate';
 
 class CardProcessingService {
     protected _basePath = 'https://app-wallee.com:443/api';
@@ -51,7 +52,7 @@ class CardProcessingService {
     * @param cardData The card details as JSON in plain which should be used to authorize the payment.
     * @param {*} [options] Override http request options.
     */
-    public process (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
+    public process (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: AuthenticatedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
         const localVarPath = this.basePath + '/card-processing/process';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -100,7 +101,7 @@ class CardProcessingService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate"),
+            body: ObjectSerializer.serialize(cardData, "AuthenticatedCardDataCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -162,7 +163,7 @@ class CardProcessingService {
     * @param cardData The card details as JSON in plain which should be used to authorize the payment.
     * @param {*} [options] Override http request options.
     */
-    public processWith3DSecure (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: UnencryptedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
+    public processWith3DSecure (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: TokenizedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/card-processing/processWith3DSecure';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -211,7 +212,7 @@ class CardProcessingService {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cardData, "UnencryptedCardDataCreate"),
+            body: ObjectSerializer.serialize(cardData, "TokenizedCardDataCreate"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

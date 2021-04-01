@@ -11,6 +11,7 @@ import { ObjectSerializer } from '../serializers/ObjectSerializer';
 import { ClientError } from  '../models/ClientError';
 import { RenderedTerminalReceipt } from  '../models/RenderedTerminalReceipt';
 import { ServerError } from  '../models/ServerError';
+import { TerminalReceiptFetchRequest } from  '../models/TerminalReceiptFetchRequest';
 
 class TransactionTerminalService {
     protected _basePath = 'https://app-wallee.com:443/api';
@@ -42,54 +43,30 @@ class TransactionTerminalService {
     }
 
     /**
-    * Returns the PDF document for the requested terminal receipt with the given page width.
-    * @summary getTerminalReceipt
+    * Returns all receipts for the requested terminal transaction.
+    * @summary Fetch Receipts
     * @param spaceId 
-    * @param transactionId The ID of the transaction to get the receipt for.
-    * @param typeId 
-    * @param width 
+    * @param request 
     * @param {*} [options] Override http request options.
     */
-    public receipt (spaceId: number, transactionId: number, typeId: number, width: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RenderedTerminalReceipt;  }> {
-        const localVarPath = this.basePath + '/transaction-terminal/receipt';
+    public fetchReceipts (spaceId: number, request: TerminalReceiptFetchRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<RenderedTerminalReceipt>;  }> {
+        const localVarPath = this.basePath + '/transaction-terminal/fetch-receipts';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling receipt.');
+                throw new Error('Required parameter spaceId was null or undefined when calling fetchReceipts.');
             }
 
-            // verify required parameter 'transactionId' is not null or undefined
-            if (transactionId === null || transactionId === undefined) {
-                throw new Error('Required parameter transactionId was null or undefined when calling receipt.');
-            }
-
-            // verify required parameter 'typeId' is not null or undefined
-            if (typeId === null || typeId === undefined) {
-                throw new Error('Required parameter typeId was null or undefined when calling receipt.');
-            }
-
-            // verify required parameter 'width' is not null or undefined
-            if (width === null || width === undefined) {
-                throw new Error('Required parameter width was null or undefined when calling receipt.');
+            // verify required parameter 'request' is not null or undefined
+            if (request === null || request === undefined) {
+                throw new Error('Required parameter request was null or undefined when calling fetchReceipts.');
             }
 
         if (spaceId !== undefined) {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
-        }
-
-        if (transactionId !== undefined) {
-            localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
-        }
-
-        if (typeId !== undefined) {
-            localVarQueryParameters['typeId'] = ObjectSerializer.serialize(typeId, "number");
-        }
-
-        if (width !== undefined) {
-            localVarQueryParameters['width'] = ObjectSerializer.serialize(width, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -97,12 +74,13 @@ class TransactionTerminalService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
-            method: 'GET',
+            method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            body: ObjectSerializer.serialize(request, "TerminalReceiptFetchRequest"),
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -114,14 +92,14 @@ class TransactionTerminalService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: RenderedTerminalReceipt;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<RenderedTerminalReceipt>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "RenderedTerminalReceipt");
+                            body = ObjectSerializer.deserialize(body, "Array<RenderedTerminalReceipt>");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;

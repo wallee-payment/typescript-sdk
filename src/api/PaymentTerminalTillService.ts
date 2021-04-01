@@ -151,6 +151,116 @@ class PaymentTerminalTillService {
             });
         });
     }
+    /**
+    * Starts a payment terminal transaction and waits for its completion. If the call returns with a long polling timeout status, you may try again. The processing of the transaction will be picked up where it was left off.
+    * @summary Perform Payment Terminal Transaction (using TID)
+    * @param spaceId 
+    * @param transactionId The ID of the transaction which is used to process with the terminal.
+    * @param terminalIdentifier The identifier (aka TID) of the terminal which should be used to process the transaction.
+    * @param language The language in which the messages should be rendered in.
+    * @param {*} [options] Override http request options.
+    */
+    public performTransactionByIdentifier (spaceId: number, transactionId: number, terminalIdentifier: string, language?: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
+        const localVarPath = this.basePath + '/payment-terminal-till/perform-transaction-by-identifier';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+            // verify required parameter 'spaceId' is not null or undefined
+            if (spaceId === null || spaceId === undefined) {
+                throw new Error('Required parameter spaceId was null or undefined when calling performTransactionByIdentifier.');
+            }
+
+            // verify required parameter 'transactionId' is not null or undefined
+            if (transactionId === null || transactionId === undefined) {
+                throw new Error('Required parameter transactionId was null or undefined when calling performTransactionByIdentifier.');
+            }
+
+            // verify required parameter 'terminalIdentifier' is not null or undefined
+            if (terminalIdentifier === null || terminalIdentifier === undefined) {
+                throw new Error('Required parameter terminalIdentifier was null or undefined when calling performTransactionByIdentifier.');
+            }
+
+        if (spaceId !== undefined) {
+            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+        }
+
+        if (transactionId !== undefined) {
+            localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
+        }
+
+        if (terminalIdentifier !== undefined) {
+            localVarQueryParameters['terminalIdentifier'] = ObjectSerializer.serialize(terminalIdentifier, "string");
+        }
+
+        if (language !== undefined) {
+            localVarQueryParameters['language'] = ObjectSerializer.serialize(language, "string");
+        }
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            method: 'GET',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
+            timeout: 90 * 1000
+        };
+
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                (<any>localVarRequestOptions).formData = localVarFormParams;
+            } else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
+            localVarRequest(localVarRequestOptions, (error, response, body) => {
+                if (error) {
+                    return reject(error);
+                } else {
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Transaction");
+                            return resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            return reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
+                    }
+                    return reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
+                }
+            });
+        });
+    }
 }
 
 export { PaymentTerminalTillService }

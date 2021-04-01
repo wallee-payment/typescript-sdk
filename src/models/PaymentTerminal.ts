@@ -13,6 +13,11 @@ class PaymentTerminal {
     'configurationVersion'?: PaymentTerminalConfigurationVersion;
 
         /**
+        * 
+        */
+    'defaultCurrency'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -66,6 +71,12 @@ class PaymentTerminal {
         "name": "configurationVersion",
         "baseName": "configurationVersion",
         "type": "PaymentTerminalConfigurationVersion"
+        },
+        
+        {
+        "name": "defaultCurrency",
+        "baseName": "defaultCurrency",
+        "type": "string"
         },
         
         {

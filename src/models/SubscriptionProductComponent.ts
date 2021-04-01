@@ -18,7 +18,7 @@ class SubscriptionProductComponent {
     'componentGroup'?: SubscriptionProductComponentGroup;
 
         /**
-        * When a component is marked as a 'default' component it is used when no other component is selected by the user.
+        * When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
         */
     'defaultComponent'?: boolean;
 
