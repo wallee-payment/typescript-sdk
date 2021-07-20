@@ -18,6 +18,11 @@ class PaymentTerminal {
     'defaultCurrency'?: string;
 
         /**
+        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+        */
+    'externalId'?: string;
+
+        /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
         */
     'id'?: number;
@@ -76,6 +81,12 @@ class PaymentTerminal {
         {
         "name": "defaultCurrency",
         "baseName": "defaultCurrency",
+        "type": "string"
+        },
+        
+        {
+        "name": "externalId",
+        "baseName": "externalId",
         "type": "string"
         },
         

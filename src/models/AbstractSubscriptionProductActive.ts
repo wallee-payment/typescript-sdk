@@ -20,6 +20,11 @@ class AbstractSubscriptionProductActive {
     'name'?: string;
 
         /**
+        * Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+        */
+    'productLocked'?: boolean;
+
+        /**
         * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
         */
     'sortOrder'?: number;
@@ -50,6 +55,12 @@ class AbstractSubscriptionProductActive {
         "name": "name",
         "baseName": "name",
         "type": "string"
+        },
+        
+        {
+        "name": "productLocked",
+        "baseName": "productLocked",
+        "type": "boolean"
         },
         
         {

@@ -32,6 +32,11 @@ class ShopifySubscriptionVersion {
         /**
         * 
         */
+    'billingReferenceDate'?: Date;
+
+        /**
+        * 
+        */
     'billingWeekday'?: ShopifySubscriptionWeekday;
 
         /**
@@ -171,6 +176,12 @@ class ShopifySubscriptionVersion {
         "name": "billingIntervalUnit",
         "baseName": "billingIntervalUnit",
         "type": "ShopifySubscriptionBillingIntervalUnit"
+        },
+        
+        {
+        "name": "billingReferenceDate",
+        "baseName": "billingReferenceDate",
+        "type": "Date"
         },
         
         {

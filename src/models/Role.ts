@@ -1,8 +1,8 @@
 'use strict';
 import { Account } from "./Account";
-import { CreationEntityState } from "./CreationEntityState";
 import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { Permission } from "./Permission";
+import { RoleState } from "./RoleState";
 
 
 class Role {
@@ -35,7 +35,7 @@ class Role {
         /**
         * 
         */
-    'state'?: CreationEntityState;
+    'state'?: RoleState;
 
         /**
         * Defines whether having been granted this role will force a user to use two-factor authentication.
@@ -85,7 +85,7 @@ class Role {
         {
         "name": "state",
         "baseName": "state",
-        "type": "CreationEntityState"
+        "type": "RoleState"
         },
         
         {

@@ -1,20 +1,13 @@
 'use strict';
-import { PaymentTerminalAddress } from "./PaymentTerminalAddress";
-import { PaymentTerminalConfiguration } from "./PaymentTerminalConfiguration";
 import { PaymentTerminalLocationState } from "./PaymentTerminalLocationState";
 
 
 class PaymentTerminalLocation {
 
         /**
-        * 
+        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
         */
-    'contactAddress'?: PaymentTerminalAddress;
-
-        /**
-        * 
-        */
-    'defaultConfiguration'?: PaymentTerminalConfiguration;
+    'externalId'?: string;
 
         /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -52,15 +45,9 @@ class PaymentTerminalLocation {
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
         {
-        "name": "contactAddress",
-        "baseName": "contactAddress",
-        "type": "PaymentTerminalAddress"
-        },
-        
-        {
-        "name": "defaultConfiguration",
-        "baseName": "defaultConfiguration",
-        "type": "PaymentTerminalConfiguration"
+        "name": "externalId",
+        "baseName": "externalId",
+        "type": "string"
         },
         
         {

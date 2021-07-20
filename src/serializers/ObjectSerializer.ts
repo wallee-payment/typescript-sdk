@@ -194,6 +194,7 @@ import { RestCountryState } from "../models/RestCountryState";
 import { RestCurrency } from "../models/RestCurrency";
 import { RestLanguage } from "../models/RestLanguage";
 import { Role } from "../models/Role";
+import { RoleState } from "../models/RoleState";
 import { SalesChannel } from "../models/SalesChannel";
 import { Scope } from "../models/Scope";
 import { ServerError } from "../models/ServerError";
@@ -465,6 +466,7 @@ class ObjectSerializer {
         "RefundType": RefundType,
         "ResourceState": ResourceState,
         "RestAddressFormatField": RestAddressFormatField,
+        "RoleState": RoleState,
         "ShopifyAdditionalLineItemData": ShopifyAdditionalLineItemData,
         "ShopifyIntegrationPaymentAppVersion": ShopifyIntegrationPaymentAppVersion,
         "ShopifyIntegrationSubscriptionAppVersion": ShopifyIntegrationSubscriptionAppVersion,

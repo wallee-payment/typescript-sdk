@@ -15,7 +15,7 @@ class SubscriptionProductComponentUpdate {
     'version': number;
 
         /**
-        * The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+        * If a product component changes from one with a lower product component tier (e.g. 1) to one with a higher product component tier (e.g. 3), it is considered an upgrade and a one-time fee could be applied.
         */
     'componentChangeWeight'?: number;
 

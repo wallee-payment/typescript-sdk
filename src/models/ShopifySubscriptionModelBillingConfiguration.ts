@@ -21,6 +21,11 @@ class ShopifySubscriptionModelBillingConfiguration {
     'billingIntervalUnit'?: ShopifySubscriptionBillingIntervalUnit;
 
         /**
+        * This date will be used as basis to calculate the dates of recurring orders.
+        */
+    'billingReferenceDate'?: Date;
+
+        /**
         * Define the weekday on which the recurring orders should be created.
         */
     'billingWeekday'?: ShopifySubscriptionWeekday;
@@ -66,6 +71,12 @@ class ShopifySubscriptionModelBillingConfiguration {
         "name": "billingIntervalUnit",
         "baseName": "billingIntervalUnit",
         "type": "ShopifySubscriptionBillingIntervalUnit"
+        },
+        
+        {
+        "name": "billingReferenceDate",
+        "baseName": "billingReferenceDate",
+        "type": "Date"
         },
         
         {

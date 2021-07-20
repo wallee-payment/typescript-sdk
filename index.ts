@@ -193,6 +193,7 @@ import { RestCountryState as RestCountryStateModelImport } from "./src/models/Re
 import { RestCurrency as RestCurrencyModelImport } from "./src/models/RestCurrency";
 import { RestLanguage as RestLanguageModelImport } from "./src/models/RestLanguage";
 import { Role as RoleModelImport } from "./src/models/Role";
+import { RoleState as RoleStateModelImport } from "./src/models/RoleState";
 import { SalesChannel as SalesChannelModelImport } from "./src/models/SalesChannel";
 import { Scope as ScopeModelImport } from "./src/models/Scope";
 import { ServerError as ServerErrorModelImport } from "./src/models/ServerError";
@@ -891,6 +892,8 @@ export namespace Wallee {
         export const RestLanguage = RestLanguageModelImport;
         export type Role = RoleModelImport;
         export const Role = RoleModelImport;
+        export type RoleState = RoleStateModelImport;
+        export const RoleState = RoleStateModelImport;
         export type SalesChannel = SalesChannelModelImport;
         export const SalesChannel = SalesChannelModelImport;
         export type Scope = ScopeModelImport;

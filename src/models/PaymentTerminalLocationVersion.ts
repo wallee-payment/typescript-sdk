@@ -14,6 +14,11 @@ class PaymentTerminalLocationVersion {
         /**
         * 
         */
+    'contactAddress'?: PaymentTerminalAddress;
+
+        /**
+        * 
+        */
     'createdBy'?: number;
 
         /**
@@ -64,6 +69,12 @@ class PaymentTerminalLocationVersion {
         {
         "name": "address",
         "baseName": "address",
+        "type": "PaymentTerminalAddress"
+        },
+        
+        {
+        "name": "contactAddress",
+        "baseName": "contactAddress",
         "type": "PaymentTerminalAddress"
         },
         

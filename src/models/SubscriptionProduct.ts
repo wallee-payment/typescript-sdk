@@ -35,6 +35,11 @@ class SubscriptionProduct {
     'plannedPurgeDate'?: Date;
 
         /**
+        * Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+        */
+    'productLocked'?: boolean;
+
+        /**
         * The product reference identifies the product for external systems. This field may contain the product's SKU.
         */
     'reference'?: string;
@@ -98,6 +103,12 @@ class SubscriptionProduct {
         "name": "plannedPurgeDate",
         "baseName": "plannedPurgeDate",
         "type": "Date"
+        },
+        
+        {
+        "name": "productLocked",
+        "baseName": "productLocked",
+        "type": "boolean"
         },
         
         {

@@ -2,6 +2,7 @@
 
 enum PaymentTerminalState{
 
+    CREATE = 'CREATE',
     PREPARING = 'PREPARING',
     ACTIVE = 'ACTIVE',
     INACTIVE = 'INACTIVE',
