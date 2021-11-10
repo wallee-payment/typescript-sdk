@@ -18,7 +18,6 @@ import { ServerError } from  '../models/ServerError';
 import { TokenVersion } from  '../models/TokenVersion';
 import { Transaction } from  '../models/Transaction';
 import { TransactionCreate } from  '../models/TransactionCreate';
-import { TransactionLineItemUpdateRequest } from  '../models/TransactionLineItemUpdateRequest';
 import { TransactionLineItemVersion } from  '../models/TransactionLineItemVersion';
 import { TransactionPending } from  '../models/TransactionPending';
 
@@ -976,7 +975,7 @@ class TransactionService {
     }
     /**
     * 
-    * @summary getLatestTransactionLineItemVersion
+    * @summary getLatestSuccessfulTransactionLineItemVersion
     * @param spaceId 
     * @param id The id of the transaction to get the latest line item version for.
     * @param {*} [options] Override http request options.
@@ -1677,97 +1676,6 @@ class TransactionService {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
                             body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
-                                errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
-                                errorObject = new ServerError();
-                            } else {
-                                errorObject = new Object();
-                            }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
-                        }
-                    }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
-        });
-    }
-    /**
-    * 
-    * @summary updateTransactionLineItems
-    * @param spaceId 
-    * @param updateRequest 
-    * @param {*} [options] Override http request options.
-    */
-    public updateTransactionLineItems (spaceId: number, updateRequest: TransactionLineItemUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TransactionLineItemVersion;  }> {
-        const localVarPath = this.basePath + '/transaction/updateTransactionLineItems';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling updateTransactionLineItems.');
-            }
-
-            // verify required parameter 'updateRequest' is not null or undefined
-            if (updateRequest === null || updateRequest === undefined) {
-                throw new Error('Required parameter updateRequest was null or undefined when calling updateTransactionLineItems.');
-            }
-
-        if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(updateRequest, "TransactionLineItemUpdateRequest"),
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
-        }
-        return new Promise<{ response: http.IncomingMessage; body: TransactionLineItemVersion;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "TransactionLineItemVersion");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;

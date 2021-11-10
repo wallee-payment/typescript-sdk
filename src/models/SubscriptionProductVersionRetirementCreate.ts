@@ -14,7 +14,7 @@ class SubscriptionProductVersionRetirementCreate {
     'respectTerminiationPeriodsEnabled'?: boolean;
 
         /**
-        * 
+        * When a target product is not chosen, all customers with the retired product will be terminated.
         */
     'targetProduct'?: number;
 

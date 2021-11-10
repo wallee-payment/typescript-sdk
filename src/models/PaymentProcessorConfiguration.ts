@@ -5,6 +5,11 @@ import { CreationEntityState } from "./CreationEntityState";
 class PaymentProcessorConfiguration {
 
         /**
+        * The configuration is managed by the application and cannot be changed via the user interface.
+        */
+    'applicationManaged'?: boolean;
+
+        /**
         * The contract links the processor configuration with the contract that is used to process payments.
         */
     'contractId'?: number;
@@ -49,6 +54,12 @@ class PaymentProcessorConfiguration {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "applicationManaged",
+        "baseName": "applicationManaged",
+        "type": "boolean"
+        },
+        
         {
         "name": "contractId",
         "baseName": "contractId",

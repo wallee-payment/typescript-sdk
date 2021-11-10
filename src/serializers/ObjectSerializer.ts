@@ -133,6 +133,24 @@ import { MetricUsage } from "../models/MetricUsage";
 import { OneClickPaymentMode } from "../models/OneClickPaymentMode";
 import { PaymentAdjustment } from "../models/PaymentAdjustment";
 import { PaymentAdjustmentType } from "../models/PaymentAdjustmentType";
+import { PaymentAppChargeAttemptTargetState } from "../models/PaymentAppChargeAttemptTargetState";
+import { PaymentAppChargeAttemptUpdateRequest } from "../models/PaymentAppChargeAttemptUpdateRequest";
+import { PaymentAppCompletionConfiguration } from "../models/PaymentAppCompletionConfiguration";
+import { PaymentAppCompletionConfigurationCreate } from "../models/PaymentAppCompletionConfigurationCreate";
+import { PaymentAppCompletionTargetState } from "../models/PaymentAppCompletionTargetState";
+import { PaymentAppCompletionUpdateRequest } from "../models/PaymentAppCompletionUpdateRequest";
+import { PaymentAppConnector } from "../models/PaymentAppConnector";
+import { PaymentAppConnectorCreationRequest } from "../models/PaymentAppConnectorCreationRequest";
+import { PaymentAppConnectorState } from "../models/PaymentAppConnectorState";
+import { PaymentAppProcessor } from "../models/PaymentAppProcessor";
+import { PaymentAppProcessorCreationRequest } from "../models/PaymentAppProcessorCreationRequest";
+import { PaymentAppProcessorState } from "../models/PaymentAppProcessorState";
+import { PaymentAppRefundConfiguration } from "../models/PaymentAppRefundConfiguration";
+import { PaymentAppRefundConfigurationCreate } from "../models/PaymentAppRefundConfigurationCreate";
+import { PaymentAppRefundTargetState } from "../models/PaymentAppRefundTargetState";
+import { PaymentAppRefundUpdateRequest } from "../models/PaymentAppRefundUpdateRequest";
+import { PaymentAppVoidTargetState } from "../models/PaymentAppVoidTargetState";
+import { PaymentAppVoidUpdateRequest } from "../models/PaymentAppVoidUpdateRequest";
 import { PaymentConnector } from "../models/PaymentConnector";
 import { PaymentConnectorConfiguration } from "../models/PaymentConnectorConfiguration";
 import { PaymentConnectorFeature } from "../models/PaymentConnectorFeature";
@@ -317,6 +335,8 @@ import { TransactionInvoiceComment } from "../models/TransactionInvoiceComment";
 import { TransactionInvoiceReplacement } from "../models/TransactionInvoiceReplacement";
 import { TransactionInvoiceState } from "../models/TransactionInvoiceState";
 import { TransactionLineItemUpdateRequest } from "../models/TransactionLineItemUpdateRequest";
+import { TransactionLineItemVersionCreate } from "../models/TransactionLineItemVersionCreate";
+import { TransactionLineItemVersionState } from "../models/TransactionLineItemVersionState";
 import { TransactionState } from "../models/TransactionState";
 import { TransactionUserInterfaceType } from "../models/TransactionUserInterfaceType";
 import { TransactionVoidMode } from "../models/TransactionVoidMode";
@@ -450,6 +470,12 @@ class ObjectSerializer {
         "ManualTaskActionStyle": ManualTaskActionStyle,
         "ManualTaskState": ManualTaskState,
         "OneClickPaymentMode": OneClickPaymentMode,
+        "PaymentAppChargeAttemptTargetState": PaymentAppChargeAttemptTargetState,
+        "PaymentAppCompletionTargetState": PaymentAppCompletionTargetState,
+        "PaymentAppConnectorState": PaymentAppConnectorState,
+        "PaymentAppProcessorState": PaymentAppProcessorState,
+        "PaymentAppRefundTargetState": PaymentAppRefundTargetState,
+        "PaymentAppVoidTargetState": PaymentAppVoidTargetState,
         "PaymentContractState": PaymentContractState,
         "PaymentLinkAddressHandlingMode": PaymentLinkAddressHandlingMode,
         "PaymentLinkProtectionMode": PaymentLinkProtectionMode,
@@ -507,6 +533,7 @@ class ObjectSerializer {
         "TransactionEnvironmentSelectionStrategy": TransactionEnvironmentSelectionStrategy,
         "TransactionGroupState": TransactionGroupState,
         "TransactionInvoiceState": TransactionInvoiceState,
+        "TransactionLineItemVersionState": TransactionLineItemVersionState,
         "TransactionState": TransactionState,
         "TransactionUserInterfaceType": TransactionUserInterfaceType,
         "TransactionVoidMode": TransactionVoidMode,
@@ -613,6 +640,18 @@ class ObjectSerializer {
                 "MetricUsage": MetricUsage,
                 "PaymentAdjustment": PaymentAdjustment,
                 "PaymentAdjustmentType": PaymentAdjustmentType,
+                "PaymentAppChargeAttemptUpdateRequest": PaymentAppChargeAttemptUpdateRequest,
+                "PaymentAppCompletionConfiguration": PaymentAppCompletionConfiguration,
+                "PaymentAppCompletionConfigurationCreate": PaymentAppCompletionConfigurationCreate,
+                "PaymentAppCompletionUpdateRequest": PaymentAppCompletionUpdateRequest,
+                "PaymentAppConnector": PaymentAppConnector,
+                "PaymentAppConnectorCreationRequest": PaymentAppConnectorCreationRequest,
+                "PaymentAppProcessor": PaymentAppProcessor,
+                "PaymentAppProcessorCreationRequest": PaymentAppProcessorCreationRequest,
+                "PaymentAppRefundConfiguration": PaymentAppRefundConfiguration,
+                "PaymentAppRefundConfigurationCreate": PaymentAppRefundConfigurationCreate,
+                "PaymentAppRefundUpdateRequest": PaymentAppRefundUpdateRequest,
+                "PaymentAppVoidUpdateRequest": PaymentAppVoidUpdateRequest,
                 "PaymentConnector": PaymentConnector,
                 "PaymentConnectorConfiguration": PaymentConnectorConfiguration,
                 "PaymentConnectorFeature": PaymentConnectorFeature,
@@ -740,6 +779,7 @@ class ObjectSerializer {
                 "TransactionInvoiceComment": TransactionInvoiceComment,
                 "TransactionInvoiceReplacement": TransactionInvoiceReplacement,
                 "TransactionLineItemUpdateRequest": TransactionLineItemUpdateRequest,
+                "TransactionLineItemVersionCreate": TransactionLineItemVersionCreate,
                 "TwoFactorAuthenticationType": TwoFactorAuthenticationType,
                 "User": User,
                 "UserAccountRole": UserAccountRole,

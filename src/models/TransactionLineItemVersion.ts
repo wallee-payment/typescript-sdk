@@ -1,7 +1,10 @@
 'use strict';
+import { FailureReason } from "./FailureReason";
+import { Label } from "./Label";
 import { LineItem } from "./LineItem";
 import { Transaction } from "./Transaction";
 import { TransactionAwareEntity } from "./TransactionAwareEntity";
+import { TransactionLineItemVersionState } from "./TransactionLineItemVersionState";
 
 
 class TransactionLineItemVersion extends TransactionAwareEntity {
@@ -22,6 +25,26 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
+        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+        */
+    'externalId'?: string;
+
+        /**
+        * 
+        */
+    'failedOn'?: Date;
+
+        /**
+        * 
+        */
+    'failureReason'?: FailureReason;
+
+        /**
+        * 
+        */
+    'labels'?: Array<Label>;
+
+        /**
         * 
         */
     'language'?: string;
@@ -32,9 +55,19 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'lineItems'?: Array<LineItem>;
 
         /**
+        * 
+        */
+    'nextUpdateOn'?: Date;
+
+        /**
         * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
         */
     'plannedPurgeDate'?: Date;
+
+        /**
+        * 
+        */
+    'processingOn'?: Date;
 
         /**
         * 
@@ -44,7 +77,22 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         /**
         * 
         */
+    'state'?: TransactionLineItemVersionState;
+
+        /**
+        * 
+        */
+    'succeededOn'?: Date;
+
+        /**
+        * 
+        */
     'taxAmount'?: number;
+
+        /**
+        * 
+        */
+    'timeoutOn'?: Date;
 
         /**
         * 
@@ -80,6 +128,30 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         },
         
         {
+        "name": "externalId",
+        "baseName": "externalId",
+        "type": "string"
+        },
+        
+        {
+        "name": "failedOn",
+        "baseName": "failedOn",
+        "type": "Date"
+        },
+        
+        {
+        "name": "failureReason",
+        "baseName": "failureReason",
+        "type": "FailureReason"
+        },
+        
+        {
+        "name": "labels",
+        "baseName": "labels",
+        "type": "Array<Label>"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
@@ -92,8 +164,20 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         },
         
         {
+        "name": "nextUpdateOn",
+        "baseName": "nextUpdateOn",
+        "type": "Date"
+        },
+        
+        {
         "name": "plannedPurgeDate",
         "baseName": "plannedPurgeDate",
+        "type": "Date"
+        },
+        
+        {
+        "name": "processingOn",
+        "baseName": "processingOn",
         "type": "Date"
         },
         
@@ -104,9 +188,27 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         },
         
         {
+        "name": "state",
+        "baseName": "state",
+        "type": "TransactionLineItemVersionState"
+        },
+        
+        {
+        "name": "succeededOn",
+        "baseName": "succeededOn",
+        "type": "Date"
+        },
+        
+        {
         "name": "taxAmount",
         "baseName": "taxAmount",
         "type": "number"
+        },
+        
+        {
+        "name": "timeoutOn",
+        "baseName": "timeoutOn",
+        "type": "Date"
         },
         
         {
