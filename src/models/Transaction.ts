@@ -6,7 +6,6 @@ import { Environment } from "./Environment";
 import { FailureReason } from "./FailureReason";
 import { LineItem } from "./LineItem";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
-import { PaymentMethodBrand } from "./PaymentMethodBrand";
 import { PaymentTerminal } from "./PaymentTerminal";
 import { Token } from "./Token";
 import { TokenizationMode } from "./TokenizationMode";
@@ -32,7 +31,7 @@ class Transaction {
         /**
         * 
         */
-    'allowedPaymentMethodBrands'?: Array<PaymentMethodBrand>;
+    'allowedPaymentMethodBrands'?: Array<number>;
 
         /**
         * 
@@ -135,7 +134,7 @@ class Transaction {
     'customerId'?: string;
 
         /**
-        * The customer's presence indicates what kind of authentication methods can be used during the authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+        * The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
         */
     'customersPresence'?: CustomersPresence;
 
@@ -364,6 +363,11 @@ class Transaction {
         */
     'windowWidth'?: string;
 
+        /**
+        * The number of years the transaction will be stored after it has been authorized.
+        */
+    'yearsToKeep'?: number;
+
 
     static discriminator: string | undefined = undefined;
 
@@ -384,7 +388,7 @@ class Transaction {
         {
         "name": "allowedPaymentMethodBrands",
         "baseName": "allowedPaymentMethodBrands",
-        "type": "Array<PaymentMethodBrand>"
+        "type": "Array<number>"
         },
         
         {
@@ -781,6 +785,12 @@ class Transaction {
         "name": "windowWidth",
         "baseName": "windowWidth",
         "type": "string"
+        },
+        
+        {
+        "name": "yearsToKeep",
+        "baseName": "yearsToKeep",
+        "type": "number"
         }        
     ];
 

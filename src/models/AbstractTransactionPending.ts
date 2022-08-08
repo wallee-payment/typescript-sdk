@@ -1,7 +1,6 @@
 'use strict';
 import { AddressCreate } from "./AddressCreate";
 import { LineItemCreate } from "./LineItemCreate";
-import { PaymentMethodBrand } from "./PaymentMethodBrand";
 import { TokenizationMode } from "./TokenizationMode";
 import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 
@@ -11,7 +10,7 @@ class AbstractTransactionPending {
         /**
         * 
         */
-    'allowedPaymentMethodBrands'?: Array<PaymentMethodBrand>;
+    'allowedPaymentMethodBrands'?: Array<number>;
 
         /**
         * 
@@ -111,7 +110,7 @@ class AbstractTransactionPending {
         {
         "name": "allowedPaymentMethodBrands",
         "baseName": "allowedPaymentMethodBrands",
-        "type": "Array<PaymentMethodBrand>"
+        "type": "Array<number>"
         },
         
         {

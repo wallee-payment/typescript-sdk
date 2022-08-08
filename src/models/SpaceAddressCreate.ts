@@ -36,7 +36,17 @@ class SpaceAddressCreate {
         /**
         * 
         */
+    'mobilePhoneNumber'?: string;
+
+        /**
+        * 
+        */
     'organizationName'?: string;
+
+        /**
+        * 
+        */
+    'phoneNumber'?: string;
 
         /**
         * 
@@ -110,8 +120,20 @@ class SpaceAddressCreate {
         },
         
         {
+        "name": "mobilePhoneNumber",
+        "baseName": "mobilePhoneNumber",
+        "type": "string"
+        },
+        
+        {
         "name": "organizationName",
         "baseName": "organizationName",
+        "type": "string"
+        },
+        
+        {
+        "name": "phoneNumber",
+        "baseName": "phoneNumber",
         "type": "string"
         },
         

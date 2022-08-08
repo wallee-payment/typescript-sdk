@@ -11,10 +11,11 @@ import { ObjectSerializer } from '../serializers/ObjectSerializer';
 import { ClientError } from  '../models/ClientError';
 import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
-import { PaymentTerminal } from  '../models/PaymentTerminal';
+import { InvoiceReimbursement } from  '../models/InvoiceReimbursement';
+import { InvoiceReimbursementWithRefundReference } from  '../models/InvoiceReimbursementWithRefundReference';
 import { ServerError } from  '../models/ServerError';
 
-class PaymentTerminalService {
+class InvoiceReimbursementService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
@@ -51,7 +52,7 @@ class PaymentTerminalService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/count';
+        const localVarPath = this.basePath + '/invoice-reimbursement-service/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -130,118 +131,14 @@ class PaymentTerminalService {
         });
     }
     /**
-    * Links the device with given serial number with terminal.
-    * @summary Link Device With Terminal
-    * @param spaceId 
-    * @param terminalId 
-    * @param serialNumber 
-    * @param {*} [options] Override http request options.
-    */
-    public link (spaceId: number, terminalId: number, serialNumber: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/link';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling link.');
-            }
-
-            // verify required parameter 'terminalId' is not null or undefined
-            if (terminalId === null || terminalId === undefined) {
-                throw new Error('Required parameter terminalId was null or undefined when calling link.');
-            }
-
-            // verify required parameter 'serialNumber' is not null or undefined
-            if (serialNumber === null || serialNumber === undefined) {
-                throw new Error('Required parameter serialNumber was null or undefined when calling link.');
-            }
-
-        if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
-        }
-
-        if (terminalId !== undefined) {
-            localVarQueryParameters['terminalId'] = ObjectSerializer.serialize(terminalId, "number");
-        }
-
-        if (serialNumber !== undefined) {
-            localVarQueryParameters['serialNumber'] = ObjectSerializer.serialize(serialNumber, "string");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
-        }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
-                                errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
-                                errorObject = new ServerError();
-                            } else {
-                                errorObject = new Object();
-                            }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
-                        }
-                    }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
-        });
-    }
-    /**
     * Reads the entity with the given 'id' and returns it.
     * @summary Read
     * @param spaceId 
-    * @param id The id of the payment terminal which should be returned.
+    * @param id The ID of the invoice reimbursement which should be returned.
     * @param {*} [options] Override http request options.
     */
-    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentTerminal;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/read';
+    public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: InvoiceReimbursement;  }> {
+        const localVarPath = this.basePath + '/invoice-reimbursement-service/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -286,14 +183,14 @@ class PaymentTerminalService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: PaymentTerminal;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: InvoiceReimbursement;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "PaymentTerminal");
+                            body = ObjectSerializer.deserialize(body, "InvoiceReimbursement");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -331,11 +228,11 @@ class PaymentTerminalService {
     * Searches for the entities as specified by the given query.
     * @summary Search
     * @param spaceId 
-    * @param query The query restricts the payment terminals which are returned by the search.
+    * @param query The query restricts the invoice reimbursements which are returned by the search.
     * @param {*} [options] Override http request options.
     */
-    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentTerminal>;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/search';
+    public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<InvoiceReimbursementWithRefundReference>;  }> {
+        const localVarPath = this.basePath + '/invoice-reimbursement-service/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -377,14 +274,14 @@ class PaymentTerminalService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: Array<PaymentTerminal>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<InvoiceReimbursementWithRefundReference>;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<PaymentTerminal>");
+                            body = ObjectSerializer.deserialize(body, "Array<InvoiceReimbursementWithRefundReference>");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -419,34 +316,44 @@ class PaymentTerminalService {
         });
     }
     /**
-    * Remotely triggers the final balance receipt on the terminal.
-    * @summary Remotely Trigger Final Balance
+    * Updates payment connector configuration for reimbursement which is in manual review.
+    * @summary Update payment connector configuration
     * @param spaceId 
-    * @param terminalId 
+    * @param id The ID of the invoice reimbursement of which connector should be updated.
+    * @param paymentConnectorConfigurationId 
     * @param {*} [options] Override http request options.
     */
-    public triggerFinalBalance (spaceId: number, terminalId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/trigger-final-balance';
+    public updateConnector (spaceId: number, id: number, paymentConnectorConfigurationId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/invoice-reimbursement-service/update-connector';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling triggerFinalBalance.');
+                throw new Error('Required parameter spaceId was null or undefined when calling updateConnector.');
             }
 
-            // verify required parameter 'terminalId' is not null or undefined
-            if (terminalId === null || terminalId === undefined) {
-                throw new Error('Required parameter terminalId was null or undefined when calling triggerFinalBalance.');
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new Error('Required parameter id was null or undefined when calling updateConnector.');
+            }
+
+            // verify required parameter 'paymentConnectorConfigurationId' is not null or undefined
+            if (paymentConnectorConfigurationId === null || paymentConnectorConfigurationId === undefined) {
+                throw new Error('Required parameter paymentConnectorConfigurationId was null or undefined when calling updateConnector.');
             }
 
         if (spaceId !== undefined) {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
-        if (terminalId !== undefined) {
-            localVarQueryParameters['terminalId'] = ObjectSerializer.serialize(terminalId, "number");
+        if (id !== undefined) {
+            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+        }
+
+        if (paymentConnectorConfigurationId !== undefined) {
+            localVarQueryParameters['paymentConnectorConfigurationId'] = ObjectSerializer.serialize(paymentConnectorConfigurationId, "number");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -513,128 +420,44 @@ class PaymentTerminalService {
         });
     }
     /**
-    * Remotely triggers the final balance receipt on the terminal by terminal identifier.
-    * @summary Remotely Trigger Final Balance By Identifier
+    * Updates recipient and/or sender IBAN for reimbursement which is in manual review.
+    * @summary Update IBAN
     * @param spaceId 
-    * @param terminalIdentifier 
+    * @param id The ID of the invoice reimbursement of which IBANs should be updated.
+    * @param recipientIban 
+    * @param senderIban 
     * @param {*} [options] Override http request options.
     */
-    public triggerFinalBalanceByIdentifier (spaceId: number, terminalIdentifier: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/trigger-final-balance-by-identifier';
+    public updateIban (spaceId: number, id: number, recipientIban?: string, senderIban?: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/invoice-reimbursement-service/update-iban';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
             // verify required parameter 'spaceId' is not null or undefined
             if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling triggerFinalBalanceByIdentifier.');
+                throw new Error('Required parameter spaceId was null or undefined when calling updateIban.');
             }
 
-            // verify required parameter 'terminalIdentifier' is not null or undefined
-            if (terminalIdentifier === null || terminalIdentifier === undefined) {
-                throw new Error('Required parameter terminalIdentifier was null or undefined when calling triggerFinalBalanceByIdentifier.');
-            }
-
-        if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
-        }
-
-        if (terminalIdentifier !== undefined) {
-            localVarQueryParameters['terminalIdentifier'] = ObjectSerializer.serialize(terminalIdentifier, "string");
-        }
-
-        (<any>Object).assign(localVarHeaderParams, options.headers);
-
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
-        }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
-                                errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
-                                errorObject = new ServerError();
-                            } else {
-                                errorObject = new Object();
-                            }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
-                        }
-                    }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
-        });
-    }
-    /**
-    * Unlinks the device from terminal.
-    * @summary Unlink Device With Terminal
-    * @param spaceId 
-    * @param terminalId 
-    * @param {*} [options] Override http request options.
-    */
-    public unlink (spaceId: number, terminalId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-terminal/unlink';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
-
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling unlink.');
-            }
-
-            // verify required parameter 'terminalId' is not null or undefined
-            if (terminalId === null || terminalId === undefined) {
-                throw new Error('Required parameter terminalId was null or undefined when calling unlink.');
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new Error('Required parameter id was null or undefined when calling updateIban.');
             }
 
         if (spaceId !== undefined) {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
-        if (terminalId !== undefined) {
-            localVarQueryParameters['terminalId'] = ObjectSerializer.serialize(terminalId, "number");
+        if (id !== undefined) {
+            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+        }
+
+        if (recipientIban !== undefined) {
+            localVarQueryParameters['recipientIban'] = ObjectSerializer.serialize(recipientIban, "string");
+        }
+
+        if (senderIban !== undefined) {
+            localVarQueryParameters['senderIban'] = ObjectSerializer.serialize(senderIban, "string");
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
@@ -702,4 +525,4 @@ class PaymentTerminalService {
     }
 }
 
-export { PaymentTerminalService }
+export { InvoiceReimbursementService }

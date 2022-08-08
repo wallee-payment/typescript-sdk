@@ -24,6 +24,12 @@ import { AccountState as AccountStateModelImport } from "./src/models/AccountSta
 import { AccountType as AccountTypeModelImport } from "./src/models/AccountType";
 import { Address as AddressModelImport } from "./src/models/Address";
 import { AddressCreate as AddressCreateModelImport } from "./src/models/AddressCreate";
+import { AnalyticsQuery as AnalyticsQueryModelImport } from "./src/models/AnalyticsQuery";
+import { AnalyticsQueryExecution as AnalyticsQueryExecutionModelImport } from "./src/models/AnalyticsQueryExecution";
+import { AnalyticsQueryExecutionState as AnalyticsQueryExecutionStateModelImport } from "./src/models/AnalyticsQueryExecutionState";
+import { AnalyticsQueryResultBatch as AnalyticsQueryResultBatchModelImport } from "./src/models/AnalyticsQueryResultBatch";
+import { AnalyticsSchemaColumn as AnalyticsSchemaColumnModelImport } from "./src/models/AnalyticsSchemaColumn";
+import { AnalyticsSchemaTable as AnalyticsSchemaTableModelImport } from "./src/models/AnalyticsSchemaTable";
 import { AuthenticatedCardDataCreate as AuthenticatedCardDataCreateModelImport } from "./src/models/AuthenticatedCardDataCreate";
 import { BankAccount as BankAccountModelImport } from "./src/models/BankAccount";
 import { BankAccountEnvironment as BankAccountEnvironmentModelImport } from "./src/models/BankAccountEnvironment";
@@ -109,6 +115,12 @@ import { InstallmentPaymentState as InstallmentPaymentStateModelImport } from ".
 import { InstallmentPlanConfiguration as InstallmentPlanConfigurationModelImport } from "./src/models/InstallmentPlanConfiguration";
 import { InstallmentPlanSliceConfiguration as InstallmentPlanSliceConfigurationModelImport } from "./src/models/InstallmentPlanSliceConfiguration";
 import { InternalTransferBankTransaction as InternalTransferBankTransactionModelImport } from "./src/models/InternalTransferBankTransaction";
+import { InvoiceReconciliationRecordInvoiceLink as InvoiceReconciliationRecordInvoiceLinkModelImport } from "./src/models/InvoiceReconciliationRecordInvoiceLink";
+import { InvoiceReconciliationRecordRejectionStatus as InvoiceReconciliationRecordRejectionStatusModelImport } from "./src/models/InvoiceReconciliationRecordRejectionStatus";
+import { InvoiceReconciliationRecordState as InvoiceReconciliationRecordStateModelImport } from "./src/models/InvoiceReconciliationRecordState";
+import { InvoiceReconciliationRecordType as InvoiceReconciliationRecordTypeModelImport } from "./src/models/InvoiceReconciliationRecordType";
+import { InvoiceReimbursement as InvoiceReimbursementModelImport } from "./src/models/InvoiceReimbursement";
+import { InvoiceReimbursementState as InvoiceReimbursementStateModelImport } from "./src/models/InvoiceReimbursementState";
 import { Label as LabelModelImport } from "./src/models/Label";
 import { LabelDescriptor as LabelDescriptorModelImport } from "./src/models/LabelDescriptor";
 import { LabelDescriptorCategory as LabelDescriptorCategoryModelImport } from "./src/models/LabelDescriptorCategory";
@@ -158,6 +170,8 @@ import { PaymentContractState as PaymentContractStateModelImport } from "./src/m
 import { PaymentContractType as PaymentContractTypeModelImport } from "./src/models/PaymentContractType";
 import { PaymentInformationHash as PaymentInformationHashModelImport } from "./src/models/PaymentInformationHash";
 import { PaymentInformationHashType as PaymentInformationHashTypeModelImport } from "./src/models/PaymentInformationHashType";
+import { PaymentInitiationAdviceFile as PaymentInitiationAdviceFileModelImport } from "./src/models/PaymentInitiationAdviceFile";
+import { PaymentInitiationAdviceFileState as PaymentInitiationAdviceFileStateModelImport } from "./src/models/PaymentInitiationAdviceFileState";
 import { PaymentLink as PaymentLinkModelImport } from "./src/models/PaymentLink";
 import { PaymentLinkAddressHandlingMode as PaymentLinkAddressHandlingModeModelImport } from "./src/models/PaymentLinkAddressHandlingMode";
 import { PaymentLinkProtectionMode as PaymentLinkProtectionModeModelImport } from "./src/models/PaymentLinkProtectionMode";
@@ -174,12 +188,16 @@ import { PaymentTerminalConfiguration as PaymentTerminalConfigurationModelImport
 import { PaymentTerminalConfigurationState as PaymentTerminalConfigurationStateModelImport } from "./src/models/PaymentTerminalConfigurationState";
 import { PaymentTerminalConfigurationVersion as PaymentTerminalConfigurationVersionModelImport } from "./src/models/PaymentTerminalConfigurationVersion";
 import { PaymentTerminalConfigurationVersionState as PaymentTerminalConfigurationVersionStateModelImport } from "./src/models/PaymentTerminalConfigurationVersionState";
+import { PaymentTerminalDccTransactionSum as PaymentTerminalDccTransactionSumModelImport } from "./src/models/PaymentTerminalDccTransactionSum";
 import { PaymentTerminalLocation as PaymentTerminalLocationModelImport } from "./src/models/PaymentTerminalLocation";
 import { PaymentTerminalLocationState as PaymentTerminalLocationStateModelImport } from "./src/models/PaymentTerminalLocationState";
 import { PaymentTerminalLocationVersion as PaymentTerminalLocationVersionModelImport } from "./src/models/PaymentTerminalLocationVersion";
 import { PaymentTerminalLocationVersionState as PaymentTerminalLocationVersionStateModelImport } from "./src/models/PaymentTerminalLocationVersionState";
 import { PaymentTerminalReceiptType as PaymentTerminalReceiptTypeModelImport } from "./src/models/PaymentTerminalReceiptType";
 import { PaymentTerminalState as PaymentTerminalStateModelImport } from "./src/models/PaymentTerminalState";
+import { PaymentTerminalTransactionSum as PaymentTerminalTransactionSumModelImport } from "./src/models/PaymentTerminalTransactionSum";
+import { PaymentTerminalTransactionSummary as PaymentTerminalTransactionSummaryModelImport } from "./src/models/PaymentTerminalTransactionSummary";
+import { PaymentTerminalTransactionSummaryFetchRequest as PaymentTerminalTransactionSummaryFetchRequestModelImport } from "./src/models/PaymentTerminalTransactionSummaryFetchRequest";
 import { PaymentTerminalType as PaymentTerminalTypeModelImport } from "./src/models/PaymentTerminalType";
 import { Permission as PermissionModelImport } from "./src/models/Permission";
 import { PersistableCurrencyAmount as PersistableCurrencyAmountModelImport } from "./src/models/PersistableCurrencyAmount";
@@ -202,6 +220,7 @@ import { RefundState as RefundStateModelImport } from "./src/models/RefundState"
 import { RefundType as RefundTypeModelImport } from "./src/models/RefundType";
 import { RenderedDocument as RenderedDocumentModelImport } from "./src/models/RenderedDocument";
 import { RenderedTerminalReceipt as RenderedTerminalReceiptModelImport } from "./src/models/RenderedTerminalReceipt";
+import { RenderedTerminalTransactionSummary as RenderedTerminalTransactionSummaryModelImport } from "./src/models/RenderedTerminalTransactionSummary";
 import { ResourcePath as ResourcePathModelImport } from "./src/models/ResourcePath";
 import { ResourceState as ResourceStateModelImport } from "./src/models/ResourceState";
 import { RestAddressFormat as RestAddressFormatModelImport } from "./src/models/RestAddressFormat";
@@ -333,7 +352,6 @@ import { TransactionGroupState as TransactionGroupStateModelImport } from "./src
 import { TransactionInvoiceComment as TransactionInvoiceCommentModelImport } from "./src/models/TransactionInvoiceComment";
 import { TransactionInvoiceReplacement as TransactionInvoiceReplacementModelImport } from "./src/models/TransactionInvoiceReplacement";
 import { TransactionInvoiceState as TransactionInvoiceStateModelImport } from "./src/models/TransactionInvoiceState";
-import { TransactionLineItemUpdateRequest as TransactionLineItemUpdateRequestModelImport } from "./src/models/TransactionLineItemUpdateRequest";
 import { TransactionLineItemVersionCreate as TransactionLineItemVersionCreateModelImport } from "./src/models/TransactionLineItemVersionCreate";
 import { TransactionLineItemVersionState as TransactionLineItemVersionStateModelImport } from "./src/models/TransactionLineItemVersionState";
 import { TransactionState as TransactionStateModelImport } from "./src/models/TransactionState";
@@ -375,6 +393,8 @@ import { DeliveryIndication as DeliveryIndicationModelImport } from "./src/model
 import { HumanUserCreate as HumanUserCreateModelImport } from "./src/models/HumanUserCreate";
 import { HumanUserUpdate as HumanUserUpdateModelImport } from "./src/models/HumanUserUpdate";
 import { InstallmentPaymentSlice as InstallmentPaymentSliceModelImport } from "./src/models/InstallmentPaymentSlice";
+import { InvoiceReconciliationRecord as InvoiceReconciliationRecordModelImport } from "./src/models/InvoiceReconciliationRecord";
+import { InvoiceReimbursementWithRefundReference as InvoiceReimbursementWithRefundReferenceModelImport } from "./src/models/InvoiceReimbursementWithRefundReference";
 import { PaymentLinkActive as PaymentLinkActiveModelImport } from "./src/models/PaymentLinkActive";
 import { PaymentLinkCreate as PaymentLinkCreateModelImport } from "./src/models/PaymentLinkCreate";
 import { RefundBankTransaction as RefundBankTransactionModelImport } from "./src/models/RefundBankTransaction";
@@ -419,6 +439,7 @@ import { ApplicationUserCreateWithMacKey as ApplicationUserCreateWithMacKeyModel
 import { SubscriptionAffiliateDeleting as SubscriptionAffiliateDeletingModelImport } from "./src/models/SubscriptionAffiliateDeleting";
 
 import { AccountService as AccountServiceApiImport } from "./src/api/AccountService";
+import { AnalyticsQueryService as AnalyticsQueryServiceApiImport } from "./src/api/AnalyticsQueryService";
 import { ApplicationUserService as ApplicationUserServiceApiImport } from "./src/api/ApplicationUserService";
 import { BankAccountService as BankAccountServiceApiImport } from "./src/api/BankAccountService";
 import { BankTransactionService as BankTransactionServiceApiImport } from "./src/api/BankTransactionService";
@@ -450,6 +471,9 @@ import { InstallmentPlanCalculationService as InstallmentPlanCalculationServiceA
 import { InstallmentPlanConfigurationService as InstallmentPlanConfigurationServiceApiImport } from "./src/api/InstallmentPlanConfigurationService";
 import { InstallmentPlanSliceConfigurationService as InstallmentPlanSliceConfigurationServiceApiImport } from "./src/api/InstallmentPlanSliceConfigurationService";
 import { InternalTransferBankTransactionService as InternalTransferBankTransactionServiceApiImport } from "./src/api/InternalTransferBankTransactionService";
+import { InvoiceReconciliationRecordInvoiceLinkService as InvoiceReconciliationRecordInvoiceLinkServiceApiImport } from "./src/api/InvoiceReconciliationRecordInvoiceLinkService";
+import { InvoiceReconciliationRecordService as InvoiceReconciliationRecordServiceApiImport } from "./src/api/InvoiceReconciliationRecordService";
+import { InvoiceReimbursementService as InvoiceReimbursementServiceApiImport } from "./src/api/InvoiceReimbursementService";
 import { LabelDescriptionGroupService as LabelDescriptionGroupServiceApiImport } from "./src/api/LabelDescriptionGroupService";
 import { LabelDescriptionService as LabelDescriptionServiceApiImport } from "./src/api/LabelDescriptionService";
 import { LanguageService as LanguageServiceApiImport } from "./src/api/LanguageService";
@@ -466,6 +490,7 @@ import { PaymentProcessorConfigurationService as PaymentProcessorConfigurationSe
 import { PaymentProcessorService as PaymentProcessorServiceApiImport } from "./src/api/PaymentProcessorService";
 import { PaymentTerminalService as PaymentTerminalServiceApiImport } from "./src/api/PaymentTerminalService";
 import { PaymentTerminalTillService as PaymentTerminalTillServiceApiImport } from "./src/api/PaymentTerminalTillService";
+import { PaymentTerminalTransactionSummaryService as PaymentTerminalTransactionSummaryServiceApiImport } from "./src/api/PaymentTerminalTransactionSummaryService";
 import { PaymentWebAppService as PaymentWebAppServiceApiImport } from "./src/api/PaymentWebAppService";
 import { PermissionService as PermissionServiceApiImport } from "./src/api/PermissionService";
 import { RefundBankTransactionService as RefundBankTransactionServiceApiImport } from "./src/api/RefundBankTransactionService";
@@ -576,6 +601,18 @@ export namespace Wallee {
         export const Address = AddressModelImport;
         export type AddressCreate = AddressCreateModelImport;
         export const AddressCreate = AddressCreateModelImport;
+        export type AnalyticsQuery = AnalyticsQueryModelImport;
+        export const AnalyticsQuery = AnalyticsQueryModelImport;
+        export type AnalyticsQueryExecution = AnalyticsQueryExecutionModelImport;
+        export const AnalyticsQueryExecution = AnalyticsQueryExecutionModelImport;
+        export type AnalyticsQueryExecutionState = AnalyticsQueryExecutionStateModelImport;
+        export const AnalyticsQueryExecutionState = AnalyticsQueryExecutionStateModelImport;
+        export type AnalyticsQueryResultBatch = AnalyticsQueryResultBatchModelImport;
+        export const AnalyticsQueryResultBatch = AnalyticsQueryResultBatchModelImport;
+        export type AnalyticsSchemaColumn = AnalyticsSchemaColumnModelImport;
+        export const AnalyticsSchemaColumn = AnalyticsSchemaColumnModelImport;
+        export type AnalyticsSchemaTable = AnalyticsSchemaTableModelImport;
+        export const AnalyticsSchemaTable = AnalyticsSchemaTableModelImport;
         export type AuthenticatedCardDataCreate = AuthenticatedCardDataCreateModelImport;
         export const AuthenticatedCardDataCreate = AuthenticatedCardDataCreateModelImport;
         export type BankAccount = BankAccountModelImport;
@@ -746,6 +783,18 @@ export namespace Wallee {
         export const InstallmentPlanSliceConfiguration = InstallmentPlanSliceConfigurationModelImport;
         export type InternalTransferBankTransaction = InternalTransferBankTransactionModelImport;
         export const InternalTransferBankTransaction = InternalTransferBankTransactionModelImport;
+        export type InvoiceReconciliationRecordInvoiceLink = InvoiceReconciliationRecordInvoiceLinkModelImport;
+        export const InvoiceReconciliationRecordInvoiceLink = InvoiceReconciliationRecordInvoiceLinkModelImport;
+        export type InvoiceReconciliationRecordRejectionStatus = InvoiceReconciliationRecordRejectionStatusModelImport;
+        export const InvoiceReconciliationRecordRejectionStatus = InvoiceReconciliationRecordRejectionStatusModelImport;
+        export type InvoiceReconciliationRecordState = InvoiceReconciliationRecordStateModelImport;
+        export const InvoiceReconciliationRecordState = InvoiceReconciliationRecordStateModelImport;
+        export type InvoiceReconciliationRecordType = InvoiceReconciliationRecordTypeModelImport;
+        export const InvoiceReconciliationRecordType = InvoiceReconciliationRecordTypeModelImport;
+        export type InvoiceReimbursement = InvoiceReimbursementModelImport;
+        export const InvoiceReimbursement = InvoiceReimbursementModelImport;
+        export type InvoiceReimbursementState = InvoiceReimbursementStateModelImport;
+        export const InvoiceReimbursementState = InvoiceReimbursementStateModelImport;
         export type Label = LabelModelImport;
         export const Label = LabelModelImport;
         export type LabelDescriptor = LabelDescriptorModelImport;
@@ -844,6 +893,10 @@ export namespace Wallee {
         export const PaymentInformationHash = PaymentInformationHashModelImport;
         export type PaymentInformationHashType = PaymentInformationHashTypeModelImport;
         export const PaymentInformationHashType = PaymentInformationHashTypeModelImport;
+        export type PaymentInitiationAdviceFile = PaymentInitiationAdviceFileModelImport;
+        export const PaymentInitiationAdviceFile = PaymentInitiationAdviceFileModelImport;
+        export type PaymentInitiationAdviceFileState = PaymentInitiationAdviceFileStateModelImport;
+        export const PaymentInitiationAdviceFileState = PaymentInitiationAdviceFileStateModelImport;
         export type PaymentLink = PaymentLinkModelImport;
         export const PaymentLink = PaymentLinkModelImport;
         export type PaymentLinkAddressHandlingMode = PaymentLinkAddressHandlingModeModelImport;
@@ -876,6 +929,8 @@ export namespace Wallee {
         export const PaymentTerminalConfigurationVersion = PaymentTerminalConfigurationVersionModelImport;
         export type PaymentTerminalConfigurationVersionState = PaymentTerminalConfigurationVersionStateModelImport;
         export const PaymentTerminalConfigurationVersionState = PaymentTerminalConfigurationVersionStateModelImport;
+        export type PaymentTerminalDccTransactionSum = PaymentTerminalDccTransactionSumModelImport;
+        export const PaymentTerminalDccTransactionSum = PaymentTerminalDccTransactionSumModelImport;
         export type PaymentTerminalLocation = PaymentTerminalLocationModelImport;
         export const PaymentTerminalLocation = PaymentTerminalLocationModelImport;
         export type PaymentTerminalLocationState = PaymentTerminalLocationStateModelImport;
@@ -888,6 +943,12 @@ export namespace Wallee {
         export const PaymentTerminalReceiptType = PaymentTerminalReceiptTypeModelImport;
         export type PaymentTerminalState = PaymentTerminalStateModelImport;
         export const PaymentTerminalState = PaymentTerminalStateModelImport;
+        export type PaymentTerminalTransactionSum = PaymentTerminalTransactionSumModelImport;
+        export const PaymentTerminalTransactionSum = PaymentTerminalTransactionSumModelImport;
+        export type PaymentTerminalTransactionSummary = PaymentTerminalTransactionSummaryModelImport;
+        export const PaymentTerminalTransactionSummary = PaymentTerminalTransactionSummaryModelImport;
+        export type PaymentTerminalTransactionSummaryFetchRequest = PaymentTerminalTransactionSummaryFetchRequestModelImport;
+        export const PaymentTerminalTransactionSummaryFetchRequest = PaymentTerminalTransactionSummaryFetchRequestModelImport;
         export type PaymentTerminalType = PaymentTerminalTypeModelImport;
         export const PaymentTerminalType = PaymentTerminalTypeModelImport;
         export type Permission = PermissionModelImport;
@@ -932,6 +993,8 @@ export namespace Wallee {
         export const RenderedDocument = RenderedDocumentModelImport;
         export type RenderedTerminalReceipt = RenderedTerminalReceiptModelImport;
         export const RenderedTerminalReceipt = RenderedTerminalReceiptModelImport;
+        export type RenderedTerminalTransactionSummary = RenderedTerminalTransactionSummaryModelImport;
+        export const RenderedTerminalTransactionSummary = RenderedTerminalTransactionSummaryModelImport;
         export type ResourcePath = ResourcePathModelImport;
         export const ResourcePath = ResourcePathModelImport;
         export type ResourceState = ResourceStateModelImport;
@@ -1194,8 +1257,6 @@ export namespace Wallee {
         export const TransactionInvoiceReplacement = TransactionInvoiceReplacementModelImport;
         export type TransactionInvoiceState = TransactionInvoiceStateModelImport;
         export const TransactionInvoiceState = TransactionInvoiceStateModelImport;
-        export type TransactionLineItemUpdateRequest = TransactionLineItemUpdateRequestModelImport;
-        export const TransactionLineItemUpdateRequest = TransactionLineItemUpdateRequestModelImport;
         export type TransactionLineItemVersionCreate = TransactionLineItemVersionCreateModelImport;
         export const TransactionLineItemVersionCreate = TransactionLineItemVersionCreateModelImport;
         export type TransactionLineItemVersionState = TransactionLineItemVersionStateModelImport;
@@ -1278,6 +1339,10 @@ export namespace Wallee {
         export const HumanUserUpdate = HumanUserUpdateModelImport;
         export type InstallmentPaymentSlice = InstallmentPaymentSliceModelImport;
         export const InstallmentPaymentSlice = InstallmentPaymentSliceModelImport;
+        export type InvoiceReconciliationRecord = InvoiceReconciliationRecordModelImport;
+        export const InvoiceReconciliationRecord = InvoiceReconciliationRecordModelImport;
+        export type InvoiceReimbursementWithRefundReference = InvoiceReimbursementWithRefundReferenceModelImport;
+        export const InvoiceReimbursementWithRefundReference = InvoiceReimbursementWithRefundReferenceModelImport;
         export type PaymentLinkActive = PaymentLinkActiveModelImport;
         export const PaymentLinkActive = PaymentLinkActiveModelImport;
         export type PaymentLinkCreate = PaymentLinkCreateModelImport;
@@ -1367,6 +1432,8 @@ export namespace Wallee {
     export namespace api {
         export type AccountService = AccountServiceApiImport;
         export const AccountService = AccountServiceApiImport;
+        export type AnalyticsQueryService = AnalyticsQueryServiceApiImport;
+        export const AnalyticsQueryService = AnalyticsQueryServiceApiImport;
         export type ApplicationUserService = ApplicationUserServiceApiImport;
         export const ApplicationUserService = ApplicationUserServiceApiImport;
         export type BankAccountService = BankAccountServiceApiImport;
@@ -1429,6 +1496,12 @@ export namespace Wallee {
         export const InstallmentPlanSliceConfigurationService = InstallmentPlanSliceConfigurationServiceApiImport;
         export type InternalTransferBankTransactionService = InternalTransferBankTransactionServiceApiImport;
         export const InternalTransferBankTransactionService = InternalTransferBankTransactionServiceApiImport;
+        export type InvoiceReconciliationRecordInvoiceLinkService = InvoiceReconciliationRecordInvoiceLinkServiceApiImport;
+        export const InvoiceReconciliationRecordInvoiceLinkService = InvoiceReconciliationRecordInvoiceLinkServiceApiImport;
+        export type InvoiceReconciliationRecordService = InvoiceReconciliationRecordServiceApiImport;
+        export const InvoiceReconciliationRecordService = InvoiceReconciliationRecordServiceApiImport;
+        export type InvoiceReimbursementService = InvoiceReimbursementServiceApiImport;
+        export const InvoiceReimbursementService = InvoiceReimbursementServiceApiImport;
         export type LabelDescriptionGroupService = LabelDescriptionGroupServiceApiImport;
         export const LabelDescriptionGroupService = LabelDescriptionGroupServiceApiImport;
         export type LabelDescriptionService = LabelDescriptionServiceApiImport;
@@ -1461,6 +1534,8 @@ export namespace Wallee {
         export const PaymentTerminalService = PaymentTerminalServiceApiImport;
         export type PaymentTerminalTillService = PaymentTerminalTillServiceApiImport;
         export const PaymentTerminalTillService = PaymentTerminalTillServiceApiImport;
+        export type PaymentTerminalTransactionSummaryService = PaymentTerminalTransactionSummaryServiceApiImport;
+        export const PaymentTerminalTransactionSummaryService = PaymentTerminalTransactionSummaryServiceApiImport;
         export type PaymentWebAppService = PaymentWebAppServiceApiImport;
         export const PaymentWebAppService = PaymentWebAppServiceApiImport;
         export type PermissionService = PermissionServiceApiImport;

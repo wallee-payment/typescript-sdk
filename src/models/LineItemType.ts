@@ -6,6 +6,7 @@ enum LineItemType{
     DISCOUNT = 'DISCOUNT',
     FEE = 'FEE',
     PRODUCT = 'PRODUCT',
+    TIP = 'TIP',
 }
 
 export { LineItemType }

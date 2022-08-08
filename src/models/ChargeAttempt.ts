@@ -3,6 +3,7 @@ import { Charge } from "./Charge";
 import { ChargeAttemptEnvironment } from "./ChargeAttemptEnvironment";
 import { ChargeAttemptState } from "./ChargeAttemptState";
 import { ConnectorInvocation } from "./ConnectorInvocation";
+import { CustomersPresence } from "./CustomersPresence";
 import { FailureReason } from "./FailureReason";
 import { Label } from "./Label";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
@@ -33,6 +34,11 @@ class ChargeAttempt extends TransactionAwareEntity {
         * The created on date indicates the date on which the entity was stored into the database.
         */
     'createdOn'?: Date;
+
+        /**
+        * The customers presence indicates which kind of customer interaction was used during the charge attempt.
+        */
+    'customersPresence'?: CustomersPresence;
 
         /**
         * 
@@ -161,6 +167,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "customersPresence",
+        "baseName": "customersPresence",
+        "type": "CustomersPresence"
         },
         
         {
