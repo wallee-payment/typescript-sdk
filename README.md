@@ -20,7 +20,7 @@ npm install wallee
 
 ## Usage
 The library needs to be configured with your account's space id, user id, and secret key which are available in your [wallee
-account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
+account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values. You can also add custom default headers to the configuration.
 
 ### Configuring a Service
 
@@ -36,6 +36,10 @@ let config = {
     space_id: spaceId,
     user_id: userId,
     api_secret: apiSecret
+    default_headers: {
+        'x-meta-header-name-1': 'header-value-1',
+        'x-meta-header-name-2': 'header-value-2'
+    }
 }
 
 // Transaction Service

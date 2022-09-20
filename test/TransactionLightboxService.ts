@@ -4,10 +4,14 @@ import { Wallee } from '../index';
 import http = require("http");
 
 // config
-let config: { space_id: number, user_id: number, api_secret: string } = {
+let config: { space_id: number, user_id: number, api_secret: string, default_headers: { [key: string]: string; } } = {
     space_id: 405,
     user_id: 512,
-    api_secret: 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ='
+    api_secret: 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=',
+    default_headers: {
+        'x-meta-header-name-1': 'header-value-1',
+        'x-meta-header-name-2': 'header-value-2'
+    }
 };
 
 // Services

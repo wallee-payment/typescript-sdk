@@ -25,7 +25,8 @@ class SubscriptionProductFeeTierService {
     };
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration))
+        this.setDefaultAuthentication(new VoidAuth(configuration));
+        this.defaultHeaders = configuration.default_headers;
     }
 
     set useQuerystring(value: boolean) {
@@ -42,6 +43,14 @@ class SubscriptionProductFeeTierService {
 
     protected setDefaultAuthentication(auth: Authentication) {
         this.authentications.default = auth;
+    }
+
+    private getVersion(): string {
+        if (typeof (process) !== 'undefined' && process && process.version) {
+            return 'node ' + process.version;
+        } else {
+            return 'unknown';
+        }
     }
 
     /**
@@ -72,6 +81,15 @@ class SubscriptionProductFeeTierService {
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
 
         let localVarUseFormData = false;
 
@@ -158,6 +176,15 @@ class SubscriptionProductFeeTierService {
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
 
         let localVarUseFormData = false;
 
@@ -249,6 +276,15 @@ class SubscriptionProductFeeTierService {
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
 
         let localVarUseFormData = false;
 
@@ -345,6 +381,15 @@ class SubscriptionProductFeeTierService {
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
@@ -434,6 +479,15 @@ class SubscriptionProductFeeTierService {
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
 
         let localVarUseFormData = false;
 
@@ -525,6 +579,15 @@ class SubscriptionProductFeeTierService {
         }
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
 
         let localVarUseFormData = false;
 
