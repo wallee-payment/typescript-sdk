@@ -23,6 +23,7 @@ class TokenService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -31,6 +32,28 @@ class TokenService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -65,7 +88,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public _delete (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/token/delete';
+        const localVarPath = '/token/delete';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -87,7 +110,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -98,6 +121,7 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -105,6 +129,7 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(id, "number"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -165,7 +190,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public checkTokenCreationPossible (spaceId: number, transactionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: boolean;  }> {
-        const localVarPath = this.basePath + '/token/check-token-creation-possible';
+        const localVarPath = '/token/check-token-creation-possible';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -191,7 +216,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -202,12 +227,14 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -268,7 +295,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/token/count';
+        const localVarPath = '/token/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -285,7 +312,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -296,6 +323,7 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -303,6 +331,7 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -363,7 +392,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, entity: TokenCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
-        const localVarPath = this.basePath + '/token/create';
+        const localVarPath = '/token/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -385,7 +414,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -396,6 +425,7 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -403,6 +433,7 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "TokenCreate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -463,7 +494,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public createTokenBasedOnTransaction (spaceId: number, transactionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TokenVersion;  }> {
-        const localVarPath = this.basePath + '/token/create-token-based-on-transaction';
+        const localVarPath = '/token/create-token-based-on-transaction';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -489,7 +520,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -500,12 +531,14 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -566,7 +599,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public createTransactionForTokenUpdate (spaceId: number, tokenId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/token/createTransactionForTokenUpdate';
+        const localVarPath = '/token/createTransactionForTokenUpdate';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -592,7 +625,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -603,12 +636,14 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -669,7 +704,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public processTransaction (spaceId: number, transactionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Charge;  }> {
-        const localVarPath = this.basePath + '/token/process-transaction';
+        const localVarPath = '/token/process-transaction';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -695,7 +730,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -706,12 +741,14 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -772,7 +809,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
-        const localVarPath = this.basePath + '/token/read';
+        const localVarPath = '/token/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -798,7 +835,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -809,12 +846,14 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -875,7 +914,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<Token>;  }> {
-        const localVarPath = this.basePath + '/token/search';
+        const localVarPath = '/token/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -897,7 +936,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -908,6 +947,7 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -915,6 +955,7 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -975,7 +1016,7 @@ class TokenService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: TokenUpdate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
-        const localVarPath = this.basePath + '/token/update';
+        const localVarPath = '/token/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -997,7 +1038,7 @@ class TokenService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1008,6 +1049,7 @@ class TokenService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1015,6 +1057,7 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "TokenUpdate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

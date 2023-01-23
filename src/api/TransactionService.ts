@@ -25,6 +25,7 @@ class TransactionService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -33,6 +34,28 @@ class TransactionService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -67,7 +90,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public _export (spaceId: number, request: EntityExportRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = this.basePath + '/transaction/export';
+        const localVarPath = '/transaction/export';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -89,7 +112,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -100,6 +123,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -107,6 +131,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "EntityExportRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -167,7 +192,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public confirm (spaceId: number, transactionModel: TransactionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/confirm';
+        const localVarPath = '/transaction/confirm';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -189,7 +214,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -200,6 +225,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -207,6 +233,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(transactionModel, "TransactionPending"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -267,7 +294,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/transaction/count';
+        const localVarPath = '/transaction/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -284,7 +311,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -295,6 +322,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -302,6 +330,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -362,7 +391,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, transaction: TransactionCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/create';
+        const localVarPath = '/transaction/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -384,7 +413,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -395,6 +424,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -402,6 +432,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(transaction, "TransactionCreate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -462,7 +493,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public createTransactionCredentials (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = this.basePath + '/transaction/createTransactionCredentials';
+        const localVarPath = '/transaction/createTransactionCredentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -488,7 +519,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -499,12 +530,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -565,7 +598,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public deleteOneClickTokenWithCredentials (credentials: string, tokenId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/transaction/deleteOneClickTokenWithCredentials';
+        const localVarPath = '/transaction/deleteOneClickTokenWithCredentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -591,7 +624,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -602,12 +635,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -667,7 +702,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchOneClickTokensWithCredentials (credentials: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<TokenVersion>;  }> {
-        const localVarPath = this.basePath + '/transaction/fetchOneClickTokensWithCredentials';
+        const localVarPath = '/transaction/fetchOneClickTokensWithCredentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -684,7 +719,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -695,12 +730,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -762,7 +799,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchPaymentMethods (spaceId: number, id: number, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = this.basePath + '/transaction/fetch-payment-methods';
+        const localVarPath = '/transaction/fetch-payment-methods';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -797,7 +834,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -808,12 +845,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -874,7 +913,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchPaymentMethodsWithCredentials (credentials: string, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = this.basePath + '/transaction/fetch-payment-methods-with-credentials';
+        const localVarPath = '/transaction/fetch-payment-methods-with-credentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -900,7 +939,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -911,12 +950,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -977,7 +1018,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getInvoiceDocument (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }> {
-        const localVarPath = this.basePath + '/transaction/getInvoiceDocument';
+        const localVarPath = '/transaction/getInvoiceDocument';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1003,7 +1044,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1014,12 +1055,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1080,7 +1123,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getLatestTransactionLineItemVersion (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TransactionLineItemVersion;  }> {
-        const localVarPath = this.basePath + '/transaction/getLatestTransactionLineItemVersion';
+        const localVarPath = '/transaction/getLatestTransactionLineItemVersion';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1106,7 +1149,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1117,12 +1160,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1183,7 +1228,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getPackingSlip (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }> {
-        const localVarPath = this.basePath + '/transaction/getPackingSlip';
+        const localVarPath = '/transaction/getPackingSlip';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1209,7 +1254,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1220,12 +1265,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1286,7 +1333,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public processOneClickTokenAndRedirectWithCredentials (credentials: string, tokenId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = this.basePath + '/transaction/processOneClickTokenAndRedirectWithCredentials';
+        const localVarPath = '/transaction/processOneClickTokenAndRedirectWithCredentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1312,7 +1359,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1323,12 +1370,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1389,7 +1438,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public processWithoutUserInteraction (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/processWithoutUserInteraction';
+        const localVarPath = '/transaction/processWithoutUserInteraction';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1415,7 +1464,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1426,12 +1475,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1492,7 +1543,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/read';
+        const localVarPath = '/transaction/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1518,7 +1569,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1529,12 +1580,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1594,7 +1647,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public readWithCredentials (credentials: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/readWithCredentials';
+        const localVarPath = '/transaction/readWithCredentials';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1611,7 +1664,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1622,12 +1675,14 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1688,7 +1743,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<Transaction>;  }> {
-        const localVarPath = this.basePath + '/transaction/search';
+        const localVarPath = '/transaction/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1710,7 +1765,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1721,6 +1776,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1728,6 +1784,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1788,7 +1845,7 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: TransactionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/transaction/update';
+        const localVarPath = '/transaction/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1810,7 +1867,7 @@ class TransactionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1821,6 +1878,7 @@ class TransactionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1828,6 +1886,7 @@ class TransactionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "TransactionPending"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

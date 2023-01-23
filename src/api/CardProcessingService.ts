@@ -18,6 +18,7 @@ class CardProcessingService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -26,6 +27,28 @@ class CardProcessingService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -62,7 +85,7 @@ class CardProcessingService {
     * @param {*} [options] Override http request options.
     */
     public process (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: AuthenticatedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = this.basePath + '/card-processing/process';
+        const localVarPath = '/card-processing/process';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -102,7 +125,7 @@ class CardProcessingService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -113,6 +136,7 @@ class CardProcessingService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -120,6 +144,7 @@ class CardProcessingService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(cardData, "AuthenticatedCardDataCreate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -182,7 +207,7 @@ class CardProcessingService {
     * @param {*} [options] Override http request options.
     */
     public processWith3DSecure (spaceId: number, transactionId: number, paymentMethodConfigurationId: number, cardData: TokenizedCardDataCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = this.basePath + '/card-processing/processWith3DSecure';
+        const localVarPath = '/card-processing/processWith3DSecure';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -222,7 +247,7 @@ class CardProcessingService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -233,6 +258,7 @@ class CardProcessingService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -240,6 +266,7 @@ class CardProcessingService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(cardData, "TokenizedCardDataCreate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

@@ -16,6 +16,7 @@ class PaymentConnectorService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -24,6 +25,28 @@ class PaymentConnectorService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -56,7 +79,7 @@ class PaymentConnectorService {
     * @param {*} [options] Override http request options.
     */
     public all (options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentConnector>;  }> {
-        const localVarPath = this.basePath + '/payment-connector/all';
+        const localVarPath = '/payment-connector/all';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -64,7 +87,7 @@ class PaymentConnectorService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -75,12 +98,14 @@ class PaymentConnectorService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -140,7 +165,7 @@ class PaymentConnectorService {
     * @param {*} [options] Override http request options.
     */
     public read (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentConnector;  }> {
-        const localVarPath = this.basePath + '/payment-connector/read';
+        const localVarPath = '/payment-connector/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -157,7 +182,7 @@ class PaymentConnectorService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -168,12 +193,14 @@ class PaymentConnectorService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

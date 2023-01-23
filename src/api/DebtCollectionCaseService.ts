@@ -22,6 +22,7 @@ class DebtCollectionCaseService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -30,6 +31,28 @@ class DebtCollectionCaseService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -64,7 +87,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public _delete (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/delete';
+        const localVarPath = '/debt-collection-case/delete';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -86,7 +109,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -97,6 +120,7 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -104,6 +128,7 @@ class DebtCollectionCaseService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(id, "number"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -166,7 +191,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public addCollectedAmount (spaceId: number, id: number, collectedAmount: number, externalId: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionReceipt;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/addCollectedAmount';
+        const localVarPath = '/debt-collection-case/addCollectedAmount';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -210,7 +235,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -221,12 +246,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -289,7 +316,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public attachDocument (spaceId: number, id: number, fileName: string, contentBase64: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCaseDocument;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/attachDocument';
+        const localVarPath = '/debt-collection-case/attachDocument';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -333,7 +360,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -344,12 +371,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -410,7 +439,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public close (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/close';
+        const localVarPath = '/debt-collection-case/close';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -436,7 +465,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -447,12 +476,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -513,7 +544,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/count';
+        const localVarPath = '/debt-collection-case/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -530,7 +561,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -541,6 +572,7 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -548,6 +580,7 @@ class DebtCollectionCaseService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -608,7 +641,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, entity: DebtCollectionCaseCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/create';
+        const localVarPath = '/debt-collection-case/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -630,7 +663,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -641,6 +674,7 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -648,6 +682,7 @@ class DebtCollectionCaseService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "DebtCollectionCaseCreate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -708,7 +743,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public documents (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<DebtCollectionCaseDocument>;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/documents';
+        const localVarPath = '/debt-collection-case/documents';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -734,7 +769,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -745,12 +780,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -811,7 +848,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public markAsPrepared (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/markAsPrepared';
+        const localVarPath = '/debt-collection-case/markAsPrepared';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -837,7 +874,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -848,12 +885,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -914,7 +953,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public markAsReviewed (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/markAsReviewed';
+        const localVarPath = '/debt-collection-case/markAsReviewed';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -940,7 +979,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -951,12 +990,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1017,7 +1058,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/read';
+        const localVarPath = '/debt-collection-case/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1043,7 +1084,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1054,12 +1095,14 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1120,7 +1163,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<DebtCollectionCase>;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/search';
+        const localVarPath = '/debt-collection-case/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1142,7 +1185,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1153,6 +1196,7 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1160,6 +1204,7 @@ class DebtCollectionCaseService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1220,7 +1265,7 @@ class DebtCollectionCaseService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: DebtCollectionCaseUpdate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: DebtCollectionCase;  }> {
-        const localVarPath = this.basePath + '/debt-collection-case/update';
+        const localVarPath = '/debt-collection-case/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1242,7 +1287,7 @@ class DebtCollectionCaseService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1253,6 +1298,7 @@ class DebtCollectionCaseService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1260,6 +1306,7 @@ class DebtCollectionCaseService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "DebtCollectionCaseUpdate"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

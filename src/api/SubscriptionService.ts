@@ -24,6 +24,7 @@ class SubscriptionService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -32,6 +33,28 @@ class SubscriptionService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -66,7 +89,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public applyChanges (spaceId: number, request: SubscriptionChangeRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionVersion;  }> {
-        const localVarPath = this.basePath + '/subscription/applyChanges';
+        const localVarPath = '/subscription/applyChanges';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -88,7 +111,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -99,6 +122,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -106,6 +130,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "SubscriptionChangeRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -166,7 +191,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/subscription/count';
+        const localVarPath = '/subscription/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -183,7 +208,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -194,6 +219,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -201,6 +227,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -261,7 +288,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, createRequest: SubscriptionCreateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionVersion;  }> {
-        const localVarPath = this.basePath + '/subscription/create';
+        const localVarPath = '/subscription/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -283,7 +310,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -294,6 +321,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -301,6 +329,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(createRequest, "SubscriptionCreateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -361,7 +390,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public initialize (spaceId: number, subscriptionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionCharge;  }> {
-        const localVarPath = this.basePath + '/subscription/initialize';
+        const localVarPath = '/subscription/initialize';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -387,7 +416,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -398,12 +427,14 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -466,7 +497,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public initializeSubscriberPresent (spaceId: number, subscriptionId: number, successUrl?: string, failedUrl?: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionCharge;  }> {
-        const localVarPath = this.basePath + '/subscription/initializeSubscriberPresent';
+        const localVarPath = '/subscription/initializeSubscriberPresent';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -500,7 +531,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -511,12 +542,14 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -577,7 +610,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Subscription;  }> {
-        const localVarPath = this.basePath + '/subscription/read';
+        const localVarPath = '/subscription/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -603,7 +636,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -614,12 +647,14 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -680,7 +715,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<Subscription>;  }> {
-        const localVarPath = this.basePath + '/subscription/search';
+        const localVarPath = '/subscription/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -702,7 +737,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -713,6 +748,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -720,6 +756,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -781,7 +818,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public searchSubscriptionInvoices (spaceId: number, subscriptionId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<TransactionInvoice>;  }> {
-        const localVarPath = this.basePath + '/subscription/searchSubscriptionInvoices';
+        const localVarPath = '/subscription/searchSubscriptionInvoices';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -812,7 +849,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -823,6 +860,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -830,6 +868,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -891,7 +930,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public terminate (spaceId: number, subscriptionId: number, respectTerminationPeriod: boolean, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/subscription/terminate';
+        const localVarPath = '/subscription/terminate';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -926,7 +965,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -937,12 +976,14 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1004,7 +1045,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, subscriptionId: number, request: SubscriptionUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Subscription;  }> {
-        const localVarPath = this.basePath + '/subscription/update';
+        const localVarPath = '/subscription/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1035,7 +1076,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1046,6 +1087,7 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -1053,6 +1095,7 @@ class SubscriptionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "SubscriptionUpdateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -1114,7 +1157,7 @@ class SubscriptionService {
     * @param {*} [options] Override http request options.
     */
     public updateProductVersion (spaceId: number, subscriptionId: number, respectTerminationPeriod: boolean, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionVersion;  }> {
-        const localVarPath = this.basePath + '/subscription/updateProductVersion';
+        const localVarPath = '/subscription/updateProductVersion';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -1149,7 +1192,7 @@ class SubscriptionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1160,12 +1203,14 @@ class SubscriptionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

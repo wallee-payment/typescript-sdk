@@ -19,6 +19,7 @@ class SubscriptionProductVersionService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -27,6 +28,28 @@ class SubscriptionProductVersionService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -61,7 +84,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public activate (spaceId: number, productVersionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionProductVersion;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/activate';
+        const localVarPath = '/subscription-product-version/activate';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -87,7 +110,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -98,12 +121,14 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -164,7 +189,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/count';
+        const localVarPath = '/subscription-product-version/count';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -181,7 +206,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -192,6 +217,7 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -199,6 +225,7 @@ class SubscriptionProductVersionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -259,7 +286,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, entity: SubscriptionProductVersionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionProductVersion;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/create';
+        const localVarPath = '/subscription-product-version/create';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -281,7 +308,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -292,6 +319,7 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -299,6 +327,7 @@ class SubscriptionProductVersionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "SubscriptionProductVersionPending"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -359,7 +388,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionProductVersion;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/read';
+        const localVarPath = '/subscription-product-version/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -385,7 +414,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -396,12 +425,14 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'GET',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -462,7 +493,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<SubscriptionProductVersion>;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/search';
+        const localVarPath = '/subscription-product-version/search';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -484,7 +515,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -495,6 +526,7 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -502,6 +534,7 @@ class SubscriptionProductVersionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(query, "EntityQuery"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -562,7 +595,7 @@ class SubscriptionProductVersionService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: SubscriptionProductVersionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionProductVersion;  }> {
-        const localVarPath = this.basePath + '/subscription-product-version/update';
+        const localVarPath = '/subscription-product-version/update';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -584,7 +617,7 @@ class SubscriptionProductVersionService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -595,6 +628,7 @@ class SubscriptionProductVersionService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -602,6 +636,7 @@ class SubscriptionProductVersionService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "SubscriptionProductVersionPending"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);

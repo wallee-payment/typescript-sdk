@@ -121,6 +121,11 @@ class TransactionCompletion extends TransactionAwareEntity {
     'state'?: TransactionCompletionState;
 
         /**
+        * The statement descriptor explain charges or payments on bank statements.
+        */
+    'statementDescriptor'?: string;
+
+        /**
         * 
         */
     'succeededOn'?: Date;
@@ -280,6 +285,12 @@ class TransactionCompletion extends TransactionAwareEntity {
         "name": "state",
         "baseName": "state",
         "type": "TransactionCompletionState"
+        },
+        
+        {
+        "name": "statementDescriptor",
+        "baseName": "statementDescriptor",
+        "type": "string"
         },
         
         {

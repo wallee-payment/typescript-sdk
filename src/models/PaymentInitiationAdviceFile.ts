@@ -1,5 +1,6 @@
 'use strict';
 import { PaymentInitiationAdviceFileState } from "./PaymentInitiationAdviceFileState";
+import { PaymentProcessor } from "./PaymentProcessor";
 
 
 class PaymentInitiationAdviceFile {
@@ -12,7 +13,17 @@ class PaymentInitiationAdviceFile {
         /**
         * 
         */
+    'failureMessage'?: string;
+
+        /**
+        * 
+        */
     'fileGeneratedOn'?: Date;
+
+        /**
+        * The shipping date indicates the date on which the pain file was transferred to an external processing system.
+        */
+    'forwardedOn'?: Date;
 
         /**
         * The ID is the primary key of the entity. The ID identifies the entity uniquely.
@@ -37,6 +48,11 @@ class PaymentInitiationAdviceFile {
         /**
         * 
         */
+    'processor'?: PaymentProcessor;
+
+        /**
+        * 
+        */
     'state'?: PaymentInitiationAdviceFileState;
 
 
@@ -51,8 +67,20 @@ class PaymentInitiationAdviceFile {
         },
         
         {
+        "name": "failureMessage",
+        "baseName": "failureMessage",
+        "type": "string"
+        },
+        
+        {
         "name": "fileGeneratedOn",
         "baseName": "fileGeneratedOn",
+        "type": "Date"
+        },
+        
+        {
+        "name": "forwardedOn",
+        "baseName": "forwardedOn",
         "type": "Date"
         },
         
@@ -78,6 +106,12 @@ class PaymentInitiationAdviceFile {
         "name": "processedOn",
         "baseName": "processedOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "processor",
+        "baseName": "processor",
+        "type": "PaymentProcessor"
         },
         
         {

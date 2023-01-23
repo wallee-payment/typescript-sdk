@@ -25,6 +25,11 @@ class TransactionCompletionRequest {
     'lineItems'?: Array<CompletionLineItemCreate>;
 
         /**
+        * The statement descriptor explain charges or payments on bank statements.
+        */
+    'statementDescriptor'?: string;
+
+        /**
         * The ID of the transaction which should be completed.
         */
     'transactionId': number;
@@ -56,6 +61,12 @@ class TransactionCompletionRequest {
         "name": "lineItems",
         "baseName": "lineItems",
         "type": "Array<CompletionLineItemCreate>"
+        },
+        
+        {
+        "name": "statementDescriptor",
+        "baseName": "statementDescriptor",
+        "type": "string"
         },
         
         {

@@ -363,6 +363,7 @@ import { User as UserModelImport } from "./src/models/User";
 import { UserAccountRole as UserAccountRoleModelImport } from "./src/models/UserAccountRole";
 import { UserSpaceRole as UserSpaceRoleModelImport } from "./src/models/UserSpaceRole";
 import { UserType as UserTypeModelImport } from "./src/models/UserType";
+import { WalletType as WalletTypeModelImport } from "./src/models/WalletType";
 import { WebAppConfirmationRequest as WebAppConfirmationRequestModelImport } from "./src/models/WebAppConfirmationRequest";
 import { WebAppConfirmationResponse as WebAppConfirmationResponseModelImport } from "./src/models/WebAppConfirmationResponse";
 import { WebhookIdentity as WebhookIdentityModelImport } from "./src/models/WebhookIdentity";
@@ -1279,6 +1280,8 @@ export namespace Wallee {
         export const UserSpaceRole = UserSpaceRoleModelImport;
         export type UserType = UserTypeModelImport;
         export const UserType = UserTypeModelImport;
+        export type WalletType = WalletTypeModelImport;
+        export const WalletType = WalletTypeModelImport;
         export type WebAppConfirmationRequest = WebAppConfirmationRequestModelImport;
         export const WebAppConfirmationRequest = WebAppConfirmationRequestModelImport;
         export type WebAppConfirmationResponse = WebAppConfirmationResponseModelImport;

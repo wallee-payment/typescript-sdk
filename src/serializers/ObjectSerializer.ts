@@ -364,6 +364,7 @@ import { User } from "../models/User";
 import { UserAccountRole } from "../models/UserAccountRole";
 import { UserSpaceRole } from "../models/UserSpaceRole";
 import { UserType } from "../models/UserType";
+import { WalletType } from "../models/WalletType";
 import { WebAppConfirmationRequest } from "../models/WebAppConfirmationRequest";
 import { WebAppConfirmationResponse } from "../models/WebAppConfirmationResponse";
 import { WebhookIdentity } from "../models/WebhookIdentity";
@@ -564,6 +565,7 @@ class ObjectSerializer {
         "TransactionVoidMode": TransactionVoidMode,
         "TransactionVoidState": TransactionVoidState,
         "UserType": UserType,
+        "WalletType": WalletType,
     }
 
     static typeMap: {[index: string]: any} = {

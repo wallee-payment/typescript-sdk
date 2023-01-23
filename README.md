@@ -94,6 +94,32 @@ transactionService.create(spaceId, transaction).then((response) => {
 
 ```
 
+### Configure connection timeout
+Connection timeout determines how long the request can take, before cutting off the connection. Same value applies both to inner 'Read timeout' and 'Connection timeout' of a [NPM request module](https://www.npmjs.com/package/request).
+
+Default connection timeout is 25s.
+
+
+Connection timeout can be set 2 ways:
+
+1. Via configuration property 'timeout' providing value in seconds.
+```
+let config = {
+    ... other properties ...
+    timeout: 15
+}
+let transactionService: Wallee.api.TransactionService = new Wallee.api.TransactionService(config);
+```
+
+2. Via service property 'timeout' providing value in seconds
+```
+let config = {
+    ... properties ...
+}
+let transactionService: Wallee.api.TransactionService = new Wallee.api.TransactionService(config);
+transactionService.timeout = 15;
+```
+
 ## License
 
 Please see the [license file](https://github.com/wallee-payment/typescript-sdk/blob/master/LICENSE) for more information.

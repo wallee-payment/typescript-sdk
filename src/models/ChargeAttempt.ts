@@ -11,6 +11,7 @@ import { PaymentTerminal } from "./PaymentTerminal";
 import { TokenVersion } from "./TokenVersion";
 import { TransactionAwareEntity } from "./TransactionAwareEntity";
 import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
+import { WalletType } from "./WalletType";
 
 
 class ChargeAttempt extends TransactionAwareEntity {
@@ -139,6 +140,11 @@ class ChargeAttempt extends TransactionAwareEntity {
         * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
         */
     'version'?: number;
+
+        /**
+        * 
+        */
+    'walletType'?: WalletType;
 
 
     static discriminator: string | undefined = undefined;
@@ -293,6 +299,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "version",
         "baseName": "version",
         "type": "number"
+        },
+        
+        {
+        "name": "walletType",
+        "baseName": "walletType",
+        "type": "WalletType"
         }        
     ];
 

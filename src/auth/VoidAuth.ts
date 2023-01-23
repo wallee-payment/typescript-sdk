@@ -4,8 +4,6 @@ import CryptoJS = require("crypto-js");
 import { Authentication } from './Authentication';
 
 class VoidAuth implements Authentication {
-
-    protected _basePath = 'https://app-wallee.com:443/api';
     protected configuration : any = {};
     protected mac_version = 1;
 
@@ -33,7 +31,7 @@ class VoidAuth implements Authentication {
             ).join('&');
         }
 
-        resourcePath = '/api' + resourcePath.split(this._basePath)[1];
+        resourcePath = '/api' + resourcePath;
 
         let timestamp: number = Math.trunc(+new Date / 1000);
 

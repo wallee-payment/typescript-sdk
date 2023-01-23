@@ -4,10 +4,11 @@ import { Wallee } from '../index';
 import http = require("http");
 
 // config
-let config: { space_id: number, user_id: number, api_secret: string } = {
+let config: { space_id: number, user_id: number, api_secret: string, timeout: number } = {
     space_id: 405,
     user_id: 512,
-    api_secret: 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ='
+    api_secret: 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=',
+    timeout: 20
 };
 
 // Services
@@ -89,6 +90,8 @@ describe('TransactionService', () => {
      */
     describe('count', () => {
         it('count successful', () => {
+            //set custom connection timeout of 45 seconds
+            transactionService.timeout = 45;
             let transaction: Wallee.model.Transaction;
             transactionService.create(config.space_id, getTransactionPayload())
                 .then((response: { response: http.IncomingMessage, body: Wallee.model.Transaction }) => {

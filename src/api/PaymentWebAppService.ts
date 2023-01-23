@@ -27,6 +27,7 @@ class PaymentWebAppService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
+    protected _timeout : number = 25;
 
     protected authentications = {
         'default': <Authentication>new VoidAuth({})
@@ -35,6 +36,28 @@ class PaymentWebAppService {
     constructor(configuration: any) {
         this.setDefaultAuthentication(new VoidAuth(configuration));
         this.defaultHeaders = configuration.default_headers;
+        this.setTimeout(configuration.timeout);
+    }
+
+    /**
+    * Set timeout in seconds. Default timeout: 25 seconds
+    * @param {number} timeout
+    */
+    set timeout(timeout: number) {
+        this.setTimeout(timeout)
+    }
+
+    private setTimeout(timeout: number) {
+        if (timeout !== undefined) {
+            if (!Number.isInteger(timeout)) {
+                throw new Error('Timeout value has to be integer');
+            }
+            if (timeout) {
+                this._timeout = timeout;
+            } else {
+                throw new Error('Timeout value has to be greater than 0');
+            }
+        }
     }
 
     set useQuerystring(value: boolean) {
@@ -69,7 +92,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public activateProcessorForProduction (spaceId: number, externalId: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentAppProcessor;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/activate-processor-for-production';
+        const localVarPath = '/payment-web-app/activate-processor-for-production';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -95,7 +118,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -106,12 +129,14 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -172,7 +197,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public deleteConnector (spaceId: number, externalId: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/delete-connector';
+        const localVarPath = '/payment-web-app/delete-connector';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -198,7 +223,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -209,12 +234,14 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -275,7 +302,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public deleteProcessor (spaceId: number, externalId: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/delete-processor';
+        const localVarPath = '/payment-web-app/delete-processor';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -301,7 +328,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -312,12 +339,14 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -378,7 +407,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public insertOrUpdateConnector (spaceId: number, request: PaymentAppConnectorCreationRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentAppConnector;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/insert-or-update-connector';
+        const localVarPath = '/payment-web-app/insert-or-update-connector';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -400,7 +429,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -411,6 +440,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -418,6 +448,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppConnectorCreationRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -478,7 +509,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public insertOrUpdateProcessor (spaceId: number, request: PaymentAppProcessorCreationRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentAppProcessor;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/insert-or-update-processor';
+        const localVarPath = '/payment-web-app/insert-or-update-processor';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -500,7 +531,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -511,6 +542,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -518,6 +550,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppProcessorCreationRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -578,7 +611,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public updateChargeAttempt (spaceId: number, request: PaymentAppChargeAttemptUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: ChargeAttempt;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/update-charge-attempt';
+        const localVarPath = '/payment-web-app/update-charge-attempt';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -600,7 +633,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -611,6 +644,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -618,6 +652,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppChargeAttemptUpdateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -678,7 +713,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public updateCompletion (spaceId: number, request: PaymentAppCompletionUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TransactionCompletion;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/update-completion';
+        const localVarPath = '/payment-web-app/update-completion';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -700,7 +735,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -711,6 +746,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -718,6 +754,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppCompletionUpdateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -778,7 +815,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public updateRefund (spaceId: number, request: PaymentAppRefundUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Refund;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/update-refund';
+        const localVarPath = '/payment-web-app/update-refund';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -800,7 +837,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -811,6 +848,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -818,6 +856,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppRefundUpdateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
@@ -878,7 +917,7 @@ class PaymentWebAppService {
     * @param {*} [options] Override http request options.
     */
     public updateVoid (spaceId: number, request: PaymentAppVoidUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TransactionVoid;  }> {
-        const localVarPath = this.basePath + '/payment-web-app/update-void';
+        const localVarPath = '/payment-web-app/update-void';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
@@ -900,7 +939,7 @@ class PaymentWebAppService {
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "3.1.2",
+            "x-meta-sdk-version": "3.2.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -911,6 +950,7 @@ class PaymentWebAppService {
         let localVarUseFormData = false;
 
         let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
             method: 'POST',
             qs: localVarQueryParameters,
             headers: localVarHeaderParams,
@@ -918,6 +958,7 @@ class PaymentWebAppService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(request, "PaymentAppVoidUpdateRequest"),
+            timeout: this._timeout * 1000
         };
 
         this.authentications.default.applyToRequest(localVarRequestOptions);
