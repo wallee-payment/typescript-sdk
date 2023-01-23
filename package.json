@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
@@ -26,9 +26,9 @@
         "bluebird": "^3.5.0",
         "crypto-js": "^3.1.8",
         "request": "^2.81.0",
-        "@types/bluebird": "*",
-        "@types/crypto-js": "*",
-        "@types/request": "*"
+        "@types/bluebird": "3.5.36",
+        "@types/crypto-js": "4.1.1",
+        "@types/request": "2.48.8"
     },
     "devDependencies": {
         "@types/chai": "^4.2.1",
