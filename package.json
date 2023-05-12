@@ -13,6 +13,11 @@
     },
     "main": "build/index.js",
     "types": "build/index.d.ts",
+    "files": [
+        "/build",
+        "LICENSE",
+        "README.MD"
+    ],
     "scripts": {
         "clean": "rm -Rf ./node_modules/ ./build ./test/*.d.ts ./test/*.js",
         "build": "tsc --project ./tsconfig.json",
