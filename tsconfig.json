@@ -6,7 +6,8 @@
         "strict": true,
         "moduleResolution": "node",
         "esModuleInterop": true,
-        "lib": ["es7", "es6", "dom"]
+        "lib": ["es7", "es6", "dom"],
+        "outDir": "./build"
     },
     "include":[
         "./src/**/*",

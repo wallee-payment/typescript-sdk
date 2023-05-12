@@ -2,3 +2,4 @@ wwwroot/*.js
 node_modules
 typings
 tests/*.d.ts
+build
