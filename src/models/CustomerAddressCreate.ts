@@ -5,7 +5,7 @@ import { AbstractCustomerAddressActive } from "./AbstractCustomerAddressActive";
 class CustomerAddressCreate extends AbstractCustomerAddressActive {
 
         /**
-        * 
+        * The customer that the object belongs to.
         */
     'customer': number;
 

@@ -5,22 +5,22 @@ import { RestAddressFormatField } from "./RestAddressFormatField";
 class RestAddressFormat {
 
         /**
-        * The example post codes allow the user to understand what we expect here.
+        * A list of sample post codes.
         */
     'postCodeExamples'?: Array<string>;
 
         /**
-        * The post code regex is a regular expression which can validates the input of the post code.
+        * The regular expression to validate post codes.
         */
     'postCodeRegex'?: string;
 
         /**
-        * The required fields indicate what fields are required within an address to comply with the address format.
+        * The fields that are required in the address format.
         */
     'requiredFields'?: Array<RestAddressFormatField>;
 
         /**
-        * The used fields indicate what fields are used within this address format.
+        * The fields that are used in the address format.
         */
     'usedFields'?: Array<RestAddressFormatField>;
 

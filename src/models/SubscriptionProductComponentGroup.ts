@@ -1,24 +1,23 @@
 'use strict';
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { SubscriptionProductVersion } from "./SubscriptionProductVersion";
 
 
 class SubscriptionProductComponentGroup {
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
         * The component group name will be shown when the components are selected. This can be visible to the subscriber.
         */
-    'name'?: DatabaseTranslatedString;
+    'name'?: { [key: string]: string; };
 
         /**
         * The component group can be optional. This means no component has to be selected by the subscriber.
@@ -36,7 +35,7 @@ class SubscriptionProductComponentGroup {
     'sortOrder'?: number;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -60,7 +59,7 @@ class SubscriptionProductComponentGroup {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

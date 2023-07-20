@@ -6,7 +6,7 @@ import { SubscriberUpdate } from "./SubscriberUpdate";
 class SubscriberActive extends SubscriberUpdate {
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

@@ -11,6 +11,11 @@ class AnalyticsQueryExecution {
     'account'?: number;
 
         /**
+        * The error message if and only if the query has failed, otherwise null.
+        */
+    'errorMessage'?: string;
+
+        /**
         * The External ID of the query if one had been specified; otherwise null.
         */
     'externalId'?: string;
@@ -21,7 +26,7 @@ class AnalyticsQueryExecution {
     'failureReason'?: FailureReason;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -69,6 +74,12 @@ class AnalyticsQueryExecution {
         "name": "account",
         "baseName": "account",
         "type": "number"
+        },
+        
+        {
+        "name": "errorMessage",
+        "baseName": "errorMessage",
+        "type": "string"
         },
         
         {

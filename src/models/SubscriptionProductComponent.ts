@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { SubscriptionProductComponentGroup } from "./SubscriptionProductComponentGroup";
 import { SubscriptionProductComponentReference } from "./SubscriptionProductComponentReference";
 import { TaxClass } from "./TaxClass";
@@ -25,15 +24,15 @@ class SubscriptionProductComponent {
         /**
         * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
         */
-    'description'?: DatabaseTranslatedString;
+    'description'?: { [key: string]: string; };
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -50,7 +49,7 @@ class SubscriptionProductComponent {
         /**
         * The component name is shown to the subscriber. It should describe in few words what the component does contain.
         */
-    'name'?: DatabaseTranslatedString;
+    'name'?: { [key: string]: string; };
 
         /**
         * The quantity step defines at which interval the quantity can be increased.
@@ -73,7 +72,7 @@ class SubscriptionProductComponent {
     'taxClass'?: TaxClass;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -103,7 +102,7 @@ class SubscriptionProductComponent {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -133,7 +132,7 @@ class SubscriptionProductComponent {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

@@ -18,12 +18,17 @@ class PaymentTerminal {
     'defaultCurrency'?: string;
 
         /**
+        * 
+        */
+    'deviceSerialNumber'?: string;
+
+        /**
         * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
         */
     'externalId'?: string;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -33,7 +38,7 @@ class PaymentTerminal {
     'identifier'?: string;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -48,12 +53,12 @@ class PaymentTerminal {
     'name'?: string;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: PaymentTerminalState;
 
@@ -63,7 +68,7 @@ class PaymentTerminal {
     'type'?: PaymentTerminalType;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -81,6 +86,12 @@ class PaymentTerminal {
         {
         "name": "defaultCurrency",
         "baseName": "defaultCurrency",
+        "type": "string"
+        },
+        
+        {
+        "name": "deviceSerialNumber",
+        "baseName": "deviceSerialNumber",
         "type": "string"
         },
         

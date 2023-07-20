@@ -4,22 +4,27 @@
 class RestCountryState {
 
         /**
-        * The code of the state identifies the state. The code is typically used within addresses. Some countries may not provide a code. For those the field is null.
+        * The state's code used within addresses.
         */
     'code'?: string;
 
         /**
-        * The country code in ISO two letter format (e.g. UK, DE, CH, US).
+        * 
+        */
+    'country'?: string;
+
+        /**
+        * The two-letter code of the state's country (ISO 3166-1 alpha-2 format).
         */
     'countryCode'?: string;
 
         /**
-        * The ID of the state corresponds to the subdivision identifier defined in ISO 3166-2. The format consists of the country code followed by a dash and a subdivision identifier.
+        * The state's code in ISO 3166-2 format.
         */
     'id'?: string;
 
         /**
-        * The name is a human readable label of the state in the language of the region.
+        * The name of the state.
         */
     'name'?: string;
 
@@ -31,6 +36,12 @@ class RestCountryState {
         {
         "name": "code",
         "baseName": "code",
+        "type": "string"
+        },
+        
+        {
+        "name": "country",
+        "baseName": "country",
         "type": "string"
         },
         

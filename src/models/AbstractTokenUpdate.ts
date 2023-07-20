@@ -19,7 +19,7 @@ class AbstractTokenUpdate {
     'enabledForOneClickPayment'?: boolean;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 

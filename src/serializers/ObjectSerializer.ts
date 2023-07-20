@@ -74,10 +74,6 @@ import { CustomerPostalAddress } from "../models/CustomerPostalAddress";
 import { CustomerPostalAddressCreate } from "../models/CustomerPostalAddressCreate";
 import { CustomersPresence } from "../models/CustomersPresence";
 import { DataCollectionType } from "../models/DataCollectionType";
-import { DatabaseTranslatedString } from "../models/DatabaseTranslatedString";
-import { DatabaseTranslatedStringCreate } from "../models/DatabaseTranslatedStringCreate";
-import { DatabaseTranslatedStringItem } from "../models/DatabaseTranslatedStringItem";
-import { DatabaseTranslatedStringItemCreate } from "../models/DatabaseTranslatedStringItemCreate";
 import { DebtCollectionCase } from "../models/DebtCollectionCase";
 import { DebtCollectionCaseDocument } from "../models/DebtCollectionCaseDocument";
 import { DebtCollectionCaseSource } from "../models/DebtCollectionCaseSource";
@@ -622,10 +618,6 @@ class ObjectSerializer {
                 "CustomerComment": CustomerComment,
                 "CustomerPostalAddress": CustomerPostalAddress,
                 "CustomerPostalAddressCreate": CustomerPostalAddressCreate,
-                "DatabaseTranslatedString": DatabaseTranslatedString,
-                "DatabaseTranslatedStringCreate": DatabaseTranslatedStringCreate,
-                "DatabaseTranslatedStringItem": DatabaseTranslatedStringItem,
-                "DatabaseTranslatedStringItemCreate": DatabaseTranslatedStringItemCreate,
                 "DebtCollectionCase": DebtCollectionCase,
                 "DebtCollectionCaseDocument": DebtCollectionCaseDocument,
                 "DebtCollectionCaseSource": DebtCollectionCaseSource,

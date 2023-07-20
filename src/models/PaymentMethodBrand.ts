@@ -4,7 +4,7 @@
 class PaymentMethodBrand {
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
@@ -14,7 +14,7 @@ class PaymentMethodBrand {
     'grayImagePath'?: string;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -24,7 +24,7 @@ class PaymentMethodBrand {
     'imagePath'?: string;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 

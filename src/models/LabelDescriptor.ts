@@ -5,42 +5,42 @@ import { LabelDescriptorCategory } from "./LabelDescriptorCategory";
 class LabelDescriptor {
 
         /**
-        * 
+        * The label's category.
         */
     'category'?: LabelDescriptorCategory;
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The features that this label belongs to.
         */
     'features'?: Array<number>;
 
         /**
-        * 
+        * The group that this label belongs to.
         */
     'group'?: number;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The type of the label's value.
         */
     'type'?: number;
 
         /**
-        * 
+        * When listing labels, they can be sorted by this number.
         */
     'weight'?: number;
 

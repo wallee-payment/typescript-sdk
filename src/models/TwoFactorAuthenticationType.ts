@@ -4,27 +4,27 @@
 class TwoFactorAuthenticationType {
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The feature that this type belongs to.
         */
     'feature'?: number;
 
         /**
-        * 
+        * The identifier of the icon representing this type.
         */
     'icon'?: string;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 

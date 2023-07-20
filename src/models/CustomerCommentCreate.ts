@@ -5,7 +5,7 @@ import { AbstractCustomerCommentActive } from "./AbstractCustomerCommentActive";
 class CustomerCommentCreate extends AbstractCustomerCommentActive {
 
         /**
-        * 
+        * The customer that the object belongs to.
         */
     'customer': number;
 

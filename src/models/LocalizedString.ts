@@ -4,17 +4,12 @@
 class LocalizedString {
 
         /**
-        * 
-        */
-    'displayName'?: string;
-
-        /**
-        * 
+        * The term's language.
         */
     'language'?: string;
 
         /**
-        * 
+        * The localized term.
         */
     'string'?: string;
 
@@ -23,12 +18,6 @@ class LocalizedString {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
-        {
-        "name": "displayName",
-        "baseName": "displayName",
-        "type": "string"
-        },
-        
         {
         "name": "language",
         "baseName": "language",

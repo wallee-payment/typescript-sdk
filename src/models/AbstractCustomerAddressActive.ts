@@ -6,12 +6,12 @@ import { CustomerPostalAddressCreate } from "./CustomerPostalAddressCreate";
 class AbstractCustomerAddressActive {
 
         /**
-        * 
+        * The actual postal address.
         */
     'address'?: CustomerPostalAddressCreate;
 
         /**
-        * 
+        * Whether the address is for billing or shipping or both.
         */
     'addressType'?: CustomerAddressType;
 

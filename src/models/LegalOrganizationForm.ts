@@ -5,27 +5,27 @@ import { LocalizedString } from "./LocalizedString";
 class LegalOrganizationForm {
 
         /**
-        * 
+        * The two-letter code of the country the legal organization form is used in (ISO 3166-1 alpha-2 format).
         */
     'country'?: string;
 
         /**
-        * 
+        * The localized descriptions of the legal organization form.
         */
     'description'?: Array<LocalizedString>;
 
         /**
-        * 
+        * The English name of the legal organization form.
         */
     'englishDescription'?: string;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The localized shortcuts of the legal organization form.
         */
     'shortcut'?: Array<LocalizedString>;
 

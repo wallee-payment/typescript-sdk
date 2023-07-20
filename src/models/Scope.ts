@@ -6,62 +6,62 @@ import { Feature } from "./Feature";
 class Scope {
 
         /**
-        * The domain name to which this scope is mapped to.
+        * The domain name that belongs to the scope.
         */
     'domainName'?: string;
 
         /**
-        * 
+        * The list of features that are active in the scope.
         */
     'features'?: Array<Feature>;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The name identifying the scope in e.g. URLs.
         */
     'machineName'?: string;
 
         /**
-        * The name of the scope is shown to the user where the user should select a scope.
+        * The name used to identify the scope.
         */
     'name'?: string;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * The port number to which this scope is mapped to.
+        * The port where the scope can be accessed.
         */
     'port'?: number;
 
         /**
-        * Define whether the scope supports SSL.
+        * Whether the scope supports SSL.
         */
     'sslActive'?: boolean;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
         /**
-        * The themes determines how the application layout, look and feel is. By providing multiple themes you can fallback to other themes.
+        * The themes that determine the look and feel of the scope's user interface. A fall-through strategy is applied when building the actual theme.
         */
     'themes'?: Array<string>;
 
         /**
-        * 
+        * The URL where the scope can be accessed.
         */
     'url'?: string;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

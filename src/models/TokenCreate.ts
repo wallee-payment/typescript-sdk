@@ -11,7 +11,7 @@ class TokenCreate extends AbstractTokenUpdate {
     'externalId': string;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

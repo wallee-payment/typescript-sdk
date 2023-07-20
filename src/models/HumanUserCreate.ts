@@ -5,7 +5,7 @@ import { AbstractHumanUserUpdate } from "./AbstractHumanUserUpdate";
 class HumanUserCreate extends AbstractHumanUserUpdate {
 
         /**
-        * The primary account links the user to a specific account.
+        * The primary account that the user belongs to.
         */
     'primaryAccount'?: number;
 

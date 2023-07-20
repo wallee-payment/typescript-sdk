@@ -5,22 +5,22 @@ import { ManualTaskActionStyle } from "./ManualTaskActionStyle";
 class ManualTaskAction {
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The action's label.
         */
     'label'?: { [key: string]: string; };
 
         /**
-        * 
+        * The action's style.
         */
     'style'?: ManualTaskActionStyle;
 
         /**
-        * 
+        * The type of manual tasks this action belongs to.
         */
     'taskType'?: number;
 

@@ -4,17 +4,22 @@
 class RestCurrency {
 
         /**
-        * The currency code identifies the currency with the three char long ISO 4217 code (e.g. USD, CHF, EUR).
+        * The currency's three-letter code (ISO 4217 format).
         */
     'currencyCode'?: string;
 
         /**
-        * The fraction digits indicates how many places the currency has. This also indicates with which precision we calculate internally when we do calculations with this currency.
+        * The currency's number of decimals. When calculating amounts in this currency, the fraction digits determine the accuracy.
         */
     'fractionDigits'?: number;
 
         /**
-        * The numeric code identifies the currency with the three digit long ISO 4217 code (e.g. 978, 756, 840).
+        * The name of the currency.
+        */
+    'name'?: string;
+
+        /**
+        * The currency's three-digit code (ISO 4217 format).
         */
     'numericCode'?: number;
 
@@ -33,6 +38,12 @@ class RestCurrency {
         "name": "fractionDigits",
         "baseName": "fractionDigits",
         "type": "number"
+        },
+        
+        {
+        "name": "name",
+        "baseName": "name",
+        "type": "string"
         },
         
         {

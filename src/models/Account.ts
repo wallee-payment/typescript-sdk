@@ -6,87 +6,87 @@ import { AccountType } from "./AccountType";
 class Account {
 
         /**
-        * Active means that this account and all accounts in the hierarchy are active.
+        * Whether this account and all its parent accounts are active.
         */
     'active'?: boolean;
 
         /**
-        * This property is true when all accounts in the hierarchy are active or restricted active.
+        * Whether this account and all its parent accounts are active or restricted active.
         */
     'activeOrRestrictedActive'?: boolean;
 
         /**
-        * The ID of the user who created this entity.
+        * The ID of the user the account was created by.
         */
     'createdBy'?: number;
 
         /**
-        * The date and time when this entity was created.
+        * The date and time when the account was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The ID of a user that deleted this entity.
+        * The ID of a user the account was deleted by.
         */
     'deletedBy'?: number;
 
         /**
-        * The date and time when this entity was deleted.
+        * The date and time when the account was deleted.
         */
     'deletedOn'?: Date;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The date and time when the object was last modified.
         */
     'lastModifiedDate'?: Date;
 
         /**
-        * The name of the account identifies the account within the administrative interface.
+        * The name used to identify the account.
         */
     'name'?: string;
 
         /**
-        * The account which is responsible for administering the account.
+        * The parent account responsible for administering this account.
         */
     'parentAccount'?: Account;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * Restricted active means that at least one account in the hierarchy is only restricted active, but all are either restricted active or active.
+        * Whether this account and all its parent accounts are active or restricted active. There is at least one account that is restricted active.
         */
     'restrictedActive'?: boolean;
 
         /**
-        * This is the scope to which the account belongs to.
+        * The scope that the account belongs to.
         */
     'scope'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: AccountState;
 
         /**
-        * This property restricts the number of subaccounts which can be created within this account.
+        * The number of sub-accounts that can be created within this account.
         */
     'subaccountLimit'?: number;
 
         /**
-        * The account type defines which role and capabilities it has.
+        * The account's type which defines its role and capabilities.
         */
     'type'?: AccountType;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

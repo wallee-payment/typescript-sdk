@@ -6,17 +6,17 @@ import { SubscriptionProductVersion } from "./SubscriptionProductVersion";
 class SubscriptionProductVersionRetirement {
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -36,7 +36,7 @@ class SubscriptionProductVersionRetirement {
     'targetProduct'?: SubscriptionProduct;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

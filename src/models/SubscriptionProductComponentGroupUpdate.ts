@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 
 
 class SubscriptionProductComponentGroupUpdate {
@@ -17,7 +16,7 @@ class SubscriptionProductComponentGroupUpdate {
         /**
         * The component group name will be shown when the components are selected. This can be visible to the subscriber.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * The component group can be optional. This means no component has to be selected by the subscriber.
@@ -54,7 +53,7 @@ class SubscriptionProductComponentGroupUpdate {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

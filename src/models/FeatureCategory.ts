@@ -4,22 +4,22 @@
 class FeatureCategory {
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * When listing feature categories, they can be sorted by this number.
         */
     'orderWeight'?: number;
 

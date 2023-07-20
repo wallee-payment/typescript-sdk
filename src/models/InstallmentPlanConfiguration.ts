@@ -1,6 +1,5 @@
 'use strict';
 import { CreationEntityState } from "./CreationEntityState";
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { ResourcePath } from "./ResourcePath";
 import { SpaceReference } from "./SpaceReference";
 import { TaxClass } from "./TaxClass";
@@ -19,7 +18,7 @@ class InstallmentPlanConfiguration {
     'conditions'?: Array<number>;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -34,7 +33,7 @@ class InstallmentPlanConfiguration {
     'interestRate'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -54,7 +53,7 @@ class InstallmentPlanConfiguration {
     'paymentMethodConfigurations'?: Array<number>;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -69,7 +68,7 @@ class InstallmentPlanConfiguration {
     'spaceReference'?: SpaceReference;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
@@ -86,10 +85,10 @@ class InstallmentPlanConfiguration {
         /**
         * The title of the installment plan is used within the payment process. The title is visible to the buyer.
         */
-    'title'?: DatabaseTranslatedString;
+    'title'?: { [key: string]: string; };
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -191,7 +190,7 @@ class InstallmentPlanConfiguration {
         {
         "name": "title",
         "baseName": "title",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

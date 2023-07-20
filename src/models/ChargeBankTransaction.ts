@@ -17,7 +17,7 @@ class ChargeBankTransaction extends TransactionAwareEntity {
     'completion'?: number;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
@@ -42,7 +42,7 @@ class ChargeBankTransaction extends TransactionAwareEntity {
     'transactionCurrencyValueAmount'?: number;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

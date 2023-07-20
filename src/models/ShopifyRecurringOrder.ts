@@ -44,7 +44,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
     'plannedExecutionDate'?: Date;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -64,7 +64,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
     'startedProcessingOn'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: ShopifyRecurringOrderState;
 

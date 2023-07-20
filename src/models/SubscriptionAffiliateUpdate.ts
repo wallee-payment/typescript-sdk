@@ -15,12 +15,12 @@ class SubscriptionAffiliateUpdate {
     'version': number;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
         /**
-        * Meta data allow to store additional data along the object.
+        * Allow to store additional information about the object.
         */
     'metaData'?: { [key: string]: string; };
 
@@ -30,7 +30,7 @@ class SubscriptionAffiliateUpdate {
     'name'?: string;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

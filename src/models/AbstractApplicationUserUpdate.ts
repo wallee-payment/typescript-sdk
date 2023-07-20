@@ -5,17 +5,17 @@ import { CreationEntityState } from "./CreationEntityState";
 class AbstractApplicationUserUpdate {
 
         /**
-        * The user name is used to identify the application user in administrative interfaces.
+        * The name used to identify the application user.
         */
     'name'?: string;
 
         /**
-        * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+        * The maximum number of API requests that are accepted every 2 minutes.
         */
     'requestLimit'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

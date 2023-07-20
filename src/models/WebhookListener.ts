@@ -7,57 +7,57 @@ import { WebhookUrl } from "./WebhookUrl";
 class WebhookListener {
 
         /**
-        * The listener listens on state changes of the entity linked with the listener.
+        * The entity that is to be monitored.
         */
     'entity'?: number;
 
         /**
-        * The target state identifies the state into which entities need to move into to trigger the webhook listener.
+        * The entity's target states that are to be monitored.
         */
     'entityStates'?: Array<string>;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The identity which will be used to sign messages sent by this listener.
+        * The identity used to sign messages.
         */
     'identity'?: WebhookIdentity;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
-        * The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the webhook listener.
         */
     'name'?: string;
 
         /**
-        * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+        * Whether every update of the entity or only state changes are to be monitored.
         */
     'notifyEveryChange'?: boolean;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
         /**
-        * The URL which is invoked by the listener to notify the application about the event.
+        * The URL where notifications about entity changes are sent to.
         */
     'url'?: WebhookUrl;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

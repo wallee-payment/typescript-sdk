@@ -5,32 +5,32 @@ import { RestAddressFormat } from "./RestAddressFormat";
 class RestCountry {
 
         /**
-        * The ISO code 2 letter identifies the country by two chars as defined in ISO 3166-1 (e.g. US, DE, CH).
+        * The country's two-letter code (ISO 3166-1 alpha-2 format).
         */
     'iSOCode2Letter'?: string;
 
         /**
-        * The ISO code 3 letter identifies the country by three chars as defined in ISO 3166-1 (e.g. CHE, USA, GBR).
+        * The country's three-letter code (ISO 3166-1 alpha-3 format).
         */
     'iSOCode3Letter'?: string;
 
         /**
-        * The address format of the country indicates how an address has to look like for the country.
+        * Specifies the country's way of formatting addresses.
         */
     'addressFormat'?: RestAddressFormat;
 
         /**
-        * The name labels the country by a name in English.
+        * The name of the country.
         */
     'name'?: string;
 
         /**
-        * The numeric code identifies the country by a three digit number as defined in ISO 3166-1 (e.g. 840, 826, 756).
+        * The country's three-digit code (ISO 3166-1 numeric format).
         */
     'numericCode'?: string;
 
         /**
-        * The state codes field is a list of all states associated with this country. The list contains the identifiers of the states. The identifiers corresponds to the ISO 3166-2 subdivision identifier.
+        * The codes of all regions (e.g. states, provinces) of the country (ISO 3166-2 format).
         */
     'stateCodes'?: Array<string>;
 

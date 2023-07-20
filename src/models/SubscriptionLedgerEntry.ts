@@ -26,7 +26,7 @@ class SubscriptionLedgerEntry {
     'createdBy'?: number;
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
@@ -41,17 +41,17 @@ class SubscriptionLedgerEntry {
     'externalId'?: string;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -61,7 +61,7 @@ class SubscriptionLedgerEntry {
     'quantity'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: SubscriptionLedgerEntryState;
 
@@ -86,7 +86,7 @@ class SubscriptionLedgerEntry {
     'title'?: string;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

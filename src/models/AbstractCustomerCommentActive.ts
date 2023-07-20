@@ -4,7 +4,7 @@
 class AbstractCustomerCommentActive {
 
         /**
-        * 
+        * The comment's actual content.
         */
     'content'?: string;
 

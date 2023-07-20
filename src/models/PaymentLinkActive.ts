@@ -6,7 +6,7 @@ import { PaymentLinkUpdate } from "./PaymentLinkUpdate";
 class PaymentLinkActive extends PaymentLinkUpdate {
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

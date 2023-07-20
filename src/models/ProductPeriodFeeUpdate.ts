@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 import { PersistableCurrencyAmountUpdate } from "./PersistableCurrencyAmountUpdate";
 
 
@@ -23,17 +22,17 @@ class ProductPeriodFeeUpdate {
         /**
         * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
         */
-    'description'?: DatabaseTranslatedStringCreate;
+    'description'?: { [key: string]: string; };
 
         /**
         * The ledger entry title will be used for the title in the ledger entry and in the invoice.
         */
-    'ledgerEntryTitle'?: DatabaseTranslatedStringCreate;
+    'ledgerEntryTitle'?: { [key: string]: string; };
 
         /**
         * The name of the fee should describe for the subscriber in few words for what the fee is for.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
@@ -71,19 +70,19 @@ class ProductPeriodFeeUpdate {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
         "name": "ledgerEntryTitle",
         "baseName": "ledgerEntryTitle",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

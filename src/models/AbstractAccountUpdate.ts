@@ -4,17 +4,17 @@
 class AbstractAccountUpdate {
 
         /**
-        * 
+        * The date and time when the object was last modified.
         */
     'lastModifiedDate'?: Date;
 
         /**
-        * The name of the account identifies the account within the administrative interface.
+        * The name used to identify the account.
         */
     'name'?: string;
 
         /**
-        * This property restricts the number of subaccounts which can be created within this account.
+        * The number of sub-accounts that can be created within this account.
         */
     'subaccountLimit'?: number;
 

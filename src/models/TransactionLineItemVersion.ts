@@ -20,7 +20,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'createdBy'?: number;
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
@@ -45,7 +45,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'labels'?: Array<Label>;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
@@ -60,7 +60,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'nextUpdateOn'?: Date;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -75,7 +75,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'spaceViewId'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: TransactionLineItemVersionState;
 
@@ -100,7 +100,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'transaction'?: Transaction;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

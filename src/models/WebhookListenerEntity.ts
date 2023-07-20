@@ -4,17 +4,17 @@
 class WebhookListenerEntity {
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * The name used to identify the webhook listener entity.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The name used to programmatically identify the webhook listener entity.
         */
     'technicalName'?: string;
 

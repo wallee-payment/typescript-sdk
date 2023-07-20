@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 import { ProductMeteredTierPricing } from "./ProductMeteredTierPricing";
 
 
@@ -23,7 +22,7 @@ class ProductMeteredFeeUpdate {
         /**
         * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
         */
-    'description'?: DatabaseTranslatedStringCreate;
+    'description'?: { [key: string]: string; };
 
         /**
         * 
@@ -33,7 +32,7 @@ class ProductMeteredFeeUpdate {
         /**
         * The name of the fee should describe for the subscriber in few words for what the fee is for.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
@@ -66,7 +65,7 @@ class ProductMeteredFeeUpdate {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -78,7 +77,7 @@ class ProductMeteredFeeUpdate {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

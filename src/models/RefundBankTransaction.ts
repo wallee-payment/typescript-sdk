@@ -12,7 +12,7 @@ class RefundBankTransaction extends TransactionAwareEntity {
     'bankTransaction'?: BankTransaction;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
@@ -37,7 +37,7 @@ class RefundBankTransaction extends TransactionAwareEntity {
     'spaceViewId'?: number;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

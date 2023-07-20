@@ -4,7 +4,7 @@
 class AbstractTransactionCommentActive {
 
         /**
-        * 
+        * The comment's actual content.
         */
     'content'?: string;
 

@@ -5,22 +5,22 @@ import { CreationEntityState } from "./CreationEntityState";
 class AbstractWebhookListenerUpdate {
 
         /**
-        * The target state identifies the state into which entities need to move into to trigger the webhook listener.
+        * The entity's target states that are to be monitored.
         */
     'entityStates'?: Array<string>;
 
         /**
-        * The webhook listener name is used internally to identify the webhook listener in administrative interfaces.For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the webhook listener.
         */
     'name'?: string;
 
         /**
-        * Defines whether the webhook listener is to be informed about every change made to the entity in contrast to state transitions only.
+        * Whether every update of the entity or only state changes are to be monitored.
         */
     'notifyEveryChange'?: boolean;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

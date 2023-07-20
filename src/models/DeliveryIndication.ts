@@ -23,7 +23,7 @@ class DeliveryIndication extends TransactionAwareEntity {
     'completion'?: number;
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
@@ -43,12 +43,12 @@ class DeliveryIndication extends TransactionAwareEntity {
     'manuallyDecidedOn'?: Date;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: DeliveryIndicationState;
 

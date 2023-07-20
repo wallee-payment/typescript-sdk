@@ -35,7 +35,7 @@ class AbstractSubscriberUpdate {
     'language'?: string;
 
         /**
-        * Meta data allow to store additional data along the object.
+        * Allow to store additional information about the object.
         */
     'metaData'?: { [key: string]: string; };
 

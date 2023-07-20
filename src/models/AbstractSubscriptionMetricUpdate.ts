@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 
 
 class AbstractSubscriptionMetricUpdate {
@@ -7,12 +6,12 @@ class AbstractSubscriptionMetricUpdate {
         /**
         * 
         */
-    'description'?: DatabaseTranslatedStringCreate;
+    'description'?: { [key: string]: string; };
 
         /**
         * 
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
 
     static discriminator: string | undefined = undefined;
@@ -22,13 +21,13 @@ class AbstractSubscriptionMetricUpdate {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         }        
     ];
 

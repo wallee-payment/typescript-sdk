@@ -5,52 +5,47 @@ import { ManualTaskState } from "./ManualTaskState";
 class ManualTask {
 
         /**
-        * 
+        * The actions that can be triggered to handle the manual task.
         */
     'actions'?: Array<number>;
 
         /**
-        * The context entity ID links the manual task to the entity which caused its creation.
+        * The ID of the entity the manual task is linked to.
         */
     'contextEntityId'?: number;
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The expiry date indicates until when the manual task has to be executed.
+        * The date and time until when the manual task has to be handled.
         */
     'expiresOn'?: Date;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
-        */
-    'spaceId'?: number;
-
-        /**
-        * 
+        * The object's current state.
         */
     'state'?: ManualTaskState;
 
         /**
-        * The type categorizes the manual task.
+        * The manual task's type.
         */
     'type'?: number;
 
@@ -99,12 +94,6 @@ class ManualTask {
         "name": "plannedPurgeDate",
         "baseName": "plannedPurgeDate",
         "type": "Date"
-        },
-        
-        {
-        "name": "spaceId",
-        "baseName": "spaceId",
-        "type": "number"
         },
         
         {

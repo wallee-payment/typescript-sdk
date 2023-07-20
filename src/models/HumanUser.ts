@@ -1,68 +1,66 @@
 'use strict';
-import { Account } from "./Account";
-import { Scope } from "./Scope";
 import { TwoFactorAuthenticationType } from "./TwoFactorAuthenticationType";
 
 
 class HumanUser {
 
         /**
-        * The email address of the user.
+        * The user's email address.
         */
     'emailAddress'?: string;
 
         /**
-        * Defines whether a user is verified or not.
+        * Whether the user's email address has been verified.
         */
     'emailAddressVerified'?: boolean;
 
         /**
-        * The first name of the user.
+        * The user's first name.
         */
     'firstname'?: string;
 
         /**
-        * The preferred language of the user.
+        * The user's preferred language.
         */
     'language'?: string;
 
         /**
-        * The last name of the user.
+        * The user's last name.
         */
     'lastname'?: string;
 
         /**
-        * 
+        * The user's mobile phone number.
         */
     'mobilePhoneNumber'?: string;
 
         /**
-        * Defines whether a users mobile phone number is verified or not.
+        * Whether the user's mobile phone number has been verified.
         */
     'mobilePhoneVerified'?: boolean;
 
         /**
-        * The primary account links the user to a specific account.
+        * The primary account that the user belongs to.
         */
-    'primaryAccount'?: Account;
+    'primaryAccount'?: number;
 
         /**
-        * The scope to which the user belongs to.
+        * The scope that the user belongs to.
         */
-    'scope'?: Scope;
+    'scope'?: number;
 
         /**
-        * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+        * The user's time zone. If none is specified, the one provided by the browser will be used.
         */
     'timeZone'?: string;
 
         /**
-        * Defines whether two-factor authentication is enabled for this user.
+        * Whether two-factor authentication is enabled for this user.
         */
     'twoFactorEnabled'?: boolean;
 
         /**
-        * 
+        * The type of two-factor authentication that is enabled for the user.
         */
     'twoFactorType'?: TwoFactorAuthenticationType;
 
@@ -116,13 +114,13 @@ class HumanUser {
         {
         "name": "primaryAccount",
         "baseName": "primaryAccount",
-        "type": "Account"
+        "type": "number"
         },
         
         {
         "name": "scope",
         "baseName": "scope",
-        "type": "Scope"
+        "type": "number"
         },
         
         {

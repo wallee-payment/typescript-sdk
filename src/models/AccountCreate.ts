@@ -5,12 +5,12 @@ import { AbstractAccountUpdate } from "./AbstractAccountUpdate";
 class AccountCreate extends AbstractAccountUpdate {
 
         /**
-        * The account which is responsible for administering the account.
+        * The parent account responsible for administering this account.
         */
     'parentAccount'?: number;
 
         /**
-        * This is the scope to which the account belongs to.
+        * The scope that the account belongs to.
         */
     'scope': number;
 

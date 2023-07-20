@@ -5,7 +5,7 @@ import { AbstractApplicationUserUpdate } from "./AbstractApplicationUserUpdate";
 class ApplicationUserCreate extends AbstractApplicationUserUpdate {
 
         /**
-        * The account that this user is associated with. The account owner will be able to manage this user.
+        * The primary account that the user belongs to.
         */
     'primaryAccount': number;
 

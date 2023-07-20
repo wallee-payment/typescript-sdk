@@ -4,7 +4,7 @@
 class AbstractRefundCommentActive {
 
         /**
-        * 
+        * The comment's actual content.
         */
     'content'?: string;
 

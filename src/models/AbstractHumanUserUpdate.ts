@@ -5,42 +5,42 @@ import { CreationEntityState } from "./CreationEntityState";
 class AbstractHumanUserUpdate {
 
         /**
-        * The email address of the user.
+        * The user's email address.
         */
     'emailAddress'?: string;
 
         /**
-        * The first name of the user.
+        * The user's first name.
         */
     'firstname'?: string;
 
         /**
-        * The preferred language of the user.
+        * The user's preferred language.
         */
     'language'?: string;
 
         /**
-        * The last name of the user.
+        * The user's last name.
         */
     'lastname'?: string;
 
         /**
-        * 
+        * The user's mobile phone number.
         */
     'mobilePhoneNumber'?: string;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
         /**
-        * The time zone which is applied for the user. If no timezone is specified the browser is used to determine an appropriate time zone.
+        * The user's time zone. If none is specified, the one provided by the browser will be used.
         */
     'timeZone'?: string;
 
         /**
-        * Defines whether two-factor authentication is enabled for this user.
+        * Whether two-factor authentication is enabled for this user.
         */
     'twoFactorEnabled'?: boolean;
 

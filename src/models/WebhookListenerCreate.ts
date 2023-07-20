@@ -5,17 +5,17 @@ import { AbstractWebhookListenerUpdate } from "./AbstractWebhookListenerUpdate";
 class WebhookListenerCreate extends AbstractWebhookListenerUpdate {
 
         /**
-        * The listener listens on state changes of the entity linked with the listener.
+        * The entity that is to be monitored.
         */
     'entity': number;
 
         /**
-        * The identity which will be used to sign messages sent by this listener.
+        * The identity used to sign messages.
         */
     'identity'?: number;
 
         /**
-        * The URL which is invoked by the listener to notify the application about the event.
+        * The URL where notifications about entity changes are sent to.
         */
     'url': number;
 

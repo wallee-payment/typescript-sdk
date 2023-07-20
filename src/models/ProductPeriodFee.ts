@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { PersistableCurrencyAmount } from "./PersistableCurrencyAmount";
 import { ProductFeeType } from "./ProductFeeType";
 import { SubscriptionProductComponent } from "./SubscriptionProductComponent";
@@ -15,27 +14,27 @@ class ProductPeriodFee {
         /**
         * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
         */
-    'description'?: DatabaseTranslatedString;
+    'description'?: { [key: string]: string; };
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
         * The ledger entry title will be used for the title in the ledger entry and in the invoice.
         */
-    'ledgerEntryTitle'?: DatabaseTranslatedString;
+    'ledgerEntryTitle'?: { [key: string]: string; };
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
         * The name of the fee should describe for the subscriber in few words for what the fee is for.
         */
-    'name'?: DatabaseTranslatedString;
+    'name'?: { [key: string]: string; };
 
         /**
         * The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
@@ -53,7 +52,7 @@ class ProductPeriodFee {
     'type'?: ProductFeeType;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -71,7 +70,7 @@ class ProductPeriodFee {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -83,7 +82,7 @@ class ProductPeriodFee {
         {
         "name": "ledgerEntryTitle",
         "baseName": "ledgerEntryTitle",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -95,7 +94,7 @@ class ProductPeriodFee {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

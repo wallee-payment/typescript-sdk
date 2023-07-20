@@ -1,7 +1,6 @@
 'use strict';
 import { CreationEntityState } from "./CreationEntityState";
 import { DataCollectionType } from "./DataCollectionType";
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { OneClickPaymentMode } from "./OneClickPaymentMode";
 import { ResourcePath } from "./ResourcePath";
 
@@ -16,10 +15,10 @@ class PaymentMethodConfiguration {
         /**
         * The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
         */
-    'description'?: DatabaseTranslatedString;
+    'description'?: { [key: string]: string; };
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -29,7 +28,7 @@ class PaymentMethodConfiguration {
     'imageResourcePath'?: ResourcePath;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -49,7 +48,7 @@ class PaymentMethodConfiguration {
     'paymentMethod'?: number;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -79,17 +78,17 @@ class PaymentMethodConfiguration {
     'spaceId'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
         /**
         * The title of the payment method configuration is used within the payment process. The title is visible to the customer.
         */
-    'title'?: DatabaseTranslatedString;
+    'title'?: { [key: string]: string; };
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -107,7 +106,7 @@ class PaymentMethodConfiguration {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -191,7 +190,7 @@ class PaymentMethodConfiguration {
         {
         "name": "title",
         "baseName": "title",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

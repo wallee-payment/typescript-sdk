@@ -4,42 +4,42 @@
 class TransactionComment {
 
         /**
-        * 
+        * The comment's actual content.
         */
     'content'?: string;
 
         /**
-        * 
+        * The ID of the user the comment was created by.
         */
     'createdBy'?: number;
 
         /**
-        * The created on date indicates the date on which the entity was stored into the database.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
         /**
-        * 
+        * The ID of the user the comment was last updated by.
         */
     'editedBy'?: number;
 
         /**
-        * The date on which the comment was last edited.
+        * The date and time when the comment was last updated.
         */
     'editedOn'?: Date;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * Whether the comment is pinned to the top.
         */
     'pinned'?: boolean;
 
@@ -49,7 +49,7 @@ class TransactionComment {
     'transaction'?: number;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

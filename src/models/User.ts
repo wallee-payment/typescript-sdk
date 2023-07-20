@@ -1,38 +1,37 @@
 'use strict';
 import { CreationEntityState } from "./CreationEntityState";
-import { Scope } from "./Scope";
 import { UserType } from "./UserType";
 
 
 class User {
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The scope that the user belongs to.
         */
-    'scope'?: Scope;
+    'scope'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 
         /**
-        * 
+        * The user's type which defines its role and capabilities.
         */
     'userType'?: UserType;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -56,7 +55,7 @@ class User {
         {
         "name": "scope",
         "baseName": "scope",
-        "type": "Scope"
+        "type": "number"
         },
         
         {

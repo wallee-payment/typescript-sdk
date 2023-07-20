@@ -5,102 +5,102 @@ import { Gender } from "./Gender";
 class CustomerPostalAddressCreate {
 
         /**
-        * 
+        * The city, town or village.
         */
     'city'?: string;
 
         /**
-        * 
+        * The commercial registration number of the organization.
         */
     'commercialRegisterNumber'?: string;
 
         /**
-        * 
+        * The two-letter country code (ISO 3166 format).
         */
     'country'?: string;
 
         /**
-        * 
+        * The date of birth.
         */
     'dateOfBirth'?: string;
 
         /**
-        * 
+        * The dependent locality which is a sub-division of the state.
         */
     'dependentLocality'?: string;
 
         /**
-        * 
+        * The email address.
         */
     'emailAddress'?: string;
 
         /**
-        * 
+        * The family or last name.
         */
     'familyName'?: string;
 
         /**
-        * 
+        * The gender.
         */
     'gender'?: Gender;
 
         /**
-        * 
+        * The given or first name.
         */
     'givenName'?: string;
 
         /**
-        * 
+        * The legal form of the organization.
         */
     'legalOrganizationForm'?: number;
 
         /**
-        * 
+        * The phone number of a mobile phone.
         */
     'mobilePhoneNumber'?: string;
 
         /**
-        * 
+        * The organization's name.
         */
     'organizationName'?: string;
 
         /**
-        * 
+        * The phone number.
         */
     'phoneNumber'?: string;
 
         /**
-        * 
+        * The name of the region, typically a state, county, province or prefecture.
         */
     'postalState'?: string;
 
         /**
-        * 
+        * The postal code, also known as ZIP, postcode, etc.
         */
     'postcode'?: string;
 
         /**
-        * 
+        * The sales tax number of the organization.
         */
     'salesTaxNumber'?: string;
 
         /**
-        * 
+        * The salutation e.g. Mrs, Mr, Dr.
         */
     'salutation'?: string;
 
         /**
-        * 
+        * The social security number.
         */
     'socialSecurityNumber'?: string;
 
         /**
-        * The sorting code identifies the post office at which the post box is located in.
+        * The sorting code identifying the post office where the PO Box is located.
         */
     'sortingCode'?: string;
 
         /**
-        * 
+        * The street or PO Box.
         */
     'street'?: string;
 

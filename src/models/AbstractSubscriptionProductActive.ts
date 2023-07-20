@@ -30,7 +30,7 @@ class AbstractSubscriptionProductActive {
     'sortOrder'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: SubscriptionProductState;
 

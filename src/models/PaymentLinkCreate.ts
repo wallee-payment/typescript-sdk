@@ -7,7 +7,7 @@ import { PaymentLinkProtectionMode } from "./PaymentLinkProtectionMode";
 class PaymentLinkCreate extends AbstractPaymentLinkUpdate {
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

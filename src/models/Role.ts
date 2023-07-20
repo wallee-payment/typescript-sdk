@@ -1,6 +1,5 @@
 'use strict';
 import { Account } from "./Account";
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { Permission } from "./Permission";
 import { RoleState } from "./RoleState";
 
@@ -8,42 +7,42 @@ import { RoleState } from "./RoleState";
 class Role {
 
         /**
-        * The account to which this role belongs to. This role can only be assigned within the assigned account and the sub accounts of the assigned account.
+        * The account the role belongs to. The role can only be assigned within this account.
         */
     'account'?: Account;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * The name of this role is used to identify the role within administrative interfaces.
+        * The name used to identify the role.
         */
-    'name'?: DatabaseTranslatedString;
+    'name'?: { [key: string]: string; };
 
         /**
-        * Set of permissions that are granted to this role.
+        * The permissions granted to users with this role.
         */
     'permissions'?: Array<Permission>;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: RoleState;
 
         /**
-        * Defines whether having been granted this role will force a user to use two-factor authentication.
+        * Whether users with this role are required to use two-factor authentication.
         */
     'twoFactorRequired'?: boolean;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -67,7 +66,7 @@ class Role {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

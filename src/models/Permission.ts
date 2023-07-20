@@ -4,52 +4,52 @@
 class Permission {
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The feature that this permission belongs to.
         */
     'feature'?: number;
 
         /**
-        * 
+        * Whether this is a permission group.
         */
     'group'?: boolean;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
         /**
-        * 
+        * Whether this is a leaf in the tree of permissions, and not a group.
         */
     'leaf'?: boolean;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The group that this permission belongs to.
         */
     'parent'?: number;
 
         /**
-        * 
+        * All parents of this permission up to the root of the permission tree.
         */
     'pathToRoot'?: Array<number>;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'title'?: { [key: string]: string; };
 
         /**
-        * 
+        * Whether users with this permission are required to enable two-factor authentication.
         */
     'twoFactorRequired'?: boolean;
 

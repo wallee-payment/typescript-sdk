@@ -6,7 +6,7 @@ import { CreationEntityState } from "./CreationEntityState";
 class SubscriberCreate extends AbstractSubscriberUpdate {
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: CreationEntityState;
 

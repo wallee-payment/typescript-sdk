@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 import { SubscriptionProductVersionState } from "./SubscriptionProductVersionState";
 import { TaxCalculation } from "./TaxCalculation";
 
@@ -44,7 +43,7 @@ class SubscriptionProductVersionPending {
         /**
         * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
@@ -57,7 +56,7 @@ class SubscriptionProductVersionPending {
     'product'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: SubscriptionProductVersionState;
 
@@ -116,7 +115,7 @@ class SubscriptionProductVersionPending {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

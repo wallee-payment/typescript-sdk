@@ -4,32 +4,37 @@
 class RestLanguage {
 
         /**
-        * The country code represents the region of the language as a 2 letter ISO code.
+        * The two-letter code of the language's region (ISO 3166-1 alpha-2 format).
         */
     'countryCode'?: string;
 
         /**
-        * The IETF code represents the language as the two letter ISO code including the region (e.g. en-US).
+        * The language's IETF tag consisting of the two-letter ISO code and region e.g. en-US, de-CH.
         */
     'ietfCode'?: string;
 
         /**
-        * The ISO 2 letter code represents the language with two letters.
+        * The language's two-letter code (ISO 639-1 format).
         */
     'iso2Code'?: string;
 
         /**
-        * The ISO 3 letter code represents the language with three letters.
+        * The language's three-letter code (ISO 639-2/T format).
         */
     'iso3Code'?: string;
 
         /**
-        * The plural expression defines how to map a plural into the language index. This expression is used to determine the plural form for the translations.
+        * The name of the language.
+        */
+    'name'?: string;
+
+        /**
+        * The expression to determine the plural index for a given number of items used to find the proper plural form for translations.
         */
     'pluralExpression'?: string;
 
         /**
-        * The primary language of a group indicates whether a language is the primary language of a group of languages. The group is determine by the ISO 2 letter code.
+        * Whether this is the primary language in a group of languages.
         */
     'primaryOfGroup'?: boolean;
 
@@ -59,6 +64,12 @@ class RestLanguage {
         {
         "name": "iso3Code",
         "baseName": "iso3Code",
+        "type": "string"
+        },
+        
+        {
+        "name": "name",
+        "baseName": "name",
         "type": "string"
         },
         

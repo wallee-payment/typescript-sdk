@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 
 
 class SubscriptionProductComponentUpdate {
@@ -32,7 +31,7 @@ class SubscriptionProductComponentUpdate {
         /**
         * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
         */
-    'description'?: DatabaseTranslatedStringCreate;
+    'description'?: { [key: string]: string; };
 
         /**
         * The maximum quantity defines the maximum value which must be entered for the quantity.
@@ -47,7 +46,7 @@ class SubscriptionProductComponentUpdate {
         /**
         * The component name is shown to the subscriber. It should describe in few words what the component does contain.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * The quantity step defines at which interval the quantity can be increased.
@@ -107,7 +106,7 @@ class SubscriptionProductComponentUpdate {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
@@ -125,7 +124,7 @@ class SubscriptionProductComponentUpdate {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

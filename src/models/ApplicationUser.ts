@@ -1,22 +1,21 @@
 'use strict';
-import { Account } from "./Account";
 import { User } from "./User";
 
 
 class ApplicationUser extends User {
 
         /**
-        * The user name is used to identify the application user in administrative interfaces.
+        * The name used to identify the application user.
         */
     'name'?: string;
 
         /**
-        * The account that this user is associated with. The account owner will be able to manage this user.
+        * The primary account that the user belongs to.
         */
-    'primaryAccount'?: Account;
+    'primaryAccount'?: number;
 
         /**
-        * The request limit defines the maximum number of API request accepted within 2 minutes. This limit can only be changed with special privileges.
+        * The maximum number of API requests that are accepted every 2 minutes.
         */
     'requestLimit'?: number;
 
@@ -34,7 +33,7 @@ class ApplicationUser extends User {
         {
         "name": "primaryAccount",
         "baseName": "primaryAccount",
-        "type": "Account"
+        "type": "number"
         },
         
         {

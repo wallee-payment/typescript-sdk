@@ -5,7 +5,7 @@ import { AbstractSpaceUpdate } from "./AbstractSpaceUpdate";
 class SpaceCreate extends AbstractSpaceUpdate {
 
         /**
-        * The account to which the space belongs to.
+        * The account that the space belongs to.
         */
     'account': number;
 

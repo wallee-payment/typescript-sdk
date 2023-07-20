@@ -53,7 +53,7 @@ class AbstractTransactionPending {
     'invoiceMerchantReference'?: string;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
@@ -68,7 +68,7 @@ class AbstractTransactionPending {
     'merchantReference'?: string;
 
         /**
-        * Meta data allow to store additional data along the object.
+        * Allow to store additional information about the object.
         */
     'metaData'?: { [key: string]: string; };
 

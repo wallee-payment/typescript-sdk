@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedString } from "./DatabaseTranslatedString";
 import { SubscriptionProduct } from "./SubscriptionProduct";
 import { SubscriptionProductVersionState } from "./SubscriptionProductVersionState";
 import { TaxCalculation } from "./TaxCalculation";
@@ -38,7 +37,7 @@ class SubscriptionProductVersion {
     'enabledCurrencies'?: Array<string>;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -48,7 +47,7 @@ class SubscriptionProductVersion {
     'incrementNumber'?: number;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -60,7 +59,7 @@ class SubscriptionProductVersion {
         /**
         * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
         */
-    'name'?: DatabaseTranslatedString;
+    'name'?: { [key: string]: string; };
 
         /**
         * The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
@@ -73,7 +72,7 @@ class SubscriptionProductVersion {
     'obsoletedOn'?: Date;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -98,7 +97,7 @@ class SubscriptionProductVersion {
     'retiringStartedOn'?: Date;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: SubscriptionProductVersionState;
 
@@ -108,7 +107,7 @@ class SubscriptionProductVersion {
     'taxCalculation'?: TaxCalculation;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
@@ -180,7 +179,7 @@ class SubscriptionProductVersion {
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedString"
+        "type": "{ [key: string]: string; }"
         },
         
         {

@@ -1,5 +1,4 @@
 'use strict';
-import { DatabaseTranslatedStringCreate } from "./DatabaseTranslatedStringCreate";
 import { PersistableCurrencyAmountUpdate } from "./PersistableCurrencyAmountUpdate";
 
 
@@ -23,12 +22,12 @@ class ProductSetupFeeUpdate {
         /**
         * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
         */
-    'description'?: DatabaseTranslatedStringCreate;
+    'description'?: { [key: string]: string; };
 
         /**
         * The name of the fee should describe for the subscriber in few words for what the fee is for.
         */
-    'name'?: DatabaseTranslatedStringCreate;
+    'name'?: { [key: string]: string; };
 
         /**
         * When the subscription is changed and the change is considered as a downgrade the amount defined by this property will be credited to the subscriber.
@@ -71,13 +70,13 @@ class ProductSetupFeeUpdate {
         {
         "name": "description",
         "baseName": "description",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {
         "name": "name",
         "baseName": "name",
-        "type": "DatabaseTranslatedStringCreate"
+        "type": "{ [key: string]: string; }"
         },
         
         {

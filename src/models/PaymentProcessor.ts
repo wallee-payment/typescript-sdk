@@ -9,7 +9,7 @@ class PaymentProcessor {
     'companyName'?: { [key: string]: string; };
 
         /**
-        * 
+        * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
 
@@ -24,7 +24,7 @@ class PaymentProcessor {
     'headquartersLocation'?: { [key: string]: string; };
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -34,7 +34,7 @@ class PaymentProcessor {
     'logoPath'?: string;
 
         /**
-        * 
+        * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
 

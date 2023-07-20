@@ -73,10 +73,6 @@ import { CustomerPostalAddress as CustomerPostalAddressModelImport } from "./src
 import { CustomerPostalAddressCreate as CustomerPostalAddressCreateModelImport } from "./src/models/CustomerPostalAddressCreate";
 import { CustomersPresence as CustomersPresenceModelImport } from "./src/models/CustomersPresence";
 import { DataCollectionType as DataCollectionTypeModelImport } from "./src/models/DataCollectionType";
-import { DatabaseTranslatedString as DatabaseTranslatedStringModelImport } from "./src/models/DatabaseTranslatedString";
-import { DatabaseTranslatedStringCreate as DatabaseTranslatedStringCreateModelImport } from "./src/models/DatabaseTranslatedStringCreate";
-import { DatabaseTranslatedStringItem as DatabaseTranslatedStringItemModelImport } from "./src/models/DatabaseTranslatedStringItem";
-import { DatabaseTranslatedStringItemCreate as DatabaseTranslatedStringItemCreateModelImport } from "./src/models/DatabaseTranslatedStringItemCreate";
 import { DebtCollectionCase as DebtCollectionCaseModelImport } from "./src/models/DebtCollectionCase";
 import { DebtCollectionCaseDocument as DebtCollectionCaseDocumentModelImport } from "./src/models/DebtCollectionCaseDocument";
 import { DebtCollectionCaseSource as DebtCollectionCaseSourceModelImport } from "./src/models/DebtCollectionCaseSource";
@@ -700,14 +696,6 @@ export namespace Wallee {
         export const CustomersPresence = CustomersPresenceModelImport;
         export type DataCollectionType = DataCollectionTypeModelImport;
         export const DataCollectionType = DataCollectionTypeModelImport;
-        export type DatabaseTranslatedString = DatabaseTranslatedStringModelImport;
-        export const DatabaseTranslatedString = DatabaseTranslatedStringModelImport;
-        export type DatabaseTranslatedStringCreate = DatabaseTranslatedStringCreateModelImport;
-        export const DatabaseTranslatedStringCreate = DatabaseTranslatedStringCreateModelImport;
-        export type DatabaseTranslatedStringItem = DatabaseTranslatedStringItemModelImport;
-        export const DatabaseTranslatedStringItem = DatabaseTranslatedStringItemModelImport;
-        export type DatabaseTranslatedStringItemCreate = DatabaseTranslatedStringItemCreateModelImport;
-        export const DatabaseTranslatedStringItemCreate = DatabaseTranslatedStringItemCreateModelImport;
         export type DebtCollectionCase = DebtCollectionCaseModelImport;
         export const DebtCollectionCase = DebtCollectionCaseModelImport;
         export type DebtCollectionCaseDocument = DebtCollectionCaseDocumentModelImport;

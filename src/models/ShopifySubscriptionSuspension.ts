@@ -28,7 +28,7 @@ class ShopifySubscriptionSuspension {
     'endedOn'?: Date;
 
         /**
-        * The ID is the primary key of the entity. The ID identifies the entity uniquely.
+        * A unique identifier for the object.
         */
     'id'?: number;
 
@@ -38,7 +38,7 @@ class ShopifySubscriptionSuspension {
     'initiator'?: ShopifySubscriptionSuspensionInitiator;
 
         /**
-        * The linked space id holds the ID of the space to which the entity belongs to.
+        * The ID of the space this object belongs to.
         */
     'linkedSpaceId'?: number;
 
@@ -53,7 +53,7 @@ class ShopifySubscriptionSuspension {
     'shop'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: ShopifySubscriptionSuspensionState;
 
@@ -68,7 +68,7 @@ class ShopifySubscriptionSuspension {
     'type'?: ShopifySubscriptionSuspensionType;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 

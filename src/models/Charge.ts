@@ -19,12 +19,12 @@ class Charge extends TransactionAwareEntity {
     'failureReason'?: FailureReason;
 
         /**
-        * 
+        * The language that is linked to the object.
         */
     'language'?: string;
 
         /**
-        * The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
@@ -34,7 +34,7 @@ class Charge extends TransactionAwareEntity {
     'spaceViewId'?: number;
 
         /**
-        * 
+        * The object's current state.
         */
     'state'?: ChargeState;
 
@@ -64,7 +64,7 @@ class Charge extends TransactionAwareEntity {
     'userFailureMessage'?: string;
 
         /**
-        * The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+        * The version is used for optimistic locking and incremented whenever the object is updated.
         */
     'version'?: number;
 
