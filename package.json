@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
@@ -11,10 +11,11 @@
     "bugs": {
         "url": "http://github.com/wallee-payment/typescript-sdk/issues"
     },
-    "main": "index.js",
-    "types": "index.d.ts",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "files": ["/build", "LICENSE", "README.MD"],
     "scripts": {
-        "clean": "rm -Rf ./node_modules/ ./src/**/*.js ./test/*.d.ts ./test/*.js",
+        "clean": "rm -Rf ./node_modules/ ./build ./test/*.d.ts ./test/*.js",
         "build": "tsc --project ./tsconfig.json",
         "test": "rm -fr ./test/*.d.ts && mocha --require ts-node/register --timeout 10000 test/*.ts test/*.js",
         "prepublishOnly": "npm run clean && npm i && npm run build"
@@ -23,24 +24,24 @@
     "license": "Apache-2.0",
     "keywords": ["wallee", "Payment", "Payment Integration"],
     "dependencies": {
-        "bluebird": "^3.5.0",
-        "crypto-js": "^3.1.8",
-        "request": "^2.81.0",
         "@types/bluebird": "3.5.36",
         "@types/crypto-js": "4.1.1",
-        "@types/request": "2.48.8"
+        "@types/request": "2.48.8",
+        "bluebird": "3.5.0",
+        "crypto-js": "3.1.8",
+        "request": "2.88.2"
     },
     "devDependencies": {
         "@types/chai": "^4.2.1",
         "@types/mocha": "^5.2.7",
-        "chai": "^4.2.0",
-        "form-data": "^2.5.1",
-		"minimist": "^1.2.5",
-        "mocha": "^6.2.0",
-        "ts-node": "^8.3.0",
-        "typescript": "^3.5.1"
+        "chai": "^4.3.7",
+        "form-data": "^4.0.0",
+        "minimist": "^1.2.8",
+        "mocha": "^10.2.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
     },
-    "publishConfig":{
+    "publishConfig": {
         "access": "public"
     }
 }

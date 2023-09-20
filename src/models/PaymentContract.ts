@@ -49,6 +49,11 @@ class PaymentContract {
     'id'?: number;
 
         /**
+        * The date and time when the object was last modified.
+        */
+    'lastModifiedDate'?: Date;
+
+        /**
         * 
         */
     'rejectedOn'?: Date;
@@ -134,6 +139,12 @@ class PaymentContract {
         "name": "id",
         "baseName": "id",
         "type": "number"
+        },
+        
+        {
+        "name": "lastModifiedDate",
+        "baseName": "lastModifiedDate",
+        "type": "Date"
         },
         
         {
