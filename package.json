@@ -28,7 +28,7 @@
         "@types/crypto-js": "4.1.1",
         "@types/request": "2.48.8",
         "bluebird": "3.5.0",
-        "crypto-js": "3.2.1",
+        "crypto-js": "4.2.0",
         "request": "2.88.2"
     },
     "devDependencies": {
