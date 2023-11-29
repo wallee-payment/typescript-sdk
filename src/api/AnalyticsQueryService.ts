@@ -97,10 +97,15 @@ class AnalyticsQueryService {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -207,10 +212,15 @@ class AnalyticsQueryService {
             localVarQueryParameters['nextToken'] = ObjectSerializer.serialize(nextToken, "string");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -307,10 +317,15 @@ class AnalyticsQueryService {
             localVarQueryParameters['timeout'] = ObjectSerializer.serialize(timeout, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -392,10 +407,15 @@ class AnalyticsQueryService {
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -487,10 +507,15 @@ class AnalyticsQueryService {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -578,10 +603,15 @@ class AnalyticsQueryService {
                 throw new Error('Required parameter query was null or undefined when calling submitQuery.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

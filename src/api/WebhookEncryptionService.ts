@@ -10,8 +10,9 @@ import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
 import { ClientError } from  '../models/ClientError';
 import { ServerError } from  '../models/ServerError';
+import { WebhookEncryptionPublicKey } from  '../models/WebhookEncryptionPublicKey';
 
-class TransactionLightboxService {
+class WebhookEncryptionService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
@@ -73,40 +74,30 @@ class TransactionLightboxService {
     }
 
     /**
-    * This operation creates the URL which can be used to embed the JavaScript for handling the Lightbox checkout flow.
-    * @summary Build JavaScript URL
-    * @param spaceId 
-    * @param id The id of the transaction which should be returned.
+    * Reads the entity with the given 'id' and returns it.
+    * @summary Read
+    * @param id The ID of the key version.
     * @param {*} [options] Override http request options.
     */
-    public javascriptUrl (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = '/transaction-lightbox/javascript-url';
+    public read (id: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: WebhookEncryptionPublicKey;  }> {
+        const localVarPath = '/webhook-encryption/read';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling javascriptUrl.');
-            }
-
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling javascriptUrl.');
+                throw new Error('Required parameter id was null or undefined when calling read.');
             }
 
-        if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
-        }
-
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "string");
         }
 
 
         // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
+            localVarHeaderParams['Content-Type'] = '*/*';
 
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
@@ -141,14 +132,14 @@ class TransactionLightboxService {
                 localVarRequestOptions.form = localVarFormParams;
             }
         }
-        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: WebhookEncryptionPublicKey;  }>((resolve, reject) => {
             localVarRequest(localVarRequestOptions, (error, response, body) => {
                 if (error) {
                     return reject(error);
                 } else {
                     if (response.statusCode){
                         if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "string");
+                            body = ObjectSerializer.deserialize(body, "WebhookEncryptionPublicKey");
                             return resolve({ response: response, body: body });
                         } else {
                             let errorObject: ClientError | ServerError;
@@ -184,4 +175,4 @@ class TransactionLightboxService {
     }
 }
 
-export { TransactionLightboxService }
+export { WebhookEncryptionService }

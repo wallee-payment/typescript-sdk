@@ -362,6 +362,7 @@ import { UserType as UserTypeModelImport } from "./src/models/UserType";
 import { WalletType as WalletTypeModelImport } from "./src/models/WalletType";
 import { WebAppConfirmationRequest as WebAppConfirmationRequestModelImport } from "./src/models/WebAppConfirmationRequest";
 import { WebAppConfirmationResponse as WebAppConfirmationResponseModelImport } from "./src/models/WebAppConfirmationResponse";
+import { WebhookEncryptionPublicKey as WebhookEncryptionPublicKeyModelImport } from "./src/models/WebhookEncryptionPublicKey";
 import { WebhookIdentity as WebhookIdentityModelImport } from "./src/models/WebhookIdentity";
 import { WebhookListener as WebhookListenerModelImport } from "./src/models/WebhookListener";
 import { WebhookListenerEntity as WebhookListenerEntityModelImport } from "./src/models/WebhookListenerEntity";
@@ -540,6 +541,7 @@ import { TransactionVoidService as TransactionVoidServiceApiImport } from "./src
 import { UserAccountRoleService as UserAccountRoleServiceApiImport } from "./src/api/UserAccountRoleService";
 import { UserSpaceRoleService as UserSpaceRoleServiceApiImport } from "./src/api/UserSpaceRoleService";
 import { WebAppService as WebAppServiceApiImport } from "./src/api/WebAppService";
+import { WebhookEncryptionService as WebhookEncryptionServiceApiImport } from "./src/api/WebhookEncryptionService";
 import { WebhookListenerService as WebhookListenerServiceApiImport } from "./src/api/WebhookListenerService";
 import { WebhookUrlService as WebhookUrlServiceApiImport } from "./src/api/WebhookUrlService";
 
@@ -1274,6 +1276,8 @@ export namespace Wallee {
         export const WebAppConfirmationRequest = WebAppConfirmationRequestModelImport;
         export type WebAppConfirmationResponse = WebAppConfirmationResponseModelImport;
         export const WebAppConfirmationResponse = WebAppConfirmationResponseModelImport;
+        export type WebhookEncryptionPublicKey = WebhookEncryptionPublicKeyModelImport;
+        export const WebhookEncryptionPublicKey = WebhookEncryptionPublicKeyModelImport;
         export type WebhookIdentity = WebhookIdentityModelImport;
         export const WebhookIdentity = WebhookIdentityModelImport;
         export type WebhookListener = WebhookListenerModelImport;
@@ -1631,6 +1635,8 @@ export namespace Wallee {
         export const UserSpaceRoleService = UserSpaceRoleServiceApiImport;
         export type WebAppService = WebAppServiceApiImport;
         export const WebAppService = WebAppServiceApiImport;
+        export type WebhookEncryptionService = WebhookEncryptionServiceApiImport;
+        export const WebhookEncryptionService = WebhookEncryptionServiceApiImport;
         export type WebhookListenerService = WebhookListenerServiceApiImport;
         export const WebhookListenerService = WebhookListenerServiceApiImport;
         export type WebhookUrlService = WebhookUrlServiceApiImport;

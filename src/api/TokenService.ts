@@ -107,10 +107,15 @@ class TokenService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -213,10 +218,15 @@ class TokenService {
             localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -309,10 +319,15 @@ class TokenService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -411,10 +426,15 @@ class TokenService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -433,6 +453,116 @@ class TokenService {
             useQuerystring: this._useQuerystring,
             json: true,
             body: ObjectSerializer.serialize(entity, "TokenCreate"),
+            timeout: this._timeout * 1000
+        };
+
+        this.authentications.default.applyToRequest(localVarRequestOptions);
+
+        if (Object.keys(localVarFormParams).length) {
+            if (localVarUseFormData) {
+                (<any>localVarRequestOptions).formData = localVarFormParams;
+            } else {
+                localVarRequestOptions.form = localVarFormParams;
+            }
+        }
+        return new Promise<{ response: http.IncomingMessage; body: Token;  }>((resolve, reject) => {
+            localVarRequest(localVarRequestOptions, (error, response, body) => {
+                if (error) {
+                    return reject(error);
+                } else {
+                    if (response.statusCode){
+                        if (response.statusCode >= 200 && response.statusCode <= 299) {
+                            body = ObjectSerializer.deserialize(body, "Token");
+                            return resolve({ response: response, body: body });
+                        } else {
+                            let errorObject: ClientError | ServerError;
+                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+                                errorObject = new ClientError();
+                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                                errorObject = new ServerError();
+                            } else {
+                                errorObject = new Object();
+                            }
+                            return reject({
+                                errorType: errorObject.constructor.name,
+                                date: (new Date()).toDateString(),
+                                statusCode: <string> <any> response.statusCode,
+                                statusMessage: response.statusMessage,
+                                body: body,
+                                response: response
+                            });
+                        }
+                    }
+                    return reject({
+                        errorType: "Unknown",
+                        date: (new Date()).toDateString(),
+                        statusCode: "Unknown",
+                        statusMessage: "Unknown",
+                        body: body,
+                        response: response
+                    });
+
+                }
+            });
+        });
+    }
+    /**
+    * This operation creates a token for the given transaction.
+    * @summary Create Token
+    * @param spaceId 
+    * @param transactionId The id of the transaction for which we want to create the token.
+    * @param {*} [options] Override http request options.
+    */
+    public createToken (spaceId: number, transactionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
+        const localVarPath = '/token/create-token';
+        let localVarQueryParameters: any = {};
+        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
+        let localVarFormParams: any = {};
+
+            // verify required parameter 'spaceId' is not null or undefined
+            if (spaceId === null || spaceId === undefined) {
+                throw new Error('Required parameter spaceId was null or undefined when calling createToken.');
+            }
+
+            // verify required parameter 'transactionId' is not null or undefined
+            if (transactionId === null || transactionId === undefined) {
+                throw new Error('Required parameter transactionId was null or undefined when calling createToken.');
+            }
+
+        if (spaceId !== undefined) {
+            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+        }
+
+        if (transactionId !== undefined) {
+            localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
+        }
+
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
+        (<any>Object).assign(localVarHeaderParams, options.headers);
+
+        let defaultHeaderParams = {
+            "x-meta-sdk-version": "4.2.1",
+            "x-meta-sdk-language": "typescript",
+            "x-meta-sdk-provider": "wallee",
+            "x-meta-sdk-language-version": this.getVersion(),
+        };
+
+        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+
+        let localVarUseFormData = false;
+
+        let localVarRequestOptions: localVarRequest.Options = {
+            baseUrl: this._basePath,
+            method: 'POST',
+            qs: localVarQueryParameters,
+            headers: localVarHeaderParams,
+            uri: localVarPath,
+            useQuerystring: this._useQuerystring,
+            json: true,
             timeout: this._timeout * 1000
         };
 
@@ -517,10 +647,15 @@ class TokenService {
             localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -622,10 +757,15 @@ class TokenService {
             localVarQueryParameters['tokenId'] = ObjectSerializer.serialize(tokenId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -727,10 +867,15 @@ class TokenService {
             localVarQueryParameters['transactionId'] = ObjectSerializer.serialize(transactionId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -832,10 +977,15 @@ class TokenService {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -933,10 +1083,15 @@ class TokenService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1035,10 +1190,15 @@ class TokenService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

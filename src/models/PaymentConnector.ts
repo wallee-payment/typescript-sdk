@@ -66,6 +66,11 @@ class PaymentConnector {
         /**
         * 
         */
+    'supportedCurrencies'?: Array<string>;
+
+        /**
+        * 
+        */
     'supportedCustomersPresences'?: Array<CustomersPresence>;
 
         /**
@@ -142,6 +147,12 @@ class PaymentConnector {
         "name": "processor",
         "baseName": "processor",
         "type": "number"
+        },
+        
+        {
+        "name": "supportedCurrencies",
+        "baseName": "supportedCurrencies",
+        "type": "Array<string>"
         },
         
         {

@@ -99,10 +99,15 @@ class ShopifySubscriptionProductService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -201,10 +206,15 @@ class ShopifySubscriptionProductService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -307,10 +317,15 @@ class ShopifySubscriptionProductService {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -408,10 +423,15 @@ class ShopifySubscriptionProductService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -510,10 +530,15 @@ class ShopifySubscriptionProductService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

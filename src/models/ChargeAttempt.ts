@@ -144,7 +144,7 @@ class ChargeAttempt extends TransactionAwareEntity {
         /**
         * 
         */
-    'walletType'?: WalletType;
+    'wallet'?: WalletType;
 
 
     static discriminator: string | undefined = undefined;
@@ -302,8 +302,8 @@ class ChargeAttempt extends TransactionAwareEntity {
         },
         
         {
-        "name": "walletType",
-        "baseName": "walletType",
+        "name": "wallet",
+        "baseName": "wallet",
         "type": "WalletType"
         }        
     ];

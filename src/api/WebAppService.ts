@@ -95,10 +95,15 @@ class WebAppService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -186,10 +191,15 @@ class WebAppService {
                 throw new Error('Required parameter request was null or undefined when calling confirm.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -282,10 +292,15 @@ class WebAppService {
             localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

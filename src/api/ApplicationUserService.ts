@@ -95,10 +95,15 @@ class ApplicationUserService {
                 throw new Error('Required parameter id was null or undefined when calling _delete.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -182,10 +187,15 @@ class ApplicationUserService {
         let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let localVarFormParams: any = {};
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -274,10 +284,15 @@ class ApplicationUserService {
                 throw new Error('Required parameter entity was null or undefined when calling create.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -370,10 +385,15 @@ class ApplicationUserService {
             localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
         }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = '*/*';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -461,10 +481,15 @@ class ApplicationUserService {
                 throw new Error('Required parameter query was null or undefined when calling search.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -553,10 +578,15 @@ class ApplicationUserService {
                 throw new Error('Required parameter entity was null or undefined when calling update.');
             }
 
+
+        // to determine the Content-Type header
+
+            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
+
         (<any>Object).assign(localVarHeaderParams, options.headers);
 
         let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.0",
+            "x-meta-sdk-version": "4.2.1",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
