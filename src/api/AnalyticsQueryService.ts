@@ -1,11 +1,11 @@
 'use strict';
 
-import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
+import axios = require("axios");
 
 import { Authentication } from '../auth/Authentication';
-import { VoidAuth } from '../auth/VoidAuth';
+import { HMACAuthentication } from '../auth/HMACAuthentication';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
 import { AnalyticsQuery } from  '../models/AnalyticsQuery';
@@ -17,17 +17,14 @@ import { ServerError } from  '../models/ServerError';
 
 class AnalyticsQueryService {
     protected _basePath = 'https://app-wallee.com:443/api';
-    protected defaultHeaders : any = {};
+    protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
-
-    protected authentications = {
-        'default': <Authentication>new VoidAuth({})
-    };
+    protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration));
-        this.defaultHeaders = configuration.default_headers;
+        this._defaultAuthentication = new HMACAuthentication(configuration).apply;
+        this._defaultHeaders = configuration.default_headers;
         this.setTimeout(configuration.timeout);
     }
 
@@ -52,10 +49,6 @@ class AnalyticsQueryService {
         }
     }
 
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
     set basePath(basePath: string) {
         this._basePath = basePath;
     }
@@ -65,7 +58,7 @@ class AnalyticsQueryService {
     }
 
     protected setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+        this._defaultAuthentication = auth;
     }
 
     private getVersion(): string {
@@ -83,99 +76,85 @@ class AnalyticsQueryService {
     * @param {*} [options] Override http request options.
     */
     public cancelExecution (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = '/analytics-query/cancel-execution';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/cancel-execution';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling cancelExecution.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling cancelExecution.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
 
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Fetches one batch of the result of a query execution.
     * @summary Fetch Result
@@ -186,111 +165,97 @@ class AnalyticsQueryService {
     * @param {*} [options] Override http request options.
     */
     public fetchResult (id: number, timeout?: number, maxRows?: number, nextToken?: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: AnalyticsQueryResultBatch;  }> {
-        const localVarPath = '/analytics-query/fetch-result';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/fetch-result';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling fetchResult.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling fetchResult.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
         if (timeout !== undefined) {
-            localVarQueryParameters['timeout'] = ObjectSerializer.serialize(timeout, "number");
+            queryParams['timeout'] = ObjectSerializer.serialize(timeout, "number");
         }
 
         if (maxRows !== undefined) {
-            localVarQueryParameters['maxRows'] = ObjectSerializer.serialize(maxRows, "number");
+            queryParams['maxRows'] = ObjectSerializer.serialize(maxRows, "number");
         }
 
         if (nextToken !== undefined) {
-            localVarQueryParameters['nextToken'] = ObjectSerializer.serialize(nextToken, "string");
+            queryParams['nextToken'] = ObjectSerializer.serialize(nextToken, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: AnalyticsQueryResultBatch;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "AnalyticsQueryResultBatch");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "AnalyticsQueryResultBatch");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Generate a URL from which the results of a query execution can be downloaded in CSV format.
     * @summary Generate Download URL
@@ -299,193 +264,165 @@ class AnalyticsQueryService {
     * @param {*} [options] Override http request options.
     */
     public generateDownloadUrl (id: number, timeout?: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = '/analytics-query/generate-download-url';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/generate-download-url';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling generateDownloadUrl.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling generateDownloadUrl.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
         if (timeout !== undefined) {
-            localVarQueryParameters['timeout'] = ObjectSerializer.serialize(timeout, "number");
+            queryParams['timeout'] = ObjectSerializer.serialize(timeout, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "string");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "string");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Get the schemas describing the available tables and their columns.
     * @summary Get Schemas
     * @param {*} [options] Override http request options.
     */
     public schema (options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<AnalyticsSchemaTable>;  }> {
-        const localVarPath = '/analytics-query/schema';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/schema';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<AnalyticsSchemaTable>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<AnalyticsSchemaTable>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<AnalyticsSchemaTable>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Returns the current status of a query execution.
     * @summary Execution Status
@@ -493,99 +430,85 @@ class AnalyticsQueryService {
     * @param {*} [options] Override http request options.
     */
     public status (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: AnalyticsQueryExecution;  }> {
-        const localVarPath = '/analytics-query/status';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/status';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling status.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling status.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: AnalyticsQueryExecution;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "AnalyticsQueryExecution");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "AnalyticsQueryExecution");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Submits a query for execution.
     * @summary Submit Query
@@ -593,96 +516,82 @@ class AnalyticsQueryService {
     * @param {*} [options] Override http request options.
     */
     public submitQuery (query: AnalyticsQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: AnalyticsQueryExecution;  }> {
-        const localVarPath = '/analytics-query/submit-query';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/analytics-query/submit-query';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'query' is not null or undefined
-            if (query === null || query === undefined) {
-                throw new Error('Required parameter query was null or undefined when calling submitQuery.');
-            }
+        // verify required parameter 'query' is not null or undefined
+        if (query === null || query === undefined) {
+            throw new Error('Required parameter query was null or undefined when calling submitQuery.');
+        }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(query, "AnalyticsQuery"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: query,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: AnalyticsQueryExecution;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "AnalyticsQueryExecution");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "AnalyticsQueryExecution");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
 }
 
 export { AnalyticsQueryService }

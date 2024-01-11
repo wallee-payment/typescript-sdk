@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "4.2.1",
+    "version": "4.3.0",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
@@ -17,19 +17,23 @@
     "scripts": {
         "clean": "rm -Rf ./node_modules/ ./build ./test/*.d.ts ./test/*.js",
         "build": "tsc --project ./tsconfig.json",
-        "test": "rm -fr ./test/*.d.ts && mocha --require ts-node/register --timeout 10000 test/*.ts test/*.js",
+        "test": "rm -fr ./test/*.d.ts && mocha --require ts-node/register test/*.test.ts test/*.test.js",
         "prepublishOnly": "npm run clean && npm i && npm run build"
     },
     "author": "wallee AG",
     "license": "Apache-2.0",
     "keywords": ["wallee", "Payment", "Payment Integration"],
+    "mocha": {
+        "timeout": 30000
+    },
     "dependencies": {
         "@types/bluebird": "3.5.36",
         "@types/crypto-js": "4.2.1",
         "@types/request": "2.48.8",
+        "axios": "1.6.2",
         "bluebird": "3.5.0",
         "crypto-js": "4.2.0",
-        "request": "2.88.2"
+        "starkbank-ecdsa": "^1.1.5"
     },
     "devDependencies": {
         "@types/chai": "^4.2.1",

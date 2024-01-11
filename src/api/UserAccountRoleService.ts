@@ -1,11 +1,11 @@
 'use strict';
 
-import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
+import axios = require("axios");
 
 import { Authentication } from '../auth/Authentication';
-import { VoidAuth } from '../auth/VoidAuth';
+import { HMACAuthentication } from '../auth/HMACAuthentication';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
 import { ClientError } from  '../models/ClientError';
@@ -14,17 +14,14 @@ import { UserAccountRole } from  '../models/UserAccountRole';
 
 class UserAccountRoleService {
     protected _basePath = 'https://app-wallee.com:443/api';
-    protected defaultHeaders : any = {};
+    protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
-
-    protected authentications = {
-        'default': <Authentication>new VoidAuth({})
-    };
+    protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration));
-        this.defaultHeaders = configuration.default_headers;
+        this._defaultAuthentication = new HMACAuthentication(configuration).apply;
+        this._defaultHeaders = configuration.default_headers;
         this.setTimeout(configuration.timeout);
     }
 
@@ -49,10 +46,6 @@ class UserAccountRoleService {
         }
     }
 
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
     set basePath(basePath: string) {
         this._basePath = basePath;
     }
@@ -62,7 +55,7 @@ class UserAccountRoleService {
     }
 
     protected setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+        this._defaultAuthentication = auth;
     }
 
     private getVersion(): string {
@@ -83,121 +76,107 @@ class UserAccountRoleService {
     * @param {*} [options] Override http request options.
     */
     public addRole (userId: number, accountId: number, roleId: number, appliesOnSubaccount?: boolean, options: any = {}) : Promise<{ response: http.IncomingMessage; body: UserAccountRole;  }> {
-        const localVarPath = '/user-account-role/addRole';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/user-account-role/addRole';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'userId' is not null or undefined
-            if (userId === null || userId === undefined) {
-                throw new Error('Required parameter userId was null or undefined when calling addRole.');
-            }
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling addRole.');
+        }
 
-            // verify required parameter 'accountId' is not null or undefined
-            if (accountId === null || accountId === undefined) {
-                throw new Error('Required parameter accountId was null or undefined when calling addRole.');
-            }
+        // verify required parameter 'accountId' is not null or undefined
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling addRole.');
+        }
 
-            // verify required parameter 'roleId' is not null or undefined
-            if (roleId === null || roleId === undefined) {
-                throw new Error('Required parameter roleId was null or undefined when calling addRole.');
-            }
+        // verify required parameter 'roleId' is not null or undefined
+        if (roleId === null || roleId === undefined) {
+            throw new Error('Required parameter roleId was null or undefined when calling addRole.');
+        }
 
         if (userId !== undefined) {
-            localVarQueryParameters['userId'] = ObjectSerializer.serialize(userId, "number");
+            queryParams['userId'] = ObjectSerializer.serialize(userId, "number");
         }
 
         if (accountId !== undefined) {
-            localVarQueryParameters['accountId'] = ObjectSerializer.serialize(accountId, "number");
+            queryParams['accountId'] = ObjectSerializer.serialize(accountId, "number");
         }
 
         if (roleId !== undefined) {
-            localVarQueryParameters['roleId'] = ObjectSerializer.serialize(roleId, "number");
+            queryParams['roleId'] = ObjectSerializer.serialize(roleId, "number");
         }
 
         if (appliesOnSubaccount !== undefined) {
-            localVarQueryParameters['appliesOnSubaccount'] = ObjectSerializer.serialize(appliesOnSubaccount, "boolean");
+            queryParams['appliesOnSubaccount'] = ObjectSerializer.serialize(appliesOnSubaccount, "boolean");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: UserAccountRole;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "UserAccountRole");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "UserAccountRole");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * List all the roles that are assigned to the given user in the given account.
     * @summary List Roles
@@ -206,108 +185,94 @@ class UserAccountRoleService {
     * @param {*} [options] Override http request options.
     */
     public list (userId: number, accountId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<UserAccountRole>;  }> {
-        const localVarPath = '/user-account-role/list';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/user-account-role/list';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'userId' is not null or undefined
-            if (userId === null || userId === undefined) {
-                throw new Error('Required parameter userId was null or undefined when calling list.');
-            }
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling list.');
+        }
 
-            // verify required parameter 'accountId' is not null or undefined
-            if (accountId === null || accountId === undefined) {
-                throw new Error('Required parameter accountId was null or undefined when calling list.');
-            }
+        // verify required parameter 'accountId' is not null or undefined
+        if (accountId === null || accountId === undefined) {
+            throw new Error('Required parameter accountId was null or undefined when calling list.');
+        }
 
         if (userId !== undefined) {
-            localVarQueryParameters['userId'] = ObjectSerializer.serialize(userId, "number");
+            queryParams['userId'] = ObjectSerializer.serialize(userId, "number");
         }
 
         if (accountId !== undefined) {
-            localVarQueryParameters['accountId'] = ObjectSerializer.serialize(accountId, "number");
+            queryParams['accountId'] = ObjectSerializer.serialize(accountId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<UserAccountRole>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<UserAccountRole>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<UserAccountRole>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation removes the specified user account role.
     * @summary Remove Role
@@ -315,99 +280,85 @@ class UserAccountRoleService {
     * @param {*} [options] Override http request options.
     */
     public removeRole (id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = '/user-account-role/removeRole';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/user-account-role/removeRole';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling removeRole.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling removeRole.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
 
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
 }
 
 export { UserAccountRoleService }

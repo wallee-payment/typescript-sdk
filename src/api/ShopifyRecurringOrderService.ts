@@ -1,11 +1,11 @@
 'use strict';
 
-import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
+import axios = require("axios");
 
 import { Authentication } from '../auth/Authentication';
-import { VoidAuth } from '../auth/VoidAuth';
+import { HMACAuthentication } from '../auth/HMACAuthentication';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
 import { ClientError } from  '../models/ClientError';
@@ -17,17 +17,14 @@ import { ShopifyRecurringOrderUpdateRequest } from  '../models/ShopifyRecurringO
 
 class ShopifyRecurringOrderService {
     protected _basePath = 'https://app-wallee.com:443/api';
-    protected defaultHeaders : any = {};
+    protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
-
-    protected authentications = {
-        'default': <Authentication>new VoidAuth({})
-    };
+    protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration));
-        this.defaultHeaders = configuration.default_headers;
+        this._defaultAuthentication = new HMACAuthentication(configuration).apply;
+        this._defaultHeaders = configuration.default_headers;
         this.setTimeout(configuration.timeout);
     }
 
@@ -52,10 +49,6 @@ class ShopifyRecurringOrderService {
         }
     }
 
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
     set basePath(basePath: string) {
         this._basePath = basePath;
     }
@@ -65,7 +58,7 @@ class ShopifyRecurringOrderService {
     }
 
     protected setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+        this._defaultAuthentication = auth;
     }
 
     private getVersion(): string {
@@ -84,100 +77,86 @@ class ShopifyRecurringOrderService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = '/shopify-recurring-order/count';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/shopify-recurring-order/count';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling count.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling count.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: filter,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: number;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "number");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "number");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Reads the entity with the given 'id' and returns it.
     * @summary Read
@@ -186,108 +165,94 @@ class ShopifyRecurringOrderService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: ShopifyRecurringOrder;  }> {
-        const localVarPath = '/shopify-recurring-order/read';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/shopify-recurring-order/read';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling read.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling read.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling read.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling read.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: ShopifyRecurringOrder;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "ShopifyRecurringOrder");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "ShopifyRecurringOrder");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Searches for the entities as specified by the given query.
     * @summary Search
@@ -296,105 +261,91 @@ class ShopifyRecurringOrderService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<ShopifyRecurringOrder>;  }> {
-        const localVarPath = '/shopify-recurring-order/search';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/shopify-recurring-order/search';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling search.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling search.');
+        }
 
-            // verify required parameter 'query' is not null or undefined
-            if (query === null || query === undefined) {
-                throw new Error('Required parameter query was null or undefined when calling search.');
-            }
+        // verify required parameter 'query' is not null or undefined
+        if (query === null || query === undefined) {
+            throw new Error('Required parameter query was null or undefined when calling search.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: query,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<ShopifyRecurringOrder>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<ShopifyRecurringOrder>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<ShopifyRecurringOrder>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation allows to update a Shopify recurring order.
     * @summary Update
@@ -403,105 +354,91 @@ class ShopifyRecurringOrderService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, updateRequest: ShopifyRecurringOrderUpdateRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = '/shopify-recurring-order/update';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/shopify-recurring-order/update';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling update.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling update.');
+        }
 
-            // verify required parameter 'updateRequest' is not null or undefined
-            if (updateRequest === null || updateRequest === undefined) {
-                throw new Error('Required parameter updateRequest was null or undefined when calling update.');
-            }
+        // verify required parameter 'updateRequest' is not null or undefined
+        if (updateRequest === null || updateRequest === undefined) {
+            throw new Error('Required parameter updateRequest was null or undefined when calling update.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(updateRequest, "ShopifyRecurringOrderUpdateRequest"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: updateRequest,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
 
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
 }
 
 export { ShopifyRecurringOrderService }

@@ -1,12 +1,13 @@
 'use strict';
 
-import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
+import axios = require("axios");
 
 import { Authentication } from '../auth/Authentication';
-import { VoidAuth } from '../auth/VoidAuth';
+import { HMACAuthentication } from '../auth/HMACAuthentication';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
+import { EncryptionUtil } from '../util/EncryptionUtil';
 
 import { ClientError } from  '../models/ClientError';
 import { ServerError } from  '../models/ServerError';
@@ -14,17 +15,14 @@ import { WebhookEncryptionPublicKey } from  '../models/WebhookEncryptionPublicKe
 
 class WebhookEncryptionService {
     protected _basePath = 'https://app-wallee.com:443/api';
-    protected defaultHeaders : any = {};
+    protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
-
-    protected authentications = {
-        'default': <Authentication>new VoidAuth({})
-    };
+    protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration));
-        this.defaultHeaders = configuration.default_headers;
+        this._defaultAuthentication = new HMACAuthentication(configuration).apply;
+        this._defaultHeaders = configuration.default_headers;
         this.setTimeout(configuration.timeout);
     }
 
@@ -49,10 +47,6 @@ class WebhookEncryptionService {
         }
     }
 
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
     set basePath(basePath: string) {
         this._basePath = basePath;
     }
@@ -62,7 +56,7 @@ class WebhookEncryptionService {
     }
 
     protected setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+        this._defaultAuthentication = auth;
     }
 
     private getVersion(): string {
@@ -80,97 +74,113 @@ class WebhookEncryptionService {
     * @param {*} [options] Override http request options.
     */
     public read (id: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: WebhookEncryptionPublicKey;  }> {
-        const localVarPath = '/webhook-encryption/read';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/webhook-encryption/read';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling read.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling read.');
+        }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "string");
+            queryParams['id'] = ObjectSerializer.serialize(id, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: WebhookEncryptionPublicKey;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "WebhookEncryptionPublicKey");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "WebhookEncryptionPublicKey");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
+        });
+    };
 
-                }
-            });
+    /**
+     * Verify webhook content signature.
+     *
+     * @param signatureHeader Signature header 'X-Signature' value from the Http request
+     * @param contentToVerify Raw webhook content in String format
+     * @returns Promise<boolean> indicating if the content is valid
+     */
+    public isContentValid(signatureHeader: string, contentToVerify: string): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            const regex = /^.*,\s*keyId=([a-zA-Z0-9\-]+),\s*signature=(.+)$/g;
+            const match = regex.exec(signatureHeader);
+
+            if (match) {
+                const publicKeyId = match[1];
+                const contentSignature = match[2];
+
+                this.read(publicKeyId)
+                    .then((response: { response: http.IncomingMessage, body: WebhookEncryptionPublicKey }) => {
+                        const publicKey = response.body.publicKey as string;
+                        const isValid = EncryptionUtil.isContentValid(contentToVerify, contentSignature, publicKey);
+                        resolve(isValid);
+                    }).catch(error => {
+                        console.error("Error verifying content:", error);
+                        reject(error);
+                    });
+            } else {
+                reject(new Error("Invalid webhook signature header. Expected header format: 'algorithm=<algorithm>, keyId=<keyId>, signature=<signature>'"));
+            }
         });
     }
 }

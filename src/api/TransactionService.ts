@@ -1,11 +1,11 @@
 'use strict';
 
-import localVarRequest = require("request");
 import http = require("http");
 import Promise = require("bluebird");
+import axios = require("axios");
 
 import { Authentication } from '../auth/Authentication';
-import { VoidAuth } from '../auth/VoidAuth';
+import { HMACAuthentication } from '../auth/HMACAuthentication';
 import { ObjectSerializer } from '../serializers/ObjectSerializer';
 
 import { ClientError } from  '../models/ClientError';
@@ -23,17 +23,14 @@ import { TransactionPending } from  '../models/TransactionPending';
 
 class TransactionService {
     protected _basePath = 'https://app-wallee.com:443/api';
-    protected defaultHeaders : any = {};
+    protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
-
-    protected authentications = {
-        'default': <Authentication>new VoidAuth({})
-    };
+    protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
-        this.setDefaultAuthentication(new VoidAuth(configuration));
-        this.defaultHeaders = configuration.default_headers;
+        this._defaultAuthentication = new HMACAuthentication(configuration).apply;
+        this._defaultHeaders = configuration.default_headers;
         this.setTimeout(configuration.timeout);
     }
 
@@ -58,10 +55,6 @@ class TransactionService {
         }
     }
 
-    set useQuerystring(value: boolean) {
-        this._useQuerystring = value;
-    }
-
     set basePath(basePath: string) {
         this._basePath = basePath;
     }
@@ -71,7 +64,7 @@ class TransactionService {
     }
 
     protected setDefaultAuthentication(auth: Authentication) {
-        this.authentications.default = auth;
+        this._defaultAuthentication = auth;
     }
 
     private getVersion(): string {
@@ -90,105 +83,91 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public _export (spaceId: number, request: EntityExportRequest, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = '/transaction/export';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/export';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling _export.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling _export.');
+        }
 
-            // verify required parameter 'request' is not null or undefined
-            if (request === null || request === undefined) {
-                throw new Error('Required parameter request was null or undefined when calling _export.');
-            }
+        // verify required parameter 'request' is not null or undefined
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling _export.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(request, "EntityExportRequest"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: request,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "string");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "string");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * The confirm operation marks the transaction as confirmed. Once the transaction is confirmed no more changes can be applied.
     * @summary Confirm
@@ -197,105 +176,91 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public confirm (spaceId: number, transactionModel: TransactionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/confirm';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/confirm';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling confirm.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling confirm.');
+        }
 
-            // verify required parameter 'transactionModel' is not null or undefined
-            if (transactionModel === null || transactionModel === undefined) {
-                throw new Error('Required parameter transactionModel was null or undefined when calling confirm.');
-            }
+        // verify required parameter 'transactionModel' is not null or undefined
+        if (transactionModel === null || transactionModel === undefined) {
+            throw new Error('Required parameter transactionModel was null or undefined when calling confirm.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(transactionModel, "TransactionPending"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: transactionModel,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Counts the number of items in the database as restricted by the given filter.
     * @summary Count
@@ -304,100 +269,86 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public count (spaceId: number, filter?: EntityQueryFilter, options: any = {}) : Promise<{ response: http.IncomingMessage; body: number;  }> {
-        const localVarPath = '/transaction/count';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/count';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling count.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling count.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(filter, "EntityQueryFilter"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: filter,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: number;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "number");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "number");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Creates the entity with the given properties.
     * @summary Create
@@ -406,105 +357,91 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, transaction: TransactionCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/create';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/create';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling create.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling create.');
+        }
 
-            // verify required parameter 'transaction' is not null or undefined
-            if (transaction === null || transaction === undefined) {
-                throw new Error('Required parameter transaction was null or undefined when calling create.');
-            }
+        // verify required parameter 'transaction' is not null or undefined
+        if (transaction === null || transaction === undefined) {
+            throw new Error('Required parameter transaction was null or undefined when calling create.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(transaction, "TransactionCreate"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: transaction,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation allows to create transaction credentials to delegate temporarily the access to the web service API for this particular transaction.
     * @summary Create Transaction Credentials
@@ -513,108 +450,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public createTransactionCredentials (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = '/transaction/createTransactionCredentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/createTransactionCredentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling createTransactionCredentials.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling createTransactionCredentials.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling createTransactionCredentials.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling createTransactionCredentials.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "string");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "string");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation removes the given token.
     * @summary Delete One-Click Token with Credentials
@@ -623,108 +546,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public deleteOneClickTokenWithCredentials (credentials: string, tokenId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
-        const localVarPath = '/transaction/deleteOneClickTokenWithCredentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/deleteOneClickTokenWithCredentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'credentials' is not null or undefined
-            if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling deleteOneClickTokenWithCredentials.');
-            }
+        // verify required parameter 'credentials' is not null or undefined
+        if (credentials === null || credentials === undefined) {
+            throw new Error('Required parameter credentials was null or undefined when calling deleteOneClickTokenWithCredentials.');
+        }
 
-            // verify required parameter 'tokenId' is not null or undefined
-            if (tokenId === null || tokenId === undefined) {
-                throw new Error('Required parameter tokenId was null or undefined when calling deleteOneClickTokenWithCredentials.');
-            }
+        // verify required parameter 'tokenId' is not null or undefined
+        if (tokenId === null || tokenId === undefined) {
+            throw new Error('Required parameter tokenId was null or undefined when calling deleteOneClickTokenWithCredentials.');
+        }
 
         if (credentials !== undefined) {
-            localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+            queryParams['credentials'] = ObjectSerializer.serialize(credentials, "string");
         }
 
         if (tokenId !== undefined) {
-            localVarQueryParameters['tokenId'] = ObjectSerializer.serialize(tokenId, "number");
+            queryParams['tokenId'] = ObjectSerializer.serialize(tokenId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
 
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation returns the token version objects which references the tokens usable as one-click payment tokens for the provided transaction.
     * @summary Fetch One Click Tokens with Credentials
@@ -732,99 +641,85 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchOneClickTokensWithCredentials (credentials: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<TokenVersion>;  }> {
-        const localVarPath = '/transaction/fetchOneClickTokensWithCredentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/fetchOneClickTokensWithCredentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'credentials' is not null or undefined
-            if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling fetchOneClickTokensWithCredentials.');
-            }
+        // verify required parameter 'credentials' is not null or undefined
+        if (credentials === null || credentials === undefined) {
+            throw new Error('Required parameter credentials was null or undefined when calling fetchOneClickTokensWithCredentials.');
+        }
 
         if (credentials !== undefined) {
-            localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+            queryParams['credentials'] = ObjectSerializer.serialize(credentials, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<TokenVersion>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<TokenVersion>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<TokenVersion>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation allows to get the payment method configurations which can be used with the provided transaction.
     * @summary Fetch Possible Payment Methods
@@ -834,117 +729,103 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchPaymentMethods (spaceId: number, id: number, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = '/transaction/fetch-payment-methods';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/fetch-payment-methods';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling fetchPaymentMethods.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling fetchPaymentMethods.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling fetchPaymentMethods.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling fetchPaymentMethods.');
+        }
 
-            // verify required parameter 'integrationMode' is not null or undefined
-            if (integrationMode === null || integrationMode === undefined) {
-                throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethods.');
-            }
+        // verify required parameter 'integrationMode' is not null or undefined
+        if (integrationMode === null || integrationMode === undefined) {
+            throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethods.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
         if (integrationMode !== undefined) {
-            localVarQueryParameters['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
+            queryParams['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<PaymentMethodConfiguration>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<PaymentMethodConfiguration>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation allows to get the payment method configurations which can be used with the provided transaction.
     * @summary Fetch Possible Payment Methods with Credentials
@@ -953,108 +834,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public fetchPaymentMethodsWithCredentials (credentials: string, integrationMode: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }> {
-        const localVarPath = '/transaction/fetch-payment-methods-with-credentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/fetch-payment-methods-with-credentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'credentials' is not null or undefined
-            if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling fetchPaymentMethodsWithCredentials.');
-            }
+        // verify required parameter 'credentials' is not null or undefined
+        if (credentials === null || credentials === undefined) {
+            throw new Error('Required parameter credentials was null or undefined when calling fetchPaymentMethodsWithCredentials.');
+        }
 
-            // verify required parameter 'integrationMode' is not null or undefined
-            if (integrationMode === null || integrationMode === undefined) {
-                throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethodsWithCredentials.');
-            }
+        // verify required parameter 'integrationMode' is not null or undefined
+        if (integrationMode === null || integrationMode === undefined) {
+            throw new Error('Required parameter integrationMode was null or undefined when calling fetchPaymentMethodsWithCredentials.');
+        }
 
         if (credentials !== undefined) {
-            localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+            queryParams['credentials'] = ObjectSerializer.serialize(credentials, "string");
         }
 
         if (integrationMode !== undefined) {
-            localVarQueryParameters['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
+            queryParams['integrationMode'] = ObjectSerializer.serialize(integrationMode, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<PaymentMethodConfiguration>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<PaymentMethodConfiguration>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<PaymentMethodConfiguration>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Returns the PDF document for the transaction invoice with given id.
     * @summary getInvoiceDocument
@@ -1063,108 +930,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getInvoiceDocument (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }> {
-        const localVarPath = '/transaction/getInvoiceDocument';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/getInvoiceDocument';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling getInvoiceDocument.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling getInvoiceDocument.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling getInvoiceDocument.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getInvoiceDocument.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "RenderedDocument");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "RenderedDocument");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * 
     * @summary getLatestSuccessfulTransactionLineItemVersion
@@ -1173,108 +1026,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getLatestTransactionLineItemVersion (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: TransactionLineItemVersion;  }> {
-        const localVarPath = '/transaction/getLatestTransactionLineItemVersion';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/getLatestTransactionLineItemVersion';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling getLatestTransactionLineItemVersion.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling getLatestTransactionLineItemVersion.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling getLatestTransactionLineItemVersion.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getLatestTransactionLineItemVersion.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: TransactionLineItemVersion;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "TransactionLineItemVersion");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "TransactionLineItemVersion");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Returns the packing slip for the transaction with given id.
     * @summary getPackingSlip
@@ -1283,108 +1122,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public getPackingSlip (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }> {
-        const localVarPath = '/transaction/getPackingSlip';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/getPackingSlip';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling getPackingSlip.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling getPackingSlip.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling getPackingSlip.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getPackingSlip.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: RenderedDocument;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "RenderedDocument");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "RenderedDocument");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation assigns the given token to the transaction and process it. This method will return an URL where the customer has to be redirect to complete the transaction.
     * @summary Process One-Click Token with Credentials
@@ -1393,108 +1218,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public processOneClickTokenAndRedirectWithCredentials (credentials: string, tokenId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: string;  }> {
-        const localVarPath = '/transaction/processOneClickTokenAndRedirectWithCredentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/processOneClickTokenAndRedirectWithCredentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'credentials' is not null or undefined
-            if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling processOneClickTokenAndRedirectWithCredentials.');
-            }
+        // verify required parameter 'credentials' is not null or undefined
+        if (credentials === null || credentials === undefined) {
+            throw new Error('Required parameter credentials was null or undefined when calling processOneClickTokenAndRedirectWithCredentials.');
+        }
 
-            // verify required parameter 'tokenId' is not null or undefined
-            if (tokenId === null || tokenId === undefined) {
-                throw new Error('Required parameter tokenId was null or undefined when calling processOneClickTokenAndRedirectWithCredentials.');
-            }
+        // verify required parameter 'tokenId' is not null or undefined
+        if (tokenId === null || tokenId === undefined) {
+            throw new Error('Required parameter tokenId was null or undefined when calling processOneClickTokenAndRedirectWithCredentials.');
+        }
 
         if (credentials !== undefined) {
-            localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+            queryParams['credentials'] = ObjectSerializer.serialize(credentials, "string");
         }
 
         if (tokenId !== undefined) {
-            localVarQueryParameters['tokenId'] = ObjectSerializer.serialize(tokenId, "number");
+            queryParams['tokenId'] = ObjectSerializer.serialize(tokenId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "string");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "string");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This operation processes the transaction without requiring that the customer is present. Means this operation applies strategies to process the transaction without a direct interaction with the buyer. This operation is suitable for recurring transactions.
     * @summary Process Without User Interaction
@@ -1503,108 +1314,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public processWithoutUserInteraction (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/processWithoutUserInteraction';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/processWithoutUserInteraction';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling processWithoutUserInteraction.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling processWithoutUserInteraction.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling processWithoutUserInteraction.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling processWithoutUserInteraction.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Reads the entity with the given 'id' and returns it.
     * @summary Read
@@ -1613,108 +1410,94 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/read';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/read';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling read.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling read.');
+        }
 
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new Error('Required parameter id was null or undefined when calling read.');
-            }
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling read.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (id !== undefined) {
-            localVarQueryParameters['id'] = ObjectSerializer.serialize(id, "number");
+            queryParams['id'] = ObjectSerializer.serialize(id, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Reads the transaction with the given 'id' and returns it. This method uses the credentials to authenticate and identify the transaction.
     * @summary Read With Credentials
@@ -1722,99 +1505,85 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public readWithCredentials (credentials: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/readWithCredentials';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/readWithCredentials';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'credentials' is not null or undefined
-            if (credentials === null || credentials === undefined) {
-                throw new Error('Required parameter credentials was null or undefined when calling readWithCredentials.');
-            }
+        // verify required parameter 'credentials' is not null or undefined
+        if (credentials === null || credentials === undefined) {
+            throw new Error('Required parameter credentials was null or undefined when calling readWithCredentials.');
+        }
 
         if (credentials !== undefined) {
-            localVarQueryParameters['credentials'] = ObjectSerializer.serialize(credentials, "string");
+            queryParams['credentials'] = ObjectSerializer.serialize(credentials, "string");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = '*/*';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = '*/*';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'GET',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * Searches for the entities as specified by the given query.
     * @summary Search
@@ -1823,105 +1592,91 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public search (spaceId: number, query: EntityQuery, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Array<Transaction>;  }> {
-        const localVarPath = '/transaction/search';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/search';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling search.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling search.');
+        }
 
-            // verify required parameter 'query' is not null or undefined
-            if (query === null || query === undefined) {
-                throw new Error('Required parameter query was null or undefined when calling search.');
-            }
+        // verify required parameter 'query' is not null or undefined
+        if (query === null || query === undefined) {
+            throw new Error('Required parameter query was null or undefined when calling search.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(query, "EntityQuery"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: query,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Array<Transaction>;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Array<Transaction>");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Array<Transaction>");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
     /**
     * This updates the entity with the given properties. Only those properties which should be updated can be provided. The 'id' and 'version' are required to identify the entity.
     * @summary Update
@@ -1930,105 +1685,91 @@ class TransactionService {
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: TransactionPending, options: any = {}) : Promise<{ response: http.IncomingMessage; body: Transaction;  }> {
-        const localVarPath = '/transaction/update';
-        let localVarQueryParameters: any = {};
-        let localVarHeaderParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let localVarFormParams: any = {};
+        const url: string = '/transaction/update';
+        let queryParams: any = {};
+        let headers: any = Object.assign({}, this._defaultHeaders);
 
-            // verify required parameter 'spaceId' is not null or undefined
-            if (spaceId === null || spaceId === undefined) {
-                throw new Error('Required parameter spaceId was null or undefined when calling update.');
-            }
+        // verify required parameter 'spaceId' is not null or undefined
+        if (spaceId === null || spaceId === undefined) {
+            throw new Error('Required parameter spaceId was null or undefined when calling update.');
+        }
 
-            // verify required parameter 'entity' is not null or undefined
-            if (entity === null || entity === undefined) {
-                throw new Error('Required parameter entity was null or undefined when calling update.');
-            }
+        // verify required parameter 'entity' is not null or undefined
+        if (entity === null || entity === undefined) {
+            throw new Error('Required parameter entity was null or undefined when calling update.');
+        }
 
         if (spaceId !== undefined) {
-            localVarQueryParameters['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
+            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
-        // to determine the Content-Type header
 
-            localVarHeaderParams['Content-Type'] = 'application/json;charset=utf-8';
 
-        (<any>Object).assign(localVarHeaderParams, options.headers);
+        headers['Content-Type'] = 'application/json;charset=utf-8';
 
-        let defaultHeaderParams = {
-            "x-meta-sdk-version": "4.2.1",
+        Object.assign(headers, options.headers);
+
+        let defaultHeaders = {
+            "x-meta-sdk-version": "4.3.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
         };
 
-        (<any>Object).assign(localVarHeaderParams, defaultHeaderParams);
+        Object.assign(headers, defaultHeaders);
 
-        let localVarUseFormData = false;
-
-        let localVarRequestOptions: localVarRequest.Options = {
-            baseUrl: this._basePath,
+        let requestConfig: axios.AxiosRequestConfig = {
+            url,
             method: 'POST',
-            qs: localVarQueryParameters,
-            headers: localVarHeaderParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: ObjectSerializer.serialize(entity, "TransactionPending"),
-            timeout: this._timeout * 1000
-        };
-
-        this.authentications.default.applyToRequest(localVarRequestOptions);
-
-        if (Object.keys(localVarFormParams).length) {
-            if (localVarUseFormData) {
-                (<any>localVarRequestOptions).formData = localVarFormParams;
-            } else {
-                localVarRequestOptions.form = localVarFormParams;
-            }
+            baseURL: this._basePath,
+            headers,
+            params: queryParams,
+            data: entity,
+            timeout: this._timeout * 1000,
+            responseType: 'json',
         }
+
+        const axiosInstance: axios.AxiosInstance  = axios.default.create();
+        axiosInstance.interceptors.request.use(this._defaultAuthentication);
+
         return new Promise<{ response: http.IncomingMessage; body: Transaction;  }>((resolve, reject) => {
-            localVarRequest(localVarRequestOptions, (error, response, body) => {
-                if (error) {
-                    return reject(error);
-                } else {
-                    if (response.statusCode){
-                        if (response.statusCode >= 200 && response.statusCode <= 299) {
-                            body = ObjectSerializer.deserialize(body, "Transaction");
-                            return resolve({ response: response, body: body });
-                        } else {
-                            let errorObject: ClientError | ServerError;
-                            if (response.statusCode >= 400 && response.statusCode <= 499) {
+            axiosInstance.request(requestConfig)
+                .then(
+                    success => {
+                        let body;
+                        body = ObjectSerializer.deserialize(success.data, "Transaction");
+                        return resolve({ response: success.request.res, body: body });
+                    },
+                    failure => {
+                        let errorObject: ClientError | ServerError | Object;
+                        if (failure.response?.status) {
+                            if (failure.response.status >= 400 && failure.response.status <= 499) {
                                 errorObject = new ClientError();
-                            } else if (response.statusCode >= 500 && response.statusCode <= 599){
+                            } else if (failure.response.status >= 500 && failure.response.status <= 599) {
                                 errorObject = new ServerError();
                             } else {
                                 errorObject = new Object();
                             }
-                            return reject({
-                                errorType: errorObject.constructor.name,
-                                date: (new Date()).toDateString(),
-                                statusCode: <string> <any> response.statusCode,
-                                statusMessage: response.statusMessage,
-                                body: body,
-                                response: response
-                            });
+                        } else {
+                            errorObject = new Object()
                         }
+                        return reject({
+                            errorType: errorObject.constructor.name,
+                            date: (new Date()).toDateString(),
+                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
+                            body: failure.response?.data,
+                            response: failure.response?.request.res
+                        });
                     }
-                    return reject({
-                        errorType: "Unknown",
-                        date: (new Date()).toDateString(),
-                        statusCode: "Unknown",
-                        statusMessage: "Unknown",
-                        body: body,
-                        response: response
-                    });
-
-                }
-            });
+                )
+                .catch(error => {
+                    return reject(error);
+                });
         });
-    }
+    };
+
 }
 
 export { TransactionService }

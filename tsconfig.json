@@ -7,7 +7,10 @@
         "moduleResolution": "node",
         "esModuleInterop": true,
         "lib": ["es7", "es6", "dom"],
-        "outDir": "./build"
+        "outDir": "./build",
+        "paths": {
+            "*": ["./src/shared/types/*"]
+        }
     },
     "include":[
         "./src/**/*",

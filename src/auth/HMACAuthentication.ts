@@ -1,27 +1,29 @@
 'use strict';
-import localVarRequest = require("request");
-import CryptoJS = require("crypto-js");
-import { Authentication } from './Authentication';
 
-class VoidAuth implements Authentication {
+import CryptoJS = require("crypto-js");
+import axios = require("axios");
+
+class HMACAuthentication {
     protected configuration : any = {};
     protected mac_version = 1;
 
     constructor(configuration: any) {
         this.configuration = configuration;
+        this.apply = this.apply.bind(this);
     }
 
-    applyToRequest(requestOptions: localVarRequest.Options): void {
-        if (requestOptions && requestOptions.headers) {
-            (<any>Object).assign(requestOptions.headers, this.getAuthHeaders(
-                <string> requestOptions.method,
-                <string> (<localVarRequest.OptionsWithUri> requestOptions).uri,
-                <any> requestOptions.qs
+    apply(config: axios.InternalAxiosRequestConfig): axios.InternalAxiosRequestConfig {
+        if (config && config.headers) {
+            Object.assign(config.headers, this.getAuthHeaders(
+                (<string> config.method).toUpperCase(),
+                <string> config.url,
+                <any> config.params
             ));
         }
+        return config;
     }
 
-    protected getAuthHeaders(method: string, resourcePath: string, queryParams: any) : any {
+    private getAuthHeaders(method: string, resourcePath: string, queryParams: any) : any {
 
         if (Object.keys(queryParams).length != 0) {
             resourcePath += '?' + Object.keys(queryParams).map(
@@ -44,7 +46,7 @@ class VoidAuth implements Authentication {
         return headers;
     }
 
-    protected getSignature(method: string, resourcePath: string, timestamp: number) : string {
+    private getSignature(method: string, resourcePath: string, timestamp: number) : string {
         let data: string = [
             this.mac_version,
             this.configuration.user_id,
@@ -58,4 +60,4 @@ class VoidAuth implements Authentication {
 
 }
 
-export { VoidAuth }
+export { HMACAuthentication }

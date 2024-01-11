@@ -1,11 +1,9 @@
 'use strict';
-import localVarRequest = require("request");
+import axios = require("axios");
 
-interface Authentication {
-    /**
-    * Apply authentication settings to header and query params.
-    */
-    applyToRequest(requestOptions: localVarRequest.Options): void;
-}
+/**
+* Apply authentication settings to header and query params.
+*/
+type Authentication = (config: axios.InternalAxiosRequestConfig) => axios.InternalAxiosRequestConfig;
 
 export { Authentication }
