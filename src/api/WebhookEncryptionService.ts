@@ -19,6 +19,7 @@ class WebhookEncryptionService {
     protected _useQuerystring : boolean = false;
     protected _timeout : number = 25;
     protected _defaultAuthentication: Authentication;
+    protected static _cache: Map<string, WebhookEncryptionPublicKey> = new Map();
 
     constructor(configuration: any) {
         this._defaultAuthentication = new HMACAuthentication(configuration).apply;
@@ -95,7 +96,7 @@ class WebhookEncryptionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.4.0",
+            "x-meta-sdk-version": "4.5.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -169,13 +170,26 @@ class WebhookEncryptionService {
                 const publicKeyId = match[1];
                 const contentSignature = match[2];
 
-                this.read(publicKeyId)
-                    .then((response: { response: http.IncomingMessage, body: WebhookEncryptionPublicKey }) => {
-                        const publicKey = response.body.publicKey as string;
-                        const isValid = EncryptionUtil.isContentValid(contentToVerify, contentSignature, publicKey);
+                let publicKeyPromise: Promise<WebhookEncryptionPublicKey>;
+                if (WebhookEncryptionService._cache.has(publicKeyId)) {
+                    publicKeyPromise = Promise.resolve(WebhookEncryptionService._cache.get(publicKeyId) as WebhookEncryptionPublicKey);
+                } else {
+                    publicKeyPromise = this.read(publicKeyId)
+                        .then((response: { response: http.IncomingMessage, body: WebhookEncryptionPublicKey }) => {
+                            const publicKey = response.body as WebhookEncryptionPublicKey;
+                            if (publicKey.publicKey) {
+                                WebhookEncryptionService._cache.set(publicKeyId, publicKey);
+                                return publicKey;
+                            } else {
+                                throw new Error(`WebhookEncryptionPublicKey with id: ${publicKeyId} not found`);
+                            }
+                        });
+                }
+                publicKeyPromise
+                    .then(publicKey => {
+                        const isValid = EncryptionUtil.isContentValid(contentToVerify, contentSignature, publicKey.publicKey as string);
                         resolve(isValid);
                     }).catch(error => {
-                        console.error("Error verifying content:", error);
                         reject(error);
                     });
             } else {

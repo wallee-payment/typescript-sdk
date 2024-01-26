@@ -122,6 +122,43 @@ let transactionService: Wallee.api.TransactionService = new Wallee.api.Transacti
 transactionService.timeout = 15;
 ```
 
+### Integrating Webhook Payload Signing Mechanism into webhook callback handler
+
+The HTTP request which is sent for a state change of an entity now includes an additional field `state`, which provides information about the update of the monitored entity's state. This enhancement is a result of the implementation of our webhook encryption mechanism.
+
+Payload field `state` provides direct information about the state update of the entity, making additional API calls to retrieve the entity state redundant.
+
+#### ⚠️ Warning: Generic Pseudocode
+
+> **The provided pseudocode is intentionally generic and serves to illustrate the process of enhancing your API to leverage webhook payload signing. It is not a complete implementation.**
+>
+> Please ensure that you adapt and extend this code to meet the specific needs of your application, including appropriate security measures and error handling.
+For a detailed webhook payload signing mechanism understanding we highly recommend referring to our comprehensive
+[Webhook Payload Signing Documentation](https://app-wallee.com/doc/webhooks#_webhook_payload_signing_mechanism).
+```
+app.post('/webhook/callback', (req: Request, res: Response) => {
+    const requestPayload: string = req.body;
+    const signature: string | undefined = req.headers['x-signature'] as string;
+
+    if (!signature) {
+        // Make additional API call to retrieve the entity state
+        // ...
+    } else {
+        if (webhookEncryptionService().isContentValid(signature, requestPayload)) {
+            // Parse requestPayload to extract 'state' value
+            // Process entity's state change
+            // ...
+        }
+    }
+
+    // Process the received webhook data
+    // ...
+
+});
+```
+
+
+
 ## License
 
 Please see the [license file](https://github.com/wallee-payment/typescript-sdk/blob/master/LICENSE) for more information.
