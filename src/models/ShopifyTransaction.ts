@@ -1,6 +1,6 @@
 'use strict';
-import { ShopifyIntegration } from "./ShopifyIntegration";
 import { ShopifyTransactionState } from "./ShopifyTransactionState";
+import { ShopifyV1Integration } from "./ShopifyV1Integration";
 import { Transaction } from "./Transaction";
 import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
@@ -20,12 +20,22 @@ class ShopifyTransaction extends TransactionAwareEntity {
         /**
         * 
         */
-    'integration'?: ShopifyIntegration;
+    'draftOrderId'?: string;
 
         /**
         * 
         */
-    'orderId'?: string;
+    'draftOrderLegacyId'?: string;
+
+        /**
+        * 
+        */
+    'integration'?: ShopifyV1Integration;
+
+        /**
+        * 
+        */
+    'orderLegacyId'?: string;
 
         /**
         * 
@@ -70,14 +80,26 @@ class ShopifyTransaction extends TransactionAwareEntity {
         },
         
         {
-        "name": "integration",
-        "baseName": "integration",
-        "type": "ShopifyIntegration"
+        "name": "draftOrderId",
+        "baseName": "draftOrderId",
+        "type": "string"
         },
         
         {
-        "name": "orderId",
-        "baseName": "orderId",
+        "name": "draftOrderLegacyId",
+        "baseName": "draftOrderLegacyId",
+        "type": "string"
+        },
+        
+        {
+        "name": "integration",
+        "baseName": "integration",
+        "type": "ShopifyV1Integration"
+        },
+        
+        {
+        "name": "orderLegacyId",
+        "baseName": "orderLegacyId",
         "type": "string"
         },
         

@@ -5,7 +5,7 @@ import { FailureCategory } from "./FailureCategory";
 class FailureReason {
 
         /**
-        * 
+        * The category that the failure reason belongs to.
         */
     'category'?: FailureCategory;
 
@@ -13,11 +13,6 @@ class FailureReason {
         * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
-
-        /**
-        * 
-        */
-    'features'?: Array<number>;
 
         /**
         * A unique identifier for the object.
@@ -44,12 +39,6 @@ class FailureReason {
         "name": "description",
         "baseName": "description",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "features",
-        "baseName": "features",
-        "type": "Array<number>"
         },
         
         {

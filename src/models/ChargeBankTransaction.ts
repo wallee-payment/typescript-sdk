@@ -22,7 +22,7 @@ class ChargeBankTransaction extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

@@ -14,17 +14,17 @@ class SubscriptionUpdate {
     'version': number;
 
         /**
-        * 
+        * The affiliate that led to the creation of the subscription.
         */
     'affiliate'?: number;
 
         /**
-        * 
+        * A description used to identify the subscription.
         */
     'description'?: string;
 
         /**
-        * 
+        * The date and time when the subscription is planned to be terminated.
         */
     'plannedTerminationDate'?: Date;
 

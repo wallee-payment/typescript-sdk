@@ -10,32 +10,32 @@ class SubscriptionChargeCreate {
     'externalId': string;
 
         /**
-        * The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+        * The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
         */
     'failedUrl'?: string;
 
         /**
-        * 
+        * The date and time when the execution of the charge is planned.
         */
     'plannedExecutionDate'?: Date;
 
         /**
-        * 
+        * The processing type specifies how the charge is to be processed.
         */
     'processingType': SubscriptionChargeProcessingType;
 
         /**
-        * 
+        * The merchant's reference used to identify the charge.
         */
     'reference'?: string;
 
         /**
-        * The field subscription indicates the subscription to which the charge belongs to.
+        * The subscription that the charge belongs to.
         */
     'subscription': number;
 
         /**
-        * The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+        * The URL to redirect the customer back to after they successfully authenticated their payment.
         */
     'successUrl'?: string;
 

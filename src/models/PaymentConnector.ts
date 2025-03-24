@@ -1,7 +1,6 @@
 'use strict';
 import { CustomersPresence } from "./CustomersPresence";
 import { DataCollectionType } from "./DataCollectionType";
-import { Feature } from "./Feature";
 import { PaymentMethodBrand } from "./PaymentMethodBrand";
 import { PaymentPrimaryRiskTaker } from "./PaymentPrimaryRiskTaker";
 
@@ -9,17 +8,17 @@ import { PaymentPrimaryRiskTaker } from "./PaymentPrimaryRiskTaker";
 class PaymentConnector {
 
         /**
-        * 
+        * The data collection type specifies how the payment information is collected.
         */
     'dataCollectionType'?: DataCollectionType;
 
         /**
-        * 
+        * Whether the object was deprecated.
         */
     'deprecated'?: boolean;
 
         /**
-        * 
+        * The deprecation reason describes why the object was deprecated.
         */
     'deprecationReason'?: { [key: string]: string; };
 
@@ -27,11 +26,6 @@ class PaymentConnector {
         * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
-
-        /**
-        * 
-        */
-    'feature'?: Feature;
 
         /**
         * A unique identifier for the object.
@@ -44,37 +38,37 @@ class PaymentConnector {
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The payment method that the connector supports.
         */
     'paymentMethod'?: number;
 
         /**
-        * 
+        * The specific brand that this payment connector supports.
         */
     'paymentMethodBrand'?: PaymentMethodBrand;
 
         /**
-        * 
+        * The entity that bears the main risk in the event that a contracting party fails to meet its obligations.
         */
     'primaryRiskTaker'?: PaymentPrimaryRiskTaker;
 
         /**
-        * 
+        * The processor that the connector belongs to.
         */
     'processor'?: number;
 
         /**
-        * 
+        * The currencies that are supported by the connector.
         */
     'supportedCurrencies'?: Array<string>;
 
         /**
-        * 
+        * The types of customer's presence that are supported by the connector.
         */
     'supportedCustomersPresences'?: Array<CustomersPresence>;
 
         /**
-        * 
+        * The features that are supported by the connector.
         */
     'supportedFeatures'?: Array<number>;
 
@@ -105,12 +99,6 @@ class PaymentConnector {
         "name": "description",
         "baseName": "description",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "feature",
-        "baseName": "feature",
-        "type": "Feature"
         },
         
         {

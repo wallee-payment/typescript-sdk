@@ -78,6 +78,11 @@ class ShopifySubscriptionProduct {
     'productId'?: string;
 
         /**
+        * The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+        */
+    'productLegacyId'?: string;
+
+        /**
         * 
         */
     'productName'?: string;
@@ -96,6 +101,11 @@ class ShopifySubscriptionProduct {
         * 
         */
     'productVariantId'?: string;
+
+        /**
+        * 
+        */
+    'productVariantLegacyId'?: string;
 
         /**
         * 
@@ -242,6 +252,12 @@ class ShopifySubscriptionProduct {
         },
         
         {
+        "name": "productLegacyId",
+        "baseName": "productLegacyId",
+        "type": "string"
+        },
+        
+        {
         "name": "productName",
         "baseName": "productName",
         "type": "string"
@@ -262,6 +278,12 @@ class ShopifySubscriptionProduct {
         {
         "name": "productVariantId",
         "baseName": "productVariantId",
+        "type": "string"
+        },
+        
+        {
+        "name": "productVariantLegacyId",
+        "baseName": "productVariantLegacyId",
         "type": "string"
         },
         

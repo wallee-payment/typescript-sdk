@@ -16,7 +16,7 @@ class PaymentTerminalConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * The terminal configuration name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment terminal configuration.
         */
     'name'?: string;
 
@@ -31,7 +31,7 @@ class PaymentTerminalConfiguration {
     'state'?: PaymentTerminalConfigurationState;
 
         /**
-        * 
+        * The type of payment terminals that this configuration can be assigned to.
         */
     'type'?: PaymentTerminalType;
 

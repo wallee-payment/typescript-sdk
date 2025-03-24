@@ -8,27 +8,27 @@ import { TransactionEnvironmentSelectionStrategy } from "./TransactionEnvironmen
 class TransactionCreate extends AbstractTransactionPending {
 
         /**
-        * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+        * Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
         */
     'autoConfirmationEnabled'?: boolean;
 
         /**
-        * When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+        * Whether the customer can make further payment attempts if the first one has failed. Default is true.
         */
     'chargeRetryEnabled'?: boolean;
 
         /**
-        * The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+        * The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
         */
     'customersPresence'?: CustomersPresence;
 
         /**
-        * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+        * Allows to link the transaction to the data collected from the customer's device.
         */
     'deviceSessionIdentifier'?: string;
 
         /**
-        * Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+        * Whether email sending is deactivated for the transaction. Default is false.
         */
     'emailsDisabled'?: boolean;
 
@@ -38,12 +38,12 @@ class TransactionCreate extends AbstractTransactionPending {
     'environment'?: Environment;
 
         /**
-        * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+        * The strategy for determining whether the transaction is to be processed in the test or production environment.
         */
     'environmentSelectionStrategy'?: TransactionEnvironmentSelectionStrategy;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

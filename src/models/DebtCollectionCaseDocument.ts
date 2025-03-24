@@ -10,12 +10,12 @@ class DebtCollectionCaseDocument {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The debt collection case that this document belongs to.
         */
     'debtCollectionCase'?: number;
 
         /**
-        * 
+        * The file name of the document.
         */
     'fileName'?: string;
 
@@ -25,7 +25,7 @@ class DebtCollectionCaseDocument {
     'id'?: number;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 
@@ -35,7 +35,7 @@ class DebtCollectionCaseDocument {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The MIME type of the document's content.
         */
     'mimeType'?: string;
 
@@ -45,12 +45,7 @@ class DebtCollectionCaseDocument {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
-        */
-    'storageId'?: string;
-
-        /**
-        * 
+        * A unique identifier of the document.
         */
     'uniqueId'?: string;
 
@@ -110,12 +105,6 @@ class DebtCollectionCaseDocument {
         "name": "plannedPurgeDate",
         "baseName": "plannedPurgeDate",
         "type": "Date"
-        },
-        
-        {
-        "name": "storageId",
-        "baseName": "storageId",
-        "type": "string"
         },
         
         {

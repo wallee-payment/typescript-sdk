@@ -5,12 +5,12 @@ import { SubscriptionProductState } from "./SubscriptionProductState";
 class SubscriptionProduct {
 
         /**
-        * The allowed payment method configurations control which payment methods can be used with this product. When none is selected all methods will be allowed.
+        * The payment methods that can be used to subscribe to this product. If none are selected, no restriction is applied.
         */
     'allowedPaymentMethodConfigurations'?: Array<number>;
 
         /**
-        * When a payment fails, the subscription to which the payment belongs to will be suspended. When the suspension is not removed within the specified period the subscription will be terminated. A payment is considered as failed when the subscriber issues a refund or when a subscription charge fails.
+        * The period after which a subscription that has been suspended due to a failed payment is terminated.
         */
     'failedPaymentSuspensionPeriod'?: string;
 
@@ -25,7 +25,7 @@ class SubscriptionProduct {
     'linkedSpaceId'?: number;
 
         /**
-        * The product name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the product.
         */
     'name'?: string;
 
@@ -35,22 +35,22 @@ class SubscriptionProduct {
     'plannedPurgeDate'?: Date;
 
         /**
-        * Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+        * Whether subscriptions can be switched to or from this product, or whether they are locked in.
         */
     'productLocked'?: boolean;
 
         /**
-        * The product reference identifies the product for external systems. This field may contain the product's SKU.
+        * The merchant's reference used to identify the product, e.g. the SKU.
         */
     'reference'?: string;
 
         /**
-        * The sort order controls in which order the product is listed. The sort order is used to order the products in ascending order.
+        * When listing products, they can be sorted by this number.
         */
     'sortOrder'?: number;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
         */
     'spaceId'?: number;
 

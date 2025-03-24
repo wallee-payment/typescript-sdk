@@ -4,17 +4,17 @@
 class SubscriptionProductRetirementCreate {
 
         /**
-        * 
+        * The product that is to be retired.
         */
     'product': number;
 
         /**
-        * 
+        * Whether the subscriptions' termination periods should be respected.
         */
-    'respectTerminiationPeriodsEnabled'?: boolean;
+    'respectTerminationPeriods'?: boolean;
 
         /**
-        * 
+        * The product to which the subscriptions with the retiring product are to be migrated. If none is defined, the subscriptions are terminated.
         */
     'targetProduct'?: number;
 
@@ -30,8 +30,8 @@ class SubscriptionProductRetirementCreate {
         },
         
         {
-        "name": "respectTerminiationPeriodsEnabled",
-        "baseName": "respectTerminiationPeriodsEnabled",
+        "name": "respectTerminationPeriods",
+        "baseName": "respectTerminationPeriods",
         "type": "boolean"
         },
         

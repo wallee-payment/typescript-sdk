@@ -1,5 +1,4 @@
 'use strict';
-import { Feature } from "./Feature";
 
 
 class SubscriptionMetricType {
@@ -12,7 +11,7 @@ class SubscriptionMetricType {
         /**
         * 
         */
-    'feature'?: Feature;
+    'feature'?: number;
 
         /**
         * A unique identifier for the object.
@@ -38,7 +37,7 @@ class SubscriptionMetricType {
         {
         "name": "feature",
         "baseName": "feature",
-        "type": "Feature"
+        "type": "number"
         },
         
         {

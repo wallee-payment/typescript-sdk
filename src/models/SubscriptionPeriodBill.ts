@@ -6,12 +6,12 @@ import { SubscriptionVersion } from "./SubscriptionVersion";
 class SubscriptionPeriodBill {
 
         /**
-        * 
+        * The date and time when the period bill was created.
         */
     'createdOn'?: Date;
 
         /**
-        * 
+        * The date and time when the period actually ended.
         */
     'effectivePeriodEndDate'?: Date;
 
@@ -31,12 +31,12 @@ class SubscriptionPeriodBill {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The date and time when the period started.
         */
     'periodStartDate'?: Date;
 
         /**
-        * 
+        * The date and time when the period is planned to end.
         */
     'plannedPeriodEndDate'?: Date;
 
@@ -51,7 +51,7 @@ class SubscriptionPeriodBill {
     'state'?: SubscriptionPeriodBillState;
 
         /**
-        * 
+        * The subscription version that the period bill belongs to.
         */
     'subscriptionVersion'?: SubscriptionVersion;
 

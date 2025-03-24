@@ -1,7 +1,7 @@
 'use strict';
 
 
-class ShopifySubscriptionModelTaxLine {
+class TaxLine {
 
         /**
         * 
@@ -32,8 +32,8 @@ class ShopifySubscriptionModelTaxLine {
     ];
 
     static getAttributeTypeMap() {
-        return ShopifySubscriptionModelTaxLine.attributeTypeMap;
+        return TaxLine.attributeTypeMap;
     }
 }
 
-export { ShopifySubscriptionModelTaxLine }
+export { TaxLine }

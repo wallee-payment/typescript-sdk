@@ -14,12 +14,12 @@ class SubscriptionMetricUpdate {
     'version': number;
 
         /**
-        * 
+        * The localized description of the metric that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The localized name of the metric that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 

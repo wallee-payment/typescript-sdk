@@ -1,6 +1,6 @@
 'use strict';
-import { ShopifySubscriptionModelBillingConfiguration } from "./ShopifySubscriptionModelBillingConfiguration";
-import { ShopifySubscriptionModelItem } from "./ShopifySubscriptionModelItem";
+import { BillingConfiguration } from "./BillingConfiguration";
+import { Item } from "./Item";
 
 
 class ShopifySubscriptionUpdateRequest {
@@ -8,7 +8,7 @@ class ShopifySubscriptionUpdateRequest {
         /**
         * 
         */
-    'billingConfiguration'?: ShopifySubscriptionModelBillingConfiguration;
+    'billingConfiguration'?: BillingConfiguration;
 
         /**
         * 
@@ -18,7 +18,7 @@ class ShopifySubscriptionUpdateRequest {
         /**
         * 
         */
-    'items'?: Array<ShopifySubscriptionModelItem>;
+    'items'?: Array<Item>;
 
         /**
         * 
@@ -38,7 +38,7 @@ class ShopifySubscriptionUpdateRequest {
         {
         "name": "billingConfiguration",
         "baseName": "billingConfiguration",
-        "type": "ShopifySubscriptionModelBillingConfiguration"
+        "type": "BillingConfiguration"
         },
         
         {
@@ -50,7 +50,7 @@ class ShopifySubscriptionUpdateRequest {
         {
         "name": "items",
         "baseName": "items",
-        "type": "Array<ShopifySubscriptionModelItem>"
+        "type": "Array<Item>"
         },
         
         {

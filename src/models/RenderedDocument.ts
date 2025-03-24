@@ -4,22 +4,22 @@
 class RenderedDocument {
 
         /**
-        * 
+        * The binary data of the document
         */
     'data'?: Array<string>;
 
         /**
-        * 
+        * The document's template type
         */
     'documentTemplateType'?: number;
 
         /**
-        * 
+        * The document's content type
         */
     'mimeType'?: string;
 
         /**
-        * 
+        * The title of the rendered document
         */
     'title'?: string;
 

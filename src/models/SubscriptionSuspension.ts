@@ -12,12 +12,12 @@ class SubscriptionSuspension {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The date and time when the suspension ended.
         */
     'effectiveEndDate'?: Date;
 
         /**
-        * When the suspension reaches the planned end date the end action will be carried out. This action is only executed when the suspension is ended automatically based on the end date.
+        * Whether the subscription should be terminated or reactivated after the suspension has reached its end date.
         */
     'endAction'?: SubscriptionSuspensionAction;
 
@@ -37,17 +37,17 @@ class SubscriptionSuspension {
     'linkedSpaceId'?: number;
 
         /**
-        * The note may contain some internal information for the suspension. The note will not be disclosed to the subscriber.
+        * A note that contains details about the suspension. It is not disclosed to the subscriber.
         */
     'note'?: string;
 
         /**
-        * 
+        * The period bill that led to the suspension of the subscription.
         */
     'periodBill'?: number;
 
         /**
-        * The planned end date of the suspension identifies the date on which the suspension will be ended automatically.
+        * The date and time when the suspension is planned to end.
         */
     'plannedEndDate'?: Date;
 
@@ -57,7 +57,7 @@ class SubscriptionSuspension {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The suspension reason indicates why a suspension has been created.
+        * The reason why the subscription was suspended.
         */
     'reason'?: SubscriptionSuspensionReason;
 
@@ -67,7 +67,7 @@ class SubscriptionSuspension {
     'state'?: SubscriptionSuspensionState;
 
         /**
-        * 
+        * The subscription that this suspension belongs to.
         */
     'subscription'?: number;
 

@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "4.5.0",
+    "version": "4.6.0",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
@@ -30,7 +30,7 @@
         "@types/bluebird": "3.5.36",
         "@types/crypto-js": "4.2.1",
         "@types/request": "2.48.8",
-        "axios": "1.6.2",
+        "axios": "1.8.3",
         "bluebird": "3.5.0",
         "crypto-js": "4.2.0",
         "starkbank-ecdsa": "^1.1.5"

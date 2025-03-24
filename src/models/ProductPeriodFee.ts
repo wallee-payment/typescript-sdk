@@ -7,12 +7,12 @@ import { SubscriptionProductComponent } from "./SubscriptionProductComponent";
 class ProductPeriodFee {
 
         /**
-        * 
+        * The product component that the fee belongs to.
         */
     'component'?: SubscriptionProductComponent;
 
         /**
-        * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+        * The localized description of the fee that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
@@ -22,7 +22,7 @@ class ProductPeriodFee {
     'id'?: number;
 
         /**
-        * The ledger entry title will be used for the title in the ledger entry and in the invoice.
+        * The localized title that be used on ledger entries and invoices.
         */
     'ledgerEntryTitle'?: { [key: string]: string; };
 
@@ -32,22 +32,22 @@ class ProductPeriodFee {
     'linkedSpaceId'?: number;
 
         /**
-        * The name of the fee should describe for the subscriber in few words for what the fee is for.
+        * The localized name of the fee that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * The number of free trial periods specify how many periods are free of charge at the begining of the subscription.
+        * The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
         */
     'numberOfFreeTrialPeriods'?: number;
 
         /**
-        * The period fee is charged for every period of the subscription except for those periods which are trial periods.
+        * The amount charged to the customer for each billing cycle during the term of a subscription.
         */
     'periodFee'?: Array<PersistableCurrencyAmount>;
 
         /**
-        * 
+        * The type of the fee.
         */
     'type'?: ProductFeeType;
 

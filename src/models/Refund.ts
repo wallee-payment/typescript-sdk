@@ -63,7 +63,7 @@ class Refund {
     'id'?: number;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 

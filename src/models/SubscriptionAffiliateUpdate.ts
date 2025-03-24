@@ -25,7 +25,7 @@ class SubscriptionAffiliateUpdate {
     'metaData'?: { [key: string]: string; };
 
         /**
-        * 
+        * The name used to identify the affiliate.
         */
     'name'?: string;
 

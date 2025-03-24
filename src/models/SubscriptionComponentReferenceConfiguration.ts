@@ -4,12 +4,12 @@
 class SubscriptionComponentReferenceConfiguration {
 
         /**
-        * 
+        * The ID of the component reference that is being configured.
         */
     'productComponentReferenceId'?: number;
 
         /**
-        * 
+        * The quantity that should be applied to the component.
         */
     'quantity'?: number;
 

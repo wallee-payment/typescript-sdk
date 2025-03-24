@@ -5,27 +5,27 @@ import { Space } from "./Space";
 class WebAppConfirmationResponse {
 
         /**
-        * The access code grants permissions to the web service API according to the OAuth standard.
+        * The access code granting permissions to the web service API according to the OAuth standard.
         */
     'accessToken'?: string;
 
         /**
-        * The scope contains the permissions granted to the web app within the space.
+        * The list of the permissions granted to the web app within the space.
         */
     'scope'?: string;
 
         /**
-        * This is the space into which the web app is installed into.
+        * The space that the web app was installed in.
         */
     'space'?: Space;
 
         /**
-        * The state contains the state parameter content provided when initiating the app installation.
+        * The state parameter that was provided in the authorization request.
         */
     'state'?: string;
 
         /**
-        * The token type indicates the type of the access token. The type determines the authentication mechanism to use for accessing the web service API.
+        * The type of the access token that determines the authentication mechanism to use for accessing the web service API.
         */
     'tokenType'?: string;
 

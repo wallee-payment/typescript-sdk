@@ -5,12 +5,12 @@ import { CreationEntityState } from "./CreationEntityState";
 class PaymentProcessorConfiguration {
 
         /**
-        * The configuration is managed by the application and cannot be changed via the user interface.
+        * Whether the processor configuration is managed by the application and therefore cannot be changed.
         */
     'applicationManaged'?: boolean;
 
         /**
-        * The contract links the processor configuration with the contract that is used to process payments.
+        * The ID of the payment contract the processor configuration is linked to.
         */
     'contractId'?: number;
 
@@ -25,7 +25,7 @@ class PaymentProcessorConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * The processor configuration name is used internally to identify a specific processor configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment method configuration.
         */
     'name'?: string;
 
@@ -35,7 +35,7 @@ class PaymentProcessorConfiguration {
     'plannedPurgeDate'?: Date;
 
         /**
-        * A processor handles the connection to a third part company (a Payment Service Provider) that technically manages the transaction and therefore processes the payment. For the same processor multiple processor configuration can be setup.
+        * The payment processor that the configuration is for.
         */
     'processor'?: number;
 

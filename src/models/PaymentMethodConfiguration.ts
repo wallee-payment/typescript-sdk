@@ -8,12 +8,12 @@ import { ResourcePath } from "./ResourcePath";
 class PaymentMethodConfiguration {
 
         /**
-        * The data collection type determines who is collecting the payment information. This can be done either by the processor (offsite) or by our application (onsite).
+        * The data collection type specifies how the payment information is collected.
         */
     'dataCollectionType'?: DataCollectionType;
 
         /**
-        * The payment method configuration description can be used to show a text during the payment process. Choose an appropriate description as it will be displayed to your customer.
+        * A custom description for the payment method which is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
@@ -23,7 +23,7 @@ class PaymentMethodConfiguration {
     'id'?: number;
 
         /**
-        * The image of the payment method configuration overrides the default image of the payment method.
+        * The resource path to a custom image for the payment method which is displayed to the customer.
         */
     'imageResourcePath'?: ResourcePath;
 
@@ -33,17 +33,17 @@ class PaymentMethodConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * The payment method configuration name is used internally to identify the payment method configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment method configuration.
         */
     'name'?: string;
 
         /**
-        * When the buyer is present on the payment page or within the iFrame the payment details can be stored automatically. The buyer will be able to use the stored payment details for subsequent transactions. When the transaction already contains a token one-click payments are disabled anyway
+        * The one-click payment mode determines whether the customer can save their payment details for later payments.
         */
     'oneClickPaymentMode'?: OneClickPaymentMode;
 
         /**
-        * 
+        * The payment method that the configuration is for.
         */
     'paymentMethod'?: number;
 
@@ -53,27 +53,27 @@ class PaymentMethodConfiguration {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The resolved description uses the specified description or the default one when it is not overridden.
+        * The description for the payment method that is actually displayed to the customer. This is either the custom description, if defined, or otherwise the payment method's default one.
         */
     'resolvedDescription'?: { [key: string]: string; };
 
         /**
-        * The resolved URL of the image to use with this payment method.
+        * The image URL for the payment method that is actually displayed to the customer. This is either the custom image, if defined, or otherwise the payment method's default one.
         */
     'resolvedImageUrl'?: string;
 
         /**
-        * The resolved title uses the specified title or the default one when it is not overridden.
+        * The title for the payment method that is actually displayed to the customer. This is either the custom title, if defined, or otherwise the payment method's default one.
         */
     'resolvedTitle'?: { [key: string]: string; };
 
         /**
-        * The sort order of the payment method determines the ordering of the methods shown to the user during the payment process.
+        * When listing payment methods, they can be sorted by this number.
         */
     'sortOrder'?: number;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
         */
     'spaceId'?: number;
 
@@ -83,7 +83,7 @@ class PaymentMethodConfiguration {
     'state'?: CreationEntityState;
 
         /**
-        * The title of the payment method configuration is used within the payment process. The title is visible to the customer.
+        * A custom title for the payment method which is displayed to the customer.
         */
     'title'?: { [key: string]: string; };
 

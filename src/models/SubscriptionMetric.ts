@@ -6,7 +6,7 @@ import { SubscriptionMetricType } from "./SubscriptionMetricType";
 class SubscriptionMetric {
 
         /**
-        * 
+        * The localized description of the metric that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
@@ -21,7 +21,7 @@ class SubscriptionMetric {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The localized name of the metric that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
@@ -36,7 +36,7 @@ class SubscriptionMetric {
     'state'?: CreationEntityState;
 
         /**
-        * 
+        * The type of the metric.
         */
     'type'?: SubscriptionMetricType;
 

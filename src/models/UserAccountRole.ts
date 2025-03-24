@@ -4,12 +4,12 @@
 class UserAccountRole {
 
         /**
-        * 
+        * The account in which the role is assigned to the user.
         */
     'account'?: number;
 
         /**
-        * 
+        * Whether the role is assigned to the user in subaccounts only.
         */
     'appliesOnSubAccount'?: boolean;
 
@@ -19,12 +19,12 @@ class UserAccountRole {
     'id'?: number;
 
         /**
-        * 
+        * The role that is assigned to the user.
         */
     'role'?: number;
 
         /**
-        * 
+        * The user whose role this defines.
         */
     'user'?: number;
 

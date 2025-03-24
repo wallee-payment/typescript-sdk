@@ -9,7 +9,7 @@ class StaticValue {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The features that this static value belongs to.
         */
     'features'?: Array<number>;
 

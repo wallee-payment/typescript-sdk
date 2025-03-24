@@ -51,7 +51,7 @@ class TransactionCompletion extends TransactionAwareEntity {
     'invoiceMerchantReference'?: string;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 
@@ -111,7 +111,7 @@ class TransactionCompletion extends TransactionAwareEntity {
     'remainingLineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

@@ -11,7 +11,7 @@ class InstallmentPlanSliceConfiguration {
     'id'?: number;
 
         /**
-        * The title of this slices line items. The title is visible to the buyer.
+        * The title of this slice's line items. The title is visible to the buyer.
         */
     'lineItemTitle'?: { [key: string]: string; };
 

@@ -5,7 +5,7 @@ import { AbstractSubscriptionMetricUpdate } from "./AbstractSubscriptionMetricUp
 class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate {
 
         /**
-        * 
+        * The type of the metric.
         */
     'type': number;
 

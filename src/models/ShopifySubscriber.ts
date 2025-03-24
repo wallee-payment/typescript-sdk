@@ -15,6 +15,11 @@ class ShopifySubscriber {
     'emailAddress'?: string;
 
         /**
+        * 
+        */
+    'externalGid'?: string;
+
+        /**
         * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
         */
     'externalId'?: string;
@@ -68,6 +73,12 @@ class ShopifySubscriber {
         {
         "name": "emailAddress",
         "baseName": "emailAddress",
+        "type": "string"
+        },
+        
+        {
+        "name": "externalGid",
+        "baseName": "externalGid",
         "type": "string"
         },
         

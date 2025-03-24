@@ -10,17 +10,17 @@ import { Transaction } from "./Transaction";
 class SubscriptionCharge {
 
         /**
-        * 
+        * The date and time when the charge was created.
         */
     'createdOn'?: Date;
 
         /**
-        * 
+        * The ID of the user the charge was discarded by.
         */
     'discardedBy'?: number;
 
         /**
-        * 
+        * The date and time when the charge was discarded.
         */
     'discardedOn'?: Date;
 
@@ -30,12 +30,12 @@ class SubscriptionCharge {
     'externalId'?: string;
 
         /**
-        * 
+        * The date and time when the charge failed.
         */
     'failedOn'?: Date;
 
         /**
-        * The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+        * The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
         */
     'failedUrl'?: string;
 
@@ -50,7 +50,7 @@ class SubscriptionCharge {
     'language'?: string;
 
         /**
-        * 
+        * The ledger entries that belong to the charge.
         */
     'ledgerEntries'?: Array<SubscriptionLedgerEntry>;
 
@@ -60,7 +60,7 @@ class SubscriptionCharge {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The date and time when the execution of the charge is planned.
         */
     'plannedExecutionDate'?: Date;
 
@@ -70,12 +70,12 @@ class SubscriptionCharge {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The processing type specifies how the charge is to be processed.
         */
     'processingType'?: SubscriptionChargeProcessingType;
 
         /**
-        * 
+        * The merchant's reference used to identify the charge.
         */
     'reference'?: string;
 
@@ -85,27 +85,27 @@ class SubscriptionCharge {
     'state'?: SubscriptionChargeState;
 
         /**
-        * The field subscription indicates the subscription to which the charge belongs to.
+        * The subscription that the charge belongs to.
         */
     'subscription'?: Subscription;
 
         /**
-        * 
+        * The date and time when the charge succeeded.
         */
     'succeedOn'?: Date;
 
         /**
-        * The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+        * The URL to redirect the customer back to after they successfully authenticated their payment.
         */
     'successUrl'?: string;
 
         /**
-        * 
+        * The transaction used to process the charge.
         */
     'transaction'?: Transaction;
 
         /**
-        * 
+        * The type specified how the charge was initiated.
         */
     'type'?: SubscriptionChargeType;
 

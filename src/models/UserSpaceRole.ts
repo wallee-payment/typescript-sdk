@@ -9,17 +9,17 @@ class UserSpaceRole {
     'id'?: number;
 
         /**
-        * 
+        * The role that is assigned to the user.
         */
     'role'?: number;
 
         /**
-        * 
+        * The space in which the role is assigned to the user.
         */
     'space'?: number;
 
         /**
-        * 
+        * The user whose role this defines.
         */
     'user'?: number;
 

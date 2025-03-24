@@ -5,7 +5,7 @@ import { AbstractSubscriptionProductActive } from "./AbstractSubscriptionProduct
 class SubscriptionProductCreate extends AbstractSubscriptionProductActive {
 
         /**
-        * The product reference identifies the product for external systems. This field may contain the product's SKU.
+        * The merchant's reference used to identify the product, e.g. the SKU.
         */
     'reference': string;
 

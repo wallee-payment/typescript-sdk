@@ -4,12 +4,12 @@
 class Tax {
 
         /**
-        * 
+        * The tax rate to be applied.
         */
     'rate'?: number;
 
         /**
-        * 
+        * The name of the tax.
         */
     'title'?: string;
 

@@ -12,27 +12,27 @@ import { LineItem } from "./LineItem";
 class DebtCollectionCase {
 
         /**
-        * The amount is the total amount of the not paid items. The amount cannot be change once the case is reviewed.
+        * The sum of all unpaid item prices in the case's currency. The amount can no longer be changed once the case has been reviewed.
         */
     'amount'?: number;
 
         /**
-        * The billing address of the case identifies the debtor.
+        * The billing address that identifies the debtor.
         */
     'billingAddress'?: Address;
 
         /**
-        * The closed on date indicates when the case is closed on.
+        * The date and time when the case was closed.
         */
     'closedOn'?: Date;
 
         /**
-        * The collector configuration determines how the debt collection case is processed.
+        * The configuration that the case is processed with.
         */
     'collectorConfiguration'?: DebtCollectorConfiguration;
 
         /**
-        * The contract date is the date on which the contract with the debtor was signed on.
+        * The date and time when the contract with the debtor was signed.
         */
     'contractDate'?: Date;
 
@@ -42,22 +42,22 @@ class DebtCollectionCase {
     'createdOn'?: Date;
 
         /**
-        * The creator references the user which has created the debt collection case.
+        * The ID of the user the case was created by.
         */
     'creator'?: number;
 
         /**
-        * The currency defines the billing currency of the debt collection case.
+        * The three-letter code (ISO 4217 format) of the case's currency.
         */
     'currency'?: string;
 
         /**
-        * The due date indicates the date on which the amount receivable was due. This date has to be always in the past.
+        * The date and time when the claim was due.
         */
     'dueDate'?: Date;
 
         /**
-        * The environment in which this case will be processed. There must be a debt collector configuration present which supports the chosen environment.
+        * The environment in which the case is processed.
         */
     'environment'?: DebtCollectionEnvironment;
 
@@ -67,12 +67,12 @@ class DebtCollectionCase {
     'externalId'?: string;
 
         /**
-        * The failed on date indicates when the case is failed on.
+        * The date and time when the case failed.
         */
     'failedOn'?: Date;
 
         /**
-        * 
+        * The reason for the failure of the case.
         */
     'failureReason'?: FailureReason;
 
@@ -82,17 +82,17 @@ class DebtCollectionCase {
     'id'?: number;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 
         /**
-        * The language indicates the language to be used in the communication with the debtor.
+        * The language that is linked to the object.
         */
     'language'?: string;
 
         /**
-        * The line items of the debt collection case will be shown on documents sent to the debtor and the total of them makes up total amount to collect.
+        * The line items that are subject of this debt collection case.
         */
     'lineItems'?: Array<LineItem>;
 
@@ -102,7 +102,7 @@ class DebtCollectionCase {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The date and time when the next attempt at processing the case will be made.
         */
     'nextAttemptOn'?: Date;
 
@@ -112,47 +112,47 @@ class DebtCollectionCase {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The processing started on date indicates the date on which the processing of the case started on.
+        * The date and time when the processing of the case was started.
         */
     'processingStartedOn'?: Date;
 
         /**
-        * 
+        * The date and time when the processing of the case times out.
         */
     'processingTimeoutOn'?: Date;
 
         /**
-        * The case reference is used in the communication with the debtor. It should be unique and it should be linkable with the source of the debt collection case.
+        * A unique reference to identify the debt collection case in communication with the debtor.
         */
     'reference'?: string;
 
         /**
-        * 
+        * The date and time when the review of the case was started.
         */
     'reviewStartedOn'?: Date;
 
         /**
-        * The reviewed on date indicates when the review of the case was conducted on.
+        * The date and time when the case was reviewed.
         */
     'reviewedOn'?: Date;
 
         /**
-        * The reviewer references the user which has reviewed the case.
+        * The ID of the user the case was reviewed by.
         */
     'reviewer'?: number;
 
         /**
-        * The source of the debt collection case indicates the origin of the amount receivable.
+        * The source of the case stating the origin of the claim.
         */
     'source'?: DebtCollectionCaseSource;
 
         /**
-        * The source entity ID points to the object which is the origin of the debt collection case. This ID is only set when the case was triggered by an internal process.
+        * The ID of the object that is the source of the case. Only defined if the case was created by an internal process.
         */
     'sourceEntityId'?: number;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

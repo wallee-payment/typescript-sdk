@@ -7,22 +7,22 @@ import { TaxClass } from "./TaxClass";
 class SubscriptionProductComponent {
 
         /**
-        * If a product component changes from one with a lower product component tier (e.g. 1) to one with a higher product component tier (e.g. 3), it is considered an upgrade and a one-time fee could be applied.
+        * If switching from a component with a lower tier to a component with a higher one, this is considered an upgrade and a fee may be applied.
         */
     'componentChangeWeight'?: number;
 
         /**
-        * 
+        * The group that the component belongs to.
         */
     'componentGroup'?: SubscriptionProductComponentGroup;
 
         /**
-        * When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
+        * Whether this is the default component in its group and preselected.
         */
     'defaultComponent'?: boolean;
 
         /**
-        * The component description may contain a longer description which gives the subscriber a better understanding of what the component contains.
+        * The localized description of the component that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
@@ -37,37 +37,37 @@ class SubscriptionProductComponent {
     'linkedSpaceId'?: number;
 
         /**
-        * The maximum quantity defines the maximum value which must be entered for the quantity.
+        * A maximum of the defined quantity can be selected for this component.
         */
     'maximalQuantity'?: number;
 
         /**
-        * The minimal quantity defines the minimum value which must be entered for the quantity.
+        * A minimum of the defined quantity must be selected for this component.
         */
     'minimalQuantity'?: number;
 
         /**
-        * The component name is shown to the subscriber. It should describe in few words what the component does contain.
+        * The localized name of the component that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * The quantity step defines at which interval the quantity can be increased.
+        * The quantity step determines the interval in which the quantity can be increased.
         */
     'quantityStep'?: number;
 
         /**
-        * The component reference is used to identify the component by external systems and it marks components to represent the same component within different product versions.
+        * The reference is used to link components across different product versions.
         */
     'reference'?: SubscriptionProductComponentReference;
 
         /**
-        * The sort order controls in which order the component is listed. The sort order is used to order the components in ascending order.
+        * When listing components, they can be sorted by this number.
         */
     'sortOrder'?: number;
 
         /**
-        * The tax class of the component determines the taxes which are applicable on all fees linked with the component.
+        * The tax class to be applied to fees.
         */
     'taxClass'?: TaxClass;
 

@@ -6,7 +6,7 @@ import { ShopifyIntegrationPaymentAppVersion } from "./ShopifyIntegrationPayment
 import { ShopifyIntegrationSubscriptionAppVersion } from "./ShopifyIntegrationSubscriptionAppVersion";
 
 
-class ShopifyIntegration {
+class ShopifyV1Integration {
 
         /**
         * 
@@ -44,7 +44,7 @@ class ShopifyIntegration {
     'language'?: string;
 
         /**
-        * The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shops payment gateway configuration.
+        * The login name is used to link a specific Shopify payment gateway to this integration.This login name is to be filled into the appropriate field in the shop's payment gateway configuration.
         */
     'loginName'?: string;
 
@@ -64,7 +64,7 @@ class ShopifyIntegration {
     'paymentInstalled'?: boolean;
 
         /**
-        * Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+        * Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
         */
     'paymentProxyPath'?: string;
 
@@ -79,7 +79,7 @@ class ShopifyIntegration {
     'replacePaymentMethodImage'?: boolean;
 
         /**
-        * The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopifys admin URL: [storeAddress].myshopify.com
+        * The store address is used to link a specific Shopify shop to this integration. This is the name used in the Shopify's admin URL: [storeAddress].myshopify.com
         */
     'shopName'?: string;
 
@@ -99,7 +99,7 @@ class ShopifyIntegration {
     'spaceId'?: number;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 
@@ -119,7 +119,7 @@ class ShopifyIntegration {
     'subscriptionInstalled'?: boolean;
 
         /**
-        * Define the path of the proxy URL. This only needs to be changed if the apps proxy URL is overwritten in the Shopify store.
+        * Define the path of the proxy URL. This only needs to be changed if the app's proxy URL is overwritten in the Shopify store.
         */
     'subscriptionProxyPath'?: string;
 
@@ -279,8 +279,8 @@ class ShopifyIntegration {
     ];
 
     static getAttributeTypeMap() {
-        return ShopifyIntegration.attributeTypeMap;
+        return ShopifyV1Integration.attributeTypeMap;
     }
 }
 
-export { ShopifyIntegration }
+export { ShopifyV1Integration }

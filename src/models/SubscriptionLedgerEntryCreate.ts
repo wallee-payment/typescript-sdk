@@ -5,9 +5,14 @@ import { TaxCreate } from "./TaxCreate";
 class SubscriptionLedgerEntryCreate {
 
         /**
-        * 
+        * The leger entry's amount with discounts applied, including taxes.
         */
     'amountIncludingTax': number;
+
+        /**
+        * 
+        */
+    'componentReferenceName'?: string;
 
         /**
         * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
@@ -15,22 +20,27 @@ class SubscriptionLedgerEntryCreate {
     'externalId': string;
 
         /**
-        * 
+        * The number of items that were consumed.
         */
     'quantity': number;
 
         /**
         * 
         */
+    'subscriptionMetricId'?: number;
+
+        /**
+        * The subscription version that the ledger entry belongs to.
+        */
     'subscriptionVersion': number;
 
         /**
-        * 
+        * A set of tax lines, each of which specifies a tax applied to the ledger entry.
         */
     'taxes'?: Array<TaxCreate>;
 
         /**
-        * 
+        * The title that indicates what the ledger entry is about.
         */
     'title': string;
 
@@ -46,6 +56,12 @@ class SubscriptionLedgerEntryCreate {
         },
         
         {
+        "name": "componentReferenceName",
+        "baseName": "componentReferenceName",
+        "type": "string"
+        },
+        
+        {
         "name": "externalId",
         "baseName": "externalId",
         "type": "string"
@@ -54,6 +70,12 @@ class SubscriptionLedgerEntryCreate {
         {
         "name": "quantity",
         "baseName": "quantity",
+        "type": "number"
+        },
+        
+        {
+        "name": "subscriptionMetricId",
+        "baseName": "subscriptionMetricId",
         "type": "number"
         },
         

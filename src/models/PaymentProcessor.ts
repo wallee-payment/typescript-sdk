@@ -4,7 +4,7 @@
 class PaymentProcessor {
 
         /**
-        * 
+        * The name of the company to which the processor belongs.
         */
     'companyName'?: { [key: string]: string; };
 
@@ -14,12 +14,7 @@ class PaymentProcessor {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
-        */
-    'feature'?: number;
-
-        /**
-        * 
+        * Where the processor's headquarters are located.
         */
     'headquartersLocation'?: { [key: string]: string; };
 
@@ -29,7 +24,7 @@ class PaymentProcessor {
     'id'?: number;
 
         /**
-        * 
+        * The path to the logo image of the processor.
         */
     'logoPath'?: string;
 
@@ -39,7 +34,7 @@ class PaymentProcessor {
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The name of the processor's product.
         */
     'productName'?: { [key: string]: string; };
 
@@ -58,12 +53,6 @@ class PaymentProcessor {
         "name": "description",
         "baseName": "description",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "feature",
-        "baseName": "feature",
-        "type": "number"
         },
         
         {

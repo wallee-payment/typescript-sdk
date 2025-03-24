@@ -5,29 +5,19 @@ import { LabelDescriptor } from "./LabelDescriptor";
 class Label {
 
         /**
-        * 
+        * The label's actual content.
         */
     'content'?: any;
 
         /**
-        * 
+        * The label's content formatted as string.
         */
     'contentAsString'?: string;
 
         /**
-        * 
+        * The descriptor that describes what information the label provides.
         */
     'descriptor'?: LabelDescriptor;
-
-        /**
-        * A unique identifier for the object.
-        */
-    'id'?: number;
-
-        /**
-        * The version is used for optimistic locking and incremented whenever the object is updated.
-        */
-    'version'?: number;
 
 
     static discriminator: string | undefined = undefined;
@@ -50,18 +40,6 @@ class Label {
         "name": "descriptor",
         "baseName": "descriptor",
         "type": "LabelDescriptor"
-        },
-        
-        {
-        "name": "id",
-        "baseName": "id",
-        "type": "number"
-        },
-        
-        {
-        "name": "version",
-        "baseName": "version",
-        "type": "number"
         }        
     ];
 

@@ -9,7 +9,7 @@ class DebtCollectionCaseSource {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * Whether debt collection cases created from this source will skip review and directly enter preparing state.
         */
     'forcedPreparingState'?: boolean;
 

@@ -1,8 +1,8 @@
 'use strict';
+import { BillingConfiguration } from "./BillingConfiguration";
+import { Item } from "./Item";
 import { ShopifySubscriberCreation } from "./ShopifySubscriberCreation";
 import { ShopifySubscriptionAddressCreate } from "./ShopifySubscriptionAddressCreate";
-import { ShopifySubscriptionModelBillingConfiguration } from "./ShopifySubscriptionModelBillingConfiguration";
-import { ShopifySubscriptionModelItem } from "./ShopifySubscriptionModelItem";
 
 
 class ShopifySubscriptionCreationRequest {
@@ -15,7 +15,7 @@ class ShopifySubscriptionCreationRequest {
         /**
         * 
         */
-    'billingConfiguration'?: ShopifySubscriptionModelBillingConfiguration;
+    'billingConfiguration'?: BillingConfiguration;
 
         /**
         * 
@@ -40,7 +40,7 @@ class ShopifySubscriptionCreationRequest {
         /**
         * 
         */
-    'items': Array<ShopifySubscriptionModelItem>;
+    'items': Array<Item>;
 
         /**
         * 
@@ -91,7 +91,7 @@ class ShopifySubscriptionCreationRequest {
         {
         "name": "billingConfiguration",
         "baseName": "billingConfiguration",
-        "type": "ShopifySubscriptionModelBillingConfiguration"
+        "type": "BillingConfiguration"
         },
         
         {
@@ -121,7 +121,7 @@ class ShopifySubscriptionCreationRequest {
         {
         "name": "items",
         "baseName": "items",
-        "type": "Array<ShopifySubscriptionModelItem>"
+        "type": "Array<Item>"
         },
         
         {

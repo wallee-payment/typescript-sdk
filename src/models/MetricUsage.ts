@@ -4,22 +4,22 @@
 class MetricUsage {
 
         /**
-        * The consumed units provide the value of how much has been consumed of the particular metric.
+        * The number of consumed units.
         */
     'consumedUnits'?: number;
 
         /**
-        * The metric description describes the metric.
+        * The description of the consumed unit's metric.
         */
     'metricDescription'?: { [key: string]: string; };
 
         /**
-        * The metric ID identifies the metric for consumed units.
+        * The ID of the consumed units' metric.
         */
     'metricId'?: number;
 
         /**
-        * The metric name defines the name of the consumed units.
+        * The name of the consumed units' metric.
         */
     'metricName'?: { [key: string]: string; };
 

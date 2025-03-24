@@ -89,6 +89,11 @@ class InvoiceReimbursement {
         /**
         * 
         */
+    'recipientOrganizationName'?: string;
+
+        /**
+        * 
+        */
     'recipientPostcode'?: string;
 
         /**
@@ -209,6 +214,12 @@ class InvoiceReimbursement {
         {
         "name": "recipientIban",
         "baseName": "recipientIban",
+        "type": "string"
+        },
+        
+        {
+        "name": "recipientOrganizationName",
+        "baseName": "recipientOrganizationName",
         "type": "string"
         },
         

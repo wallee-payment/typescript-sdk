@@ -7,6 +7,11 @@ import { WebhookUrl } from "./WebhookUrl";
 class WebhookListener {
 
         /**
+        * Whether signature header and 'state' property are enabled in webhook payload.
+        */
+    'enablePayloadSignatureAndState'?: boolean;
+
+        /**
         * The entity that is to be monitored.
         */
     'entity'?: number;
@@ -66,6 +71,12 @@ class WebhookListener {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "enablePayloadSignatureAndState",
+        "baseName": "enablePayloadSignatureAndState",
+        "type": "boolean"
+        },
+        
         {
         "name": "entity",
         "baseName": "entity",

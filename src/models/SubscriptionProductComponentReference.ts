@@ -15,7 +15,7 @@ class SubscriptionProductComponentReference {
     'linkedSpaceId'?: number;
 
         /**
-        * The component reference name is used internally to identify the reference. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the component reference.
         */
     'name'?: string;
 
@@ -25,9 +25,9 @@ class SubscriptionProductComponentReference {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The component reference sku as a unique identifier.
         */
-    'spaceId'?: number;
+    'sku'?: string;
 
         /**
         * The object's current state.
@@ -69,9 +69,9 @@ class SubscriptionProductComponentReference {
         },
         
         {
-        "name": "spaceId",
-        "baseName": "spaceId",
-        "type": "number"
+        "name": "sku",
+        "baseName": "sku",
+        "type": "string"
         },
         
         {

@@ -5,7 +5,7 @@ import { CreationEntityState } from "./CreationEntityState";
 class Condition {
 
         /**
-        * The selected condition type defines how the configuration is applied to the transactions.
+        * The condition type determines the criteria that a transaction must fulfill in order for a connector configuration to be considered for processing the payment.
         */
     'conditionType'?: number;
 
@@ -20,7 +20,7 @@ class Condition {
     'linkedSpaceId'?: number;
 
         /**
-        * The condition name is used internally to identify the condition. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the condition.
         */
     'name'?: string;
 

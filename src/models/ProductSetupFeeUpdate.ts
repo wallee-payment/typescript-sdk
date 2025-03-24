@@ -15,32 +15,32 @@ class ProductSetupFeeUpdate {
     'version': number;
 
         /**
-        * 
+        * The product component that the fee belongs to.
         */
     'component'?: number;
 
         /**
-        * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+        * The localized description of the fee that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * The name of the fee should describe for the subscriber in few words for what the fee is for.
+        * The localized name of the fee that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * When the subscription is changed and the change is considered as a downgrade the amount defined by this property will be credited to the subscriber.
+        * The amount charged to the customer when a subscription is downgraded.
         */
     'onDowngradeCreditedAmount'?: Array<PersistableCurrencyAmountUpdate>;
 
         /**
-        * When the subscription is changed and the change is considered as a upgrade the amount defined by this property will be credited to the subscriber.
+        * The amount charged to the customer when a subscription is upgraded.
         */
     'onUpgradeCreditedAmount'?: Array<PersistableCurrencyAmountUpdate>;
 
         /**
-        * The setup fee is charged when the subscriber subscribes to this component. The setup fee is debited with the first charge for the subscriptions.
+        * The amount charged to the customer once when they subscribe to a subscription.
         */
     'setupFee'?: Array<PersistableCurrencyAmountUpdate>;
 

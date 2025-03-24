@@ -5,17 +5,17 @@ import { DocumentTemplateTypeGroup } from "./DocumentTemplateTypeGroup";
 class DocumentTemplateType {
 
         /**
-        * 
+        * The localized description of the document template type.
         */
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The feature that this document template type belongs to.
         */
     'feature'?: number;
 
         /**
-        * 
+        * The group that this document template type belongs to.
         */
     'group'?: DocumentTemplateTypeGroup;
 
@@ -25,7 +25,7 @@ class DocumentTemplateType {
     'id'?: number;
 
         /**
-        * 
+        * The localized title of the document template type.
         */
     'title'?: { [key: string]: string; };
 

@@ -1,5 +1,4 @@
 'use strict';
-import { Feature } from "./Feature";
 
 
 class PaymentContractType {
@@ -8,11 +7,6 @@ class PaymentContractType {
         * The localized description of the object.
         */
     'description'?: { [key: string]: string; };
-
-        /**
-        * 
-        */
-    'feature'?: Feature;
 
         /**
         * A unique identifier for the object.
@@ -33,12 +27,6 @@ class PaymentContractType {
         "name": "description",
         "baseName": "description",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "feature",
-        "baseName": "feature",
-        "type": "Feature"
         },
         
         {

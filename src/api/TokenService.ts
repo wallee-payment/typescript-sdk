@@ -107,7 +107,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -204,7 +204,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -291,7 +291,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -384,7 +384,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -444,7 +444,7 @@ class TokenService {
     };
 
     /**
-    * This operation creates a token for the given transaction.
+    * This operation creates a token for the given transaction. The transaction payment information will be populated asynchronously as soon as all data becomes available.
     * @summary Create Token
     * @param spaceId 
     * @param transactionId The id of the transaction for which we want to create the token.
@@ -481,7 +481,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -540,8 +540,8 @@ class TokenService {
     };
 
     /**
-    * This operation creates a token for the given transaction and fills it with the stored payment information of the transaction.
-    * @summary Create Token Based On Transaction
+    * This operation creates a token for the given transaction and fills it with the stored payment information of the transaction. The payment information for the transaction will be filled in immediately, if payment information is missing, an exception will be thrown.
+    * @summary Create Token Based On Transaction And Fill It With Stored Payment Information
     * @param spaceId 
     * @param transactionId The id of the transaction for which we want to create the token.
     * @param {*} [options] Override http request options.
@@ -577,7 +577,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -673,7 +673,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -769,7 +769,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -865,7 +865,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -957,7 +957,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -1050,7 +1050,7 @@ class TokenService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

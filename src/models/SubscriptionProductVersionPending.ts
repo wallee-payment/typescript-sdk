@@ -16,42 +16,42 @@ class SubscriptionProductVersionPending {
     'version': number;
 
         /**
-        * The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
+        * The recurring period of time, typically monthly or annually, for which a subscriber is charged.
         */
     'billingCycle'?: string;
 
         /**
-        * The comment allows to provide a internal comment for the version. It helps to document why a product was changed. The comment is not disclosed to the subscriber.
+        * A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
         */
     'comment'?: string;
 
         /**
-        * The default currency has to be used in all fees.
+        * The three-letter code (ISO 4217 format) of the product version's default currency.
         */
     'defaultCurrency'?: string;
 
         /**
-        * The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
+        * The three-letter codes (ISO 4217 format) of the currencies that the product version supports.
         */
     'enabledCurrencies'?: Array<string>;
 
         /**
-        * The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
+        * The minimum number of periods the subscription will run before it can be terminated.
         */
     'minimalNumberOfPeriods'?: number;
 
         /**
-        * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+        * The localized name of the product that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
+        * The number of periods the subscription will keep running after its termination was requested.
         */
     'numberOfNoticePeriods'?: number;
 
         /**
-        * Each product version is linked to a product.
+        * The product that the version belongs to.
         */
     'product'?: number;
 
@@ -61,7 +61,7 @@ class SubscriptionProductVersionPending {
     'state'?: SubscriptionProductVersionState;
 
         /**
-        * Strategy that is used for tax calculation in fees.
+        * The way taxes are calculated for fees.
         */
     'taxCalculation'?: TaxCalculation;
 

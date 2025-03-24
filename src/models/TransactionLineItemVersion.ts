@@ -40,7 +40,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'failureReason'?: FailureReason;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 
@@ -70,7 +70,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'processingOn'?: Date;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

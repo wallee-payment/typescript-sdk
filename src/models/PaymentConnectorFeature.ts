@@ -1,18 +1,12 @@
 'use strict';
-import { Feature } from "./Feature";
 
 
 class PaymentConnectorFeature {
 
         /**
-        * 
+        * The name of the feature.
         */
     'displayName'?: string;
-
-        /**
-        * 
-        */
-    'feature'?: Feature;
 
         /**
         * A unique identifier for the object.
@@ -28,12 +22,6 @@ class PaymentConnectorFeature {
         "name": "displayName",
         "baseName": "displayName",
         "type": "string"
-        },
-        
-        {
-        "name": "feature",
-        "baseName": "feature",
-        "type": "Feature"
         },
         
         {

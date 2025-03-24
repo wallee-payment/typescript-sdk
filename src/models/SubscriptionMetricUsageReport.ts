@@ -4,27 +4,27 @@
 class SubscriptionMetricUsageReport {
 
         /**
-        * The consumed units describe the amount of resources consumed. Those consumed units will be billed in the next billing cycle.
+        * The number of resources consumed, will be charged in the next billing cycle.
         */
     'consumedUnits'?: number;
 
         /**
-        * 
+        * The ID of the user the usage report was created by.
         */
     'createdByUserId'?: number;
 
         /**
-        * 
+        * The date and time when the usage report was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The metric usage report description describe the reported usage. This description may be shown to the end user.
+        * A description used to identify the usage report.
         */
     'description'?: string;
 
         /**
-        * The external id identifies the metric usage uniquely.
+        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
         */
     'externalId'?: string;
 
@@ -39,7 +39,7 @@ class SubscriptionMetricUsageReport {
     'linkedSpaceId'?: number;
 
         /**
-        * The metric usage report is linked to the metric for which the usage should be recorded.
+        * The metric that the usage report is recorded for.
         */
     'metric'?: number;
 
@@ -49,7 +49,7 @@ class SubscriptionMetricUsageReport {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The subscription to which the usage is added to.
+        * The subscription that the usage report is recorded for.
         */
     'subscription'?: number;
 

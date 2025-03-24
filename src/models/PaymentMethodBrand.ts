@@ -19,7 +19,7 @@ class PaymentMethodBrand {
     'id'?: number;
 
         /**
-        * 
+        * The path to the payment brand's image which is displayed to the customer.
         */
     'imagePath'?: string;
 
@@ -29,7 +29,7 @@ class PaymentMethodBrand {
     'name'?: { [key: string]: string; };
 
         /**
-        * 
+        * The payment method that the brand belongs to.
         */
     'paymentMethod'?: number;
 

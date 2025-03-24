@@ -30,7 +30,7 @@ class SubscriptionAffiliate {
     'metaData'?: { [key: string]: string; };
 
         /**
-        * 
+        * The name used to identify the affiliate.
         */
     'name'?: string;
 
@@ -40,7 +40,7 @@ class SubscriptionAffiliate {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The reference used to identify the affiliate.
         */
     'reference'?: string;
 

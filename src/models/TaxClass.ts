@@ -15,7 +15,7 @@ class TaxClass {
     'linkedSpaceId'?: number;
 
         /**
-        * The tax class name is used internally to identify the tax class in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the tax class.
         */
     'name'?: string;
 
@@ -23,11 +23,6 @@ class TaxClass {
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
-
-        /**
-        * 
-        */
-    'spaceId'?: number;
 
         /**
         * The object's current state.
@@ -66,12 +61,6 @@ class TaxClass {
         "name": "plannedPurgeDate",
         "baseName": "plannedPurgeDate",
         "type": "Date"
-        },
-        
-        {
-        "name": "spaceId",
-        "baseName": "spaceId",
-        "type": "number"
         },
         
         {

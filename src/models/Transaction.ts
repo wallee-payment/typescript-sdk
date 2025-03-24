@@ -19,32 +19,32 @@ import { TransactionUserInterfaceType } from "./TransactionUserInterfaceType";
 class Transaction {
 
         /**
-        * 
+        * The 'Accept' header of the customer's web browser.
         */
     'acceptHeader'?: string;
 
         /**
-        * The accept language contains the header which indicates the language preferences of the buyer.
+        * The 'Accept Language' header of the customer's web browser.
         */
     'acceptLanguageHeader'?: string;
 
         /**
-        * 
+        * The payment method brands that can be used to authorize the transaction.
         */
     'allowedPaymentMethodBrands'?: Array<number>;
 
         /**
-        * 
+        * The payment method configurations that can be used to authorize the transaction.
         */
     'allowedPaymentMethodConfigurations'?: Array<number>;
 
         /**
-        * 
+        * The sum of all line item prices including taxes in the transaction's currency.
         */
     'authorizationAmount'?: number;
 
         /**
-        * The environment in which this transaction was successfully authorized.
+        * The environment in which the transaction was authorized.
         */
     'authorizationEnvironment'?: ChargeAttemptEnvironment;
 
@@ -54,62 +54,62 @@ class Transaction {
     'authorizationSalesChannel'?: number;
 
         /**
-        * This is the time on which the transaction will be timed out when it is not at least authorized. The timeout time may change over time.
+        * The date and time when the transaction must be authorized, otherwise it will canceled.
         */
     'authorizationTimeoutOn'?: Date;
 
         /**
-        * 
+        * The date and time when the transaction was authorized.
         */
     'authorizedOn'?: Date;
 
         /**
-        * When auto confirmation is enabled the transaction can be confirmed by the user and does not require an explicit confirmation through the web service API.
+        * Whether the transaction can be confirmed automatically or whether this must be done explicitly via the API. Default is true.
         */
     'autoConfirmationEnabled'?: boolean;
 
         /**
-        * 
+        * The address associated with the payment method for invoicing and transaction processing purposes.
         */
     'billingAddress'?: Address;
 
         /**
-        * When the charging of the customer fails we can retry the charging. This implies that we redirect the user back to the payment page which allows the customer to retry. By default we will retry.
+        * Whether the customer can make further payment attempts if the first one has failed. Default is true.
         */
     'chargeRetryEnabled'?: boolean;
 
         /**
-        * The completed amount is the total amount which has been captured so far.
+        * The total amount that was completed, in the transaction's currency.
         */
     'completedAmount'?: number;
 
         /**
-        * 
+        * The date and time when the transaction was completed.
         */
     'completedOn'?: Date;
 
         /**
-        * The completion behavior controls when the transaction is completed.
+        * The behavior that controls when the transaction is completed.
         */
     'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
-        * 
+        * The date and time when the transaction is completed automatically.
         */
     'completionTimeoutOn'?: Date;
 
         /**
-        * 
+        * The ID of the user the transaction was confirmed by.
         */
     'confirmedBy'?: number;
 
         /**
-        * 
+        * The date and time when the transaction was created.
         */
     'confirmedOn'?: Date;
 
         /**
-        * 
+        * The ID of the user the transaction was created by.
         */
     'createdBy'?: number;
 
@@ -119,42 +119,42 @@ class Transaction {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The three-letter code (ISO 4217 format) of the transaction's currency.
         */
     'currency'?: string;
 
         /**
-        * The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+        * The customer's email address.
         */
     'customerEmailAddress'?: string;
 
         /**
-        * 
+        * The unique identifier of the customer in the external system.
         */
     'customerId'?: string;
 
         /**
-        * The customer's presence indicates what kind of authentication method was finally used during authorization of the transaction. If no value is provided, 'Virtually Present' is used by default.
+        * The customer's presence indicates whether and in what way the transaction's customer is present. Default is VIRTUAL_PRESENT.
         */
     'customersPresence'?: CustomersPresence;
 
         /**
-        * This date indicates when the decision has been made if a transaction should be delivered or not.
+        * This date and time when the decision was made as to whether the order should be shipped.
         */
     'deliveryDecisionMadeOn'?: Date;
 
         /**
-        * The device session identifier links the transaction with the session identifier provided in the URL of the device data JavaScript. This allows to link the transaction with the collected device data of the buyer.
+        * Allows to link the transaction to the data collected from the customer's device.
         */
     'deviceSessionIdentifier'?: string;
 
         /**
-        * Flag indicating whether email sending is disabled for this particular transaction. Defaults to false.
+        * Whether email sending is deactivated for the transaction. Default is false.
         */
     'emailsDisabled'?: boolean;
 
         /**
-        * The transaction's end of life indicates the date from which on no operation can be carried out anymore.
+        * The date and time when the transaction reaches its end of live. No further actions can be carried out at this time.
         */
     'endOfLife'?: Date;
 
@@ -164,27 +164,27 @@ class Transaction {
     'environment'?: Environment;
 
         /**
-        * The environment selection strategy determines how the environment (test or production) for processing the transaction is selected.
+        * The strategy for determining whether the transaction is to be processed in the test or production environment.
         */
     'environmentSelectionStrategy'?: TransactionEnvironmentSelectionStrategy;
 
         /**
-        * 
+        * The date and time when the transaction failed.
         */
     'failedOn'?: Date;
 
         /**
-        * The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+        * The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
         */
     'failedUrl'?: string;
 
         /**
-        * The failure reason describes why the transaction failed. This is only provided when the transaction is marked as failed.
+        * The reason for the failure of the transaction.
         */
     'failureReason'?: FailureReason;
 
         /**
-        * 
+        * The group that the transaction belongs to.
         */
     'group'?: TransactionGroup;
 
@@ -194,22 +194,22 @@ class Transaction {
     'id'?: number;
 
         /**
-        * The Internet Protocol (IP) address identifies the device of the buyer.
+        * The IP address of the customer's device.
         */
     'internetProtocolAddress'?: string;
 
         /**
-        * 
+        * The country determined from the IP address of the customer's device.
         */
     'internetProtocolAddressCountry'?: string;
 
         /**
-        * 
+        * The merchant's reference used to identify the invoice.
         */
     'invoiceMerchantReference'?: string;
 
         /**
-        * 
+        * Whether Java is enabled on the customer's web browser.
         */
     'javaEnabled'?: boolean;
 
@@ -219,7 +219,7 @@ class Transaction {
     'language'?: string;
 
         /**
-        * 
+        * The line items purchased by the customer.
         */
     'lineItems'?: Array<LineItem>;
 
@@ -229,7 +229,7 @@ class Transaction {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The merchant's reference used to identify the transaction.
         */
     'merchantReference'?: string;
 
@@ -239,12 +239,12 @@ class Transaction {
     'metaData'?: { [key: string]: string; };
 
         /**
-        * 
+        * The parent transaction which was (partially) replaced by this transaction.
         */
     'parent'?: number;
 
         /**
-        * 
+        * The payment connector configuration that was used to authorize the transaction.
         */
     'paymentConnectorConfiguration'?: PaymentConnectorConfiguration;
 
@@ -254,42 +254,42 @@ class Transaction {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The date and time when the processing of the transaction was started.
         */
     'processingOn'?: Date;
 
         /**
-        * The refunded amount is the total amount which has been refunded so far.
+        * The total amount that was refunded, in the transaction's currency.
         */
     'refundedAmount'?: number;
 
         /**
-        * 
+        * The screen color depth of the customer's web browser.
         */
     'screenColorDepth'?: string;
 
         /**
-        * 
+        * The screen height of the customer's web browser.
         */
     'screenHeight'?: string;
 
         /**
-        * 
+        * The screen width of the customer's web browser.
         */
     'screenWidth'?: string;
 
         /**
-        * 
+        * The address to where the order will be shipped.
         */
     'shippingAddress'?: Address;
 
         /**
-        * 
+        * The name of the shipping method used to ship the products.
         */
     'shippingMethod'?: string;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 
@@ -299,52 +299,52 @@ class Transaction {
     'state'?: TransactionState;
 
         /**
-        * The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+        * The URL to redirect the customer back to after they successfully authenticated their payment.
         */
     'successUrl'?: string;
 
         /**
-        * The terminal on which the payment was processed.
+        * The payment terminal through which the payment was processed.
         */
     'terminal'?: PaymentTerminal;
 
         /**
-        * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+        * The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
         */
     'timeZone'?: string;
 
         /**
-        * 
+        * The payment token that should be used to charge the customer.
         */
     'token'?: Token;
 
         /**
-        * The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+        * The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
         */
     'tokenizationMode'?: TokenizationMode;
 
         /**
-        * The total applied fees is the sum of all fees that have been applied so far.
+        * The total of all fees charged, in the transaction's currency.
         */
     'totalAppliedFees'?: number;
 
         /**
-        * The total settled amount is the total amount which has been settled so far.
+        * The total amount that was settled, in the transaction's currency.
         */
     'totalSettledAmount'?: number;
 
         /**
-        * The user agent header provides the exact string which contains the user agent of the buyer.
+        * The 'User Agent' header of the customer's web browser.
         */
     'userAgentHeader'?: string;
 
         /**
-        * The failure message describes for an end user why the transaction is failed in the language of the user. This is only provided when the transaction is marked as failed.
+        * The message that can be displayed to the customer explaining why the transaction failed, in the customer's language.
         */
     'userFailureMessage'?: string;
 
         /**
-        * The user interface type defines through which user interface the transaction has been processed resp. created.
+        * The type of user interface the customer used to provide the payment information.
         */
     'userInterfaceType'?: TransactionUserInterfaceType;
 
@@ -354,17 +354,17 @@ class Transaction {
     'version'?: number;
 
         /**
-        * 
+        * The window height of the customer's web browser.
         */
     'windowHeight'?: string;
 
         /**
-        * 
+        * The window width of the customer's web browser.
         */
     'windowWidth'?: string;
 
         /**
-        * The number of years the transaction will be stored after it has been authorized.
+        * The number of years the transaction is kept after its authorization.
         */
     'yearsToKeep'?: number;
 

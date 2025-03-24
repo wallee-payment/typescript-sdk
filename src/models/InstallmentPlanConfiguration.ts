@@ -38,7 +38,7 @@ class InstallmentPlanConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * The installment plan can only be applied if the orders total is at least the defined minimal amount.
+        * The installment plan can only be applied if the order's total is at least the defined minimal amount.
         */
     'minimalAmount'?: number;
 

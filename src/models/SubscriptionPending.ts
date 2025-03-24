@@ -5,17 +5,17 @@ import { SubscriptionUpdate } from "./SubscriptionUpdate";
 class SubscriptionPending extends SubscriptionUpdate {
 
         /**
-        * 
+        * The merchant's reference used to identify the subscription.
         */
     'reference'?: string;
 
         /**
-        * 
+        * The subscriber that the subscription belongs to.
         */
     'subscriber'?: number;
 
         /**
-        * 
+        * The payment token that is used to charge the customer.
         */
     'token'?: number;
 

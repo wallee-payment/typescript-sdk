@@ -8,17 +8,22 @@ import { PaymentTerminalType } from "./PaymentTerminalType";
 class PaymentTerminal {
 
         /**
-        * 
+        * The configuration that is assigned to the terminal and determines how it works.
         */
     'configurationVersion'?: PaymentTerminalConfigurationVersion;
 
         /**
-        * 
+        * The default currency of the terminal.
         */
     'defaultCurrency'?: string;
 
         /**
-        * 
+        * The name of the device that is currently linked to the payment terminal.
+        */
+    'deviceName'?: string;
+
+        /**
+        * The serial number of the device that is currently linked to the payment terminal.
         */
     'deviceSerialNumber'?: string;
 
@@ -33,7 +38,7 @@ class PaymentTerminal {
     'id'?: number;
 
         /**
-        * The identifier uniquely identifies the terminal. Normally it is visible on the device or in the display of the device.
+        * The unique identifier of the terminal, that is displayed on the device.
         */
     'identifier'?: string;
 
@@ -43,12 +48,12 @@ class PaymentTerminal {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The physical location where the terminal is used.
         */
     'locationVersion'?: PaymentTerminalLocationVersion;
 
         /**
-        * The terminal name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment terminal.
         */
     'name'?: string;
 
@@ -63,7 +68,7 @@ class PaymentTerminal {
     'state'?: PaymentTerminalState;
 
         /**
-        * 
+        * The type of the payment terminal.
         */
     'type'?: PaymentTerminalType;
 
@@ -86,6 +91,12 @@ class PaymentTerminal {
         {
         "name": "defaultCurrency",
         "baseName": "defaultCurrency",
+        "type": "string"
+        },
+        
+        {
+        "name": "deviceName",
+        "baseName": "deviceName",
         "type": "string"
         },
         

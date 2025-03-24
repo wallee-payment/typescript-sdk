@@ -4,7 +4,7 @@
 class SubscriptionUpdateRequest {
 
         /**
-        * 
+        * A description used to identify the subscription.
         */
     'description'?: string;
 

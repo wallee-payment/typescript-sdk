@@ -24,12 +24,6 @@ import { AccountState as AccountStateModelImport } from "./src/models/AccountSta
 import { AccountType as AccountTypeModelImport } from "./src/models/AccountType";
 import { Address as AddressModelImport } from "./src/models/Address";
 import { AddressCreate as AddressCreateModelImport } from "./src/models/AddressCreate";
-import { AnalyticsQuery as AnalyticsQueryModelImport } from "./src/models/AnalyticsQuery";
-import { AnalyticsQueryExecution as AnalyticsQueryExecutionModelImport } from "./src/models/AnalyticsQueryExecution";
-import { AnalyticsQueryExecutionState as AnalyticsQueryExecutionStateModelImport } from "./src/models/AnalyticsQueryExecutionState";
-import { AnalyticsQueryResultBatch as AnalyticsQueryResultBatchModelImport } from "./src/models/AnalyticsQueryResultBatch";
-import { AnalyticsSchemaColumn as AnalyticsSchemaColumnModelImport } from "./src/models/AnalyticsSchemaColumn";
-import { AnalyticsSchemaTable as AnalyticsSchemaTableModelImport } from "./src/models/AnalyticsSchemaTable";
 import { AuthenticatedCardDataCreate as AuthenticatedCardDataCreateModelImport } from "./src/models/AuthenticatedCardDataCreate";
 import { BankAccount as BankAccountModelImport } from "./src/models/BankAccount";
 import { BankAccountEnvironment as BankAccountEnvironmentModelImport } from "./src/models/BankAccountEnvironment";
@@ -40,11 +34,14 @@ import { BankTransactionFlowDirection as BankTransactionFlowDirectionModelImport
 import { BankTransactionSource as BankTransactionSourceModelImport } from "./src/models/BankTransactionSource";
 import { BankTransactionState as BankTransactionStateModelImport } from "./src/models/BankTransactionState";
 import { BankTransactionType as BankTransactionTypeModelImport } from "./src/models/BankTransactionType";
+import { BillingConfiguration as BillingConfigurationModelImport } from "./src/models/BillingConfiguration";
+import { BillingCycleModel as BillingCycleModelModelImport } from "./src/models/BillingCycleModel";
+import { BillingCycleType as BillingCycleTypeModelImport } from "./src/models/BillingCycleType";
+import { BillingDayCustomization as BillingDayCustomizationModelImport } from "./src/models/BillingDayCustomization";
 import { CardAuthenticationResponse as CardAuthenticationResponseModelImport } from "./src/models/CardAuthenticationResponse";
 import { CardAuthenticationVersion as CardAuthenticationVersionModelImport } from "./src/models/CardAuthenticationVersion";
 import { CardCryptogram as CardCryptogramModelImport } from "./src/models/CardCryptogram";
 import { CardCryptogramCreate as CardCryptogramCreateModelImport } from "./src/models/CardCryptogramCreate";
-import { CardCryptogramType as CardCryptogramTypeModelImport } from "./src/models/CardCryptogramType";
 import { CardholderAuthentication as CardholderAuthenticationModelImport } from "./src/models/CardholderAuthentication";
 import { CardholderAuthenticationCreate as CardholderAuthenticationCreateModelImport } from "./src/models/CardholderAuthenticationCreate";
 import { ChargeAttemptEnvironment as ChargeAttemptEnvironmentModelImport } from "./src/models/ChargeAttemptEnvironment";
@@ -86,6 +83,8 @@ import { DebtCollectorConditionType as DebtCollectorConditionTypeModelImport } f
 import { DebtCollectorConfiguration as DebtCollectorConfigurationModelImport } from "./src/models/DebtCollectorConfiguration";
 import { DeliveryIndicationDecisionReason as DeliveryIndicationDecisionReasonModelImport } from "./src/models/DeliveryIndicationDecisionReason";
 import { DeliveryIndicationState as DeliveryIndicationStateModelImport } from "./src/models/DeliveryIndicationState";
+import { DisplayableDayOfWeek as DisplayableDayOfWeekModelImport } from "./src/models/DisplayableDayOfWeek";
+import { DisplayableMonth as DisplayableMonthModelImport } from "./src/models/DisplayableMonth";
 import { DocumentTemplate as DocumentTemplateModelImport } from "./src/models/DocumentTemplate";
 import { DocumentTemplateType as DocumentTemplateTypeModelImport } from "./src/models/DocumentTemplateType";
 import { DocumentTemplateTypeGroup as DocumentTemplateTypeGroupModelImport } from "./src/models/DocumentTemplateTypeGroup";
@@ -117,6 +116,7 @@ import { InvoiceReconciliationRecordState as InvoiceReconciliationRecordStateMod
 import { InvoiceReconciliationRecordType as InvoiceReconciliationRecordTypeModelImport } from "./src/models/InvoiceReconciliationRecordType";
 import { InvoiceReimbursement as InvoiceReimbursementModelImport } from "./src/models/InvoiceReimbursement";
 import { InvoiceReimbursementState as InvoiceReimbursementStateModelImport } from "./src/models/InvoiceReimbursementState";
+import { Item as ItemModelImport } from "./src/models/Item";
 import { Label as LabelModelImport } from "./src/models/Label";
 import { LabelDescriptor as LabelDescriptorModelImport } from "./src/models/LabelDescriptor";
 import { LabelDescriptorCategory as LabelDescriptorCategoryModelImport } from "./src/models/LabelDescriptorCategory";
@@ -138,6 +138,7 @@ import { ManualTaskState as ManualTaskStateModelImport } from "./src/models/Manu
 import { ManualTaskType as ManualTaskTypeModelImport } from "./src/models/ManualTaskType";
 import { MetricUsage as MetricUsageModelImport } from "./src/models/MetricUsage";
 import { OneClickPaymentMode as OneClickPaymentModeModelImport } from "./src/models/OneClickPaymentMode";
+import { PanType as PanTypeModelImport } from "./src/models/PanType";
 import { PaymentAdjustment as PaymentAdjustmentModelImport } from "./src/models/PaymentAdjustment";
 import { PaymentAdjustmentType as PaymentAdjustmentTypeModelImport } from "./src/models/PaymentAdjustmentType";
 import { PaymentAppChargeAttemptTargetState as PaymentAppChargeAttemptTargetStateModelImport } from "./src/models/PaymentAppChargeAttemptTargetState";
@@ -194,6 +195,7 @@ import { PaymentTerminalState as PaymentTerminalStateModelImport } from "./src/m
 import { PaymentTerminalTransactionSum as PaymentTerminalTransactionSumModelImport } from "./src/models/PaymentTerminalTransactionSum";
 import { PaymentTerminalTransactionSummary as PaymentTerminalTransactionSummaryModelImport } from "./src/models/PaymentTerminalTransactionSummary";
 import { PaymentTerminalTransactionSummaryFetchRequest as PaymentTerminalTransactionSummaryFetchRequestModelImport } from "./src/models/PaymentTerminalTransactionSummaryFetchRequest";
+import { PaymentTerminalTransactionSummaryReference as PaymentTerminalTransactionSummaryReferenceModelImport } from "./src/models/PaymentTerminalTransactionSummaryReference";
 import { PaymentTerminalType as PaymentTerminalTypeModelImport } from "./src/models/PaymentTerminalType";
 import { Permission as PermissionModelImport } from "./src/models/Permission";
 import { PersistableCurrencyAmount as PersistableCurrencyAmountModelImport } from "./src/models/PersistableCurrencyAmount";
@@ -231,7 +233,6 @@ import { SalesChannel as SalesChannelModelImport } from "./src/models/SalesChann
 import { Scope as ScopeModelImport } from "./src/models/Scope";
 import { ServerError as ServerErrorModelImport } from "./src/models/ServerError";
 import { ShopifyAdditionalLineItemData as ShopifyAdditionalLineItemDataModelImport } from "./src/models/ShopifyAdditionalLineItemData";
-import { ShopifyIntegration as ShopifyIntegrationModelImport } from "./src/models/ShopifyIntegration";
 import { ShopifyIntegrationPaymentAppVersion as ShopifyIntegrationPaymentAppVersionModelImport } from "./src/models/ShopifyIntegrationPaymentAppVersion";
 import { ShopifyIntegrationSubscriptionAppVersion as ShopifyIntegrationSubscriptionAppVersionModelImport } from "./src/models/ShopifyIntegrationSubscriptionAppVersion";
 import { ShopifyRecurringOrderState as ShopifyRecurringOrderStateModelImport } from "./src/models/ShopifyRecurringOrderState";
@@ -244,9 +245,6 @@ import { ShopifySubscription as ShopifySubscriptionModelImport } from "./src/mod
 import { ShopifySubscriptionAddressCreate as ShopifySubscriptionAddressCreateModelImport } from "./src/models/ShopifySubscriptionAddressCreate";
 import { ShopifySubscriptionBillingIntervalUnit as ShopifySubscriptionBillingIntervalUnitModelImport } from "./src/models/ShopifySubscriptionBillingIntervalUnit";
 import { ShopifySubscriptionCreationRequest as ShopifySubscriptionCreationRequestModelImport } from "./src/models/ShopifySubscriptionCreationRequest";
-import { ShopifySubscriptionModelBillingConfiguration as ShopifySubscriptionModelBillingConfigurationModelImport } from "./src/models/ShopifySubscriptionModelBillingConfiguration";
-import { ShopifySubscriptionModelItem as ShopifySubscriptionModelItemModelImport } from "./src/models/ShopifySubscriptionModelItem";
-import { ShopifySubscriptionModelTaxLine as ShopifySubscriptionModelTaxLineModelImport } from "./src/models/ShopifySubscriptionModelTaxLine";
 import { ShopifySubscriptionProduct as ShopifySubscriptionProductModelImport } from "./src/models/ShopifySubscriptionProduct";
 import { ShopifySubscriptionProductPricingOption as ShopifySubscriptionProductPricingOptionModelImport } from "./src/models/ShopifySubscriptionProductPricingOption";
 import { ShopifySubscriptionProductState as ShopifySubscriptionProductStateModelImport } from "./src/models/ShopifySubscriptionProductState";
@@ -265,6 +263,7 @@ import { ShopifySubscriptionVersionState as ShopifySubscriptionVersionStateModel
 import { ShopifySubscriptionWeekday as ShopifySubscriptionWeekdayModelImport } from "./src/models/ShopifySubscriptionWeekday";
 import { ShopifyTaxLine as ShopifyTaxLineModelImport } from "./src/models/ShopifyTaxLine";
 import { ShopifyTransactionState as ShopifyTransactionStateModelImport } from "./src/models/ShopifyTransactionState";
+import { ShopifyV1Integration as ShopifyV1IntegrationModelImport } from "./src/models/ShopifyV1Integration";
 import { Space as SpaceModelImport } from "./src/models/Space";
 import { SpaceAddress as SpaceAddressModelImport } from "./src/models/SpaceAddress";
 import { SpaceAddressCreate as SpaceAddressCreateModelImport } from "./src/models/SpaceAddressCreate";
@@ -325,6 +324,7 @@ import { Tax as TaxModelImport } from "./src/models/Tax";
 import { TaxCalculation as TaxCalculationModelImport } from "./src/models/TaxCalculation";
 import { TaxClass as TaxClassModelImport } from "./src/models/TaxClass";
 import { TaxCreate as TaxCreateModelImport } from "./src/models/TaxCreate";
+import { TaxLine as TaxLineModelImport } from "./src/models/TaxLine";
 import { TenantDatabase as TenantDatabaseModelImport } from "./src/models/TenantDatabase";
 import { TerminalReceiptFetchRequest as TerminalReceiptFetchRequestModelImport } from "./src/models/TerminalReceiptFetchRequest";
 import { TerminalReceiptFormat as TerminalReceiptFormatModelImport } from "./src/models/TerminalReceiptFormat";
@@ -437,7 +437,6 @@ import { ApplicationUserCreateWithMacKey as ApplicationUserCreateWithMacKeyModel
 import { SubscriptionAffiliateDeleting as SubscriptionAffiliateDeletingModelImport } from "./src/models/SubscriptionAffiliateDeleting";
 
 import { AccountService as AccountServiceApiImport } from "./src/api/AccountService";
-import { AnalyticsQueryService as AnalyticsQueryServiceApiImport } from "./src/api/AnalyticsQueryService";
 import { ApplicationUserService as ApplicationUserServiceApiImport } from "./src/api/ApplicationUserService";
 import { BankAccountService as BankAccountServiceApiImport } from "./src/api/BankAccountService";
 import { BankTransactionService as BankTransactionServiceApiImport } from "./src/api/BankTransactionService";
@@ -600,18 +599,6 @@ export namespace Wallee {
         export const Address = AddressModelImport;
         export type AddressCreate = AddressCreateModelImport;
         export const AddressCreate = AddressCreateModelImport;
-        export type AnalyticsQuery = AnalyticsQueryModelImport;
-        export const AnalyticsQuery = AnalyticsQueryModelImport;
-        export type AnalyticsQueryExecution = AnalyticsQueryExecutionModelImport;
-        export const AnalyticsQueryExecution = AnalyticsQueryExecutionModelImport;
-        export type AnalyticsQueryExecutionState = AnalyticsQueryExecutionStateModelImport;
-        export const AnalyticsQueryExecutionState = AnalyticsQueryExecutionStateModelImport;
-        export type AnalyticsQueryResultBatch = AnalyticsQueryResultBatchModelImport;
-        export const AnalyticsQueryResultBatch = AnalyticsQueryResultBatchModelImport;
-        export type AnalyticsSchemaColumn = AnalyticsSchemaColumnModelImport;
-        export const AnalyticsSchemaColumn = AnalyticsSchemaColumnModelImport;
-        export type AnalyticsSchemaTable = AnalyticsSchemaTableModelImport;
-        export const AnalyticsSchemaTable = AnalyticsSchemaTableModelImport;
         export type AuthenticatedCardDataCreate = AuthenticatedCardDataCreateModelImport;
         export const AuthenticatedCardDataCreate = AuthenticatedCardDataCreateModelImport;
         export type BankAccount = BankAccountModelImport;
@@ -632,6 +619,14 @@ export namespace Wallee {
         export const BankTransactionState = BankTransactionStateModelImport;
         export type BankTransactionType = BankTransactionTypeModelImport;
         export const BankTransactionType = BankTransactionTypeModelImport;
+        export type BillingConfiguration = BillingConfigurationModelImport;
+        export const BillingConfiguration = BillingConfigurationModelImport;
+        export type BillingCycleModel = BillingCycleModelModelImport;
+        export const BillingCycleModel = BillingCycleModelModelImport;
+        export type BillingCycleType = BillingCycleTypeModelImport;
+        export const BillingCycleType = BillingCycleTypeModelImport;
+        export type BillingDayCustomization = BillingDayCustomizationModelImport;
+        export const BillingDayCustomization = BillingDayCustomizationModelImport;
         export type CardAuthenticationResponse = CardAuthenticationResponseModelImport;
         export const CardAuthenticationResponse = CardAuthenticationResponseModelImport;
         export type CardAuthenticationVersion = CardAuthenticationVersionModelImport;
@@ -640,8 +635,6 @@ export namespace Wallee {
         export const CardCryptogram = CardCryptogramModelImport;
         export type CardCryptogramCreate = CardCryptogramCreateModelImport;
         export const CardCryptogramCreate = CardCryptogramCreateModelImport;
-        export type CardCryptogramType = CardCryptogramTypeModelImport;
-        export const CardCryptogramType = CardCryptogramTypeModelImport;
         export type CardholderAuthentication = CardholderAuthenticationModelImport;
         export const CardholderAuthentication = CardholderAuthenticationModelImport;
         export type CardholderAuthenticationCreate = CardholderAuthenticationCreateModelImport;
@@ -724,6 +717,10 @@ export namespace Wallee {
         export const DeliveryIndicationDecisionReason = DeliveryIndicationDecisionReasonModelImport;
         export type DeliveryIndicationState = DeliveryIndicationStateModelImport;
         export const DeliveryIndicationState = DeliveryIndicationStateModelImport;
+        export type DisplayableDayOfWeek = DisplayableDayOfWeekModelImport;
+        export const DisplayableDayOfWeek = DisplayableDayOfWeekModelImport;
+        export type DisplayableMonth = DisplayableMonthModelImport;
+        export const DisplayableMonth = DisplayableMonthModelImport;
         export type DocumentTemplate = DocumentTemplateModelImport;
         export const DocumentTemplate = DocumentTemplateModelImport;
         export type DocumentTemplateType = DocumentTemplateTypeModelImport;
@@ -786,6 +783,8 @@ export namespace Wallee {
         export const InvoiceReimbursement = InvoiceReimbursementModelImport;
         export type InvoiceReimbursementState = InvoiceReimbursementStateModelImport;
         export const InvoiceReimbursementState = InvoiceReimbursementStateModelImport;
+        export type Item = ItemModelImport;
+        export const Item = ItemModelImport;
         export type Label = LabelModelImport;
         export const Label = LabelModelImport;
         export type LabelDescriptor = LabelDescriptorModelImport;
@@ -828,6 +827,8 @@ export namespace Wallee {
         export const MetricUsage = MetricUsageModelImport;
         export type OneClickPaymentMode = OneClickPaymentModeModelImport;
         export const OneClickPaymentMode = OneClickPaymentModeModelImport;
+        export type PanType = PanTypeModelImport;
+        export const PanType = PanTypeModelImport;
         export type PaymentAdjustment = PaymentAdjustmentModelImport;
         export const PaymentAdjustment = PaymentAdjustmentModelImport;
         export type PaymentAdjustmentType = PaymentAdjustmentTypeModelImport;
@@ -940,6 +941,8 @@ export namespace Wallee {
         export const PaymentTerminalTransactionSummary = PaymentTerminalTransactionSummaryModelImport;
         export type PaymentTerminalTransactionSummaryFetchRequest = PaymentTerminalTransactionSummaryFetchRequestModelImport;
         export const PaymentTerminalTransactionSummaryFetchRequest = PaymentTerminalTransactionSummaryFetchRequestModelImport;
+        export type PaymentTerminalTransactionSummaryReference = PaymentTerminalTransactionSummaryReferenceModelImport;
+        export const PaymentTerminalTransactionSummaryReference = PaymentTerminalTransactionSummaryReferenceModelImport;
         export type PaymentTerminalType = PaymentTerminalTypeModelImport;
         export const PaymentTerminalType = PaymentTerminalTypeModelImport;
         export type Permission = PermissionModelImport;
@@ -1014,8 +1017,6 @@ export namespace Wallee {
         export const ServerError = ServerErrorModelImport;
         export type ShopifyAdditionalLineItemData = ShopifyAdditionalLineItemDataModelImport;
         export const ShopifyAdditionalLineItemData = ShopifyAdditionalLineItemDataModelImport;
-        export type ShopifyIntegration = ShopifyIntegrationModelImport;
-        export const ShopifyIntegration = ShopifyIntegrationModelImport;
         export type ShopifyIntegrationPaymentAppVersion = ShopifyIntegrationPaymentAppVersionModelImport;
         export const ShopifyIntegrationPaymentAppVersion = ShopifyIntegrationPaymentAppVersionModelImport;
         export type ShopifyIntegrationSubscriptionAppVersion = ShopifyIntegrationSubscriptionAppVersionModelImport;
@@ -1040,12 +1041,6 @@ export namespace Wallee {
         export const ShopifySubscriptionBillingIntervalUnit = ShopifySubscriptionBillingIntervalUnitModelImport;
         export type ShopifySubscriptionCreationRequest = ShopifySubscriptionCreationRequestModelImport;
         export const ShopifySubscriptionCreationRequest = ShopifySubscriptionCreationRequestModelImport;
-        export type ShopifySubscriptionModelBillingConfiguration = ShopifySubscriptionModelBillingConfigurationModelImport;
-        export const ShopifySubscriptionModelBillingConfiguration = ShopifySubscriptionModelBillingConfigurationModelImport;
-        export type ShopifySubscriptionModelItem = ShopifySubscriptionModelItemModelImport;
-        export const ShopifySubscriptionModelItem = ShopifySubscriptionModelItemModelImport;
-        export type ShopifySubscriptionModelTaxLine = ShopifySubscriptionModelTaxLineModelImport;
-        export const ShopifySubscriptionModelTaxLine = ShopifySubscriptionModelTaxLineModelImport;
         export type ShopifySubscriptionProduct = ShopifySubscriptionProductModelImport;
         export const ShopifySubscriptionProduct = ShopifySubscriptionProductModelImport;
         export type ShopifySubscriptionProductPricingOption = ShopifySubscriptionProductPricingOptionModelImport;
@@ -1082,6 +1077,8 @@ export namespace Wallee {
         export const ShopifyTaxLine = ShopifyTaxLineModelImport;
         export type ShopifyTransactionState = ShopifyTransactionStateModelImport;
         export const ShopifyTransactionState = ShopifyTransactionStateModelImport;
+        export type ShopifyV1Integration = ShopifyV1IntegrationModelImport;
+        export const ShopifyV1Integration = ShopifyV1IntegrationModelImport;
         export type Space = SpaceModelImport;
         export const Space = SpaceModelImport;
         export type SpaceAddress = SpaceAddressModelImport;
@@ -1202,6 +1199,8 @@ export namespace Wallee {
         export const TaxClass = TaxClassModelImport;
         export type TaxCreate = TaxCreateModelImport;
         export const TaxCreate = TaxCreateModelImport;
+        export type TaxLine = TaxLineModelImport;
+        export const TaxLine = TaxLineModelImport;
         export type TenantDatabase = TenantDatabaseModelImport;
         export const TenantDatabase = TenantDatabaseModelImport;
         export type TerminalReceiptFetchRequest = TerminalReceiptFetchRequestModelImport;
@@ -1427,8 +1426,6 @@ export namespace Wallee {
     export namespace api {
         export type AccountService = AccountServiceApiImport;
         export const AccountService = AccountServiceApiImport;
-        export type AnalyticsQueryService = AnalyticsQueryServiceApiImport;
-        export const AnalyticsQueryService = AnalyticsQueryServiceApiImport;
         export type ApplicationUserService = ApplicationUserServiceApiImport;
         export const ApplicationUserService = ApplicationUserServiceApiImport;
         export type BankAccountService = BankAccountServiceApiImport;

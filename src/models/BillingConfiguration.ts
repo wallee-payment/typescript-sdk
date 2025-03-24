@@ -3,7 +3,7 @@ import { ShopifySubscriptionBillingIntervalUnit } from "./ShopifySubscriptionBil
 import { ShopifySubscriptionWeekday } from "./ShopifySubscriptionWeekday";
 
 
-class ShopifySubscriptionModelBillingConfiguration {
+class BillingConfiguration {
 
         /**
         * Define the day of the month on which the recurring orders should be created.
@@ -111,8 +111,8 @@ class ShopifySubscriptionModelBillingConfiguration {
     ];
 
     static getAttributeTypeMap() {
-        return ShopifySubscriptionModelBillingConfiguration.attributeTypeMap;
+        return BillingConfiguration.attributeTypeMap;
     }
 }
 
-export { ShopifySubscriptionModelBillingConfiguration }
+export { BillingConfiguration }

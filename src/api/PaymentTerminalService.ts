@@ -12,6 +12,7 @@ import { ClientError } from  '../models/ClientError';
 import { EntityQuery } from  '../models/EntityQuery';
 import { EntityQueryFilter } from  '../models/EntityQueryFilter';
 import { PaymentTerminal } from  '../models/PaymentTerminal';
+import { PaymentTerminalTransactionSummaryReference } from  '../models/PaymentTerminalTransactionSummaryReference';
 import { ServerError } from  '../models/ServerError';
 
 class PaymentTerminalService {
@@ -97,7 +98,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -204,7 +205,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -300,7 +301,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -392,7 +393,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -458,7 +459,7 @@ class PaymentTerminalService {
     * @param terminalId 
     * @param {*} [options] Override http request options.
     */
-    public triggerFinalBalance (spaceId: number, terminalId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public triggerFinalBalance (spaceId: number, terminalId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentTerminalTransactionSummaryReference;  }> {
         const url: string = '/payment-terminal/trigger-final-balance';
         let queryParams: any = {};
         let headers: any = Object.assign({}, this._defaultHeaders);
@@ -489,7 +490,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -510,12 +511,12 @@ class PaymentTerminalService {
         const axiosInstance: axios.AxiosInstance  = axios.default.create();
         axiosInstance.interceptors.request.use(this._defaultAuthentication);
 
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PaymentTerminalTransactionSummaryReference;  }>((resolve, reject) => {
             axiosInstance.request(requestConfig)
                 .then(
                     success => {
                         let body;
-
+                        body = ObjectSerializer.deserialize(success.data, "PaymentTerminalTransactionSummaryReference");
                         return resolve({ response: success.request.res, body: body });
                     },
                     failure => {
@@ -554,7 +555,7 @@ class PaymentTerminalService {
     * @param terminalIdentifier 
     * @param {*} [options] Override http request options.
     */
-    public triggerFinalBalanceByIdentifier (spaceId: number, terminalIdentifier: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+    public triggerFinalBalanceByIdentifier (spaceId: number, terminalIdentifier: string, options: any = {}) : Promise<{ response: http.IncomingMessage; body: PaymentTerminalTransactionSummaryReference;  }> {
         const url: string = '/payment-terminal/trigger-final-balance-by-identifier';
         let queryParams: any = {};
         let headers: any = Object.assign({}, this._defaultHeaders);
@@ -585,7 +586,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -606,12 +607,12 @@ class PaymentTerminalService {
         const axiosInstance: axios.AxiosInstance  = axios.default.create();
         axiosInstance.interceptors.request.use(this._defaultAuthentication);
 
-        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PaymentTerminalTransactionSummaryReference;  }>((resolve, reject) => {
             axiosInstance.request(requestConfig)
                 .then(
                     success => {
                         let body;
-
+                        body = ObjectSerializer.deserialize(success.data, "PaymentTerminalTransactionSummaryReference");
                         return resolve({ response: success.request.res, body: body });
                     },
                     failure => {
@@ -681,7 +682,7 @@ class PaymentTerminalService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

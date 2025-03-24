@@ -37,7 +37,7 @@ class ChargeAttempt extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
-        * The customers presence indicates which kind of customer interaction was used during the charge attempt.
+        * The customer's presence indicates which kind of customer interaction was used during the charge attempt.
         */
     'customersPresence'?: CustomersPresence;
 
@@ -67,7 +67,7 @@ class ChargeAttempt extends TransactionAwareEntity {
     'invocation'?: ConnectorInvocation;
 
         /**
-        * 
+        * The labels providing additional information about the object.
         */
     'labels'?: Array<Label>;
 
@@ -97,7 +97,7 @@ class ChargeAttempt extends TransactionAwareEntity {
     'salesChannel'?: number;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

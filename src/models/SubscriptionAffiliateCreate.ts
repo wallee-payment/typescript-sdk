@@ -10,7 +10,7 @@ class SubscriptionAffiliateCreate extends AbstractSubscriptionAffiliateUpdate {
     'externalId': string;
 
         /**
-        * 
+        * The reference used to identify the affiliate.
         */
     'reference': string;
 

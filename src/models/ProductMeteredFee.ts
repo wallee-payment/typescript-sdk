@@ -8,12 +8,12 @@ import { SubscriptionProductComponent } from "./SubscriptionProductComponent";
 class ProductMeteredFee {
 
         /**
-        * 
+        * The product component that the fee belongs to.
         */
     'component'?: SubscriptionProductComponent;
 
         /**
-        * The description of a component fee describes the fee to the subscriber. The description may be shown in documents or on certain user interfaces.
+        * The localized description of the fee that is displayed to the customer.
         */
     'description'?: { [key: string]: string; };
 
@@ -28,22 +28,22 @@ class ProductMeteredFee {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The metric used to determine the resource consumption billed to the customer.
         */
     'metric'?: SubscriptionMetric;
 
         /**
-        * The name of the fee should describe for the subscriber in few words for what the fee is for.
+        * The localized name of the fee that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * The tier pricing determines the calculation method of the tiers. The prices of the different tiers can be applied in different ways. The tier pricing controls this calculation.
+        * The method used to calculate the tier price.
         */
     'tierPricing'?: ProductMeteredTierPricing;
 
         /**
-        * 
+        * The type of the fee.
         */
     'type'?: ProductFeeType;
 

@@ -26,12 +26,22 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
         /**
         * 
         */
+    'draftOrderId'?: string;
+
+        /**
+        * 
+        */
     'failureReason'?: FailureReason;
 
         /**
         * 
         */
     'orderId'?: string;
+
+        /**
+        * 
+        */
+    'orderLegacyId'?: string;
 
         /**
         * 
@@ -102,6 +112,12 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
         },
         
         {
+        "name": "draftOrderId",
+        "baseName": "draftOrderId",
+        "type": "string"
+        },
+        
+        {
         "name": "failureReason",
         "baseName": "failureReason",
         "type": "FailureReason"
@@ -110,6 +126,12 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
         {
         "name": "orderId",
         "baseName": "orderId",
+        "type": "string"
+        },
+        
+        {
+        "name": "orderLegacyId",
+        "baseName": "orderLegacyId",
         "type": "string"
         },
         

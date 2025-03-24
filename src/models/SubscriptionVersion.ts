@@ -1,7 +1,7 @@
 'use strict';
+import { BillingCycleModel } from "./BillingCycleModel";
 import { Subscription } from "./Subscription";
 import { SubscriptionComponentConfiguration } from "./SubscriptionComponentConfiguration";
-import { SubscriptionProductComponent } from "./SubscriptionProductComponent";
 import { SubscriptionProductVersion } from "./SubscriptionProductVersion";
 import { SubscriptionVersionState } from "./SubscriptionVersionState";
 
@@ -9,32 +9,37 @@ import { SubscriptionVersionState } from "./SubscriptionVersionState";
 class SubscriptionVersion {
 
         /**
-        * 
+        * The date and time when the subscription version was activated.
         */
     'activatedOn'?: Date;
 
         /**
-        * The subscriber is charged in the billing currency. The billing currency has to be one of the enabled currencies on the subscription product.
+        * The three-letter code (ISO 4217 format) of the currency used to invoice the customer. Must be one of the currencies supported by the product.
         */
     'billingCurrency'?: string;
 
         /**
         * 
         */
+    'billingCycleModel'?: BillingCycleModel;
+
+        /**
+        * The configurations of the subscription's components.
+        */
     'componentConfigurations'?: Array<SubscriptionComponentConfiguration>;
 
         /**
-        * 
+        * The date and time when the subscription version was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The expected last period end is the date on which the projected end date of the last period is. This is only a projection and as such the actual date may be different.
+        * The date and time when the last period is expected to end.
         */
     'expectedLastPeriodEnd'?: Date;
 
         /**
-        * 
+        * The date and time when the subscription version failed.
         */
     'failedOn'?: Date;
 
@@ -59,19 +64,14 @@ class SubscriptionVersion {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The date and time when the termination of the subscription version is planned.
         */
     'plannedTerminationDate'?: Date;
 
         /**
-        * 
+        * The product version that is subscribed to.
         */
     'productVersion'?: SubscriptionProductVersion;
-
-        /**
-        * 
-        */
-    'selectedComponents'?: Array<SubscriptionProductComponent>;
 
         /**
         * The object's current state.
@@ -79,22 +79,22 @@ class SubscriptionVersion {
     'state'?: SubscriptionVersionState;
 
         /**
-        * 
+        * The subscription that this version belongs to.
         */
     'subscription'?: Subscription;
 
         /**
-        * 
+        * The date and time when the subscription version was terminated.
         */
     'terminatedOn'?: Date;
 
         /**
-        * 
+        * The date and time when the termination of the subscription version started.
         */
     'terminatingOn'?: Date;
 
         /**
-        * 
+        * The date and time when the termination of the subscription version was issued.
         */
     'terminationIssuedOn'?: Date;
 
@@ -118,6 +118,12 @@ class SubscriptionVersion {
         "name": "billingCurrency",
         "baseName": "billingCurrency",
         "type": "string"
+        },
+        
+        {
+        "name": "billingCycleModel",
+        "baseName": "billingCycleModel",
+        "type": "BillingCycleModel"
         },
         
         {
@@ -178,12 +184,6 @@ class SubscriptionVersion {
         "name": "productVersion",
         "baseName": "productVersion",
         "type": "SubscriptionProductVersion"
-        },
-        
-        {
-        "name": "selectedComponents",
-        "baseName": "selectedComponents",
-        "type": "Array<SubscriptionProductComponent>"
         },
         
         {

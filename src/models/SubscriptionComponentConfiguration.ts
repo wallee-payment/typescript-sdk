@@ -4,7 +4,7 @@
 class SubscriptionComponentConfiguration {
 
         /**
-        * 
+        * The component that is being configured.
         */
     'component'?: number;
 
@@ -19,7 +19,7 @@ class SubscriptionComponentConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The quantity that should be applied to the component.
         */
     'quantity'?: number;
 

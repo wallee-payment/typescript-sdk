@@ -1,4 +1,5 @@
 'use strict';
+import { BillingCycleModel } from "./BillingCycleModel";
 import { SubscriptionProduct } from "./SubscriptionProduct";
 import { SubscriptionProductVersionState } from "./SubscriptionProductVersionState";
 import { TaxCalculation } from "./TaxCalculation";
@@ -7,32 +8,37 @@ import { TaxCalculation } from "./TaxCalculation";
 class SubscriptionProductVersion {
 
         /**
-        * 
+        * The date and time when the product version was activated.
         */
     'activatedOn'?: Date;
 
         /**
-        * The billing cycle determines the rhythm with which the subscriber is billed. The charging may have different rhythm.
+        * The recurring period of time, typically monthly or annually, for which a subscriber is charged.
         */
     'billingCycle'?: string;
 
         /**
-        * The comment allows to provide a internal comment for the version. It helps to document why a product was changed. The comment is not disclosed to the subscriber.
+        * 
+        */
+    'billingCycleModel'?: BillingCycleModel;
+
+        /**
+        * A comment that describes the product version and why it was created. It is not disclosed to the subscriber.
         */
     'comment'?: string;
 
         /**
-        * 
+        * The date and time when the product version was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The default currency has to be used in all fees.
+        * The three-letter code (ISO 4217 format) of the product version's default currency.
         */
     'defaultCurrency'?: string;
 
         /**
-        * The currencies which are enabled can be selected to define component fees. Currencies which are not enabled cannot be used to define fees.
+        * The three-letter codes (ISO 4217 format) of the currencies that the product version supports.
         */
     'enabledCurrencies'?: Array<string>;
 
@@ -42,7 +48,7 @@ class SubscriptionProductVersion {
     'id'?: number;
 
         /**
-        * The increment number represents the version number incremented whenever a new version is activated.
+        * Whenever a new version of a product is created, the number is increased and assigned.
         */
     'incrementNumber'?: number;
 
@@ -52,22 +58,22 @@ class SubscriptionProductVersion {
     'linkedSpaceId'?: number;
 
         /**
-        * The minimal number of periods determines how long the subscription has to run before the subscription can be terminated.
+        * The minimum number of periods the subscription will run before it can be terminated.
         */
     'minimalNumberOfPeriods'?: number;
 
         /**
-        * The product version name is the name of the product which is shown to the user for the version. When the visible product name should be changed for a particular product a new version has to be created which contains the new name of the product.
+        * The localized name of the product that is displayed to the customer.
         */
     'name'?: { [key: string]: string; };
 
         /**
-        * The number of notice periods determines the number of periods which need to be paid between the request to terminate the subscription and the final period.
+        * The number of periods the subscription will keep running after its termination was requested.
         */
     'numberOfNoticePeriods'?: number;
 
         /**
-        * 
+        * The date and time when the product version was made obsolete.
         */
     'obsoletedOn'?: Date;
 
@@ -77,22 +83,22 @@ class SubscriptionProductVersion {
     'plannedPurgeDate'?: Date;
 
         /**
-        * Each product version is linked to a product.
+        * The product that the version belongs to.
         */
     'product'?: SubscriptionProduct;
 
         /**
-        * The product version reference helps to identify the version. The reference is generated out of the product reference.
+        * The reference used to identify the product version.
         */
     'reference'?: string;
 
         /**
-        * 
+        * The date and time when the product version was retired.
         */
     'retiringFinishedOn'?: Date;
 
         /**
-        * 
+        * The date and time when the product version's retirement was started.
         */
     'retiringStartedOn'?: Date;
 
@@ -102,7 +108,7 @@ class SubscriptionProductVersion {
     'state'?: SubscriptionProductVersionState;
 
         /**
-        * Strategy that is used for tax calculation in fees.
+        * The way taxes are calculated for fees.
         */
     'taxCalculation'?: TaxCalculation;
 
@@ -126,6 +132,12 @@ class SubscriptionProductVersion {
         "name": "billingCycle",
         "baseName": "billingCycle",
         "type": "string"
+        },
+        
+        {
+        "name": "billingCycleModel",
+        "baseName": "billingCycleModel",
+        "type": "BillingCycleModel"
         },
         
         {

@@ -9,11 +9,6 @@ class SalesChannel {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
-        */
-    'icon'?: string;
-
-        /**
         * A unique identifier for the object.
         */
     'id'?: number;
@@ -24,12 +19,7 @@ class SalesChannel {
     'name'?: { [key: string]: string; };
 
         /**
-        * 
-        */
-    'parent'?: SalesChannel;
-
-        /**
-        * 
+        * When listing sales channels, they can be sorted by this number.
         */
     'sortOrder'?: number;
 
@@ -45,12 +35,6 @@ class SalesChannel {
         },
         
         {
-        "name": "icon",
-        "baseName": "icon",
-        "type": "string"
-        },
-        
-        {
         "name": "id",
         "baseName": "id",
         "type": "number"
@@ -60,12 +44,6 @@ class SalesChannel {
         "name": "name",
         "baseName": "name",
         "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "parent",
-        "baseName": "parent",
-        "type": "SalesChannel"
         },
         
         {

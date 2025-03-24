@@ -43,6 +43,11 @@ class PaymentTerminalTransactionSummary {
         /**
         * 
         */
+    'reference'?: number;
+
+        /**
+        * 
+        */
     'startedOn'?: Date;
 
         /**
@@ -100,6 +105,12 @@ class PaymentTerminalTransactionSummary {
         "name": "receipt",
         "baseName": "receipt",
         "type": "string"
+        },
+        
+        {
+        "name": "reference",
+        "baseName": "reference",
+        "type": "number"
         },
         
         {

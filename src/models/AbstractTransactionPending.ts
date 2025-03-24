@@ -8,47 +8,47 @@ import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 class AbstractTransactionPending {
 
         /**
-        * 
+        * The payment method brands that can be used to authorize the transaction.
         */
     'allowedPaymentMethodBrands'?: Array<number>;
 
         /**
-        * 
+        * The payment method configurations that can be used to authorize the transaction.
         */
     'allowedPaymentMethodConfigurations'?: Array<number>;
 
         /**
-        * 
+        * The address associated with the payment method for invoicing and transaction processing purposes.
         */
     'billingAddress'?: AddressCreate;
 
         /**
-        * The completion behavior controls when the transaction is completed.
+        * The behavior that controls when the transaction is completed.
         */
     'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
-        * 
+        * The three-letter code (ISO 4217 format) of the transaction's currency.
         */
     'currency'?: string;
 
         /**
-        * The customer email address is the email address of the customer. If no email address is provided on the shipping or billing address this address is used.
+        * The customer's email address.
         */
     'customerEmailAddress'?: string;
 
         /**
-        * 
+        * The unique identifier of the customer in the external system.
         */
     'customerId'?: string;
 
         /**
-        * The user will be redirected to failed URL when the transaction could not be authorized or completed. In case no failed URL is specified a default failed page will be displayed.
+        * The URL to redirect the customer back to after they canceled or failed to authenticated their payment.
         */
     'failedUrl'?: string;
 
         /**
-        * 
+        * The merchant's reference used to identify the invoice.
         */
     'invoiceMerchantReference'?: string;
 
@@ -58,12 +58,12 @@ class AbstractTransactionPending {
     'language'?: string;
 
         /**
-        * 
+        * The line items purchased by the customer.
         */
     'lineItems'?: Array<LineItemCreate>;
 
         /**
-        * 
+        * The merchant's reference used to identify the transaction.
         */
     'merchantReference'?: string;
 
@@ -73,32 +73,32 @@ class AbstractTransactionPending {
     'metaData'?: { [key: string]: string; };
 
         /**
-        * 
+        * The address to where the order will be shipped.
         */
     'shippingAddress'?: AddressCreate;
 
         /**
-        * 
+        * The name of the shipping method used to ship the products.
         */
     'shippingMethod'?: string;
 
         /**
-        * The user will be redirected to success URL when the transaction could be authorized or completed. In case no success URL is specified a default success page will be displayed.
+        * The URL to redirect the customer back to after they successfully authenticated their payment.
         */
     'successUrl'?: string;
 
         /**
-        * The time zone defines in which time zone the customer is located in. The time zone may affects how dates are formatted when interacting with the customer.
+        * The customer's time zone, which affects how dates and times are formatted when communicating with the customer.
         */
     'timeZone'?: string;
 
         /**
-        * 
+        * The payment token that should be used to charge the customer.
         */
     'token'?: number;
 
         /**
-        * The tokenization mode controls if and how the tokenization of payment information is applied to the transaction.
+        * The tokenization mode specifies whether and how the tokenization of payment information is applied to the transaction.
         */
     'tokenizationMode'?: TokenizationMode;
 

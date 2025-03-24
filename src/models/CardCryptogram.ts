@@ -1,5 +1,4 @@
 'use strict';
-import { CardCryptogramType } from "./CardCryptogramType";
 
 
 class CardCryptogram {
@@ -7,7 +6,7 @@ class CardCryptogram {
         /**
         * 
         */
-    'type'?: CardCryptogramType;
+    'eci'?: string;
 
         /**
         * 
@@ -20,9 +19,9 @@ class CardCryptogram {
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
         {
-        "name": "type",
-        "baseName": "type",
-        "type": "CardCryptogramType"
+        "name": "eci",
+        "baseName": "eci",
+        "type": "string"
         },
         
         {

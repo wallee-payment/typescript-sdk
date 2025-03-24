@@ -5,6 +5,11 @@ import { CreationEntityState } from "./CreationEntityState";
 class AbstractWebhookListenerUpdate {
 
         /**
+        * Whether signature header and 'state' property are enabled in webhook payload.
+        */
+    'enablePayloadSignatureAndState'?: boolean;
+
+        /**
         * The entity's target states that are to be monitored.
         */
     'entityStates'?: Array<string>;
@@ -29,6 +34,12 @@ class AbstractWebhookListenerUpdate {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "enablePayloadSignatureAndState",
+        "baseName": "enablePayloadSignatureAndState",
+        "type": "boolean"
+        },
+        
         {
         "name": "entityStates",
         "baseName": "entityStates",

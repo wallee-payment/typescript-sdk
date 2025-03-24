@@ -9,27 +9,27 @@ import { Token } from "./Token";
 class Subscription {
 
         /**
-        * 
+        * The date and time when the subscription was activate.
         */
     'activatedOn'?: Date;
 
         /**
-        * 
+        * The affiliate that led to the creation of the subscription.
         */
     'affiliate'?: SubscriptionAffiliate;
 
         /**
-        * 
+        * The date and time when the subscription was created.
         */
     'createdOn'?: Date;
 
         /**
-        * 
+        * The version of the product that the subscription is currently linked to.
         */
     'currentProductVersion'?: SubscriptionProductVersion;
 
         /**
-        * 
+        * A description used to identify the subscription.
         */
     'description'?: string;
 
@@ -39,7 +39,7 @@ class Subscription {
     'id'?: number;
 
         /**
-        * 
+        * The date and time when the subscription was initialized.
         */
     'initializedOn'?: Date;
 
@@ -59,12 +59,12 @@ class Subscription {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The date and time when the subscription is planned to be terminated.
         */
     'plannedTerminationDate'?: Date;
 
         /**
-        * 
+        * The merchant's reference used to identify the subscription.
         */
     'reference'?: string;
 
@@ -74,32 +74,32 @@ class Subscription {
     'state'?: SubscriptionState;
 
         /**
-        * 
+        * The subscriber that the subscription belongs to.
         */
     'subscriber'?: Subscriber;
 
         /**
-        * 
+        * The ID of the user the subscription was terminated by.
         */
     'terminatedBy'?: number;
 
         /**
-        * 
+        * The date and time when the subscription was terminated.
         */
     'terminatedOn'?: Date;
 
         /**
-        * 
+        * The date and time when the termination of the subscription started.
         */
     'terminatingOn'?: Date;
 
         /**
-        * 
+        * The date and time when the subscription was scheduled to be terminated.
         */
     'terminationScheduledOn'?: Date;
 
         /**
-        * 
+        * The payment token that is used to charge the customer.
         */
     'token'?: Token;
 

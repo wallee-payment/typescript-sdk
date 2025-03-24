@@ -94,10 +94,6 @@ class RefundCommentService {
             queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
-        if (id !== undefined) {
-            queryParams['id'] = ObjectSerializer.serialize(id, "number");
-        }
-
 
 
 
@@ -106,7 +102,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -120,6 +116,7 @@ class RefundCommentService {
             baseURL: this._basePath,
             headers,
             params: queryParams,
+            data: id,
             timeout: this._timeout * 1000,
             responseType: 'json',
         }
@@ -202,7 +199,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -264,7 +261,7 @@ class RefundCommentService {
     * Creates the comment with the given properties.
     * @summary Create
     * @param spaceId 
-    * @param entity 
+    * @param entity The comment object which should be created.
     * @param {*} [options] Override http request options.
     */
     public create (spaceId: number, entity: RefundCommentCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RefundComment;  }> {
@@ -294,7 +291,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -357,7 +354,7 @@ class RefundCommentService {
     * Pins the comment to the top.
     * @summary Pin
     * @param spaceId 
-    * @param id 
+    * @param id The id of the comment to pin to the top.
     * @param {*} [options] Override http request options.
     */
     public pin (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
@@ -391,7 +388,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -453,7 +450,7 @@ class RefundCommentService {
     * Reads the comment with the given 'id' and returns it.
     * @summary Read
     * @param spaceId 
-    * @param id 
+    * @param id The id of the comment which should be returned.
     * @param {*} [options] Override http request options.
     */
     public read (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RefundComment;  }> {
@@ -487,7 +484,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -549,7 +546,7 @@ class RefundCommentService {
     * Unpins the comment from the top.
     * @summary Unpin
     * @param spaceId 
-    * @param id 
+    * @param id The id of the comment to unpin.
     * @param {*} [options] Override http request options.
     */
     public unpin (spaceId: number, id: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
@@ -583,7 +580,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -645,7 +642,7 @@ class RefundCommentService {
     * This updates the comment with the given properties. Only those properties which should be updated can be provided. The 'id' and 'version' are required to identify the comment.
     * @summary Update
     * @param spaceId 
-    * @param entity 
+    * @param entity The comment object with the properties which should be updated.
     * @param {*} [options] Override http request options.
     */
     public update (spaceId: number, entity: RefundCommentActive, options: any = {}) : Promise<{ response: http.IncomingMessage; body: RefundComment;  }> {
@@ -675,7 +672,7 @@ class RefundCommentService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.5.0",
+            "x-meta-sdk-version": "4.6.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

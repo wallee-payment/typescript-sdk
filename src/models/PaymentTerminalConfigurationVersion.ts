@@ -6,17 +6,17 @@ import { PaymentTerminalConfigurationVersionState } from "./PaymentTerminalConfi
 class PaymentTerminalConfigurationVersion {
 
         /**
-        * 
+        * The payment terminal configuration that the version belongs to.
         */
     'configuration'?: PaymentTerminalConfiguration;
 
         /**
-        * 
+        * The payment connector configurations that are available on the payment terminal.
         */
     'connectorConfigurations'?: Array<number>;
 
         /**
-        * 
+        * The ID of the user the payment terminal configuration version was created by.
         */
     'createdBy'?: number;
 
@@ -26,7 +26,7 @@ class PaymentTerminalConfigurationVersion {
     'createdOn'?: Date;
 
         /**
-        * The currency is derived by default from the terminal location. By setting a specific currency the derived currency is overridden.
+        * The default currency that is used if none is set on the payment terminal itself. If it is empty, the currency is derived from the location of the terminal.
         */
     'defaultCurrency'?: string;
 
@@ -41,12 +41,12 @@ class PaymentTerminalConfigurationVersion {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The permitted duration of the terminal's maintenance window.
         */
     'maintenanceWindowDuration'?: string;
 
         /**
-        * 
+        * The start time of the terminal's maintenance window.
         */
     'maintenanceWindowStart'?: string;
 
@@ -61,7 +61,7 @@ class PaymentTerminalConfigurationVersion {
     'state'?: PaymentTerminalConfigurationVersionState;
 
         /**
-        * 
+        * The time zone of the payment terminal used to determine the maintenance window.
         */
     'timeZone'?: string;
 
@@ -71,7 +71,7 @@ class PaymentTerminalConfigurationVersion {
     'version'?: number;
 
         /**
-        * 
+        * Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
         */
     'versionAppliedImmediately'?: boolean;
 

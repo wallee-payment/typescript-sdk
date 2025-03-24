@@ -19,7 +19,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate {
         /**
         * The protection mode determines if the payment link is protected against tampering and in what way.
         */
-    'protectionMode'?: PaymentLinkProtectionMode;
+    'protectionMode': PaymentLinkProtectionMode;
 
 
     static discriminator: string | undefined = undefined;

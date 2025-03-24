@@ -1,37 +1,35 @@
 'use strict';
-import { Account } from "./Account";
 import { FailureReason } from "./FailureReason";
 import { PaymentContractState } from "./PaymentContractState";
 import { PaymentContractType } from "./PaymentContractType";
-import { User } from "./User";
 
 
 class PaymentContract {
 
         /**
-        * 
+        * This account that the contract belongs to.
         */
-    'account'?: Account;
+    'account'?: number;
 
         /**
-        * 
+        * The date and time when the contract was activated.
         */
     'activatedOn'?: Date;
 
         /**
-        * 
+        * The identifier of the contract.
         */
     'contractIdentifier'?: string;
 
         /**
-        * 
+        * The type of the contract.
         */
     'contractType'?: PaymentContractType;
 
         /**
-        * 
+        * The ID of the user the contract was created by.
         */
-    'createdBy'?: User;
+    'createdBy'?: number;
 
         /**
         * The date and time when the object was created.
@@ -54,17 +52,17 @@ class PaymentContract {
     'lastModifiedDate'?: Date;
 
         /**
-        * 
+        * The date and time when the contract was rejected.
         */
     'rejectedOn'?: Date;
 
         /**
-        * 
+        * The reason for rejecting the contract.
         */
     'rejectionReason'?: FailureReason;
 
         /**
-        * 
+        * The date and time when the termination process of the contract was started.
         */
     'startTerminatingOn'?: Date;
 
@@ -74,12 +72,12 @@ class PaymentContract {
     'state'?: PaymentContractState;
 
         /**
-        * 
+        * The ID of the user the contract was terminated by.
         */
-    'terminatedBy'?: User;
+    'terminatedBy'?: number;
 
         /**
-        * 
+        * The date and time when the contract was terminated.
         */
     'terminatedOn'?: Date;
 
@@ -96,7 +94,7 @@ class PaymentContract {
         {
         "name": "account",
         "baseName": "account",
-        "type": "Account"
+        "type": "number"
         },
         
         {
@@ -120,7 +118,7 @@ class PaymentContract {
         {
         "name": "createdBy",
         "baseName": "createdBy",
-        "type": "User"
+        "type": "number"
         },
         
         {
@@ -174,7 +172,7 @@ class PaymentContract {
         {
         "name": "terminatedBy",
         "baseName": "terminatedBy",
-        "type": "User"
+        "type": "number"
         },
         
         {

@@ -15,6 +15,11 @@ class PaymentAdjustment {
     'amountIncludingTax'?: number;
 
         /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
         * The rate in percentage is the rate on which the adjustment amount was calculated with.
         */
     'rateInPercentage'?: number;
@@ -43,6 +48,12 @@ class PaymentAdjustment {
         {
         "name": "amountIncludingTax",
         "baseName": "amountIncludingTax",
+        "type": "number"
+        },
+        
+        {
+        "name": "id",
+        "baseName": "id",
         "type": "number"
         },
         

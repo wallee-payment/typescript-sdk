@@ -20,7 +20,7 @@ class PaymentTerminalLocation {
     'linkedSpaceId'?: number;
 
         /**
-        * The terminal location name is used internally to identify the terminal in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment terminal location.
         */
     'name'?: string;
 

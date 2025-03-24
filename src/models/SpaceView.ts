@@ -16,7 +16,7 @@ class SpaceView {
     'linkedSpaceId'?: number;
 
         /**
-        * The space view name is used internally to identify the space view in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the space view.
         */
     'name'?: string;
 
@@ -26,7 +26,7 @@ class SpaceView {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The space to which the view belongs to.
+        * The space that the space view belongs to.
         */
     'space'?: Space;
 

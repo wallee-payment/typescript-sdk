@@ -9,7 +9,7 @@ class DocumentTemplateTypeGroup {
     'id'?: number;
 
         /**
-        * 
+        * The localized title of the group.
         */
     'title'?: { [key: string]: string; };
 

@@ -21,17 +21,17 @@ class SubscriptionProductVersionRetirement {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The product version that is to be retired.
         */
     'productVersion'?: SubscriptionProductVersion;
 
         /**
-        * 
+        * Whether the subscriptions' termination periods should be respected.
         */
-    'respectTerminiationPeriodsEnabled'?: boolean;
+    'respectTerminationPeriods'?: boolean;
 
         /**
-        * When a target product is not chosen, all customers with the retired product will be terminated.
+        * The product to which the subscriptions with the retiring product version are to be migrated. If none is defined, the subscriptions are terminated.
         */
     'targetProduct'?: SubscriptionProduct;
 
@@ -70,8 +70,8 @@ class SubscriptionProductVersionRetirement {
         },
         
         {
-        "name": "respectTerminiationPeriodsEnabled",
-        "baseName": "respectTerminiationPeriodsEnabled",
+        "name": "respectTerminationPeriods",
+        "baseName": "respectTerminationPeriods",
         "type": "boolean"
         },
         

@@ -6,12 +6,12 @@ import { ResourcePath } from "./ResourcePath";
 class DocumentTemplate {
 
         /**
-        * The default document template is used whenever no specific template is specified for a particular template type.
+        * Whether this is the default document template which is used whenever no specific template is specified for the same template type.
         */
     'defaultTemplate'?: boolean;
 
         /**
-        * 
+        * Whether documents of this template should be delivered.
         */
     'deliveryEnabled'?: boolean;
 
@@ -26,7 +26,7 @@ class DocumentTemplate {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The name used to identify the document template.
         */
     'name'?: string;
 
@@ -36,7 +36,7 @@ class DocumentTemplate {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
         */
     'spaceId'?: number;
 
@@ -46,12 +46,12 @@ class DocumentTemplate {
     'state'?: CreationEntityState;
 
         /**
-        * 
+        * The resource path to a custom template to be used to generate PDF documents.
         */
     'templateResource'?: ResourcePath;
 
         /**
-        * 
+        * The document template's type.
         */
     'type'?: number;
 

@@ -7,12 +7,22 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
         /**
         * The ID of the Shopify product that is enabled to be ordered as subscription.
         */
-    'productId': string;
+    'productId'?: string;
+
+        /**
+        * The legacy ID of the Shopify product that is enabled to be ordered as subscription.
+        */
+    'productLegacyId': string;
 
         /**
         * 
         */
-    'productVariantId': string;
+    'productVariantId'?: string;
+
+        /**
+        * 
+        */
+    'productVariantLegacyId': string;
 
         /**
         * 
@@ -31,8 +41,20 @@ class ShopifySubscriptionProductCreate extends AbstractShopifySubscriptionProduc
         },
         
         {
+        "name": "productLegacyId",
+        "baseName": "productLegacyId",
+        "type": "string"
+        },
+        
+        {
         "name": "productVariantId",
         "baseName": "productVariantId",
+        "type": "string"
+        },
+        
+        {
+        "name": "productVariantLegacyId",
+        "baseName": "productVariantLegacyId",
         "type": "string"
         },
         

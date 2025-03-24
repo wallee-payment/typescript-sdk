@@ -1,6 +1,7 @@
 'use strict';
 import { CardCryptogramCreate } from "./CardCryptogramCreate";
 import { CardholderAuthenticationCreate } from "./CardholderAuthenticationCreate";
+import { PanType } from "./PanType";
 import { RecurringIndicator } from "./RecurringIndicator";
 
 
@@ -30,6 +31,11 @@ class AuthenticatedCardDataCreate {
         * The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
         */
     'expiryDate'?: string;
+
+        /**
+        * 
+        */
+    'panType'?: PanType;
 
         /**
         * The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
@@ -84,6 +90,12 @@ class AuthenticatedCardDataCreate {
         "name": "expiryDate",
         "baseName": "expiryDate",
         "type": "string"
+        },
+        
+        {
+        "name": "panType",
+        "baseName": "panType",
+        "type": "PanType"
         },
         
         {

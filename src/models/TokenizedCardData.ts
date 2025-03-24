@@ -13,6 +13,11 @@ class TokenizedCardData {
         /**
         * 
         */
+    'initialRecurringTransaction'?: boolean;
+
+        /**
+        * 
+        */
     'recurringIndicator'?: RecurringIndicator;
 
         /**
@@ -29,6 +34,12 @@ class TokenizedCardData {
         "name": "cryptogram",
         "baseName": "cryptogram",
         "type": "CardCryptogram"
+        },
+        
+        {
+        "name": "initialRecurringTransaction",
+        "baseName": "initialRecurringTransaction",
+        "type": "boolean"
         },
         
         {

@@ -29,7 +29,7 @@ class Charge extends TransactionAwareEntity {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 

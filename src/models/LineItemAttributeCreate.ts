@@ -4,12 +4,12 @@
 class LineItemAttributeCreate {
 
         /**
-        * 
+        * The label describing the line item attribute.
         */
     'label': string;
 
         /**
-        * 
+        * The value of the line item attribute.
         */
     'value': string;
 

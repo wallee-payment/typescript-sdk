@@ -5,7 +5,7 @@ import { AbstractDebtCollectionCaseUpdate } from "./AbstractDebtCollectionCaseUp
 class DebtCollectionCaseCreate extends AbstractDebtCollectionCaseUpdate {
 
         /**
-        * The collector configuration determines how the debt collection case is processed.
+        * The configuration that the case is processed with.
         */
     'collectorConfiguration'?: number;
 
@@ -15,7 +15,7 @@ class DebtCollectionCaseCreate extends AbstractDebtCollectionCaseUpdate {
     'externalId': string;
 
         /**
-        * The case reference is used in the communication with the debtor. It should be unique and it should be linkable with the source of the debt collection case.
+        * A unique reference to identify the debt collection case in communication with the debtor.
         */
     'reference': string;
 

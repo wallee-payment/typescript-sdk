@@ -9,6 +9,11 @@ class SpaceCreate extends AbstractSpaceUpdate {
         */
     'account': number;
 
+        /**
+        * The database the space is connected to and that holds the space's data.
+        */
+    'database'?: number;
+
 
     static discriminator: string | undefined = undefined;
 
@@ -17,6 +22,12 @@ class SpaceCreate extends AbstractSpaceUpdate {
         {
         "name": "account",
         "baseName": "account",
+        "type": "number"
+        },
+        
+        {
+        "name": "database",
+        "baseName": "database",
         "type": "number"
         }        
     ];

@@ -5,17 +5,17 @@ import { TransactionGroupState } from "./TransactionGroupState";
 class TransactionGroup {
 
         /**
-        * 
+        * The date and time when the initial transaction in the group was created.
         */
     'beginDate'?: Date;
 
         /**
-        * 
+        * The unique identifier of the customer in the external system.
         */
     'customerId'?: string;
 
         /**
-        * 
+        * The date and time when the final transaction in the group was last updated.
         */
     'endDate'?: Date;
 

@@ -4,12 +4,12 @@
 class DebtCollectionReceipt {
 
         /**
-        * 
+        * The amount that was collected.
         */
     'amount'?: number;
 
         /**
-        * The created by field indicates the user which has created the receipt.
+        * The ID of the user the receipt was created by.
         */
     'createdBy'?: number;
 
@@ -19,12 +19,12 @@ class DebtCollectionReceipt {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The debt collection case that this document belongs to.
         */
     'debtCollectionCase'?: number;
 
         /**
-        * The external id is a unique identifier for the receipt. The external id has to be unique in combination with the debt collection case. When a receipt is sent with an existing external id the existing one is returned rather than a new one is created.
+        * A client-generated nonce which uniquely identifies the receipt.Subsequent requests with the same external ID do not lead to the creation of another receipt, but return the original one.
         */
     'externalId'?: string;
 
@@ -44,7 +44,7 @@ class DebtCollectionReceipt {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The source stating where the receipt is coming from.
         */
     'source'?: number;
 

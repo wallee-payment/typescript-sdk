@@ -48,6 +48,11 @@ class BankTransaction {
     'linkedSpaceId'?: number;
 
         /**
+        * The payment date describes the date when the transaction was made.
+        */
+    'paymentDate'?: Date;
+
+        /**
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
@@ -148,6 +153,12 @@ class BankTransaction {
         "name": "linkedSpaceId",
         "baseName": "linkedSpaceId",
         "type": "number"
+        },
+        
+        {
+        "name": "paymentDate",
+        "baseName": "paymentDate",
+        "type": "Date"
         },
         
         {

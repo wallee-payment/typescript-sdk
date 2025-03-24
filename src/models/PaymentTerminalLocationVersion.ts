@@ -7,17 +7,17 @@ import { PaymentTerminalLocationVersionState } from "./PaymentTerminalLocationVe
 class PaymentTerminalLocationVersion {
 
         /**
-        * 
+        * The postal address of the location where the payment terminals are used.
         */
     'address'?: PaymentTerminalAddress;
 
         /**
-        * 
+        * The contact details if the person responsible for the payment terminals at this location.
         */
     'contactAddress'?: PaymentTerminalAddress;
 
         /**
-        * 
+        * The ID of the user the payment terminal location version was created by.
         */
     'createdBy'?: number;
 
@@ -37,7 +37,7 @@ class PaymentTerminalLocationVersion {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The payment terminal location that the version belongs to.
         */
     'location'?: PaymentTerminalLocation;
 
@@ -57,7 +57,7 @@ class PaymentTerminalLocationVersion {
     'version'?: number;
 
         /**
-        * 
+        * Whether payment terminals are immediately updated to this configuration version. If not, it will be applied during the maintenance window.
         */
     'versionAppliedImmediately'?: boolean;
 

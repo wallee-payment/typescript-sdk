@@ -14,6 +14,11 @@ class ShopifySubscriberCreation {
     'phoneNumber'?: string;
 
         /**
+        * The customer Global ID has to correspond to the Global ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
+        */
+    'shopifyCustomerGid'?: string;
+
+        /**
         * The customer ID has to correspond to the ID assigned to the customer by Shopify. When the subscriber already exists no new subscriber will be created.
         */
     'shopifyCustomerId': string;
@@ -32,6 +37,12 @@ class ShopifySubscriberCreation {
         {
         "name": "phoneNumber",
         "baseName": "phoneNumber",
+        "type": "string"
+        },
+        
+        {
+        "name": "shopifyCustomerGid",
+        "baseName": "shopifyCustomerGid",
         "type": "string"
         },
         
