@@ -1,7 +1,7 @@
 {
     "name": "wallee",
     "title": "wallee",
-    "version": "4.6.0",
+    "version": "4.7.0",
     "description": "TypeScript/JavaScript client for wallee",
     "homepage": "http://github.com/wallee-payment/typescript-sdk",
     "repository": {
