@@ -16,7 +16,7 @@ class PaymentTerminalTillService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
-    protected _timeout : number = 25;
+    protected _timeout : number = 90;
     protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
@@ -133,7 +133,7 @@ class PaymentTerminalTillService {
             baseURL: this._basePath,
             headers,
             params: queryParams,
-            timeout: 90 * 1000,
+            timeout: this._timeout * 1000,
             responseType: 'json',
         }
 
@@ -244,7 +244,7 @@ class PaymentTerminalTillService {
             baseURL: this._basePath,
             headers,
             params: queryParams,
-            timeout: 90 * 1000,
+            timeout: this._timeout * 1000,
             responseType: 'json',
         }
 
