@@ -164,7 +164,7 @@ class PaymentTerminalTillService {
                         return reject({
                             errorType: errorObject.constructor.name,
                             date: (new Date()).toDateString(),
-                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusCode: failure.response?.status && !isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
                             statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
                             body: failure.response?.data,
                             response: failure.response?.request.res
@@ -275,7 +275,7 @@ class PaymentTerminalTillService {
                         return reject({
                             errorType: errorObject.constructor.name,
                             date: (new Date()).toDateString(),
-                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusCode: failure.response?.status && !isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
                             statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
                             body: failure.response?.data,
                             response: failure.response?.request.res
