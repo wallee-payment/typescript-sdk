@@ -4,17 +4,17 @@
 class CompletionLineItemCreate {
 
         /**
-        * The total amount of the line item including any tax.
+        * The total amount of the line item to be captured, including taxes.
         */
     'amount': number;
 
         /**
-        * The quantity of the line item which should be completed.
+        * The number of items to be captured.
         */
     'quantity': number;
 
         /**
-        * The unique id identifies the line item on which the capture is applied on.
+        * The unique identifier of the line item within the set of line items.
         */
     'uniqueId': string;
 

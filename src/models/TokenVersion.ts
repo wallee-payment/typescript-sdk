@@ -12,12 +12,12 @@ import { TokenVersionType } from "./TokenVersionType";
 class TokenVersion {
 
         /**
-        * 
+        * The date and time when the token version was activated.
         */
     'activatedOn'?: Date;
 
         /**
-        * 
+        * The billing address to be used for the transaction if no explicit billing address is provided during payment processing.
         */
     'billingAddress'?: Address;
 
@@ -27,17 +27,17 @@ class TokenVersion {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The environment in which the token version was created.
         */
     'environment'?: ChargeAttemptEnvironment;
 
         /**
-        * The expires on date indicates when token version expires. Once this date is reached the token version is marked as obsolete.
+        * The date and time when the token version is set to expire, after which it will be marked as obsolete.
         */
     'expiresOn'?: Date;
 
         /**
-        * 
+        * The URL to the token's icon displayed to the customer.
         */
     'iconUrl'?: string;
 
@@ -62,32 +62,32 @@ class TokenVersion {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The name used to identify the token.
         */
     'name'?: string;
 
         /**
-        * 
+        * The date and time when the token version was marked obsolete.
         */
     'obsoletedOn'?: Date;
 
         /**
-        * 
+        * The payment connector configuration that initialized the token version.
         */
     'paymentConnectorConfiguration'?: PaymentConnectorConfiguration;
 
         /**
-        * The payment information hash set contains hashes of the payment information represented by this token version.
+        * The hashed payment information that the token version represents.
         */
     'paymentInformationHashes'?: Array<PaymentInformationHash>;
 
         /**
-        * 
+        * The payment method that initialized the token version.
         */
     'paymentMethod'?: number;
 
         /**
-        * 
+        * The payment method brand that initialized the token version.
         */
     'paymentMethodBrand'?: number;
 
@@ -97,12 +97,12 @@ class TokenVersion {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The token name as specified by the processor.
         */
     'processorToken'?: string;
 
         /**
-        * 
+        * The shipping address to be used for the transaction if no explicit shipping address is provided during payment processing.
         */
     'shippingAddress'?: Address;
 
@@ -112,12 +112,12 @@ class TokenVersion {
     'state'?: TokenVersionState;
 
         /**
-        * 
+        * The token that the token version belongs to.
         */
     'token'?: Token;
 
         /**
-        * The token version type determines what kind of token it is and by which payment connector the token can be processed by.
+        * The type specifies the nature of the token and identifies the payment connector capable of processing it.
         */
     'type'?: TokenVersionType;
 

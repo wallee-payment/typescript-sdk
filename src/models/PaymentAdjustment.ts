@@ -5,12 +5,12 @@ import { Tax } from "./Tax";
 class PaymentAdjustment {
 
         /**
-        * 
+        * The adjustment's amount, excluding taxes.
         */
     'amountExcludingTax'?: number;
 
         /**
-        * The total amount of this adjustment including taxes.
+        * The adjustment's amount, including taxes.
         */
     'amountIncludingTax'?: number;
 
@@ -20,17 +20,17 @@ class PaymentAdjustment {
     'id'?: number;
 
         /**
-        * The rate in percentage is the rate on which the adjustment amount was calculated with.
+        * The percentage rate used to calculate the adjustment amount.
         */
     'rateInPercentage'?: number;
 
         /**
-        * 
+        * The tax applied to the adjustment.
         */
     'tax'?: Tax;
 
         /**
-        * 
+        * The type of the adjustment.
         */
     'type'?: number;
 

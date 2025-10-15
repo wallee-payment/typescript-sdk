@@ -13,7 +13,7 @@ class PaymentMethodConfiguration {
     'dataCollectionType'?: DataCollectionType;
 
         /**
-        * A custom description for the payment method which is displayed to the customer.
+        * A customer-facing custom description for the payment method.
         */
     'description'?: { [key: string]: string; };
 
@@ -23,7 +23,7 @@ class PaymentMethodConfiguration {
     'id'?: number;
 
         /**
-        * The resource path to a custom image for the payment method which is displayed to the customer.
+        * The resource path to a custom image for the payment method, displayed to the customer for visual identification.
         */
     'imageResourcePath'?: ResourcePath;
 
@@ -53,17 +53,17 @@ class PaymentMethodConfiguration {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The description for the payment method that is actually displayed to the customer. This is either the custom description, if defined, or otherwise the payment method's default one.
+        * The description of the payment method displayed to the customer. If a custom description is defined, it will be used; otherwise, the default description of the payment method will be shown.
         */
     'resolvedDescription'?: { [key: string]: string; };
 
         /**
-        * The image URL for the payment method that is actually displayed to the customer. This is either the custom image, if defined, or otherwise the payment method's default one.
+        * The URL to the image of the payment method displayed to the customer. If a custom image is defined, it will be used; otherwise, the default image of the payment method will be shown.
         */
     'resolvedImageUrl'?: string;
 
         /**
-        * The title for the payment method that is actually displayed to the customer. This is either the custom title, if defined, or otherwise the payment method's default one.
+        * The title of the payment method displayed to the customer. If a custom title is defined, it will be used; otherwise, the default title of the payment method will be shown.
         */
     'resolvedTitle'?: { [key: string]: string; };
 
@@ -83,7 +83,7 @@ class PaymentMethodConfiguration {
     'state'?: CreationEntityState;
 
         /**
-        * A custom title for the payment method which is displayed to the customer.
+        * A customer-facing custom title for the payment method.
         */
     'title'?: { [key: string]: string; };
 

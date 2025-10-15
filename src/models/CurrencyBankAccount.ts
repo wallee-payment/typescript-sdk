@@ -6,17 +6,17 @@ import { BankAccountEnvironment } from "./BankAccountEnvironment";
 class CurrencyBankAccount {
 
         /**
-        * 
+        * The bank account this currency bank account belongs to.
         */
     'bankAccount'?: BankAccount;
 
         /**
-        * 
+        * The currency associated with the bank account.
         */
     'currency'?: string;
 
         /**
-        * 
+        * Whether the bank account operates in a test or production environment.
         */
     'environment'?: BankAccountEnvironment;
 

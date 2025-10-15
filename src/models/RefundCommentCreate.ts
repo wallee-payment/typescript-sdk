@@ -5,7 +5,7 @@ import { AbstractRefundCommentActive } from "./AbstractRefundCommentActive";
 class RefundCommentCreate extends AbstractRefundCommentActive {
 
         /**
-        * 
+        * The refund that the comment belongs to.
         */
     'refund': number;
 

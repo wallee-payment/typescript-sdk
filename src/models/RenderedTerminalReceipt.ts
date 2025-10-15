@@ -5,22 +5,22 @@ import { PaymentTerminalReceiptType } from "./PaymentTerminalReceiptType";
 class RenderedTerminalReceipt {
 
         /**
-        * The data property contains the binary data of the receipt document encoded as base 64 encoded string.
+        * The receipt document data in binary format, presented as a Base64-encoded string.
         */
     'data'?: Array<string>;
 
         /**
-        * The mime type indicates the format of the receipt document. The mime type depends on the requested receipt format.
+        * The MIME type specifies the format of the receipt document and is determined by the requested format.
         */
     'mimeType'?: string;
 
         /**
-        * The terminal might or might not print the receipt. This property is set to true when the configuration of the terminal forces the printing and the device supports the receipt printing.
+        * Whether the terminal's configuration mandates printing and the device has receipt printing capabilities.
         */
     'printed'?: boolean;
 
         /**
-        * Each receipt has a different usage. The receipt type indicates for what resp. for whom the document is for.
+        * The receipt type specifies the intended use and the target audience of the document.
         */
     'receiptType'?: PaymentTerminalReceiptType;
 

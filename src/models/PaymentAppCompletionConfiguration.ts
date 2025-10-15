@@ -4,27 +4,27 @@
 class PaymentAppCompletionConfiguration {
 
         /**
-        * The completion endpoint is invoked to request the payment service provider to execute a completion.
+        * The URL that the payment service provider will invoke to process a completion request. This endpoint handles communication with the provider for initiating and managing completions.
         */
     'completionEndpoint'?: string;
 
         /**
-        * When the completion or the void is triggered we expect a feedback about the state of it. This timeout defines after how long we consider the void resp. completion as failed without receiving a final state update.
+        * The maximum time (in minutes) to wait for a response from the payment service provider after a completion request is triggered. If no feedback or final status is received within this period, the completion is considered failed.
         */
     'completionTimeoutInMinutes'?: number;
 
         /**
-        * The completion resp. the void can be triggered a while after the authorization of the transaction has been executed. This delay defines how many days after the authorization the void resp. completion must be triggered at the latest.
+        * The maximum number of days after a transaction's authorization during which a completion or void action can be triggered. Once this period has passed, neither action can be executed.
         */
     'maximalCompletionDelayInDays'?: number;
 
         /**
-        * This flag indicates whether the connector supports multiple completions for a single transaction or not.
+        * Whether the payment connector can process multiple completions for a single transaction.
         */
     'multipleCompletionsSupported'?: boolean;
 
         /**
-        * The void endpoint is invoked to request the payment service provider to execute a void.
+        * The URL that the payment service provider will invoke to process a void request. This endpoint handles communication with the provider for initiating and managing voids.
         */
     'voidEndpoint'?: string;
 

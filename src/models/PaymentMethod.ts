@@ -5,7 +5,7 @@ import { DataCollectionType } from "./DataCollectionType";
 class PaymentMethod {
 
         /**
-        * The data collection types that are supported by the payment method.
+        * The data collection types that payment method supports.
         */
     'dataCollectionTypes'?: Array<DataCollectionType>;
 
@@ -20,12 +20,12 @@ class PaymentMethod {
     'id'?: number;
 
         /**
-        * The path to the payment method's image which is displayed to the customer.
+        * The path to the payment method's image.
         */
     'imagePath'?: string;
 
         /**
-        * 
+        * A merchant-focused, localized description of the payment method, providing its purpose and details.
         */
     'merchantDescription'?: { [key: string]: string; };
 
@@ -35,7 +35,7 @@ class PaymentMethod {
     'name'?: { [key: string]: string; };
 
         /**
-        * The currencies that are supported by the payment method.
+        * The currencies that the payment method supports.
         */
     'supportedCurrencies'?: Array<string>;
 

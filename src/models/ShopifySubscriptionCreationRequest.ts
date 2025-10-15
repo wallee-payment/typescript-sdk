@@ -23,7 +23,7 @@ class ShopifySubscriptionCreationRequest {
     'currency': string;
 
         /**
-        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId': string;
 

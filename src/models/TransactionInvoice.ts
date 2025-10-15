@@ -2,57 +2,61 @@
 import { Address } from "./Address";
 import { Environment } from "./Environment";
 import { LineItem } from "./LineItem";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 import { TransactionCompletion } from "./TransactionCompletion";
 import { TransactionInvoiceState } from "./TransactionInvoiceState";
 
 
-class TransactionInvoice extends TransactionAwareEntity {
+class TransactionInvoice {
 
         /**
-        * 
+        * The total sum of all line items on the invoice, including taxes.
         */
     'amount'?: number;
 
         /**
-        * 
+        * The address associated with the invoice, used for billing purposes.
         */
     'billingAddress'?: Address;
 
         /**
-        * 
+        * The transaction completion this object is linked to.
         */
     'completion'?: TransactionCompletion;
 
         /**
-        * The date on which the invoice is created on.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The id of the user which marked the invoice as derecognized.
+        * The ID of the user the invoice was derecognized by.
         */
     'derecognizedBy'?: number;
 
         /**
-        * The date on which the invoice is marked as derecognized.
+        * The date and time when the invoice was derecognized, meaning it is no longer considered outstanding or valid in the system.
         */
     'derecognizedOn'?: Date;
 
         /**
-        * The date on which the invoice should be paid on.
+        * The due date for payment of the invoice.
         */
     'dueOn'?: Date;
 
         /**
-        * 
+        * The environment used when rendering resources.
         */
     'environment'?: Environment;
 
         /**
-        * The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId'?: string;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The language that is linked to the object.
@@ -60,22 +64,32 @@ class TransactionInvoice extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * 
+        * The invoiced line items that will appear on the invoice document.
         */
     'lineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The merchant's reference used to identify the invoice.
         */
     'merchantReference'?: string;
 
         /**
-        * The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
+        * The remaining amount the buyer owes to the merchant. A negative value indicates the invoice has been overpaid.
         */
     'outstandingAmount'?: number;
 
         /**
-        * The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
+        * The date and time when the invoice was recorded as paid. May differ from the actual payment date due to processing delays.
         */
     'paidOn'?: Date;
 
@@ -95,12 +109,12 @@ class TransactionInvoice extends TransactionAwareEntity {
     'state'?: TransactionInvoiceState;
 
         /**
-        * 
+        * The portion of the invoiced amount that corresponds to taxes.
         */
     'taxAmount'?: number;
 
         /**
-        * 
+        * The time zone that this object is associated with.
         */
     'timeZone'?: string;
 
@@ -169,6 +183,12 @@ class TransactionInvoice extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
@@ -178,6 +198,18 @@ class TransactionInvoice extends TransactionAwareEntity {
         "name": "lineItems",
         "baseName": "lineItems",
         "type": "Array<LineItem>"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -236,7 +268,7 @@ class TransactionInvoice extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(TransactionInvoice.attributeTypeMap);
+        return TransactionInvoice.attributeTypeMap;
     }
 }
 

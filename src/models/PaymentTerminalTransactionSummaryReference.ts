@@ -14,12 +14,12 @@ class PaymentTerminalTransactionSummaryReference {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The unique identifier of the terminal.
         */
     'terminalId'?: number;
 
         /**
-        * 
+        * The unique identifier of the terminal, that is displayed on the device.
         */
     'terminalIdentifier'?: string;
 

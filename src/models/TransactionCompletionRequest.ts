@@ -25,7 +25,7 @@ class TransactionCompletionRequest {
     'lineItems'?: Array<CompletionLineItemCreate>;
 
         /**
-        * The statement descriptor explain charges or payments on bank statements.
+        * The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
         */
     'statementDescriptor'?: string;
 

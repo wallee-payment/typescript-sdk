@@ -2,15 +2,19 @@
 import { BankTransaction } from "./BankTransaction";
 import { LineItem } from "./LineItem";
 import { Refund } from "./Refund";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class RefundRecoveryBankTransaction extends TransactionAwareEntity {
+class RefundRecoveryBankTransaction {
 
         /**
-        * 
+        * Provides general information about the bank transaction.
         */
     'bankTransaction'?: BankTransaction;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The language that is linked to the object.
@@ -18,22 +22,32 @@ class RefundRecoveryBankTransaction extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * The line items contain the items which could be recovered.
+        * The line items that were recovered.
         */
     'lineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The refund this bank transaction belongs to.
         */
     'refund'?: Refund;
 
         /**
-        * Specify the posting amount in the refund's currency.
+        * The posting amount represents the monetary value of the bank transaction, recorded in the refund's currency, before applying any adjustments.
         */
     'refundCurrencyAmount'?: number;
 
         /**
-        * 
+        * The value amount represents the net monetary value of the bank transaction, recorded in the refund's currency, after applicable deductions.
         */
     'refundCurrencyValueAmount'?: number;
 
@@ -59,6 +73,12 @@ class RefundRecoveryBankTransaction extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
@@ -68,6 +88,18 @@ class RefundRecoveryBankTransaction extends TransactionAwareEntity {
         "name": "lineItems",
         "baseName": "lineItems",
         "type": "Array<LineItem>"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -102,7 +134,7 @@ class RefundRecoveryBankTransaction extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(RefundRecoveryBankTransaction.attributeTypeMap);
+        return RefundRecoveryBankTransaction.attributeTypeMap;
     }
 }
 

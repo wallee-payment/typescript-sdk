@@ -15,12 +15,12 @@ class InternalTransferBankTransaction {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The bank transaction from which funds are being transferred out.
         */
     'sourceBankTransaction'?: BankTransaction;
 
         /**
-        * 
+        * The bank transaction to which funds are being transferred in.
         */
     'targetBankTransaction'?: BankTransaction;
 

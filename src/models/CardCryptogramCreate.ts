@@ -4,12 +4,12 @@
 class CardCryptogramCreate {
 
         /**
-        * 
+        * The Electronic Commerce Indicator (ECI) represents the authentication level and indicates liability shift during online or card-not-present transactions.
         */
     'eci'?: string;
 
         /**
-        * 
+        * The cryptogram value used for securing card transactions, format varying based on the PAN type.
         */
     'value': string;
 

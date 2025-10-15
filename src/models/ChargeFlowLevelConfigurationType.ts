@@ -14,7 +14,7 @@ class ChargeFlowLevelConfigurationType {
     'id'?: number;
 
         /**
-        * 
+        * The localized label that describes the action triggered by the configuration type.
         */
     'label'?: { [key: string]: string; };
 

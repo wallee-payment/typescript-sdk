@@ -8,52 +8,52 @@ import { RecurringIndicator } from "./RecurringIndicator";
 class AuthenticatedCardDataCreate {
 
         /**
-        * The card holder name is the name printed onto the card. It identifies the person who owns the card.
+        * The name of the cardholder, as printed on the card, identifying the card owner.
         */
     'cardHolderName'?: string;
 
         /**
-        * The card verification code (CVC) is a 3 to 4 digit code typically printed on the back of the card. It helps to ensure that the card holder is authorizing the transaction. For card not-present transactions this field is optional.
+        * The security code used to validate the card during transactions.
         */
     'cardVerificationCode'?: string;
 
         /**
-        * The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+        * Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
         */
     'cardholderAuthentication'?: CardholderAuthenticationCreate;
 
         /**
-        * The additional authentication value used to secure the tokenized card transactions.
+        * An additional authentication value that enhances the security of tokenized card transactions.
         */
     'cryptogram'?: CardCryptogramCreate;
 
         /**
-        * The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
+        * The expiry date of the card, indicating its validity period in yyyy-mm format (e.g., 2023-09).
         */
     'expiryDate'?: string;
 
         /**
-        * 
+        * The type of PAN or token, indicating the source or security method of the card information.
         */
     'panType'?: PanType;
 
         /**
-        * The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
+        * The card's primary account number (PAN), the unique identifier of the card.
         */
     'primaryAccountNumber': string;
 
         /**
-        * 
+        * The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
         */
     'recurringIndicator'?: RecurringIndicator;
 
         /**
-        * 
+        * A reference specific to the card's transaction within its payment scheme.
         */
     'schemeTransactionReference'?: string;
 
         /**
-        * 
+        * The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
         */
     'tokenRequestorId'?: string;
 

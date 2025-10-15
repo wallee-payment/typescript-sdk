@@ -9,27 +9,27 @@ import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
 class PaymentAppConnector {
 
         /**
-        * 
+        * The duration within which the authorization process for a payment should complete.
         */
     'authorizationTimeout'?: string;
 
         /**
-        * The completion configuration defines how the deferred completion is processed. If it is not present it means that deferred completion is not supported by this connector.
+        * The completion configuration controlling how deferred completion is processed. If not present, deferred completion is not supported for this connector.
         */
     'completionConfiguration'?: PaymentAppCompletionConfiguration;
 
         /**
-        * The connector configuration references the configuration that was created as part of this connector within the space. The connector configuration is referenced within transactions created with this connector.
+        * The connector configuration created alongside the connector within its designated space. This configuration is used in transactions created using this connector.
         */
     'connectorConfiguration'?: PaymentConnectorConfiguration;
 
         /**
-        * The created on date indicates when the connector was added.
+        * The date and time when the connector was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The external ID corresponds to the ID provided during inserting of the processor.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId'?: string;
 
@@ -44,22 +44,22 @@ class PaymentAppConnector {
     'linkedSpaceId'?: number;
 
         /**
-        * The name of the connector will be displayed within the user interfaces that the merchant is interacting with.
+        * The name used to identify the connector.
         */
     'name'?: string;
 
         /**
-        * The payment page endpoint is invoked to process the transaction. The endpoint is defined by the external service provider.
+        * The URL where the user is redirected to process a payment. This endpoint is provided by the external service provider.
         */
     'paymentPageEndpoint'?: string;
 
         /**
-        * The processor references the app processor to which this connector belongs to. The relationship is established during the creation of the connector.
+        * The payment app processor that the connector belongs to. This relationship is defined when the connector is created.
         */
     'processor'?: PaymentAppProcessor;
 
         /**
-        * The refund configuration defines how refunds are processed. If it is not present it means that refunds are not supported by this connector.
+        * The refund configuration controlling the behavior for processing refunds. If not present, refunds are not supported for this connector.
         */
     'refundConfiguration'?: PaymentAppRefundConfiguration;
 
@@ -69,7 +69,7 @@ class PaymentAppConnector {
     'state'?: PaymentAppConnectorState;
 
         /**
-        * The updated on date indicates when the last time the connector was updated on.
+        * The date and time when the connector was last updated.
         */
     'updatedOn'?: Date;
 

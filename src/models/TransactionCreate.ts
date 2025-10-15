@@ -33,7 +33,7 @@ class TransactionCreate extends AbstractTransactionPending {
     'emailsDisabled'?: boolean;
 
         /**
-        * 
+        * The environment used when rendering resources.
         */
     'environment'?: Environment;
 

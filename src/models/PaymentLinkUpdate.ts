@@ -17,57 +17,62 @@ class PaymentLinkUpdate {
     'version': number;
 
         /**
-        * The allowed payment method configurations restrict the payment methods which can be used with this payment link.
+        * The payment method configurations that customers can use for making payments.
         */
     'allowedPaymentMethodConfigurations'?: Array<PaymentMethodConfiguration>;
 
         /**
-        * The payment link can be conducted in a specific space view. The space view may apply a specific design to the payment page.
+        * The domains to which the user is allowed to be redirected after the payment is completed. The following options can be configured: Exact domain: enter a full domain, e.g. (https://example.com). Wildcard domain: use to allow subdomains, e.g. (https://_*.example.com). All domains: use (ALL) to allow redirection to any domain (not recommended for security reasons). No domains : use (NONE) to disallow any redirection. Only one option per line is allowed. Invalid entries will be rejected. 
+        */
+    'allowedRedirectionDomains'?: Array<string>;
+
+        /**
+        * The payment link can be used within a specific space view, which may apply a customized design to the payment page.
         */
     'appliedSpaceView'?: number;
 
         /**
-        * The available from date defines the earliest date on which the payment link can be used. When no date is specified there will be no restriction.
+        * The earliest date the payment link can be used to initiate a transaction. If no date is provided, the link will be available immediately.
         */
     'availableFrom'?: Date;
 
         /**
-        * The available from date defines the latest date on which the payment link can be used to initialize a transaction. When no date is specified there will be no restriction.
+        * The latest date the payment link can be used to initiate a transaction. If no date is provided, the link will remain available indefinitely.
         */
     'availableUntil'?: Date;
 
         /**
-        * The billing address handling mode controls if the address is collected or not and how it is collected.
+        * The handling mode defines whether a billing address is required and specifies how it should be provided.
         */
     'billingAddressHandlingMode'?: PaymentLinkAddressHandlingMode;
 
         /**
-        * The currency defines in which currency the payment is executed in. If no currency is defined it has to be specified within the request parameter 'currency'.
+        * The three-letter currency code (ISO 4217). If not specified, it must be provided in the 'currency' request parameter.
         */
     'currency'?: string;
 
         /**
-        * The language defines the language of the payment page. If no language is provided it can be provided through the request parameter.
+        * The language for displaying the payment page. If not specified, it can be supplied via the 'language' request parameter.
         */
     'language'?: string;
 
         /**
-        * The line items allows to define the line items for this payment link. When the line items are defined they cannot be overridden through the request parameters. If no amount for the payment link is defined, the additional checkout page to enter the amount is shown to the consumer.
+        * The line items representing what is being sold. If not specified, they can be supplied via request parameters.
         */
     'lineItems'?: Array<LineItemCreate>;
 
         /**
-        * The maximal number of transactions limits the number of transactions which can be created with this payment link.
+        * The maximum number of transactions that can be initiated using the payment link.
         */
     'maximalNumberOfTransactions'?: number;
 
         /**
-        * The payment link name is used internally to identify the payment link. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the payment link.
         */
     'name'?: string;
 
         /**
-        * The shipping address handling mode controls if the address is collected or not and how it is collected.
+        * The handling mode defines whether a shipping address is required and specifies how it should be provided.
         */
     'shippingAddressHandlingMode'?: PaymentLinkAddressHandlingMode;
 
@@ -92,6 +97,12 @@ class PaymentLinkUpdate {
         "name": "allowedPaymentMethodConfigurations",
         "baseName": "allowedPaymentMethodConfigurations",
         "type": "Array<PaymentMethodConfiguration>"
+        },
+        
+        {
+        "name": "allowedRedirectionDomains",
+        "baseName": "allowedRedirectionDomains",
+        "type": "Array<string>"
         },
         
         {

@@ -8,12 +8,12 @@ import { PaymentAdjustment } from "./PaymentAdjustment";
 class BankTransaction {
 
         /**
-        * The adjustments applied on this bank transaction.
+        * Adjustments are changes made to the initial transaction amount, such as fees or corrections.
         */
     'adjustments'?: Array<PaymentAdjustment>;
 
         /**
-        * The created by indicates the user which has created the bank transaction.
+        * The ID of the user the bank transaction was created by.
         */
     'createdBy'?: number;
 
@@ -23,17 +23,17 @@ class BankTransaction {
     'createdOn'?: Date;
 
         /**
-        * The currency bank account which is used to handle money flow.
+        * The currency bank account that sends or receives money based on the bank transaction's flow direction.
         */
     'currencyBankAccount'?: CurrencyBankAccount;
 
         /**
-        * 
+        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
         */
     'externalId'?: string;
 
         /**
-        * 
+        * Indicates the direction of a bank transaction, specifying whether the amount flows into or out of the bank account.
         */
     'flowDirection'?: BankTransactionFlowDirection;
 
@@ -48,7 +48,7 @@ class BankTransaction {
     'linkedSpaceId'?: number;
 
         /**
-        * The payment date describes the date when the transaction was made.
+        * The payment date specifies the date on which the payment was processed.
         */
     'paymentDate'?: Date;
 
@@ -58,17 +58,17 @@ class BankTransaction {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The posting amount indicates the amount including adjustments.
+        * The posting amount refers to the monetary value recorded for the bank transaction prior to any adjustments.
         */
     'postingAmount'?: number;
 
         /**
-        * 
+        * A unique reference to identify the bank transaction.
         */
     'reference'?: string;
 
         /**
-        * 
+        * The source indicates how the bank transaction was created.
         */
     'source'?: number;
 
@@ -78,22 +78,22 @@ class BankTransaction {
     'state'?: BankTransactionState;
 
         /**
-        * 
+        * Represents the total value of all adjustments to the bank transaction, including tax.
         */
     'totalAdjustmentAmountIncludingTax'?: number;
 
         /**
-        * 
+        * The bank transaction's type.
         */
     'type'?: number;
 
         /**
-        * 
+        * The value amount represents the net monetary value of the transaction after applicable deductions.
         */
     'valueAmount'?: number;
 
         /**
-        * The value date describes the date the amount is effective on the account.
+        * The value date indicates the date on which the transaction amount becomes effective.
         */
     'valueDate'?: Date;
 

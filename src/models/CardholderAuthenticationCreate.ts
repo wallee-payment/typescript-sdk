@@ -6,27 +6,27 @@ import { CardAuthenticationVersion } from "./CardAuthenticationVersion";
 class CardholderAuthenticationCreate {
 
         /**
-        * The authentication identifier as assigned by authentication system (e.g. XID or DSTransactionID).
+        * The identifier (e.g., XID or DSTransactionID) assigned by the authentication system for tracking and verification.
         */
     'authenticationIdentifier'?: string;
 
         /**
-        * 
+        * The result of the authentication process.
         */
     'authenticationResponse': CardAuthenticationResponse;
 
         /**
-        * The cardholder authentication value. Also known as Cardholder Authentication Verification Value (CAVV).
+        * The cryptographic token (CAVV/AAV) generated during the authentication process to validate the cardholder's identity.
         */
     'authenticationValue'?: string;
 
         /**
-        * The Electronic Commerce Indicator (ECI) value. The ECI is returned by authentication system and indicates the outcome/status of authentication.
+        * The Electronic Commerce Indicator (ECI) represents the authentication level and indicates liability shift during online or card-not-present transactions.
         */
     'electronicCommerceIndicator'?: string;
 
         /**
-        * 
+        * The version of the authentication protocol (e.g., 3D Secure 1.0 or 2.0) used for the transaction.
         */
     'version': CardAuthenticationVersion;
 

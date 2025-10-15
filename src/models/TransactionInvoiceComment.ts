@@ -44,7 +44,7 @@ class TransactionInvoiceComment {
     'pinned'?: boolean;
 
         /**
-        * 
+        * The transaction invoice that the comment belongs to.
         */
     'transactionInvoice'?: number;
 

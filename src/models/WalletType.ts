@@ -1,4 +1,5 @@
 'use strict';
+import { Feature } from "./Feature";
 
 
 class WalletType {
@@ -9,6 +10,11 @@ class WalletType {
     'description'?: { [key: string]: string; };
 
         /**
+        * 
+        */
+    'feature'?: Feature;
+
+        /**
         * A unique identifier for the object.
         */
     'id'?: number;
@@ -17,6 +23,16 @@ class WalletType {
         * The localized name of the object.
         */
     'name'?: { [key: string]: string; };
+
+        /**
+        * 
+        */
+    'navigationPath'?: string;
+
+        /**
+        * 
+        */
+    'sortOrder'?: number;
 
 
     static discriminator: string | undefined = undefined;
@@ -30,6 +46,12 @@ class WalletType {
         },
         
         {
+        "name": "feature",
+        "baseName": "feature",
+        "type": "Feature"
+        },
+        
+        {
         "name": "id",
         "baseName": "id",
         "type": "number"
@@ -39,6 +61,18 @@ class WalletType {
         "name": "name",
         "baseName": "name",
         "type": "{ [key: string]: string; }"
+        },
+        
+        {
+        "name": "navigationPath",
+        "baseName": "navigationPath",
+        "type": "string"
+        },
+        
+        {
+        "name": "sortOrder",
+        "baseName": "sortOrder",
+        "type": "number"
         }        
     ];
 

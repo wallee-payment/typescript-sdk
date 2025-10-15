@@ -6,6 +6,11 @@ import { PaymentTerminalTransactionSum } from "./PaymentTerminalTransactionSum";
 class PaymentTerminalTransactionSummary {
 
         /**
+        * The transactions amount per currency.
+        */
+    'balanceAmountPerCurrency'?: { [key: string]: number; };
+
+        /**
         * 
         */
     'dccTransactionSums'?: Array<PaymentTerminalDccTransactionSum>;
@@ -31,7 +36,7 @@ class PaymentTerminalTransactionSummary {
     'numberOfTransactions'?: number;
 
         /**
-        * 
+        * The payment terminal of the transaction summary.
         */
     'paymentTerminal'?: number;
 
@@ -65,6 +70,12 @@ class PaymentTerminalTransactionSummary {
 
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
     
+        {
+        "name": "balanceAmountPerCurrency",
+        "baseName": "balanceAmountPerCurrency",
+        "type": "{ [key: string]: number; }"
+        },
+        
         {
         "name": "dccTransactionSums",
         "baseName": "dccTransactionSums",

@@ -1,9 +1,8 @@
 'use strict';
 import { ConnectorInvocationStage } from "./ConnectorInvocationStage";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ConnectorInvocation extends TransactionAwareEntity {
+class ConnectorInvocation {
 
         /**
         * The date and time when the object was created.
@@ -11,22 +10,32 @@ class ConnectorInvocation extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
         */
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The transaction stage during which the connector invocation was performed.
         */
     'stage'?: ConnectorInvocationStage;
 
         /**
-        * 
+        * The duration, in milliseconds, taken to execute the connector invocation.
         */
     'timeTookInMilliseconds'?: number;
 
         /**
-        * 
+        * The transaction that the connector invocation belongs to.
         */
     'transaction'?: number;
 
@@ -44,6 +53,18 @@ class ConnectorInvocation extends TransactionAwareEntity {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
         },
         
         {
@@ -78,7 +99,7 @@ class ConnectorInvocation extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ConnectorInvocation.attributeTypeMap);
+        return ConnectorInvocation.attributeTypeMap;
     }
 }
 

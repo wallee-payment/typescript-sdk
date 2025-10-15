@@ -6,22 +6,22 @@ import { RecurringIndicator } from "./RecurringIndicator";
 class TokenizedCardData {
 
         /**
-        * The additional authentication value used to secure the tokenized card transactions.
+        * An additional authentication value that enhances the security of tokenized card transactions.
         */
     'cryptogram'?: CardCryptogram;
 
         /**
-        * 
+        * Whether the transaction is an initial recurring transaction, based on the recurring indicator. This is used to identify the first transaction in a recurring payment setup.
         */
     'initialRecurringTransaction'?: boolean;
 
         /**
-        * 
+        * The indicator used to distinguish between recurring and one-time transactions. If omitted, it will be automatically determined based on the transaction's properties.
         */
     'recurringIndicator'?: RecurringIndicator;
 
         /**
-        * 
+        * The token requestor identifier (TRID) identifies the entity requesting tokenization for a card transaction.
         */
     'tokenRequestorId'?: string;
 

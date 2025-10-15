@@ -6,7 +6,7 @@ import { CreationEntityState } from "./CreationEntityState";
 class ChargeFlowLevelConfiguration {
 
         /**
-        * The charge flow level configuration to which the flow is associated.
+        * The charge flow that this level configuration belongs to.
         */
     'flow'?: ChargeFlow;
 
@@ -21,12 +21,12 @@ class ChargeFlowLevelConfiguration {
     'linkedSpaceId'?: number;
 
         /**
-        * The charge flow level configuration name is used internally to identify the charge flow level configuration. For example the name is used within search fields and hence it should be distinct and descriptive.
+        * The name used to identify the charge flow level configuration.
         */
     'name'?: string;
 
         /**
-        * The duration of the level before switching to the next one.
+        * The duration specifies how long the level remains active before transitioning to the next one.
         */
     'period'?: string;
 
@@ -36,7 +36,7 @@ class ChargeFlowLevelConfiguration {
     'plannedPurgeDate'?: Date;
 
         /**
-        * The priority indicates the sort order of the level configurations. A low value indicates that the level configuration is executed before any level with a higher value. Any change to this value affects future level configuration selections.
+        * The priority that determines the order in which level configurations are taken into account when processing a charge flow. Low values are considered first.
         */
     'priority'?: number;
 
@@ -46,7 +46,7 @@ class ChargeFlowLevelConfiguration {
     'state'?: CreationEntityState;
 
         /**
-        * The type determines how the payment link is delivered to the customer. Once the type is defined it cannot be changed anymore.
+        * The type defines the method of delivering the payment link to the customer.
         */
     'type'?: number;
 

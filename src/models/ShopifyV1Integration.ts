@@ -19,6 +19,11 @@ class ShopifyV1Integration {
     'allowInvoiceDownload'?: boolean;
 
         /**
+        * If in the merchant Shopify store is used legacy tax service, rounding discrepancies in line item tax amounts may occur. When this check is enabled, such discrepancies are tolerated, allowing the payment to proceed without raising an exception.
+        */
+    'allowPaymentWithTaxDiscrepancy'?: boolean;
+
+        /**
         * 
         */
     'allowedPaymentMethodConfigurations'?: Array<PaymentMethodConfiguration>;
@@ -142,6 +147,12 @@ class ShopifyV1Integration {
         {
         "name": "allowInvoiceDownload",
         "baseName": "allowInvoiceDownload",
+        "type": "boolean"
+        },
+        
+        {
+        "name": "allowPaymentWithTaxDiscrepancy",
+        "baseName": "allowPaymentWithTaxDiscrepancy",
         "type": "boolean"
         },
         

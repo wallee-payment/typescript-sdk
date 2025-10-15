@@ -9,7 +9,7 @@ class PaymentInformationHashType {
     'id'?: number;
 
         /**
-        * 
+        * The name that describes the hash type.
         */
     'name'?: { [key: string]: string; };
 

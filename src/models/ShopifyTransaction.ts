@@ -2,10 +2,9 @@
 import { ShopifyTransactionState } from "./ShopifyTransactionState";
 import { ShopifyV1Integration } from "./ShopifyV1Integration";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ShopifyTransaction extends TransactionAwareEntity {
+class ShopifyTransaction {
 
         /**
         * 
@@ -28,9 +27,24 @@ class ShopifyTransaction extends TransactionAwareEntity {
     'draftOrderLegacyId'?: string;
 
         /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
         * 
         */
     'integration'?: ShopifyV1Integration;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
 
         /**
         * 
@@ -92,9 +106,27 @@ class ShopifyTransaction extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "integration",
         "baseName": "integration",
         "type": "ShopifyV1Integration"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -135,7 +167,7 @@ class ShopifyTransaction extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ShopifyTransaction.attributeTypeMap);
+        return ShopifyTransaction.attributeTypeMap;
     }
 }
 

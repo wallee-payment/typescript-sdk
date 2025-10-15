@@ -1,20 +1,24 @@
 'use strict';
 import { BankTransaction } from "./BankTransaction";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ChargeBankTransaction extends TransactionAwareEntity {
+class ChargeBankTransaction {
 
         /**
-        * 
+        * Provides general information about the bank transaction.
         */
     'bankTransaction'?: BankTransaction;
 
         /**
-        * 
+        * The transaction completion this bank transaction is belongs to.
         */
     'completion'?: number;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The language that is linked to the object.
@@ -22,22 +26,32 @@ class ChargeBankTransaction extends TransactionAwareEntity {
     'language'?: string;
 
         /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
         * The ID of the space view this object is linked to.
         */
     'spaceViewId'?: number;
 
         /**
-        * 
+        * The payment transaction this bank transaction belongs to.
         */
     'transaction'?: Transaction;
 
         /**
-        * Specify the posting amount in the transaction's currency.
+        * The posting amount represents the monetary value of the bank transaction, recorded in the payment transaction's currency, before applying any adjustments.
         */
     'transactionCurrencyAmount'?: number;
 
         /**
-        * 
+        * The value amount represents the net monetary value of the bank transaction, recorded in the payment transaction's currency, after applicable deductions.
         */
     'transactionCurrencyValueAmount'?: number;
 
@@ -64,9 +78,27 @@ class ChargeBankTransaction extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -101,7 +133,7 @@ class ChargeBankTransaction extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ChargeBankTransaction.attributeTypeMap);
+        return ChargeBankTransaction.attributeTypeMap;
     }
 }
 

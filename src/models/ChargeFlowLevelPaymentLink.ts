@@ -1,17 +1,26 @@
 'use strict';
 import { ChargeFlowLevel } from "./ChargeFlowLevel";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ChargeFlowLevelPaymentLink extends TransactionAwareEntity {
+class ChargeFlowLevelPaymentLink {
 
         /**
-        * 
+        * The charge flow level that the payment link belongs to.
         */
     'chargeFlowLevel'?: ChargeFlowLevel;
 
         /**
-        * 
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The URL provided to the customer for entering their payment details and completing the transaction.
         */
     'paymentLink'?: string;
 
@@ -27,6 +36,18 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
         "name": "paymentLink",
         "baseName": "paymentLink",
         "type": "string"
@@ -34,7 +55,7 @@ class ChargeFlowLevelPaymentLink extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ChargeFlowLevelPaymentLink.attributeTypeMap);
+        return ChargeFlowLevelPaymentLink.attributeTypeMap;
     }
 }
 

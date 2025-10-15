@@ -6,7 +6,7 @@ import { TokenizedCardData } from "./TokenizedCardData";
 class AuthenticatedCardData extends TokenizedCardData {
 
         /**
-        * The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
+        * Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
         */
     'cardholderAuthentication'?: CardholderAuthentication;
 

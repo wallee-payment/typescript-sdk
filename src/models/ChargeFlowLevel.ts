@@ -2,18 +2,17 @@
 import { ChargeFlowLevelConfiguration } from "./ChargeFlowLevelConfiguration";
 import { ChargeFlowLevelState } from "./ChargeFlowLevelState";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ChargeFlowLevel extends TransactionAwareEntity {
+class ChargeFlowLevel {
 
         /**
-        * 
+        * The charge to process the payment asynchronously.
         */
     'asynchronousCharge'?: number;
 
         /**
-        * 
+        * The configuration that was used for this charge flow level.
         */
     'configuration'?: ChargeFlowLevelConfiguration;
 
@@ -21,6 +20,21 @@ class ChargeFlowLevel extends TransactionAwareEntity {
         * The date and time when the object was created.
         */
     'createdOn'?: Date;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
 
         /**
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -33,22 +47,22 @@ class ChargeFlowLevel extends TransactionAwareEntity {
     'state'?: ChargeFlowLevelState;
 
         /**
-        * 
+        * The charge to process the payment synchronously.
         */
     'synchronousCharge'?: number;
 
         /**
-        * 
+        * The date and time when the charge flow level will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The charge to process the payment using a token.
         */
     'tokenCharge'?: number;
 
         /**
-        * 
+        * The transaction that the charge flow level belongs to.
         */
     'transaction'?: Transaction;
 
@@ -78,6 +92,24 @@ class ChargeFlowLevel extends TransactionAwareEntity {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -124,7 +156,7 @@ class ChargeFlowLevel extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ChargeFlowLevel.attributeTypeMap);
+        return ChargeFlowLevel.attributeTypeMap;
     }
 }
 

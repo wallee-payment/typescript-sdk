@@ -4,10 +4,9 @@ import { FailureReason } from "./FailureReason";
 import { InvoiceReconciliationRecordRejectionStatus } from "./InvoiceReconciliationRecordRejectionStatus";
 import { InvoiceReconciliationRecordState } from "./InvoiceReconciliationRecordState";
 import { InvoiceReconciliationRecordType } from "./InvoiceReconciliationRecordType";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class InvoiceReconciliationRecord extends TransactionAwareEntity {
+class InvoiceReconciliationRecord {
 
         /**
         * 
@@ -70,9 +69,24 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity {
     'iban'?: string;
 
         /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
         * 
         */
     'lastResolutionFailure'?: FailureReason;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
 
         /**
         * 
@@ -237,9 +251,27 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "lastResolutionFailure",
         "baseName": "lastResolutionFailure",
         "type": "FailureReason"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -346,7 +378,7 @@ class InvoiceReconciliationRecord extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(InvoiceReconciliationRecord.attributeTypeMap);
+        return InvoiceReconciliationRecord.attributeTypeMap;
     }
 }
 

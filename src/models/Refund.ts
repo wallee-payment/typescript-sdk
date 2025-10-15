@@ -13,22 +13,22 @@ import { Transaction } from "./Transaction";
 class Refund {
 
         /**
-        * 
+        * The total monetary amount of the refund, representing the exact credit issued to the customer.
         */
     'amount'?: number;
 
         /**
-        * 
+        * The original base line items from the transaction prior to the refund, serving as a reference for the refunded amounts.
         */
     'baseLineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The transaction completion that the refund belongs to.
         */
     'completion'?: number;
 
         /**
-        * 
+        * The ID of the user the refund was created by.
         */
     'createdBy'?: number;
 
@@ -38,22 +38,22 @@ class Refund {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The environment used when rendering resources.
         */
     'environment'?: Environment;
 
         /**
-        * The external id helps to identify duplicate calls to the refund service. As such the external ID has to be unique per transaction.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId'?: string;
 
         /**
-        * 
+        * The date and time when the refund failed.
         */
     'failedOn'?: Date;
 
         /**
-        * 
+        * The reason for the failure of the refund.
         */
     'failureReason'?: FailureReason;
 
@@ -73,7 +73,7 @@ class Refund {
     'language'?: string;
 
         /**
-        * 
+        * The line items included in the refund, representing the reductions.
         */
     'lineItems'?: Array<LineItem>;
 
@@ -83,12 +83,12 @@ class Refund {
     'linkedSpaceId'?: number;
 
         /**
-        * 
+        * The merchant's reference used to identify the refund.
         */
     'merchantReference'?: string;
 
         /**
-        * 
+        * The date and time when the next update of the object's state is planned.
         */
     'nextUpdateOn'?: Date;
 
@@ -98,22 +98,22 @@ class Refund {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The date and time when the processing of the refund was started.
         */
     'processingOn'?: Date;
 
         /**
-        * 
+        * The reference ID provided by the payment processor, used to trace the refund through the external payment system.
         */
     'processorReference'?: string;
 
         /**
-        * 
+        * The line items from the original transaction, adjusted to reflect any reductions applied during the refund process.
         */
     'reducedLineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The reductions applied on the original transaction items, detailing specific adjustments associated with the refund.
         */
     'reductions'?: Array<LineItemReduction>;
 
@@ -123,47 +123,47 @@ class Refund {
     'state'?: RefundState;
 
         /**
-        * 
+        * The date and time when the refund succeeded.
         */
     'succeededOn'?: Date;
 
         /**
-        * 
+        * The tax breakdown applied to the refund amount, helping with tax calculations or reporting.
         */
     'taxes'?: Array<Tax>;
 
         /**
-        * 
+        * The time zone that this object is associated with.
         */
     'timeZone'?: string;
 
         /**
-        * 
+        * The date and time when the object will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * The total applied fees is the sum of all fees that have been applied so far.
+        * The sum of fees applied to the refund transaction, such as processing or service charges.
         */
     'totalAppliedFees'?: number;
 
         /**
-        * The total settled amount is the total amount which has been settled so far.
+        * The total amount settled for the refund, factoring in reductions, taxes, and any additional applied fees.
         */
     'totalSettledAmount'?: number;
 
         /**
-        * 
+        * The transaction that the refund belongs to.
         */
     'transaction'?: Transaction;
 
         /**
-        * 
+        * The type specifying the method and origin of the refund (e.g., initiated by the customer or merchant).
         */
     'type'?: RefundType;
 
         /**
-        * 
+        * An updated invoice reflecting adjustments made by the refund.
         */
     'updatedInvoice'?: number;
 

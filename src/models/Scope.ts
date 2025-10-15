@@ -41,6 +41,16 @@ class Scope {
     'port'?: number;
 
         /**
+        * The preprod domain name that belongs to the scope.
+        */
+    'preprodDomainName'?: string;
+
+        /**
+        * The sandbox domain name that belongs to the scope.
+        */
+    'sandboxDomainName'?: string;
+
+        /**
         * Whether the scope supports SSL.
         */
     'sslActive'?: boolean;
@@ -110,6 +120,18 @@ class Scope {
         "name": "port",
         "baseName": "port",
         "type": "number"
+        },
+        
+        {
+        "name": "preprodDomainName",
+        "baseName": "preprodDomainName",
+        "type": "string"
+        },
+        
+        {
+        "name": "sandboxDomainName",
+        "baseName": "sandboxDomainName",
+        "type": "string"
         },
         
         {

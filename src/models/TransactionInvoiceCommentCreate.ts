@@ -5,7 +5,7 @@ import { AbstractTransactionInvoiceCommentActive } from "./AbstractTransactionIn
 class TransactionInvoiceCommentCreate extends AbstractTransactionInvoiceCommentActive {
 
         /**
-        * 
+        * The transaction invoice that the comment belongs to.
         */
     'transactionInvoice': number;
 

@@ -7,22 +7,22 @@ import { PaymentProcessorConfiguration } from "./PaymentProcessorConfiguration";
 class PaymentAppProcessor {
 
         /**
-        * 
+        * The environment (e.g., test or production) currently configured for the processor.
         */
     'configuredEnvironment'?: ChargeAttemptEnvironment;
 
         /**
-        * The created on date is the date when this processor has been added.
+        * The date and time when the processor was created.
         */
     'createdOn'?: Date;
 
         /**
-        * The documentation URL points to a web site that describes how to configure and use the processor.
+        * A URL pointing to the documentation that explains how to configure and use the processor.
         */
     'documentationUrl'?: string;
 
         /**
-        * The external ID corresponds to the ID that was provided during creation of the processor.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId'?: string;
 
@@ -42,17 +42,17 @@ class PaymentAppProcessor {
     'linkedSpaceId'?: number;
 
         /**
-        * The name of the processor will be displayed within the user interfaces that the merchant is interacting with.
+        * The name used to identify the processor.
         */
     'name'?: string;
 
         /**
-        * This processor configuration is created as part of the app processor. Any transaction created with the processor is linked with this processor configuration.
+        * The processor configuration created alongside the process within its designated space. This configuration is used in transactions created using this processor.
         */
     'processorConfiguration'?: PaymentProcessorConfiguration;
 
         /**
-        * When the user sets the processor into the production mode the user will be forwarded to this URL to configure the production environment. When no URL is provided no redirection will happen.
+        * A URL pointing to the site where merchants can set up production mode for the processor.
         */
     'productionModeUrl'?: string;
 
@@ -62,22 +62,22 @@ class PaymentAppProcessor {
     'state'?: PaymentAppProcessorState;
 
         /**
-        * 
+        * An SVG icon representing the processor, displayed to the user in the interface.
         */
     'svgIcon'?: string;
 
         /**
-        * The updated on date indicates when the last update on the processor occurred.
+        * The date and time when the processor was last updated.
         */
     'updatedOn'?: Date;
 
         /**
-        * When the processor is ready to be used for transactions in the production environment this flag is set to true.
+        * Whether the processor is fully prepared and available for handling transactions in a production environment.
         */
     'usableInProduction'?: boolean;
 
         /**
-        * 
+        * the date and time when the processor became fully usable and available for handling transactions in a production environment.
         */
     'usableInProductionSince'?: Date;
 

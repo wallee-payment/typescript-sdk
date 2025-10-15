@@ -3,10 +3,9 @@ import { FailureReason } from "./FailureReason";
 import { ShopifyRecurringOrderState } from "./ShopifyRecurringOrderState";
 import { ShopifySubscriptionVersion } from "./ShopifySubscriptionVersion";
 import { ShopifyTransaction } from "./ShopifyTransaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class ShopifyRecurringOrder extends TransactionAwareEntity {
+class ShopifyRecurringOrder {
 
         /**
         * 
@@ -32,6 +31,21 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
         * 
         */
     'failureReason'?: FailureReason;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
 
         /**
         * 
@@ -124,6 +138,24 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
+        },
+        
+        {
         "name": "orderId",
         "baseName": "orderId",
         "type": "string"
@@ -191,7 +223,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ShopifyRecurringOrder.attributeTypeMap);
+        return ShopifyRecurringOrder.attributeTypeMap;
     }
 }
 

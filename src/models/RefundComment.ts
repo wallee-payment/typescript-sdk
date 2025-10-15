@@ -44,7 +44,7 @@ class RefundComment {
     'pinned'?: boolean;
 
         /**
-        * 
+        * The refund that the comment belongs to.
         */
     'refund'?: number;
 

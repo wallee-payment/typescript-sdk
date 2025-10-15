@@ -10,12 +10,12 @@ class PaymentInformationHash {
     'id'?: number;
 
         /**
-        * 
+        * The type specifies the algorithm used for calculating the hash.
         */
     'type'?: PaymentInformationHashType;
 
         /**
-        * 
+        * The hash value generated based on the specified type.
         */
     'value'?: string;
 

@@ -9,25 +9,24 @@ import { Label } from "./Label";
 import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
 import { PaymentTerminal } from "./PaymentTerminal";
 import { TokenVersion } from "./TokenVersion";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
 import { WalletType } from "./WalletType";
 
 
-class ChargeAttempt extends TransactionAwareEntity {
+class ChargeAttempt {
 
         /**
-        * 
+        * The charge that the charge attempt belongs to.
         */
     'charge'?: Charge;
 
         /**
-        * 
+        * The behavior that controls when the transaction is completed.
         */
     'completionBehavior'?: TransactionCompletionBehavior;
 
         /**
-        * 
+        * The payment connector configuration that was used for the charge attempt.
         */
     'connectorConfiguration'?: PaymentConnectorConfiguration;
 
@@ -37,32 +36,37 @@ class ChargeAttempt extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
-        * The customer's presence indicates which kind of customer interaction was used during the charge attempt.
+        * The customer's presence indicates whether and in what way the charge attempt's customer is present.
         */
     'customersPresence'?: CustomersPresence;
 
         /**
-        * 
+        * The environment in which the charge attempt is executed.
         */
     'environment'?: ChargeAttemptEnvironment;
 
         /**
-        * 
+        * The date and time when the charge attempt failed.
         */
     'failedOn'?: Date;
 
         /**
-        * 
+        * The reason for the failure of the charge attempt.
         */
     'failureReason'?: FailureReason;
 
         /**
-        * 
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * Whether a new token version is being initialized.
         */
     'initializingTokenVersion'?: boolean;
 
         /**
-        * 
+        * The connector invocation that the charge attempt belongs to.
         */
     'invocation'?: ConnectorInvocation;
 
@@ -77,7 +81,17 @@ class ChargeAttempt extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The date and time when the next update of the object's state is planned.
         */
     'nextUpdateOn'?: Date;
 
@@ -87,12 +101,12 @@ class ChargeAttempt extends TransactionAwareEntity {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The URL to redirect the customer to after payment processing.
         */
     'redirectionUrl'?: string;
 
         /**
-        * 
+        * The sales channel through which the charge attempt was made.
         */
     'salesChannel'?: number;
 
@@ -107,32 +121,32 @@ class ChargeAttempt extends TransactionAwareEntity {
     'state'?: ChargeAttemptState;
 
         /**
-        * 
+        * The date and time when the charge attempt succeeded.
         */
     'succeededOn'?: Date;
 
         /**
-        * 
+        * The payment terminal through which the charge attempt was made.
         */
     'terminal'?: PaymentTerminal;
 
         /**
-        * 
+        * The time zone that this object is associated with.
         */
     'timeZone'?: string;
 
         /**
-        * 
+        * The date and time when the object will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The token version used for the charge attempt.
         */
     'tokenVersion'?: TokenVersion;
 
         /**
-        * The user failure message contains the message for the user in case the attempt failed. The message is localized into the language specified on the transaction.
+        * The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
         */
     'userFailureMessage'?: string;
 
@@ -142,7 +156,7 @@ class ChargeAttempt extends TransactionAwareEntity {
     'version'?: number;
 
         /**
-        * 
+        * The type of wallet used to make the charge attempt.
         */
     'wallet'?: WalletType;
 
@@ -200,6 +214,12 @@ class ChargeAttempt extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "initializingTokenVersion",
         "baseName": "initializingTokenVersion",
         "type": "boolean"
@@ -221,6 +241,18 @@ class ChargeAttempt extends TransactionAwareEntity {
         "name": "language",
         "baseName": "language",
         "type": "string"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -309,7 +341,7 @@ class ChargeAttempt extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(ChargeAttempt.attributeTypeMap);
+        return ChargeAttempt.attributeTypeMap;
     }
 }
 

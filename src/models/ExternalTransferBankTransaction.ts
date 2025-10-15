@@ -5,22 +5,22 @@ import { BankTransaction } from "./BankTransaction";
 class ExternalTransferBankTransaction {
 
         /**
-        * 
+        * Provides general information about the bank transaction.
         */
     'bankTransaction'?: BankTransaction;
 
         /**
-        * 
+        * The identifier is used to uniquely identify the external bank account.
         */
     'externalAccountIdentifier'?: string;
 
         /**
-        * 
+        * The external bank account's type.
         */
     'externalAccountType'?: string;
 
         /**
-        * 
+        * The external bank account's name.
         */
     'externalBankName'?: string;
 

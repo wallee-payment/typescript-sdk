@@ -9,7 +9,7 @@ class PaymentMethodBrand {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The path to the payment method brand's grayscale image.
         */
     'grayImagePath'?: string;
 
@@ -19,7 +19,7 @@ class PaymentMethodBrand {
     'id'?: number;
 
         /**
-        * The path to the payment brand's image which is displayed to the customer.
+        * The path to the payment method brand's image.
         */
     'imagePath'?: string;
 

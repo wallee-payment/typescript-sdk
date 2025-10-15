@@ -3,19 +3,18 @@ import { FailureReason } from "./FailureReason";
 import { Label } from "./Label";
 import { LineItem } from "./LineItem";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 import { TransactionLineItemVersionState } from "./TransactionLineItemVersionState";
 
 
-class TransactionLineItemVersion extends TransactionAwareEntity {
+class TransactionLineItemVersion {
 
         /**
-        * 
+        * The total amount of the updated line items, including taxes.
         */
     'amount'?: number;
 
         /**
-        * 
+        * The ID of the user the line item version was created by.
         */
     'createdBy'?: number;
 
@@ -25,12 +24,12 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
-        * A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
+        * A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
         */
     'externalId'?: string;
 
         /**
-        * 
+        * The date and time when the processing of the line item version failed.
         */
     'failedOn'?: Date;
 
@@ -38,6 +37,11 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         * 
         */
     'failureReason'?: FailureReason;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The labels providing additional information about the object.
@@ -50,12 +54,22 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * 
+        * The line items that replace the original line items in the transaction.
         */
     'lineItems'?: Array<LineItem>;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The date and time when the next update of the line item version's state is planned.
         */
     'nextUpdateOn'?: Date;
 
@@ -65,7 +79,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The date and time when the processing of the line item version was started.
         */
     'processingOn'?: Date;
 
@@ -80,22 +94,22 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     'state'?: TransactionLineItemVersionState;
 
         /**
-        * 
+        * The date and time when the line item version was processed successfully.
         */
     'succeededOn'?: Date;
 
         /**
-        * 
+        * The portion of the total amount that corresponds to taxes.
         */
     'taxAmount'?: number;
 
         /**
-        * 
+        * The date and time by when the line item version is expected to be processed.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The transaction that the line item version belongs to.
         */
     'transaction'?: Transaction;
 
@@ -146,6 +160,12 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "labels",
         "baseName": "labels",
         "type": "Array<Label>"
@@ -161,6 +181,18 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
         "name": "lineItems",
         "baseName": "lineItems",
         "type": "Array<LineItem>"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -225,7 +257,7 @@ class TransactionLineItemVersion extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(TransactionLineItemVersion.attributeTypeMap);
+        return TransactionLineItemVersion.attributeTypeMap;
     }
 }
 

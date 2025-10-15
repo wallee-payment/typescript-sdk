@@ -98,7 +98,7 @@ class SubscriptionSuspensionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.7.0",
+            "x-meta-sdk-version": "4.8.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -160,27 +160,17 @@ class SubscriptionSuspensionService {
     /**
     * The create operation creates a new subscription suspension.
     * @summary Create
-    * @param spaceId 
     * @param suspension 
     * @param {*} [options] Override http request options.
     */
-    public create (spaceId: number, suspension: SubscriptionSuspensionCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionSuspension;  }> {
+    public create (suspension: SubscriptionSuspensionCreate, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionSuspension;  }> {
         const url: string = '/subscription-suspension/create';
         let queryParams: any = {};
         let headers: any = Object.assign({}, this._defaultHeaders);
 
-        // verify required parameter 'spaceId' is not null or undefined
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling create.');
-        }
-
         // verify required parameter 'suspension' is not null or undefined
         if (suspension === null || suspension === undefined) {
             throw new Error('Required parameter suspension was null or undefined when calling create.');
-        }
-
-        if (spaceId !== undefined) {
-            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
 
@@ -191,7 +181,7 @@ class SubscriptionSuspensionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.7.0",
+            "x-meta-sdk-version": "4.8.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -288,7 +278,7 @@ class SubscriptionSuspensionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.7.0",
+            "x-meta-sdk-version": "4.8.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -380,7 +370,7 @@ class SubscriptionSuspensionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.7.0",
+            "x-meta-sdk-version": "4.8.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),
@@ -440,29 +430,19 @@ class SubscriptionSuspensionService {
     };
 
     /**
-    * The create operation creates a new subscription suspension.
+    * Terminates an existing subscription suspension.
     * @summary terminate
-    * @param spaceId 
     * @param suspensionId 
     * @param {*} [options] Override http request options.
     */
-    public terminate (spaceId: number, suspensionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionSuspension;  }> {
+    public terminate (suspensionId: number, options: any = {}) : Promise<{ response: http.IncomingMessage; body: SubscriptionSuspension;  }> {
         const url: string = '/subscription-suspension/terminate';
         let queryParams: any = {};
         let headers: any = Object.assign({}, this._defaultHeaders);
 
-        // verify required parameter 'spaceId' is not null or undefined
-        if (spaceId === null || spaceId === undefined) {
-            throw new Error('Required parameter spaceId was null or undefined when calling terminate.');
-        }
-
         // verify required parameter 'suspensionId' is not null or undefined
         if (suspensionId === null || suspensionId === undefined) {
             throw new Error('Required parameter suspensionId was null or undefined when calling terminate.');
-        }
-
-        if (spaceId !== undefined) {
-            queryParams['spaceId'] = ObjectSerializer.serialize(spaceId, "number");
         }
 
         if (suspensionId !== undefined) {
@@ -477,7 +457,7 @@ class SubscriptionSuspensionService {
         Object.assign(headers, options.headers);
 
         let defaultHeaders = {
-            "x-meta-sdk-version": "4.7.0",
+            "x-meta-sdk-version": "4.8.0",
             "x-meta-sdk-language": "typescript",
             "x-meta-sdk-provider": "wallee",
             "x-meta-sdk-language-version": this.getVersion(),

@@ -10,7 +10,7 @@ class TokenVersionType {
     'description'?: { [key: string]: string; };
 
         /**
-        * 
+        * The feature that the token version type belongs to.
         */
     'feature'?: Feature;
 

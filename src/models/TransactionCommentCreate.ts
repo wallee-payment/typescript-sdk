@@ -5,7 +5,7 @@ import { AbstractTransactionCommentActive } from "./AbstractTransactionCommentAc
 class TransactionCommentCreate extends AbstractTransactionCommentActive {
 
         /**
-        * 
+        * The transaction that the comment belongs to.
         */
     'transaction': number;
 

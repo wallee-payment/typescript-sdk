@@ -45,7 +45,7 @@ class Feature {
     'sortOrder'?: number;
 
         /**
-        * 
+        * Whether the feature is visible to the user.
         */
     'visible'?: boolean;
 

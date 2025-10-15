@@ -44,7 +44,7 @@ class TransactionComment {
     'pinned'?: boolean;
 
         /**
-        * 
+        * The transaction that the comment belongs to.
         */
     'transaction'?: number;
 

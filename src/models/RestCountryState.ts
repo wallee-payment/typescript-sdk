@@ -9,11 +9,6 @@ class RestCountryState {
     'code'?: string;
 
         /**
-        * 
-        */
-    'country'?: string;
-
-        /**
         * The two-letter code of the state's country (ISO 3166-1 alpha-2 format).
         */
     'countryCode'?: string;
@@ -36,12 +31,6 @@ class RestCountryState {
         {
         "name": "code",
         "baseName": "code",
-        "type": "string"
-        },
-        
-        {
-        "name": "country",
-        "baseName": "country",
         "type": "string"
         },
         

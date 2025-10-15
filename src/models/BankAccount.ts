@@ -5,7 +5,7 @@ import { BankAccountState } from "./BankAccountState";
 class BankAccount {
 
         /**
-        * The optional description is shown along the identifier. The intention of the description is to give an alternative name to the bank account.
+        * The description serves as an alternative name for the bank account.
         */
     'description'?: string;
 
@@ -15,7 +15,7 @@ class BankAccount {
     'id'?: number;
 
         /**
-        * The bank account identifier is responsible to uniquely identify the bank account.
+        * The identifier is used to uniquely identify the bank account.
         */
     'identifier'?: string;
 
@@ -35,7 +35,7 @@ class BankAccount {
     'state'?: BankAccountState;
 
         /**
-        * 
+        * The bank account's type
         */
     'type'?: number;
 

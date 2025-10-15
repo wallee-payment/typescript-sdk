@@ -4,7 +4,7 @@
 class PaymentConnectorFeature {
 
         /**
-        * The name of the feature.
+        * The localized name of the feature.
         */
     'displayName'?: string;
 

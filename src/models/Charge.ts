@@ -3,25 +3,34 @@ import { ChargeState } from "./ChargeState";
 import { ChargeType } from "./ChargeType";
 import { FailureReason } from "./FailureReason";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class Charge extends TransactionAwareEntity {
+class Charge {
 
         /**
-        * The date on which the charge was created on.
+        * The date and time when the object was created.
         */
     'createdOn'?: Date;
 
         /**
-        * 
+        * The reason for the failure of the charge.
         */
     'failureReason'?: FailureReason;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The language that is linked to the object.
         */
     'language'?: string;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
 
         /**
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -39,27 +48,27 @@ class Charge extends TransactionAwareEntity {
     'state'?: ChargeState;
 
         /**
-        * 
+        * The time zone that this object is associated with.
         */
     'timeZone'?: string;
 
         /**
-        * 
+        * The date and time when the charge will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The transaction that the charge belongs to.
         */
     'transaction'?: Transaction;
 
         /**
-        * 
+        * The type specifying how the customer was charged.
         */
     'type'?: ChargeType;
 
         /**
-        * The failure message describes for an end user why the charge is failed in the language of the user. This is only provided when the charge is marked as failed.
+        * The message that can be displayed to the customer explaining why the charge failed, in the customer's language.
         */
     'userFailureMessage'?: string;
 
@@ -86,9 +95,21 @@ class Charge extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "language",
         "baseName": "language",
         "type": "string"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
         },
         
         {
@@ -147,7 +168,7 @@ class Charge extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(Charge.attributeTypeMap);
+        return Charge.attributeTypeMap;
     }
 }
 

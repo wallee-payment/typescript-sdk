@@ -2,23 +2,22 @@
 import { DeliveryIndicationDecisionReason } from "./DeliveryIndicationDecisionReason";
 import { DeliveryIndicationState } from "./DeliveryIndicationState";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class DeliveryIndication extends TransactionAwareEntity {
+class DeliveryIndication {
 
         /**
-        * 
+        * The reason for the automatic system decision about the delivery indication.
         */
     'automaticDecisionReason'?: DeliveryIndicationDecisionReason;
 
         /**
-        * 
+        * The date and time when an automatic decision was made.
         */
     'automaticallyDecidedOn'?: Date;
 
         /**
-        * 
+        * The transaction completion that the delivery indication is linked to.
         */
     'completion'?: number;
 
@@ -28,17 +27,32 @@ class DeliveryIndication extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
-        * 
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The date and time by which a decision must be made before the system automatically proceeds according to the connector's predefined settings.
         */
     'manualDecisionTimeoutOn'?: Date;
 
         /**
-        * 
+        * The ID of the user who manually decided the delivery indication's state.
         */
     'manuallyDecidedBy'?: number;
 
         /**
-        * 
+        * The date and time when a manual decision was made.
         */
     'manuallyDecidedOn'?: Date;
 
@@ -53,12 +67,12 @@ class DeliveryIndication extends TransactionAwareEntity {
     'state'?: DeliveryIndicationState;
 
         /**
-        * 
+        * The date and time when the delivery indication will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The payment transaction that the delivery indication is linked to.
         */
     'transaction'?: Transaction;
 
@@ -89,6 +103,24 @@ class DeliveryIndication extends TransactionAwareEntity {
         "name": "createdOn",
         "baseName": "createdOn",
         "type": "Date"
+        },
+        
+        {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -135,7 +167,7 @@ class DeliveryIndication extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(DeliveryIndication.attributeTypeMap);
+        return DeliveryIndication.attributeTypeMap;
     }
 }
 

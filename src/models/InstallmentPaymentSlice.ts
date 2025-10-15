@@ -3,10 +3,9 @@ import { InstallmentPayment } from "./InstallmentPayment";
 import { InstallmentPaymentSliceState } from "./InstallmentPaymentSliceState";
 import { LineItem } from "./LineItem";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 
 
-class InstallmentPaymentSlice extends TransactionAwareEntity {
+class InstallmentPaymentSlice {
 
         /**
         * 
@@ -19,6 +18,11 @@ class InstallmentPaymentSlice extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
+
+        /**
         * 
         */
     'installmentPayment'?: InstallmentPayment;
@@ -27,6 +31,16 @@ class InstallmentPaymentSlice extends TransactionAwareEntity {
         * 
         */
     'lineItems'?: Array<LineItem>;
+
+        /**
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
 
         /**
         * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
@@ -66,6 +80,12 @@ class InstallmentPaymentSlice extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "installmentPayment",
         "baseName": "installmentPayment",
         "type": "InstallmentPayment"
@@ -75,6 +95,18 @@ class InstallmentPaymentSlice extends TransactionAwareEntity {
         "name": "lineItems",
         "baseName": "lineItems",
         "type": "Array<LineItem>"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -103,7 +135,7 @@ class InstallmentPaymentSlice extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(InstallmentPaymentSlice.attributeTypeMap);
+        return InstallmentPaymentSlice.attributeTypeMap;
     }
 }
 

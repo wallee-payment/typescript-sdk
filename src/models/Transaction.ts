@@ -159,7 +159,7 @@ class Transaction {
     'endOfLife'?: Date;
 
         /**
-        * 
+        * The environment used when rendering resources.
         */
     'environment'?: Environment;
 

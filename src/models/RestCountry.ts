@@ -5,7 +5,7 @@ import { RestAddressFormat } from "./RestAddressFormat";
 class RestCountry {
 
         /**
-        * Specifies the country's way of formatting addresses.
+        * The country's way of formatting addresses.
         */
     'addressFormat'?: RestAddressFormat;
 

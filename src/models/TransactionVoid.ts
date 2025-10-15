@@ -2,15 +2,14 @@
 import { FailureReason } from "./FailureReason";
 import { Label } from "./Label";
 import { Transaction } from "./Transaction";
-import { TransactionAwareEntity } from "./TransactionAwareEntity";
 import { TransactionVoidMode } from "./TransactionVoidMode";
 import { TransactionVoidState } from "./TransactionVoidState";
 
 
-class TransactionVoid extends TransactionAwareEntity {
+class TransactionVoid {
 
         /**
-        * 
+        * The ID of the user the transaction void was created by.
         */
     'createdBy'?: number;
 
@@ -20,14 +19,19 @@ class TransactionVoid extends TransactionAwareEntity {
     'createdOn'?: Date;
 
         /**
-        * 
+        * The date and time when the transaction void failed.
         */
     'failedOn'?: Date;
 
         /**
-        * 
+        * The reason for the failure of the transaction void.
         */
     'failureReason'?: FailureReason;
+
+        /**
+        * A unique identifier for the object.
+        */
+    'id'?: number;
 
         /**
         * The labels providing additional information about the object.
@@ -40,12 +44,22 @@ class TransactionVoid extends TransactionAwareEntity {
     'language'?: string;
 
         /**
-        * 
+        * The ID of the space this object belongs to.
+        */
+    'linkedSpaceId'?: number;
+
+        /**
+        * The payment transaction this object is linked to.
+        */
+    'linkedTransaction'?: number;
+
+        /**
+        * The mode of transaction void, such as online or offline, determining how the void process is executed.
         */
     'mode'?: TransactionVoidMode;
 
         /**
-        * 
+        * The date and time when the next update of the object's state is planned.
         */
     'nextUpdateOn'?: Date;
 
@@ -55,7 +69,7 @@ class TransactionVoid extends TransactionAwareEntity {
     'plannedPurgeDate'?: Date;
 
         /**
-        * 
+        * The reference ID provided by the payment processor, used to trace the void through the external payment system.
         */
     'processorReference'?: string;
 
@@ -70,17 +84,17 @@ class TransactionVoid extends TransactionAwareEntity {
     'state'?: TransactionVoidState;
 
         /**
-        * 
+        * The date and time when the transaction void succeeded.
         */
     'succeededOn'?: Date;
 
         /**
-        * 
+        * The date and time when the object will expire.
         */
     'timeoutOn'?: Date;
 
         /**
-        * 
+        * The transaction that the void belongs to.
         */
     'transaction'?: Transaction;
 
@@ -119,6 +133,12 @@ class TransactionVoid extends TransactionAwareEntity {
         },
         
         {
+        "name": "id",
+        "baseName": "id",
+        "type": "number"
+        },
+        
+        {
         "name": "labels",
         "baseName": "labels",
         "type": "Array<Label>"
@@ -128,6 +148,18 @@ class TransactionVoid extends TransactionAwareEntity {
         "name": "language",
         "baseName": "language",
         "type": "string"
+        },
+        
+        {
+        "name": "linkedSpaceId",
+        "baseName": "linkedSpaceId",
+        "type": "number"
+        },
+        
+        {
+        "name": "linkedTransaction",
+        "baseName": "linkedTransaction",
+        "type": "number"
         },
         
         {
@@ -192,7 +224,7 @@ class TransactionVoid extends TransactionAwareEntity {
     ];
 
     static getAttributeTypeMap() {
-        return super.getAttributeTypeMap().concat(TransactionVoid.attributeTypeMap);
+        return TransactionVoid.attributeTypeMap;
     }
 }
 

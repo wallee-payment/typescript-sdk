@@ -14,7 +14,7 @@ class BankAccountType {
     'id'?: number;
 
         /**
-        * 
+        * The identifier name specifies how the bank account type's identifier is called.
         */
     'identifierName'?: { [key: string]: string; };
 
