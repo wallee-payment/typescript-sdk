@@ -16,7 +16,7 @@ class PaymentTerminalTillService {
     protected _basePath = 'https://app-wallee.com:443/api';
     protected _defaultHeaders : any = {};
     protected _useQuerystring : boolean = false;
-    protected _timeout : number = 25;
+    protected _timeout : number = 90;
     protected _defaultAuthentication: Authentication;
 
     constructor(configuration: any) {
@@ -133,7 +133,7 @@ class PaymentTerminalTillService {
             baseURL: this._basePath,
             headers,
             params: queryParams,
-            timeout: 90 * 1000,
+            timeout: this._timeout * 1000,
             responseType: 'json',
         }
 
@@ -164,7 +164,7 @@ class PaymentTerminalTillService {
                         return reject({
                             errorType: errorObject.constructor.name,
                             date: (new Date()).toDateString(),
-                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusCode: failure.response?.status && !isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
                             statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
                             body: failure.response?.data,
                             response: failure.response?.request.res
@@ -244,7 +244,7 @@ class PaymentTerminalTillService {
             baseURL: this._basePath,
             headers,
             params: queryParams,
-            timeout: 90 * 1000,
+            timeout: this._timeout * 1000,
             responseType: 'json',
         }
 
@@ -275,7 +275,7 @@ class PaymentTerminalTillService {
                         return reject({
                             errorType: errorObject.constructor.name,
                             date: (new Date()).toDateString(),
-                            statusCode: failure.response?.status && isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
+                            statusCode: failure.response?.status && !isNaN(failure.response.status) ? String(failure.response.status) : "Unknown",
                             statusMessage: failure.response?.statusText != null ? failure.response.statusText : "Unknown",
                             body: failure.response?.data,
                             response: failure.response?.request.res
