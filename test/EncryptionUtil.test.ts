@@ -1,76 +1,95 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { expect } from "chai";
-import { EncryptionUtil } from "../src/util/EncryptionUtil";
+import {it} from "mocha";
+import { EncryptionUtil } from "../src/utils/EncryptionUtil";
 
-describe("EncryptionUtil", () => {
-
-  const validContentToVerify =
+describe("EncryptionUtil tests", () => {
+  const VALID_CONTENT_TO_VERIFY =
     '{"entityId":11,"eventId":35,"listenerEntityId":1472041829003,"listenerEntityTechnicalName":"Transaction","spaceId":1,"state":"PROCESSING","timestamp":"2023-12-19T13:43:35+0000","webhookListenerId":2}';
 
-  const validContentSignature =
+  const VALID_CONTENT_SIGNATURE =
     "MEYCIQCTzbMrMsOAC6T57T9kQTb1iGZVg2R7n6pY9A4ML4P31gIhAIOoav8cG8x0jpRWQztqSJIC8gXWKq+4DuENEySvmMYf";
 
-  const validEncodedPublicKey =
+  const VALID_PUBLIC_KEY =
     "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdWq7ZBGsjUzhBO3e6mzUBLpjpV3TQw1bL1rk3ocjn5C5qne7TY0OBBhiWgaPtWlvUcqASz903vtfeSTQma+SBA==";
 
-  it('should return true for valid content, signature, and public key', (done) => {
-    expect(EncryptionUtil.isContentValid(validContentToVerify, validContentSignature, validEncodedPublicKey)).to.be.true;
-    done();
+  it("should validate correct signature and content", () => {
+    const isValid = EncryptionUtil.isContentValid(
+      VALID_CONTENT_TO_VERIFY,
+      VALID_CONTENT_SIGNATURE,
+      VALID_PUBLIC_KEY
+    );
+    expect(isValid).to.be.true;
   });
 
-  it('should return false when the content does not correspond to the signature', (done) => {
-    // Modify the content to make it invalid
-    const modifiedContent = 'ModifiedContent';
-
-    expect(EncryptionUtil.isContentValid(modifiedContent, validContentSignature, validEncodedPublicKey)).to.be.false;
-    done();
+  it("should fail validation with incorrect content", () => {
+    const isValid = EncryptionUtil.isContentValid(
+      "ModifiedContent",
+      VALID_CONTENT_SIGNATURE,
+      VALID_PUBLIC_KEY
+    );
+    expect(isValid).to.be.false;
   });
 
-  it('should return an error for invalid signature in the plain text format', (done) => {
-    // Modify the signature to make it invalid
-    const modifiedSignature = "InvalidModifiedSignature";
-
-    try {
-      EncryptionUtil.isContentValid(validContentToVerify, modifiedSignature, validEncodedPublicKey);
-      done(new Error('Expected an exception but none was thrown.'));
-    } catch (error: any) {
-      expect(error).to.be.an.instanceOf(Error);
-      done();
-    }
+  it("should throw on badly formatted signature", () => {
+    expect(() =>
+      EncryptionUtil.isContentValid(
+        VALID_CONTENT_TO_VERIFY,
+        "InvalidModifiedSignature",
+        VALID_PUBLIC_KEY
+      )
+    ).to.throw();
   });
 
-  it('should return false for invalid signature in the Base64 format', (done) => {
-    // Modify the signature to make it invalid in the Base64 format
-    const modifiedBase64Signature = "MEYCIQCTzbMrMsOAC6T57T9kQTb1iGZVg2R7n6pY9A4ML4P31gIhAIOoav8cG8x0jpRWQztqSJIC8gXWKq";
-
-    expect(EncryptionUtil.isContentValid(validContentToVerify, modifiedBase64Signature, validEncodedPublicKey)).to.be.false;
-    done();
+  it("should fail validation with incorrect base64 signature format", () => {
+    const isValid = EncryptionUtil.isContentValid(
+        VALID_CONTENT_TO_VERIFY,
+        "MEYCIQCTzbMrMsOAC6T57T9kQTb1iGZVg2R7n6pY9A4ML4P31gIhAIOoav8cG8x0jpRWQztqSJIC8gXWKq",
+        VALID_PUBLIC_KEY
+    );
+    expect(isValid).to.be.false;
   });
 
-
-  it('should return an error for invalid public key in the plain text format', (done) => {
-    // Modify the public key in the plain text format to make it invalid
-    const modifiedPublicKey = "InvalidModifiedPublicKey";
-
-    try {
-      EncryptionUtil.isContentValid(validContentToVerify, validContentSignature, modifiedPublicKey);
-      done(new Error('Expected an exception but none was thrown.'));
-    } catch (error: any) {
-      expect(error).to.be.an.instanceOf(Error);
-      done();
-    }
+  it("should throw on badly formatted public key", () => {
+    expect(() =>
+      EncryptionUtil.isContentValid(
+        VALID_CONTENT_TO_VERIFY,
+        VALID_CONTENT_SIGNATURE,
+        "InvalidModifiedPublicKey"
+      )
+    ).to.throw();
   });
 
-  it('should return an error for invalid public key in the Base64 format', (done) => {
-    // Modify the public key in the Base64 format to make it invalid
-    const modifiedBase64PublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdWq7ZBGsjUzhBO3e6mzUBLpjpV3TQw1bL1rk3ocjn5C5qne7TY0OBBhiWgaPtWlvUcqASz903vtfeSTQm';
-
-    try {
-      EncryptionUtil.isContentValid(validContentToVerify, validContentSignature, modifiedBase64PublicKey);
-      done(new Error('Expected an exception but none was thrown.'));
-    } catch (error: any) {
-      expect(error).to.be.an.instanceOf(Error);
-      done();
-    }
+  it("should throw on invalid base64 public key format", () => {
+    expect(() =>
+      EncryptionUtil.isContentValid(
+        VALID_CONTENT_TO_VERIFY,
+        VALID_CONTENT_SIGNATURE,
+        "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdWq7ZBGsjUzhBO3e6mzUBLpjpV3TQw1bL1rk3ocjn5C5qne7TY0OBBhiWgaPtWlvUcqASz903vtfeSTQm"
+      )
+    ).to.throw();
   });
-
 });

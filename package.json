@@ -1,51 +1,48 @@
 {
-    "name": "wallee",
-    "title": "wallee",
-    "version": "4.8.0",
-    "description": "TypeScript/JavaScript client for wallee",
-    "homepage": "http://github.com/wallee-payment/typescript-sdk",
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/wallee-payment/typescript-sdk.git"
-    },
-    "bugs": {
-        "url": "http://github.com/wallee-payment/typescript-sdk/issues"
-    },
-    "main": "build/index.js",
-    "types": "build/index.d.ts",
-    "files": ["/build", "LICENSE", "README.MD"],
-    "scripts": {
-        "clean": "rm -Rf ./node_modules/ ./build ./test/*.d.ts ./test/*.js",
-        "build": "tsc --project ./tsconfig.json",
-        "test": "rm -fr ./test/*.d.ts && mocha --require ts-node/register test/*.test.ts test/*.test.js",
-        "prepublishOnly": "npm run clean && npm i && npm run build"
-    },
-    "author": "wallee AG",
-    "license": "Apache-2.0",
-    "keywords": ["wallee", "Payment", "Payment Integration"],
-    "mocha": {
-        "timeout": 30000
-    },
-    "dependencies": {
-        "@types/bluebird": "3.5.36",
-        "@types/crypto-js": "4.2.1",
-        "@types/request": "2.48.8",
-        "axios": "1.8.3",
-        "bluebird": "3.5.0",
-        "crypto-js": "4.2.0",
-        "starkbank-ecdsa": "^1.1.5"
-    },
-    "devDependencies": {
-        "@types/chai": "^4.2.1",
-        "@types/mocha": "^5.2.7",
-        "chai": "^4.3.7",
-        "form-data": "^4.0.0",
-        "minimist": "^1.2.8",
-        "mocha": "^10.2.0",
-        "ts-node": "^10.9.1",
-        "typescript": "^5.0.4"
-    },
-    "publishConfig": {
-        "access": "public"
-    }
+  "name": "wallee",
+  "title": "wallee",
+  "version": "5.0.0",
+  "description": "TypeScript/JavaScript client for wallee",
+  "author": "wallee AG",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wallee-payment/typescript-sdk.git"
+  },
+  "bugs": {
+    "url": "http://github.com/wallee-payment/typescript-sdk/issues"
+  },
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "files": ["dist/", "LICENSE", "README.MD"],
+  "scripts": {
+    "clean": "rm -Rf ./node_modules/ ./build ./test/*.d.ts ./test/*.js",
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build",
+    "test": "rm -fr ./test/*.d.ts && mocha --require ts-node/register \"test/**/*.test.{ts, js}\"",
+    "prepublishOnly": "npm run clean && npm install && npm run build"
+  },
+  "license": "",
+  "keywords": [
+    "wallee",
+    "Payment",
+    "Payment Integration"
+  ],
+  "mocha": {
+    "timeout": 30000
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.1",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.19.49",
+    "chai": "^4.3.7",
+    "mocha": "^10.7.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.0 || ^5.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "starkbank-ecdsa": "^1.1.5"
+  }
 }

@@ -1,28 +1,69 @@
-'use strict';
-
-
-class AbstractRefundCommentActive {
-
-        /**
-        * The comment's actual content.
-        */
-    'content'?: string;
-
-
-    static discriminator: string | undefined = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    
-        {
-        "name": "content",
-        "baseName": "content",
-        "type": "string"
-        }        
-    ];
-
-    static getAttributeTypeMap() {
-        return AbstractRefundCommentActive.attributeTypeMap;
-    }
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+/**
+ * 
+ * @export
+ * @interface AbstractRefundCommentActive
+ */
+export interface AbstractRefundCommentActive {
+    /**
+     * The comment's actual content.
+     * @type {string}
+     * @memberof AbstractRefundCommentActive
+     */
+    content?: string;
 }
 
-export { AbstractRefundCommentActive }
+/**
+ * Check if a given object implements the AbstractRefundCommentActive interface.
+ */
+export function instanceOfAbstractRefundCommentActive(value: object): value is AbstractRefundCommentActive {
+    return true;
+}
+
+export function AbstractRefundCommentActiveFromJSON(json: any): AbstractRefundCommentActive {
+    return AbstractRefundCommentActiveFromJSONTyped(json, false);
+}
+
+export function AbstractRefundCommentActiveFromJSONTyped(json: any, ignoreDiscriminator: boolean): AbstractRefundCommentActive {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'content': json['content'] == null ? undefined : json['content'],
+    };
+}
+
+export function AbstractRefundCommentActiveToJSON(value?: AbstractRefundCommentActive | null): any {
+    if (value == null) {
+        return value;
+    }
+    return {
+        
+        'content': value['content'],
+    };
+}
+

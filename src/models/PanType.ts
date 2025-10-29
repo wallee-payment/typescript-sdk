@@ -1,15 +1,64 @@
-'use strict';
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-enum PanType{
+/**
+ * 
+ * @export
+ */
+export const PanType = {
+    Plain: 'PLAIN',
+    PlainGooglePay: 'PLAIN_GOOGLE_PAY',
+    SchemeToken: 'SCHEME_TOKEN',
+    SchemeTokenClickToPay: 'SCHEME_TOKEN_CLICK_TO_PAY',
+    DeviceTokenApplePay: 'DEVICE_TOKEN_APPLE_PAY',
+    DeviceTokenGooglePay: 'DEVICE_TOKEN_GOOGLE_PAY',
+    DeviceTokenSamsungPay: 'DEVICE_TOKEN_SAMSUNG_PAY',
+    DeviceTokenAndroidPay: 'DEVICE_TOKEN_ANDROID_PAY'
+} as const;
+export type PanType = typeof PanType[keyof typeof PanType];
 
-    PLAIN = 'PLAIN',
-    PLAIN_GOOGLE_PAY = 'PLAIN_GOOGLE_PAY',
-    SCHEME_TOKEN = 'SCHEME_TOKEN',
-    SCHEME_TOKEN_CLICK_TO_PAY = 'SCHEME_TOKEN_CLICK_TO_PAY',
-    DEVICE_TOKEN_APPLE_PAY = 'DEVICE_TOKEN_APPLE_PAY',
-    DEVICE_TOKEN_GOOGLE_PAY = 'DEVICE_TOKEN_GOOGLE_PAY',
-    DEVICE_TOKEN_SAMSUNG_PAY = 'DEVICE_TOKEN_SAMSUNG_PAY',
-    DEVICE_TOKEN_ANDROID_PAY = 'DEVICE_TOKEN_ANDROID_PAY',
+
+export function instanceOfPanType(value: any): boolean {
+    for (const key in PanType) {
+        if (Object.prototype.hasOwnProperty.call(PanType, key)) {
+            if (PanType[key as keyof typeof PanType] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
-export { PanType }
+export function PanTypeFromJSON(json: any): PanType {
+    return PanTypeFromJSONTyped(json, false);
+}
+
+export function PanTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean): PanType {
+    return json as PanType;
+}
+
+export function PanTypeToJSON(value?: PanType | null): any {
+    return value as any;
+}
+

@@ -1,94 +1,113 @@
-'use strict';
-
-
-class PaymentProcessor {
-
-        /**
-        * The name of the company to which the processor belongs.
-        */
-    'companyName'?: { [key: string]: string; };
-
-        /**
-        * The localized description of the object.
-        */
-    'description'?: { [key: string]: string; };
-
-        /**
-        * Where the processor's headquarters are located.
-        */
-    'headquartersLocation'?: { [key: string]: string; };
-
-        /**
-        * A unique identifier for the object.
-        */
-    'id'?: number;
-
-        /**
-        * The path to the logo image of the processor.
-        */
-    'logoPath'?: string;
-
-        /**
-        * The localized name of the object.
-        */
-    'name'?: { [key: string]: string; };
-
-        /**
-        * The name of the processor's product.
-        */
-    'productName'?: { [key: string]: string; };
-
-
-    static discriminator: string | undefined = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    
-        {
-        "name": "companyName",
-        "baseName": "companyName",
-        "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "description",
-        "baseName": "description",
-        "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "headquartersLocation",
-        "baseName": "headquartersLocation",
-        "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "id",
-        "baseName": "id",
-        "type": "number"
-        },
-        
-        {
-        "name": "logoPath",
-        "baseName": "logoPath",
-        "type": "string"
-        },
-        
-        {
-        "name": "name",
-        "baseName": "name",
-        "type": "{ [key: string]: string; }"
-        },
-        
-        {
-        "name": "productName",
-        "baseName": "productName",
-        "type": "{ [key: string]: string; }"
-        }        
-    ];
-
-    static getAttributeTypeMap() {
-        return PaymentProcessor.attributeTypeMap;
-    }
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+/**
+ * Payment processors serve as intermediaries that establish connections with third-party
+ * companies, known as payment service providers. These providers are responsible for
+ * managing the technical aspects of payment transactions, ensuring seamless and secure
+ * payment processing.
+ * @export
+ * @interface PaymentProcessor
+ */
+export interface PaymentProcessor {
+    /**
+     * The name of the company to which the processor belongs.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentProcessor
+     */
+    readonly companyName?: { [key: string]: string; };
+    /**
+     * Where the processor's headquarters are located.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentProcessor
+     */
+    readonly headquartersLocation?: { [key: string]: string; };
+    /**
+     * The path to the logo image of the processor.
+     * @type {string}
+     * @memberof PaymentProcessor
+     */
+    readonly logoPath?: string;
+    /**
+     * The localized name of the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentProcessor
+     */
+    readonly name?: { [key: string]: string; };
+    /**
+     * The localized description of the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentProcessor
+     */
+    readonly description?: { [key: string]: string; };
+    /**
+     * A unique identifier for the object.
+     * @type {number}
+     * @memberof PaymentProcessor
+     */
+    readonly id?: number;
+    /**
+     * The name of the processor's product.
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentProcessor
+     */
+    readonly productName?: { [key: string]: string; };
 }
 
-export { PaymentProcessor }
+/**
+ * Check if a given object implements the PaymentProcessor interface.
+ */
+export function instanceOfPaymentProcessor(value: object): value is PaymentProcessor {
+    return true;
+}
+
+export function PaymentProcessorFromJSON(json: any): PaymentProcessor {
+    return PaymentProcessorFromJSONTyped(json, false);
+}
+
+export function PaymentProcessorFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentProcessor {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'companyName': json['companyName'] == null ? undefined : json['companyName'],
+        'headquartersLocation': json['headquartersLocation'] == null ? undefined : json['headquartersLocation'],
+        'logoPath': json['logoPath'] == null ? undefined : json['logoPath'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'description': json['description'] == null ? undefined : json['description'],
+        'id': json['id'] == null ? undefined : json['id'],
+        'productName': json['productName'] == null ? undefined : json['productName'],
+    };
+}
+
+export function PaymentProcessorToJSON(value?: Omit<PaymentProcessor, 'companyName'|'headquartersLocation'|'logoPath'|'name'|'description'|'id'|'productName'> | null): any {
+    if (value == null) {
+        return value;
+    }
+    return {
+        
+    };
+}
+

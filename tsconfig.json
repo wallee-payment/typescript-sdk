@@ -1,27 +1,22 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "declaration": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "lib": ["es7", "es6", "dom"],
-        "outDir": "./build",
-        "paths": {
-            "*": ["./src/shared/types/*"]
-        }
-    },
-    "include":[
-        "./src/**/*",
-        "./tests/*",
-        "./index.ts"
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "typeRoots": [
+      "node_modules/@types"
     ],
-    "exclude": [
-        "node_modules",
-        "./node_modules",
-        "./node_modules/*",
-        "./node_modules/@types/node/index.d.ts",
-        "./tests/*.d.ts"
-    ]
+    "paths": {
+      "runtime": ["./src/runtime.ts"]
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*"
+  ]
 }

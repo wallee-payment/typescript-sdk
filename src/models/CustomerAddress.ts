@@ -1,108 +1,139 @@
-'use strict';
-import { Customer } from "./Customer";
-import { CustomerAddressType } from "./CustomerAddressType";
-import { CustomerPostalAddress } from "./CustomerPostalAddress";
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+import type { Customer } from './Customer';
+import {
+    CustomerFromJSON,
+    CustomerFromJSONTyped,
+    CustomerToJSON,
+} from './Customer';
+import type { CustomerAddressType } from './CustomerAddressType';
+import {
+    CustomerAddressTypeFromJSON,
+    CustomerAddressTypeFromJSONTyped,
+    CustomerAddressTypeToJSON,
+} from './CustomerAddressType';
+import type { CustomerPostalAddress } from './CustomerPostalAddress';
+import {
+    CustomerPostalAddressFromJSON,
+    CustomerPostalAddressFromJSONTyped,
+    CustomerPostalAddressToJSON,
+} from './CustomerPostalAddress';
 
-
-class CustomerAddress {
-
-        /**
-        * The actual postal address.
-        */
-    'address'?: CustomerPostalAddress;
-
-        /**
-        * Whether the address is for billing or shipping or both.
-        */
-    'addressType'?: CustomerAddressType;
-
-        /**
-        * The date and time when the object was created.
-        */
-    'createdOn'?: Date;
-
-        /**
-        * The customer that the object belongs to.
-        */
-    'customer'?: Customer;
-
-        /**
-        * Whether this is the customer's default address.
-        */
-    'defaultAddress'?: boolean;
-
-        /**
-        * A unique identifier for the object.
-        */
-    'id'?: number;
-
-        /**
-        * The ID of the space this object belongs to.
-        */
-    'linkedSpaceId'?: number;
-
-        /**
-        * The version is used for optimistic locking and incremented whenever the object is updated.
-        */
-    'version'?: number;
-
-
-    static discriminator: string | undefined = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    
-        {
-        "name": "address",
-        "baseName": "address",
-        "type": "CustomerPostalAddress"
-        },
-        
-        {
-        "name": "addressType",
-        "baseName": "addressType",
-        "type": "CustomerAddressType"
-        },
-        
-        {
-        "name": "createdOn",
-        "baseName": "createdOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "customer",
-        "baseName": "customer",
-        "type": "Customer"
-        },
-        
-        {
-        "name": "defaultAddress",
-        "baseName": "defaultAddress",
-        "type": "boolean"
-        },
-        
-        {
-        "name": "id",
-        "baseName": "id",
-        "type": "number"
-        },
-        
-        {
-        "name": "linkedSpaceId",
-        "baseName": "linkedSpaceId",
-        "type": "number"
-        },
-        
-        {
-        "name": "version",
-        "baseName": "version",
-        "type": "number"
-        }        
-    ];
-
-    static getAttributeTypeMap() {
-        return CustomerAddress.attributeTypeMap;
-    }
+/**
+ * 
+ * @export
+ * @interface CustomerAddress
+ */
+export interface CustomerAddress {
+    /**
+     * The ID of the space this object belongs to.
+     * @type {number}
+     * @memberof CustomerAddress
+     */
+    readonly linkedSpaceId?: number;
+    /**
+     * 
+     * @type {CustomerPostalAddress}
+     * @memberof CustomerAddress
+     */
+    address?: CustomerPostalAddress;
+    /**
+     * 
+     * @type {CustomerAddressType}
+     * @memberof CustomerAddress
+     */
+    addressType?: CustomerAddressType;
+    /**
+     * A unique identifier for the object.
+     * @type {number}
+     * @memberof CustomerAddress
+     */
+    readonly id?: number;
+    /**
+     * The date and time when the object was created.
+     * @type {Date}
+     * @memberof CustomerAddress
+     */
+    readonly createdOn?: Date;
+    /**
+     * The version is used for optimistic locking and incremented whenever the object is updated.
+     * @type {number}
+     * @memberof CustomerAddress
+     */
+    readonly version?: number;
+    /**
+     * 
+     * @type {Customer}
+     * @memberof CustomerAddress
+     */
+    customer?: Customer;
+    /**
+     * Whether this is the customer's default address.
+     * @type {boolean}
+     * @memberof CustomerAddress
+     */
+    readonly defaultAddress?: boolean;
 }
 
-export { CustomerAddress }
+/**
+ * Check if a given object implements the CustomerAddress interface.
+ */
+export function instanceOfCustomerAddress(value: object): value is CustomerAddress {
+    return true;
+}
+
+export function CustomerAddressFromJSON(json: any): CustomerAddress {
+    return CustomerAddressFromJSONTyped(json, false);
+}
+
+export function CustomerAddressFromJSONTyped(json: any, ignoreDiscriminator: boolean): CustomerAddress {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
+        'address': json['address'] == null ? undefined : CustomerPostalAddressFromJSON(json['address']),
+        'addressType': json['addressType'] == null ? undefined : CustomerAddressTypeFromJSON(json['addressType']),
+        'id': json['id'] == null ? undefined : json['id'],
+        'createdOn': json['createdOn'] == null ? undefined : (new Date(json['createdOn'])),
+        'version': json['version'] == null ? undefined : json['version'],
+        'customer': json['customer'] == null ? undefined : CustomerFromJSON(json['customer']),
+        'defaultAddress': json['defaultAddress'] == null ? undefined : json['defaultAddress'],
+    };
+}
+
+export function CustomerAddressToJSON(value?: Omit<CustomerAddress, 'linkedSpaceId'|'id'|'createdOn'|'version'|'defaultAddress'> | null): any {
+    if (value == null) {
+        return value;
+    }
+    return {
+        
+        'address': CustomerPostalAddressToJSON(value['address']),
+        'addressType': CustomerAddressTypeToJSON(value['addressType']),
+        'customer': CustomerToJSON(value['customer']),
+    };
+}
+

@@ -1,39 +1,77 @@
-'use strict';
-
-
-class SubscriptionComponentReferenceConfiguration {
-
-        /**
-        * The ID of the component reference that is being configured.
-        */
-    'productComponentReferenceId'?: number;
-
-        /**
-        * The quantity that should be applied to the component.
-        */
-    'quantity'?: number;
-
-
-    static discriminator: string | undefined = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    
-        {
-        "name": "productComponentReferenceId",
-        "baseName": "productComponentReferenceId",
-        "type": "number"
-        },
-        
-        {
-        "name": "quantity",
-        "baseName": "quantity",
-        "type": "number"
-        }        
-    ];
-
-    static getAttributeTypeMap() {
-        return SubscriptionComponentReferenceConfiguration.attributeTypeMap;
-    }
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+/**
+ * The component reference configuration adjusts the product component for a particular subscription.
+ * @export
+ * @interface SubscriptionComponentReferenceConfiguration
+ */
+export interface SubscriptionComponentReferenceConfiguration {
+    /**
+     * The quantity that should be applied to the component.
+     * @type {number}
+     * @memberof SubscriptionComponentReferenceConfiguration
+     */
+    quantity?: number;
+    /**
+     * The ID of the component reference that is being configured.
+     * @type {number}
+     * @memberof SubscriptionComponentReferenceConfiguration
+     */
+    productComponentReferenceId?: number;
 }
 
-export { SubscriptionComponentReferenceConfiguration }
+/**
+ * Check if a given object implements the SubscriptionComponentReferenceConfiguration interface.
+ */
+export function instanceOfSubscriptionComponentReferenceConfiguration(value: object): value is SubscriptionComponentReferenceConfiguration {
+    return true;
+}
+
+export function SubscriptionComponentReferenceConfigurationFromJSON(json: any): SubscriptionComponentReferenceConfiguration {
+    return SubscriptionComponentReferenceConfigurationFromJSONTyped(json, false);
+}
+
+export function SubscriptionComponentReferenceConfigurationFromJSONTyped(json: any, ignoreDiscriminator: boolean): SubscriptionComponentReferenceConfiguration {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'quantity': json['quantity'] == null ? undefined : json['quantity'],
+        'productComponentReferenceId': json['productComponentReferenceId'] == null ? undefined : json['productComponentReferenceId'],
+    };
+}
+
+export function SubscriptionComponentReferenceConfigurationToJSON(value?: SubscriptionComponentReferenceConfiguration | null): any {
+    if (value == null) {
+        return value;
+    }
+    return {
+        
+        'quantity': value['quantity'],
+        'productComponentReferenceId': value['productComponentReferenceId'],
+    };
+}
+

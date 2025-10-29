@@ -1,12 +1,61 @@
-'use strict';
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-enum CardAuthenticationResponse{
+/**
+ * 
+ * @export
+ */
+export const CardAuthenticationResponse = {
+    FullyAuthenticated: 'FULLY_AUTHENTICATED',
+    AuthenticationNotRequired: 'AUTHENTICATION_NOT_REQUIRED',
+    NotEnrolled: 'NOT_ENROLLED',
+    EnrollmentError: 'ENROLLMENT_ERROR',
+    AuthenticationError: 'AUTHENTICATION_ERROR'
+} as const;
+export type CardAuthenticationResponse = typeof CardAuthenticationResponse[keyof typeof CardAuthenticationResponse];
 
-    FULLY_AUTHENTICATED = 'FULLY_AUTHENTICATED',
-    AUTHENTICATION_NOT_REQUIRED = 'AUTHENTICATION_NOT_REQUIRED',
-    NOT_ENROLLED = 'NOT_ENROLLED',
-    ENROLLMENT_ERROR = 'ENROLLMENT_ERROR',
-    AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR',
+
+export function instanceOfCardAuthenticationResponse(value: any): boolean {
+    for (const key in CardAuthenticationResponse) {
+        if (Object.prototype.hasOwnProperty.call(CardAuthenticationResponse, key)) {
+            if (CardAuthenticationResponse[key as keyof typeof CardAuthenticationResponse] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
-export { CardAuthenticationResponse }
+export function CardAuthenticationResponseFromJSON(json: any): CardAuthenticationResponse {
+    return CardAuthenticationResponseFromJSONTyped(json, false);
+}
+
+export function CardAuthenticationResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CardAuthenticationResponse {
+    return json as CardAuthenticationResponse;
+}
+
+export function CardAuthenticationResponseToJSON(value?: CardAuthenticationResponse | null): any {
+    return value as any;
+}
+

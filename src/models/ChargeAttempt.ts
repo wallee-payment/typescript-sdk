@@ -1,348 +1,348 @@
-'use strict';
-import { Charge } from "./Charge";
-import { ChargeAttemptEnvironment } from "./ChargeAttemptEnvironment";
-import { ChargeAttemptState } from "./ChargeAttemptState";
-import { ConnectorInvocation } from "./ConnectorInvocation";
-import { CustomersPresence } from "./CustomersPresence";
-import { FailureReason } from "./FailureReason";
-import { Label } from "./Label";
-import { PaymentConnectorConfiguration } from "./PaymentConnectorConfiguration";
-import { PaymentTerminal } from "./PaymentTerminal";
-import { TokenVersion } from "./TokenVersion";
-import { TransactionCompletionBehavior } from "./TransactionCompletionBehavior";
-import { WalletType } from "./WalletType";
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+import type { CustomersPresence } from './CustomersPresence';
+import {
+    CustomersPresenceFromJSON,
+    CustomersPresenceFromJSONTyped,
+    CustomersPresenceToJSON,
+} from './CustomersPresence';
+import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
+import {
+    PaymentConnectorConfigurationFromJSON,
+    PaymentConnectorConfigurationFromJSONTyped,
+    PaymentConnectorConfigurationToJSON,
+} from './PaymentConnectorConfiguration';
+import type { WalletType } from './WalletType';
+import {
+    WalletTypeFromJSON,
+    WalletTypeFromJSONTyped,
+    WalletTypeToJSON,
+} from './WalletType';
+import type { ChargeAttemptState } from './ChargeAttemptState';
+import {
+    ChargeAttemptStateFromJSON,
+    ChargeAttemptStateFromJSONTyped,
+    ChargeAttemptStateToJSON,
+} from './ChargeAttemptState';
+import type { ConnectorInvocation } from './ConnectorInvocation';
+import {
+    ConnectorInvocationFromJSON,
+    ConnectorInvocationFromJSONTyped,
+    ConnectorInvocationToJSON,
+} from './ConnectorInvocation';
+import type { FailureReason } from './FailureReason';
+import {
+    FailureReasonFromJSON,
+    FailureReasonFromJSONTyped,
+    FailureReasonToJSON,
+} from './FailureReason';
+import type { TransactionCompletionBehavior } from './TransactionCompletionBehavior';
+import {
+    TransactionCompletionBehaviorFromJSON,
+    TransactionCompletionBehaviorFromJSONTyped,
+    TransactionCompletionBehaviorToJSON,
+} from './TransactionCompletionBehavior';
+import type { Charge } from './Charge';
+import {
+    ChargeFromJSON,
+    ChargeFromJSONTyped,
+    ChargeToJSON,
+} from './Charge';
+import type { Label } from './Label';
+import {
+    LabelFromJSON,
+    LabelFromJSONTyped,
+    LabelToJSON,
+} from './Label';
+import type { PaymentTerminal } from './PaymentTerminal';
+import {
+    PaymentTerminalFromJSON,
+    PaymentTerminalFromJSONTyped,
+    PaymentTerminalToJSON,
+} from './PaymentTerminal';
+import type { TokenVersion } from './TokenVersion';
+import {
+    TokenVersionFromJSON,
+    TokenVersionFromJSONTyped,
+    TokenVersionToJSON,
+} from './TokenVersion';
+import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
+import {
+    ChargeAttemptEnvironmentFromJSON,
+    ChargeAttemptEnvironmentFromJSONTyped,
+    ChargeAttemptEnvironmentToJSON,
+} from './ChargeAttemptEnvironment';
 
-
-class ChargeAttempt {
-
-        /**
-        * The charge that the charge attempt belongs to.
-        */
-    'charge'?: Charge;
-
-        /**
-        * The behavior that controls when the transaction is completed.
-        */
-    'completionBehavior'?: TransactionCompletionBehavior;
-
-        /**
-        * The payment connector configuration that was used for the charge attempt.
-        */
-    'connectorConfiguration'?: PaymentConnectorConfiguration;
-
-        /**
-        * The date and time when the object was created.
-        */
-    'createdOn'?: Date;
-
-        /**
-        * The customer's presence indicates whether and in what way the charge attempt's customer is present.
-        */
-    'customersPresence'?: CustomersPresence;
-
-        /**
-        * The environment in which the charge attempt is executed.
-        */
-    'environment'?: ChargeAttemptEnvironment;
-
-        /**
-        * The date and time when the charge attempt failed.
-        */
-    'failedOn'?: Date;
-
-        /**
-        * The reason for the failure of the charge attempt.
-        */
-    'failureReason'?: FailureReason;
-
-        /**
-        * A unique identifier for the object.
-        */
-    'id'?: number;
-
-        /**
-        * Whether a new token version is being initialized.
-        */
-    'initializingTokenVersion'?: boolean;
-
-        /**
-        * The connector invocation that the charge attempt belongs to.
-        */
-    'invocation'?: ConnectorInvocation;
-
-        /**
-        * The labels providing additional information about the object.
-        */
-    'labels'?: Array<Label>;
-
-        /**
-        * The language that is linked to the object.
-        */
-    'language'?: string;
-
-        /**
-        * The ID of the space this object belongs to.
-        */
-    'linkedSpaceId'?: number;
-
-        /**
-        * The payment transaction this object is linked to.
-        */
-    'linkedTransaction'?: number;
-
-        /**
-        * The date and time when the next update of the object's state is planned.
-        */
-    'nextUpdateOn'?: Date;
-
-        /**
-        * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
-        */
-    'plannedPurgeDate'?: Date;
-
-        /**
-        * The URL to redirect the customer to after payment processing.
-        */
-    'redirectionUrl'?: string;
-
-        /**
-        * The sales channel through which the charge attempt was made.
-        */
-    'salesChannel'?: number;
-
-        /**
-        * The ID of the space view this object is linked to.
-        */
-    'spaceViewId'?: number;
-
-        /**
-        * The object's current state.
-        */
-    'state'?: ChargeAttemptState;
-
-        /**
-        * The date and time when the charge attempt succeeded.
-        */
-    'succeededOn'?: Date;
-
-        /**
-        * The payment terminal through which the charge attempt was made.
-        */
-    'terminal'?: PaymentTerminal;
-
-        /**
-        * The time zone that this object is associated with.
-        */
-    'timeZone'?: string;
-
-        /**
-        * The date and time when the object will expire.
-        */
-    'timeoutOn'?: Date;
-
-        /**
-        * The token version used for the charge attempt.
-        */
-    'tokenVersion'?: TokenVersion;
-
-        /**
-        * The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
-        */
-    'userFailureMessage'?: string;
-
-        /**
-        * The version is used for optimistic locking and incremented whenever the object is updated.
-        */
-    'version'?: number;
-
-        /**
-        * The type of wallet used to make the charge attempt.
-        */
-    'wallet'?: WalletType;
-
-
-    static discriminator: string | undefined = undefined;
-
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-    
-        {
-        "name": "charge",
-        "baseName": "charge",
-        "type": "Charge"
-        },
-        
-        {
-        "name": "completionBehavior",
-        "baseName": "completionBehavior",
-        "type": "TransactionCompletionBehavior"
-        },
-        
-        {
-        "name": "connectorConfiguration",
-        "baseName": "connectorConfiguration",
-        "type": "PaymentConnectorConfiguration"
-        },
-        
-        {
-        "name": "createdOn",
-        "baseName": "createdOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "customersPresence",
-        "baseName": "customersPresence",
-        "type": "CustomersPresence"
-        },
-        
-        {
-        "name": "environment",
-        "baseName": "environment",
-        "type": "ChargeAttemptEnvironment"
-        },
-        
-        {
-        "name": "failedOn",
-        "baseName": "failedOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "failureReason",
-        "baseName": "failureReason",
-        "type": "FailureReason"
-        },
-        
-        {
-        "name": "id",
-        "baseName": "id",
-        "type": "number"
-        },
-        
-        {
-        "name": "initializingTokenVersion",
-        "baseName": "initializingTokenVersion",
-        "type": "boolean"
-        },
-        
-        {
-        "name": "invocation",
-        "baseName": "invocation",
-        "type": "ConnectorInvocation"
-        },
-        
-        {
-        "name": "labels",
-        "baseName": "labels",
-        "type": "Array<Label>"
-        },
-        
-        {
-        "name": "language",
-        "baseName": "language",
-        "type": "string"
-        },
-        
-        {
-        "name": "linkedSpaceId",
-        "baseName": "linkedSpaceId",
-        "type": "number"
-        },
-        
-        {
-        "name": "linkedTransaction",
-        "baseName": "linkedTransaction",
-        "type": "number"
-        },
-        
-        {
-        "name": "nextUpdateOn",
-        "baseName": "nextUpdateOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "plannedPurgeDate",
-        "baseName": "plannedPurgeDate",
-        "type": "Date"
-        },
-        
-        {
-        "name": "redirectionUrl",
-        "baseName": "redirectionUrl",
-        "type": "string"
-        },
-        
-        {
-        "name": "salesChannel",
-        "baseName": "salesChannel",
-        "type": "number"
-        },
-        
-        {
-        "name": "spaceViewId",
-        "baseName": "spaceViewId",
-        "type": "number"
-        },
-        
-        {
-        "name": "state",
-        "baseName": "state",
-        "type": "ChargeAttemptState"
-        },
-        
-        {
-        "name": "succeededOn",
-        "baseName": "succeededOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "terminal",
-        "baseName": "terminal",
-        "type": "PaymentTerminal"
-        },
-        
-        {
-        "name": "timeZone",
-        "baseName": "timeZone",
-        "type": "string"
-        },
-        
-        {
-        "name": "timeoutOn",
-        "baseName": "timeoutOn",
-        "type": "Date"
-        },
-        
-        {
-        "name": "tokenVersion",
-        "baseName": "tokenVersion",
-        "type": "TokenVersion"
-        },
-        
-        {
-        "name": "userFailureMessage",
-        "baseName": "userFailureMessage",
-        "type": "string"
-        },
-        
-        {
-        "name": "version",
-        "baseName": "version",
-        "type": "number"
-        },
-        
-        {
-        "name": "wallet",
-        "baseName": "wallet",
-        "type": "WalletType"
-        }        
-    ];
-
-    static getAttributeTypeMap() {
-        return ChargeAttempt.attributeTypeMap;
-    }
+/**
+ * 
+ * @export
+ * @interface ChargeAttempt
+ */
+export interface ChargeAttempt {
+    /**
+     * The language that is linked to the object.
+     * @type {string}
+     * @memberof ChargeAttempt
+     */
+    readonly language?: string;
+    /**
+     * The sales channel through which the charge attempt was made.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly salesChannel?: number;
+    /**
+     * The date and time when the object was created.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly createdOn?: Date;
+    /**
+     * Whether a new token version is being initialized.
+     * @type {boolean}
+     * @memberof ChargeAttempt
+     */
+    readonly initializingTokenVersion?: boolean;
+    /**
+     * 
+     * @type {TokenVersion}
+     * @memberof ChargeAttempt
+     */
+    tokenVersion?: TokenVersion;
+    /**
+     * The date and time when the charge attempt succeeded.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly succeededOn?: Date;
+    /**
+     * A unique identifier for the object.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly id?: number;
+    /**
+     * 
+     * @type {ChargeAttemptState}
+     * @memberof ChargeAttempt
+     */
+    state?: ChargeAttemptState;
+    /**
+     * The payment transaction this object is linked to.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly linkedTransaction?: number;
+    /**
+     * The URL to redirect the customer to after payment processing.
+     * @type {string}
+     * @memberof ChargeAttempt
+     */
+    readonly redirectionUrl?: string;
+    /**
+     * 
+     * @type {Charge}
+     * @memberof ChargeAttempt
+     */
+    charge?: Charge;
+    /**
+     * 
+     * @type {WalletType}
+     * @memberof ChargeAttempt
+     */
+    wallet?: WalletType;
+    /**
+     * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly plannedPurgeDate?: Date;
+    /**
+     * The time zone that this object is associated with.
+     * @type {string}
+     * @memberof ChargeAttempt
+     */
+    readonly timeZone?: string;
+    /**
+     * The ID of the space view this object is linked to.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly spaceViewId?: number;
+    /**
+     * 
+     * @type {PaymentTerminal}
+     * @memberof ChargeAttempt
+     */
+    terminal?: PaymentTerminal;
+    /**
+     * The message that can be displayed to the customer explaining why the charge attempt failed, in the customer's language.
+     * @type {string}
+     * @memberof ChargeAttempt
+     */
+    readonly userFailureMessage?: string;
+    /**
+     * 
+     * @type {TransactionCompletionBehavior}
+     * @memberof ChargeAttempt
+     */
+    completionBehavior?: TransactionCompletionBehavior;
+    /**
+     * The version is used for optimistic locking and incremented whenever the object is updated.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly version?: number;
+    /**
+     * The labels providing additional information about the object.
+     * @type {Set<Label>}
+     * @memberof ChargeAttempt
+     */
+    readonly labels?: Set<Label>;
+    /**
+     * The ID of the space this object belongs to.
+     * @type {number}
+     * @memberof ChargeAttempt
+     */
+    readonly linkedSpaceId?: number;
+    /**
+     * The date and time when the object will expire.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly timeoutOn?: Date;
+    /**
+     * 
+     * @type {ChargeAttemptEnvironment}
+     * @memberof ChargeAttempt
+     */
+    environment?: ChargeAttemptEnvironment;
+    /**
+     * 
+     * @type {ConnectorInvocation}
+     * @memberof ChargeAttempt
+     */
+    invocation?: ConnectorInvocation;
+    /**
+     * 
+     * @type {PaymentConnectorConfiguration}
+     * @memberof ChargeAttempt
+     */
+    connectorConfiguration?: PaymentConnectorConfiguration;
+    /**
+     * The date and time when the next update of the object's state is planned.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly nextUpdateOn?: Date;
+    /**
+     * 
+     * @type {FailureReason}
+     * @memberof ChargeAttempt
+     */
+    failureReason?: FailureReason;
+    /**
+     * 
+     * @type {CustomersPresence}
+     * @memberof ChargeAttempt
+     */
+    customersPresence?: CustomersPresence;
+    /**
+     * The date and time when the charge attempt failed.
+     * @type {Date}
+     * @memberof ChargeAttempt
+     */
+    readonly failedOn?: Date;
 }
 
-export { ChargeAttempt }
+/**
+ * Check if a given object implements the ChargeAttempt interface.
+ */
+export function instanceOfChargeAttempt(value: object): value is ChargeAttempt {
+    return true;
+}
+
+export function ChargeAttemptFromJSON(json: any): ChargeAttempt {
+    return ChargeAttemptFromJSONTyped(json, false);
+}
+
+export function ChargeAttemptFromJSONTyped(json: any, ignoreDiscriminator: boolean): ChargeAttempt {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'language': json['language'] == null ? undefined : json['language'],
+        'salesChannel': json['salesChannel'] == null ? undefined : json['salesChannel'],
+        'createdOn': json['createdOn'] == null ? undefined : (new Date(json['createdOn'])),
+        'initializingTokenVersion': json['initializingTokenVersion'] == null ? undefined : json['initializingTokenVersion'],
+        'tokenVersion': json['tokenVersion'] == null ? undefined : TokenVersionFromJSON(json['tokenVersion']),
+        'succeededOn': json['succeededOn'] == null ? undefined : (new Date(json['succeededOn'])),
+        'id': json['id'] == null ? undefined : json['id'],
+        'state': json['state'] == null ? undefined : ChargeAttemptStateFromJSON(json['state']),
+        'linkedTransaction': json['linkedTransaction'] == null ? undefined : json['linkedTransaction'],
+        'redirectionUrl': json['redirectionUrl'] == null ? undefined : json['redirectionUrl'],
+        'charge': json['charge'] == null ? undefined : ChargeFromJSON(json['charge']),
+        'wallet': json['wallet'] == null ? undefined : WalletTypeFromJSON(json['wallet']),
+        'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
+        'timeZone': json['timeZone'] == null ? undefined : json['timeZone'],
+        'spaceViewId': json['spaceViewId'] == null ? undefined : json['spaceViewId'],
+        'terminal': json['terminal'] == null ? undefined : PaymentTerminalFromJSON(json['terminal']),
+        'userFailureMessage': json['userFailureMessage'] == null ? undefined : json['userFailureMessage'],
+        'completionBehavior': json['completionBehavior'] == null ? undefined : TransactionCompletionBehaviorFromJSON(json['completionBehavior']),
+        'version': json['version'] == null ? undefined : json['version'],
+        'labels': json['labels'] == null ? undefined : (new Set((json['labels'] as Array<any>).map(LabelFromJSON))),
+        'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
+        'timeoutOn': json['timeoutOn'] == null ? undefined : (new Date(json['timeoutOn'])),
+        'environment': json['environment'] == null ? undefined : ChargeAttemptEnvironmentFromJSON(json['environment']),
+        'invocation': json['invocation'] == null ? undefined : ConnectorInvocationFromJSON(json['invocation']),
+        'connectorConfiguration': json['connectorConfiguration'] == null ? undefined : PaymentConnectorConfigurationFromJSON(json['connectorConfiguration']),
+        'nextUpdateOn': json['nextUpdateOn'] == null ? undefined : (new Date(json['nextUpdateOn'])),
+        'failureReason': json['failureReason'] == null ? undefined : FailureReasonFromJSON(json['failureReason']),
+        'customersPresence': json['customersPresence'] == null ? undefined : CustomersPresenceFromJSON(json['customersPresence']),
+        'failedOn': json['failedOn'] == null ? undefined : (new Date(json['failedOn'])),
+    };
+}
+
+export function ChargeAttemptToJSON(value?: Omit<ChargeAttempt, 'language'|'salesChannel'|'createdOn'|'initializingTokenVersion'|'succeededOn'|'id'|'linkedTransaction'|'redirectionUrl'|'plannedPurgeDate'|'timeZone'|'spaceViewId'|'userFailureMessage'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'nextUpdateOn'|'failedOn'> | null): any {
+    if (value == null) {
+        return value;
+    }
+    return {
+        
+        'tokenVersion': TokenVersionToJSON(value['tokenVersion']),
+        'state': ChargeAttemptStateToJSON(value['state']),
+        'charge': ChargeToJSON(value['charge']),
+        'wallet': WalletTypeToJSON(value['wallet']),
+        'terminal': PaymentTerminalToJSON(value['terminal']),
+        'completionBehavior': TransactionCompletionBehaviorToJSON(value['completionBehavior']),
+        'environment': ChargeAttemptEnvironmentToJSON(value['environment']),
+        'invocation': ConnectorInvocationToJSON(value['invocation']),
+        'connectorConfiguration': PaymentConnectorConfigurationToJSON(value['connectorConfiguration']),
+        'failureReason': FailureReasonToJSON(value['failureReason']),
+        'customersPresence': CustomersPresenceToJSON(value['customersPresence']),
+    };
+}
+
