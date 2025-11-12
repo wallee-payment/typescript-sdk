@@ -199,7 +199,7 @@ export class BaseAPI {
 
     private addMetaHeaders(headerParameters: HTTPHeaders) {
         let defaultHeaders = {
-            'x-meta-sdk-version': '5.0.0',
+            'x-meta-sdk-version': '5.1.0',
             'x-meta-sdk-language': 'typescript',
             'x-meta-sdk-provider': 'wallee',
             'x-meta-sdk-language-version': this.getVersion(),

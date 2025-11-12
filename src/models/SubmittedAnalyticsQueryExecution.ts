@@ -36,6 +36,12 @@ import {
  */
 export interface SubmittedAnalyticsQueryExecution {
     /**
+     * The external id associated with this query, if any.
+     * @type {string}
+     * @memberof SubmittedAnalyticsQueryExecution
+     */
+    readonly queryExternalId?: string;
+    /**
      * The ID of the target account for which the analytics query will be executed, determining the data scope for the request.
      * @type {number}
      * @memberof SubmittedAnalyticsQueryExecution
@@ -108,6 +114,7 @@ export function SubmittedAnalyticsQueryExecutionFromJSONTyped(json: any, ignoreD
     }
     return {
         
+        'queryExternalId': json['queryExternalId'] == null ? undefined : json['queryExternalId'],
         'accountId': json['accountId'] == null ? undefined : json['accountId'],
         'totalBilledExecutionTimeMs': json['totalBilledExecutionTimeMs'] == null ? undefined : json['totalBilledExecutionTimeMs'],
         'createdTimestamp': json['createdTimestamp'] == null ? undefined : (new Date(json['createdTimestamp'])),
@@ -120,7 +127,7 @@ export function SubmittedAnalyticsQueryExecutionFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function SubmittedAnalyticsQueryExecutionToJSON(value?: Omit<SubmittedAnalyticsQueryExecution, 'accountId'|'totalBilledExecutionTimeMs'|'createdTimestamp'|'downloadRequests'|'originalQuery'|'scannedBytes'|'portalQueryToken'|'resultFileBytes'> | null): any {
+export function SubmittedAnalyticsQueryExecutionToJSON(value?: Omit<SubmittedAnalyticsQueryExecution, 'queryExternalId'|'accountId'|'totalBilledExecutionTimeMs'|'createdTimestamp'|'downloadRequests'|'originalQuery'|'scannedBytes'|'portalQueryToken'|'resultFileBytes'> | null): any {
     if (value == null) {
         return value;
     }

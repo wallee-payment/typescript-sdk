@@ -44,7 +44,12 @@ import {
 } from '../models/index';
 import {ServiceApiUtils} from "../utils/ServiceApiUtils";
 
-export interface DeleteAnalyticsQueriesQueryTokenRequest {
+export interface DeleteAnalyticsQueriesQueryExternalIdQueryExternalIdRequest {
+    queryExternalId: string;
+    account: number;
+}
+
+export interface DeleteAnalyticsQueriesQueryTokenQueryTokenRequest {
     queryToken: string;
     account: number;
 }
@@ -55,17 +60,28 @@ export interface GetAnalyticsQueriesRequest {
     account: number;
 }
 
-export interface GetAnalyticsQueriesQueryTokenRequest {
+export interface GetAnalyticsQueriesQueryExternalIdQueryExternalIdRequest {
+    queryExternalId: string;
+    account: number;
+}
+
+export interface GetAnalyticsQueriesQueryExternalIdQueryExternalIdResultRequest {
+    queryExternalId: string;
+    account: number;
+}
+
+export interface GetAnalyticsQueriesQueryTokenQueryTokenRequest {
     queryToken: string;
     account: number;
 }
 
-export interface GetAnalyticsQueriesQueryTokenResultRequest {
+export interface GetAnalyticsQueriesQueryTokenQueryTokenResultRequest {
     queryToken: string;
     account: number;
 }
 
 export interface PostAnalyticsQueriesSubmitRequest {
+    queryExternalId: string;
     account: number;
     analyticsQueryExecutionRequest: AnalyticsQueryExecutionRequest;
 }
@@ -79,21 +95,21 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
     }
 
     /**
-     * Cancel a query execution
+     * Cancel a query execution, identifying it by its external id.
      
      */
-    async deleteAnalyticsQueriesQueryTokenRaw(requestParameters: DeleteAnalyticsQueriesQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters['queryToken'] == null) {
+    async deleteAnalyticsQueriesQueryExternalIdQueryExternalIdRaw(requestParameters: DeleteAnalyticsQueriesQueryExternalIdQueryExternalIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['queryExternalId'] == null) {
             throw new runtime.RequiredError(
-                'queryToken',
-                'Required parameter "queryToken" was null or undefined when calling deleteAnalyticsQueriesQueryToken().'
+                'queryExternalId',
+                'Required parameter "queryExternalId" was null or undefined when calling deleteAnalyticsQueriesQueryExternalIdQueryExternalId().'
             );
         }
 
         if (requestParameters['account'] == null) {
             throw new runtime.RequiredError(
                 'account',
-                'Required parameter "account" was null or undefined when calling deleteAnalyticsQueriesQueryToken().'
+                'Required parameter "account" was null or undefined when calling deleteAnalyticsQueriesQueryExternalIdQueryExternalId().'
             );
         }
 
@@ -107,7 +123,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         }
 
         const method = 'DELETE';
-        const path = `/analytics/queries/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+        const path = `/analytics/queries/queryExternalId/{queryExternalId}`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId'])));
 
         if (this.configuration.httpBearerAuth) {
             await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
@@ -128,11 +144,68 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
     }
 
     /**
-     * Cancel a query execution
+     * Cancel a query execution, identifying it by its external id.
      
      */
-    async deleteAnalyticsQueriesQueryToken(requestParameters: DeleteAnalyticsQueriesQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.deleteAnalyticsQueriesQueryTokenRaw(requestParameters, initOverrides);
+    async deleteAnalyticsQueriesQueryExternalIdQueryExternalId(requestParameters: DeleteAnalyticsQueriesQueryExternalIdQueryExternalIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteAnalyticsQueriesQueryExternalIdQueryExternalIdRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * Cancel a query execution, identifying it by its query token.
+     
+     */
+    async deleteAnalyticsQueriesQueryTokenQueryTokenRaw(requestParameters: DeleteAnalyticsQueriesQueryTokenQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['queryToken'] == null) {
+            throw new runtime.RequiredError(
+                'queryToken',
+                'Required parameter "queryToken" was null or undefined when calling deleteAnalyticsQueriesQueryTokenQueryToken().'
+            );
+        }
+
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling deleteAnalyticsQueriesQueryTokenQueryToken().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        if (requestParameters['account'] != null) {
+            headerParameters['Account'] = String(requestParameters['account']);
+        }
+
+        const method = 'DELETE';
+        const path = `/analytics/queries/queryToken/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: path,
+            method: method,
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Cancel a query execution, identifying it by its query token.
+     
+     */
+    async deleteAnalyticsQueriesQueryTokenQueryToken(requestParameters: DeleteAnalyticsQueriesQueryTokenQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteAnalyticsQueriesQueryTokenQueryTokenRaw(requestParameters, initOverrides);
     }
 
     /**
@@ -210,22 +283,22 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
     /**
      * Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
-     * Retrieve a query execution information
+     * Retrieve a query execution information by its external id
      
      * (The read time out for this request is 97 seconds)
      */
-    async getAnalyticsQueriesQueryTokenRaw(requestParameters: GetAnalyticsQueriesQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubmittedAnalyticsQueryExecution>> {
-        if (requestParameters['queryToken'] == null) {
+    async getAnalyticsQueriesQueryExternalIdQueryExternalIdRaw(requestParameters: GetAnalyticsQueriesQueryExternalIdQueryExternalIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubmittedAnalyticsQueryExecution>> {
+        if (requestParameters['queryExternalId'] == null) {
             throw new runtime.RequiredError(
-                'queryToken',
-                'Required parameter "queryToken" was null or undefined when calling getAnalyticsQueriesQueryToken().'
+                'queryExternalId',
+                'Required parameter "queryExternalId" was null or undefined when calling getAnalyticsQueriesQueryExternalIdQueryExternalId().'
             );
         }
 
         if (requestParameters['account'] == null) {
             throw new runtime.RequiredError(
                 'account',
-                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryToken().'
+                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryExternalIdQueryExternalId().'
             );
         }
 
@@ -239,7 +312,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         }
 
         const method = 'GET';
-        const path = `/analytics/queries/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+        const path = `/analytics/queries/queryExternalId/{queryExternalId}`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId'])));
 
         if (this.configuration.httpBearerAuth) {
             await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
@@ -261,32 +334,32 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
     /**
      * Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
-     * Retrieve a query execution information
+     * Retrieve a query execution information by its external id
      
      * (The read time out for this request is 97 seconds)
      */
-    async getAnalyticsQueriesQueryToken(requestParameters: GetAnalyticsQueriesQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubmittedAnalyticsQueryExecution> {
-        const response = await this.getAnalyticsQueriesQueryTokenRaw(requestParameters, initOverrides);
+    async getAnalyticsQueriesQueryExternalIdQueryExternalId(requestParameters: GetAnalyticsQueriesQueryExternalIdQueryExternalIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubmittedAnalyticsQueryExecution> {
+        const response = await this.getAnalyticsQueriesQueryExternalIdQueryExternalIdRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      * Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the \'Retrieve a query execution\' endpoint for status checks.
-     * Generate a temporary URL to download the query result
+     * Generate a temporary URL to download the query result. It retrieves the query by its external id
      
      */
-    async getAnalyticsQueriesQueryTokenResultRaw(requestParameters: GetAnalyticsQueriesQueryTokenResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
-        if (requestParameters['queryToken'] == null) {
+    async getAnalyticsQueriesQueryExternalIdQueryExternalIdResultRaw(requestParameters: GetAnalyticsQueriesQueryExternalIdQueryExternalIdResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['queryExternalId'] == null) {
             throw new runtime.RequiredError(
-                'queryToken',
-                'Required parameter "queryToken" was null or undefined when calling getAnalyticsQueriesQueryTokenResult().'
+                'queryExternalId',
+                'Required parameter "queryExternalId" was null or undefined when calling getAnalyticsQueriesQueryExternalIdQueryExternalIdResult().'
             );
         }
 
         if (requestParameters['account'] == null) {
             throw new runtime.RequiredError(
                 'account',
-                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryTokenResult().'
+                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryExternalIdQueryExternalIdResult().'
             );
         }
 
@@ -300,7 +373,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         }
 
         const method = 'GET';
-        const path = `/analytics/queries/{queryToken}/result`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+        const path = `/analytics/queries/queryExternalId/{queryExternalId}/result`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId'])));
 
         if (this.configuration.httpBearerAuth) {
             await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
@@ -326,11 +399,146 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
     /**
      * Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the \'Retrieve a query execution\' endpoint for status checks.
-     * Generate a temporary URL to download the query result
+     * Generate a temporary URL to download the query result. It retrieves the query by its external id
      
      */
-    async getAnalyticsQueriesQueryTokenResult(requestParameters: GetAnalyticsQueriesQueryTokenResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string | null | undefined > {
-        const response = await this.getAnalyticsQueriesQueryTokenResultRaw(requestParameters, initOverrides);
+    async getAnalyticsQueriesQueryExternalIdQueryExternalIdResult(requestParameters: GetAnalyticsQueriesQueryExternalIdQueryExternalIdResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string | null | undefined > {
+        const response = await this.getAnalyticsQueriesQueryExternalIdQueryExternalIdResultRaw(requestParameters, initOverrides);
+        switch (response.raw.status) {
+            case 200:
+                return await response.value();
+            case 202:
+                return null;
+            case 204:
+                return null;
+            default:
+                return await response.value();
+        }
+    }
+
+    /**
+     * Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
+     * Retrieve a query execution information by its query token
+     
+     * (The read time out for this request is 97 seconds)
+     */
+    async getAnalyticsQueriesQueryTokenQueryTokenRaw(requestParameters: GetAnalyticsQueriesQueryTokenQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubmittedAnalyticsQueryExecution>> {
+        if (requestParameters['queryToken'] == null) {
+            throw new runtime.RequiredError(
+                'queryToken',
+                'Required parameter "queryToken" was null or undefined when calling getAnalyticsQueriesQueryTokenQueryToken().'
+            );
+        }
+
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryTokenQueryToken().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        if (requestParameters['account'] != null) {
+            headerParameters['Account'] = String(requestParameters['account']);
+        }
+
+        const method = 'GET';
+        const path = `/analytics/queries/queryToken/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = 97;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: path,
+            method: method,
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SubmittedAnalyticsQueryExecutionFromJSON(jsonValue));
+    }
+
+    /**
+     * Queries are processed asynchronously and may take several minutes to complete. Avoid frequent requests, as they will not speed up processing.
+     * Retrieve a query execution information by its query token
+     
+     * (The read time out for this request is 97 seconds)
+     */
+    async getAnalyticsQueriesQueryTokenQueryToken(requestParameters: GetAnalyticsQueriesQueryTokenQueryTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubmittedAnalyticsQueryExecution> {
+        const response = await this.getAnalyticsQueriesQueryTokenQueryTokenRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the \'Retrieve a query execution\' endpoint for status checks.
+     * Generate a temporary URL to download the query result. It retrieves the query by its query token
+     
+     */
+    async getAnalyticsQueriesQueryTokenQueryTokenResultRaw(requestParameters: GetAnalyticsQueriesQueryTokenQueryTokenResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['queryToken'] == null) {
+            throw new runtime.RequiredError(
+                'queryToken',
+                'Required parameter "queryToken" was null or undefined when calling getAnalyticsQueriesQueryTokenQueryTokenResult().'
+            );
+        }
+
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling getAnalyticsQueriesQueryTokenQueryTokenResult().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        if (requestParameters['account'] != null) {
+            headerParameters['Account'] = String(requestParameters['account']);
+        }
+
+        const method = 'GET';
+        const path = `/analytics/queries/queryToken/{queryToken}/result`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: path,
+            method: method,
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Generate a short-lived (5-minute) URL for downloading the Analytics query result file. Note that each URL generation is counted as a potential download and will be billed accordingly. Do not use this endpoint for periodic checks of file availability. Instead, use the \'Retrieve a query execution\' endpoint for status checks.
+     * Generate a temporary URL to download the query result. It retrieves the query by its query token
+     
+     */
+    async getAnalyticsQueriesQueryTokenQueryTokenResult(requestParameters: GetAnalyticsQueriesQueryTokenQueryTokenResultRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string | null | undefined > {
+        const response = await this.getAnalyticsQueriesQueryTokenQueryTokenResultRaw(requestParameters, initOverrides);
         switch (response.raw.status) {
             case 200:
                 return await response.value();
@@ -348,6 +556,13 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
      
      */
     async postAnalyticsQueriesSubmitRaw(requestParameters: PostAnalyticsQueriesSubmitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AnalyticsQueryExecutionResponse>> {
+        if (requestParameters['queryExternalId'] == null) {
+            throw new runtime.RequiredError(
+                'queryExternalId',
+                'Required parameter "queryExternalId" was null or undefined when calling postAnalyticsQueriesSubmit().'
+            );
+        }
+
         if (requestParameters['account'] == null) {
             throw new runtime.RequiredError(
                 'account',
@@ -363,6 +578,10 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['queryExternalId'] != null) {
+            queryParameters['queryExternalId'] = requestParameters['queryExternalId'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
