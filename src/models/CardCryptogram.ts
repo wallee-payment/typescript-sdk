@@ -64,10 +64,15 @@ export function CardCryptogramFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function CardCryptogramToJSON(value?: Omit<CardCryptogram, 'eci'|'value'> | null): any {
+export function CardCryptogramToJSON(json: any): CardCryptogram {
+    return CardCryptogramToJSONTyped(json, false);
+}
+
+export function CardCryptogramToJSONTyped(value?: Omit<CardCryptogram, 'eci'|'value'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

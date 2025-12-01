@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -79,6 +80,8 @@ export interface SingleSignOnUserCreate {
     primaryAccount?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SingleSignOnUserCreate interface.
  */
@@ -107,10 +110,15 @@ export function SingleSignOnUserCreateFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SingleSignOnUserCreateToJSON(value?: SingleSignOnUserCreate | null): any {
+export function SingleSignOnUserCreateToJSON(json: any): SingleSignOnUserCreate {
+    return SingleSignOnUserCreateToJSONTyped(json, false);
+}
+
+export function SingleSignOnUserCreateToJSONTyped(value?: SingleSignOnUserCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'firstname': value['firstname'],

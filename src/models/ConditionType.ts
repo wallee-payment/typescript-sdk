@@ -71,10 +71,15 @@ export function ConditionTypeFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function ConditionTypeToJSON(value?: Omit<ConditionType, 'name'|'description'|'id'> | null): any {
+export function ConditionTypeToJSON(json: any): ConditionType {
+    return ConditionTypeToJSONTyped(json, false);
+}
+
+export function ConditionTypeToJSONTyped(value?: Omit<ConditionType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,18 +27,21 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 import type { LabelDescriptorCategory } from './LabelDescriptorCategory';
 import {
     LabelDescriptorCategoryFromJSON,
     LabelDescriptorCategoryFromJSONTyped,
     LabelDescriptorCategoryToJSON,
+    LabelDescriptorCategoryToJSONTyped,
 } from './LabelDescriptorCategory';
 import type { LabelDescriptorGroup } from './LabelDescriptorGroup';
 import {
     LabelDescriptorGroupFromJSON,
     LabelDescriptorGroupFromJSONTyped,
     LabelDescriptorGroupToJSON,
+    LabelDescriptorGroupToJSONTyped,
 } from './LabelDescriptorGroup';
 
 /**
@@ -97,6 +100,8 @@ export interface LabelDescriptor {
     group?: LabelDescriptorGroup;
 }
 
+
+
 /**
  * Check if a given object implements the LabelDescriptor interface.
  */
@@ -125,10 +130,15 @@ export function LabelDescriptorFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function LabelDescriptorToJSON(value?: Omit<LabelDescriptor, 'features'|'name'|'description'|'weight'|'id'|'type'> | null): any {
+export function LabelDescriptorToJSON(json: any): LabelDescriptor {
+    return LabelDescriptorToJSONTyped(json, false);
+}
+
+export function LabelDescriptorToJSONTyped(value?: Omit<LabelDescriptor, 'features'|'name'|'description'|'weight'|'id'|'type'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'category': LabelDescriptorCategoryToJSON(value['category']),

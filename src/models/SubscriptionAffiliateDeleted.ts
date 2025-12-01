@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -97,6 +98,8 @@ export interface SubscriptionAffiliateDeleted {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionAffiliateDeleted interface.
  */
@@ -127,10 +130,15 @@ export function SubscriptionAffiliateDeletedFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function SubscriptionAffiliateDeletedToJSON(value?: Omit<SubscriptionAffiliateDeleted, 'reference'|'linkedSpaceId'|'metaData'|'name'|'plannedPurgeDate'|'externalId'|'language'|'id'|'version'> | null): any {
+export function SubscriptionAffiliateDeletedToJSON(json: any): SubscriptionAffiliateDeleted {
+    return SubscriptionAffiliateDeletedToJSONTyped(json, false);
+}
+
+export function SubscriptionAffiliateDeletedToJSONTyped(value?: Omit<SubscriptionAffiliateDeleted, 'reference'|'linkedSpaceId'|'metaData'|'name'|'plannedPurgeDate'|'externalId'|'language'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

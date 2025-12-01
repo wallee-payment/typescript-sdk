@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { UserType } from './UserType';
 import {
     UserTypeFromJSON,
     UserTypeFromJSONTyped,
     UserTypeToJSON,
+    UserTypeToJSONTyped,
 } from './UserType';
 
 /**
@@ -79,6 +81,8 @@ export interface User {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the User interface.
  */
@@ -105,10 +109,15 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
     };
 }
 
-export function UserToJSON(value?: Omit<User, 'scope'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function UserToJSON(json: any): User {
+    return UserToJSONTyped(json, false);
+}
+
+export function UserToJSONTyped(value?: Omit<User, 'scope'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

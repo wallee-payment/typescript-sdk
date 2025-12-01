@@ -93,6 +93,7 @@ export interface PostSubscriptionsProductsMeteredFeesRequest {
  * 
  */
 export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -120,7 +121,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -137,8 +137,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -190,7 +190,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -207,8 +206,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -252,7 +251,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -269,8 +267,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -323,7 +321,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -340,8 +337,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -394,7 +391,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -411,8 +407,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: ProductMeteredFeeUpdateToJSON(requestParameters['productMeteredFeeUpdate']),
@@ -459,7 +455,6 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -476,8 +471,8 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/metered-fees`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: ProductMeteredFeeUpdateToJSON(requestParameters['productMeteredFeeUpdate']),

@@ -155,10 +155,15 @@ export function SpaceAddressFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function SpaceAddressToJSON(value?: Omit<SpaceAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'givenName'|'postcode'|'salesTaxNumber'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null): any {
+export function SpaceAddressToJSON(json: any): SpaceAddress {
+    return SpaceAddressToJSONTyped(json, false);
+}
+
+export function SpaceAddressToJSONTyped(value?: Omit<SpaceAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'givenName'|'postcode'|'salesTaxNumber'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

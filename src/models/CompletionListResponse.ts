@@ -27,6 +27,7 @@ import {
     TransactionCompletionFromJSON,
     TransactionCompletionFromJSONTyped,
     TransactionCompletionToJSON,
+    TransactionCompletionToJSONTyped,
 } from './TransactionCompletion';
 
 /**
@@ -78,10 +79,15 @@ export function CompletionListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function CompletionListResponseToJSON(value?: Omit<CompletionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CompletionListResponseToJSON(json: any): CompletionListResponse {
+    return CompletionListResponseToJSONTyped(json, false);
+}
+
+export function CompletionListResponseToJSONTyped(value?: Omit<CompletionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

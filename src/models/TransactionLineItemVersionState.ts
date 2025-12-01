@@ -59,3 +59,7 @@ export function TransactionLineItemVersionStateToJSON(value?: TransactionLineIte
     return value as any;
 }
 
+export function TransactionLineItemVersionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionLineItemVersionState {
+    return value as TransactionLineItemVersionState;
+}
+

@@ -114,6 +114,7 @@ export interface PostPaymentTransactionsInvoicesInvoiceIdCommentsIdUnpinRequest 
  * 
  */
 export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -148,7 +149,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -165,8 +165,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/{id}`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -225,7 +225,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -242,8 +241,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -294,7 +293,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -311,8 +309,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/{id}`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -372,7 +370,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -389,8 +386,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/search`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -450,7 +447,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -467,8 +463,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/{id}`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: TransactionInvoiceCommentActiveToJSON(requestParameters['transactionInvoiceCommentActive']),
@@ -522,7 +518,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -539,8 +534,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: TransactionInvoiceCommentCreateToJSON(requestParameters['transactionInvoiceCommentCreate']),
@@ -588,7 +583,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -605,8 +599,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/{id}/pin`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -652,7 +646,6 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -669,8 +662,8 @@ export class TransactionInvoiceCommentsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/transactions/invoices/{invoiceId}/comments/{id}/unpin`.replace(`{${"invoiceId"}}`, encodeURIComponent(String(requestParameters['invoiceId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

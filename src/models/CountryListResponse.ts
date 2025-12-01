@@ -27,6 +27,7 @@ import {
     RestCountryFromJSON,
     RestCountryFromJSONTyped,
     RestCountryToJSON,
+    RestCountryToJSONTyped,
 } from './RestCountry';
 
 /**
@@ -78,10 +79,15 @@ export function CountryListResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function CountryListResponseToJSON(value?: Omit<CountryListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CountryListResponseToJSON(json: any): CountryListResponse {
+    return CountryListResponseToJSONTyped(json, false);
+}
+
+export function CountryListResponseToJSONTyped(value?: Omit<CountryListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

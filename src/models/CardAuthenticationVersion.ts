@@ -56,3 +56,7 @@ export function CardAuthenticationVersionToJSON(value?: CardAuthenticationVersio
     return value as any;
 }
 
+export function CardAuthenticationVersionToJSONTyped(value: any, ignoreDiscriminator: boolean): CardAuthenticationVersion {
+    return value as CardAuthenticationVersion;
+}
+

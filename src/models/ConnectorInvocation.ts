@@ -27,6 +27,7 @@ import {
     ConnectorInvocationStageFromJSON,
     ConnectorInvocationStageFromJSONTyped,
     ConnectorInvocationStageToJSON,
+    ConnectorInvocationStageToJSONTyped,
 } from './ConnectorInvocationStage';
 
 /**
@@ -85,6 +86,8 @@ export interface ConnectorInvocation {
     readonly transaction?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ConnectorInvocation interface.
  */
@@ -113,10 +116,15 @@ export function ConnectorInvocationFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function ConnectorInvocationToJSON(value?: Omit<ConnectorInvocation, 'linkedSpaceId'|'timeTookInMilliseconds'|'plannedPurgeDate'|'id'|'createdOn'|'version'|'transaction'> | null): any {
+export function ConnectorInvocationToJSON(json: any): ConnectorInvocation {
+    return ConnectorInvocationToJSONTyped(json, false);
+}
+
+export function ConnectorInvocationToJSONTyped(value?: Omit<ConnectorInvocation, 'linkedSpaceId'|'timeTookInMilliseconds'|'plannedPurgeDate'|'id'|'createdOn'|'version'|'transaction'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'stage': ConnectorInvocationStageToJSON(value['stage']),

@@ -27,42 +27,49 @@ import {
     CustomersPresenceFromJSON,
     CustomersPresenceFromJSONTyped,
     CustomersPresenceToJSON,
+    CustomersPresenceToJSONTyped,
 } from './CustomersPresence';
 import type { PaymentPrimaryRiskTaker } from './PaymentPrimaryRiskTaker';
 import {
     PaymentPrimaryRiskTakerFromJSON,
     PaymentPrimaryRiskTakerFromJSONTyped,
     PaymentPrimaryRiskTakerToJSON,
+    PaymentPrimaryRiskTakerToJSONTyped,
 } from './PaymentPrimaryRiskTaker';
 import type { PaymentProcessor } from './PaymentProcessor';
 import {
     PaymentProcessorFromJSON,
     PaymentProcessorFromJSONTyped,
     PaymentProcessorToJSON,
+    PaymentProcessorToJSONTyped,
 } from './PaymentProcessor';
 import type { PaymentMethod } from './PaymentMethod';
 import {
     PaymentMethodFromJSON,
     PaymentMethodFromJSONTyped,
     PaymentMethodToJSON,
+    PaymentMethodToJSONTyped,
 } from './PaymentMethod';
 import type { DataCollectionType } from './DataCollectionType';
 import {
     DataCollectionTypeFromJSON,
     DataCollectionTypeFromJSONTyped,
     DataCollectionTypeToJSON,
+    DataCollectionTypeToJSONTyped,
 } from './DataCollectionType';
 import type { PaymentConnectorFeature } from './PaymentConnectorFeature';
 import {
     PaymentConnectorFeatureFromJSON,
     PaymentConnectorFeatureFromJSONTyped,
     PaymentConnectorFeatureToJSON,
+    PaymentConnectorFeatureToJSONTyped,
 } from './PaymentConnectorFeature';
 import type { PaymentMethodBrand } from './PaymentMethodBrand';
 import {
     PaymentMethodBrandFromJSON,
     PaymentMethodBrandFromJSONTyped,
     PaymentMethodBrandToJSON,
+    PaymentMethodBrandToJSONTyped,
 } from './PaymentMethodBrand';
 
 /**
@@ -151,6 +158,8 @@ export interface PaymentConnector {
     readonly id?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentConnector interface.
  */
@@ -177,17 +186,22 @@ export function PaymentConnectorFromJSONTyped(json: any, ignoreDiscriminator: bo
         'paymentMethodBrand': json['paymentMethodBrand'] == null ? undefined : PaymentMethodBrandFromJSON(json['paymentMethodBrand']),
         'processor': json['processor'] == null ? undefined : PaymentProcessorFromJSON(json['processor']),
         'deprecationReason': json['deprecationReason'] == null ? undefined : json['deprecationReason'],
-        'supportedCurrencies': json['supportedCurrencies'] == null ? undefined : json['supportedCurrencies'],
+        'supportedCurrencies': json['supportedCurrencies'] == null ? undefined : new Set(json['supportedCurrencies']),
         'name': json['name'] == null ? undefined : json['name'],
         'paymentMethod': json['paymentMethod'] == null ? undefined : PaymentMethodFromJSON(json['paymentMethod']),
         'id': json['id'] == null ? undefined : json['id'],
     };
 }
 
-export function PaymentConnectorToJSON(value?: Omit<PaymentConnector, 'supportedFeatures'|'supportedCustomersPresences'|'deprecated'|'description'|'deprecationReason'|'supportedCurrencies'|'name'|'id'> | null): any {
+export function PaymentConnectorToJSON(json: any): PaymentConnector {
+    return PaymentConnectorToJSONTyped(json, false);
+}
+
+export function PaymentConnectorToJSONTyped(value?: Omit<PaymentConnector, 'supportedFeatures'|'supportedCustomersPresences'|'deprecated'|'description'|'deprecationReason'|'supportedCurrencies'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'dataCollectionType': DataCollectionTypeToJSON(value['dataCollectionType']),

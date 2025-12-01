@@ -65,10 +65,15 @@ export function PaymentTerminalUpdateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function PaymentTerminalUpdateToJSON(value?: PaymentTerminalUpdate | null): any {
+export function PaymentTerminalUpdateToJSON(json: any): PaymentTerminalUpdate {
+    return PaymentTerminalUpdateToJSONTyped(json, false);
+}
+
+export function PaymentTerminalUpdateToJSONTyped(value?: PaymentTerminalUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

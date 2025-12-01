@@ -27,6 +27,7 @@ import {
     CompletionLineItemCreateFromJSON,
     CompletionLineItemCreateFromJSONTyped,
     CompletionLineItemCreateToJSON,
+    CompletionLineItemCreateToJSONTyped,
 } from './CompletionLineItemCreate';
 
 /**
@@ -92,10 +93,15 @@ export function TransactionCompletionDetailsFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function TransactionCompletionDetailsToJSON(value?: TransactionCompletionDetails | null): any {
+export function TransactionCompletionDetailsToJSON(json: any): TransactionCompletionDetails {
+    return TransactionCompletionDetailsToJSONTyped(json, false);
+}
+
+export function TransactionCompletionDetailsToJSONTyped(value?: TransactionCompletionDetails | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(CompletionLineItemCreateToJSON)),

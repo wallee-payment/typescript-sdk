@@ -91,10 +91,15 @@ export function PaymentAppCompletionConfigurationCreateFromJSONTyped(json: any, 
     };
 }
 
-export function PaymentAppCompletionConfigurationCreateToJSON(value?: PaymentAppCompletionConfigurationCreate | null): any {
+export function PaymentAppCompletionConfigurationCreateToJSON(json: any): PaymentAppCompletionConfigurationCreate {
+    return PaymentAppCompletionConfigurationCreateToJSONTyped(json, false);
+}
+
+export function PaymentAppCompletionConfigurationCreateToJSONTyped(value?: PaymentAppCompletionConfigurationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'multipleCompletionsSupported': value['multipleCompletionsSupported'],

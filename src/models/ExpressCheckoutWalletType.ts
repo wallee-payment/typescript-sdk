@@ -71,10 +71,15 @@ export function ExpressCheckoutWalletTypeFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function ExpressCheckoutWalletTypeToJSON(value?: Omit<ExpressCheckoutWalletType, 'name'|'description'|'id'> | null): any {
+export function ExpressCheckoutWalletTypeToJSON(json: any): ExpressCheckoutWalletType {
+    return ExpressCheckoutWalletTypeToJSONTyped(json, false);
+}
+
+export function ExpressCheckoutWalletTypeToJSONTyped(value?: Omit<ExpressCheckoutWalletType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

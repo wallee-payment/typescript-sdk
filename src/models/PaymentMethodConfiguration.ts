@@ -27,24 +27,28 @@ import {
     OneClickPaymentModeFromJSON,
     OneClickPaymentModeFromJSONTyped,
     OneClickPaymentModeToJSON,
+    OneClickPaymentModeToJSONTyped,
 } from './OneClickPaymentMode';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { PaymentMethod } from './PaymentMethod';
 import {
     PaymentMethodFromJSON,
     PaymentMethodFromJSONTyped,
     PaymentMethodToJSON,
+    PaymentMethodToJSONTyped,
 } from './PaymentMethod';
 import type { DataCollectionType } from './DataCollectionType';
 import {
     DataCollectionTypeFromJSON,
     DataCollectionTypeFromJSONTyped,
     DataCollectionTypeToJSON,
+    DataCollectionTypeToJSONTyped,
 } from './DataCollectionType';
 
 /**
@@ -157,6 +161,8 @@ export interface PaymentMethodConfiguration {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentMethodConfiguration interface.
  */
@@ -194,10 +200,15 @@ export function PaymentMethodConfigurationFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function PaymentMethodConfigurationToJSON(value?: Omit<PaymentMethodConfiguration, 'plannedPurgeDate'|'description'|'resolvedImageUrl'|'title'|'version'|'linkedSpaceId'|'spaceId'|'imageResourcePath'|'sortOrder'|'name'|'resolvedDescription'|'resolvedTitle'|'id'> | null): any {
+export function PaymentMethodConfigurationToJSON(json: any): PaymentMethodConfiguration {
+    return PaymentMethodConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentMethodConfigurationToJSONTyped(value?: Omit<PaymentMethodConfiguration, 'plannedPurgeDate'|'description'|'resolvedImageUrl'|'title'|'version'|'linkedSpaceId'|'spaceId'|'imageResourcePath'|'sortOrder'|'name'|'resolvedDescription'|'resolvedTitle'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'dataCollectionType': DataCollectionTypeToJSON(value['dataCollectionType']),

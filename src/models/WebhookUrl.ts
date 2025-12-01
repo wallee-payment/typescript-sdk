@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -85,6 +86,8 @@ export interface WebhookUrl {
     readonly url?: string;
 }
 
+
+
 /**
  * Check if a given object implements the WebhookUrl interface.
  */
@@ -113,10 +116,15 @@ export function WebhookUrlFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function WebhookUrlToJSON(value?: Omit<WebhookUrl, 'linkedSpaceId'|'applicationManaged'|'name'|'plannedPurgeDate'|'id'|'version'|'url'> | null): any {
+export function WebhookUrlToJSON(json: any): WebhookUrl {
+    return WebhookUrlToJSONTyped(json, false);
+}
+
+export function WebhookUrlToJSONTyped(value?: Omit<WebhookUrl, 'linkedSpaceId'|'applicationManaged'|'name'|'plannedPurgeDate'|'id'|'version'|'url'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

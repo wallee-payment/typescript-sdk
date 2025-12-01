@@ -78,10 +78,15 @@ export function BankAccountTypeFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function BankAccountTypeToJSON(value?: Omit<BankAccountType, 'identifierName'|'name'|'description'|'id'> | null): any {
+export function BankAccountTypeToJSON(json: any): BankAccountType {
+    return BankAccountTypeToJSONTyped(json, false);
+}
+
+export function BankAccountTypeToJSONTyped(value?: Omit<BankAccountType, 'identifierName'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

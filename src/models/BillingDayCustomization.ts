@@ -56,3 +56,7 @@ export function BillingDayCustomizationToJSON(value?: BillingDayCustomization | 
     return value as any;
 }
 
+export function BillingDayCustomizationToJSONTyped(value: any, ignoreDiscriminator: boolean): BillingDayCustomization {
+    return value as BillingDayCustomization;
+}
+

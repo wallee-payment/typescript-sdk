@@ -27,6 +27,7 @@ import {
     ChargeAttemptFromJSON,
     ChargeAttemptFromJSONTyped,
     ChargeAttemptToJSON,
+    ChargeAttemptToJSONTyped,
 } from './ChargeAttempt';
 
 /**
@@ -78,10 +79,15 @@ export function ChargeAttemptListResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function ChargeAttemptListResponseToJSON(value?: Omit<ChargeAttemptListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ChargeAttemptListResponseToJSON(json: any): ChargeAttemptListResponse {
+    return ChargeAttemptListResponseToJSONTyped(json, false);
+}
+
+export function ChargeAttemptListResponseToJSONTyped(value?: Omit<ChargeAttemptListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

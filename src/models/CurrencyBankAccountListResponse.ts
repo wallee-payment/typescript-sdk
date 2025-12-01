@@ -27,6 +27,7 @@ import {
     CurrencyBankAccountFromJSON,
     CurrencyBankAccountFromJSONTyped,
     CurrencyBankAccountToJSON,
+    CurrencyBankAccountToJSONTyped,
 } from './CurrencyBankAccount';
 
 /**
@@ -78,10 +79,15 @@ export function CurrencyBankAccountListResponseFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function CurrencyBankAccountListResponseToJSON(value?: Omit<CurrencyBankAccountListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CurrencyBankAccountListResponseToJSON(json: any): CurrencyBankAccountListResponse {
+    return CurrencyBankAccountListResponseToJSONTyped(json, false);
+}
+
+export function CurrencyBankAccountListResponseToJSONTyped(value?: Omit<CurrencyBankAccountListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -127,10 +127,15 @@ export function SubscriptionMetricUsageReportFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function SubscriptionMetricUsageReportToJSON(value?: Omit<SubscriptionMetricUsageReport, 'consumedUnits'|'createdByUserId'|'linkedSpaceId'|'metric'|'plannedPurgeDate'|'description'|'externalId'|'id'|'subscription'|'createdOn'|'version'> | null): any {
+export function SubscriptionMetricUsageReportToJSON(json: any): SubscriptionMetricUsageReport {
+    return SubscriptionMetricUsageReportToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricUsageReportToJSONTyped(value?: Omit<SubscriptionMetricUsageReport, 'consumedUnits'|'createdByUserId'|'linkedSpaceId'|'metric'|'plannedPurgeDate'|'description'|'externalId'|'id'|'subscription'|'createdOn'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

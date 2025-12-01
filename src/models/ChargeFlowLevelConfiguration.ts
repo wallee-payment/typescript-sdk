@@ -27,12 +27,14 @@ import {
     ChargeFlowFromJSON,
     ChargeFlowFromJSONTyped,
     ChargeFlowToJSON,
+    ChargeFlowToJSONTyped,
 } from './ChargeFlow';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -103,6 +105,8 @@ export interface ChargeFlowLevelConfiguration {
     flow?: ChargeFlow;
 }
 
+
+
 /**
  * Check if a given object implements the ChargeFlowLevelConfiguration interface.
  */
@@ -133,10 +137,15 @@ export function ChargeFlowLevelConfigurationFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function ChargeFlowLevelConfigurationToJSON(value?: Omit<ChargeFlowLevelConfiguration, 'linkedSpaceId'|'period'|'name'|'plannedPurgeDate'|'id'|'priority'|'type'|'version'> | null): any {
+export function ChargeFlowLevelConfigurationToJSON(json: any): ChargeFlowLevelConfiguration {
+    return ChargeFlowLevelConfigurationToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelConfigurationToJSONTyped(value?: Omit<ChargeFlowLevelConfiguration, 'linkedSpaceId'|'period'|'name'|'plannedPurgeDate'|'id'|'priority'|'type'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

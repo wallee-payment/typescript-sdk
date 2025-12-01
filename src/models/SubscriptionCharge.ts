@@ -27,36 +27,42 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { SubscriptionLedgerEntry } from './SubscriptionLedgerEntry';
 import {
     SubscriptionLedgerEntryFromJSON,
     SubscriptionLedgerEntryFromJSONTyped,
     SubscriptionLedgerEntryToJSON,
+    SubscriptionLedgerEntryToJSONTyped,
 } from './SubscriptionLedgerEntry';
 import type { Subscription } from './Subscription';
 import {
     SubscriptionFromJSON,
     SubscriptionFromJSONTyped,
     SubscriptionToJSON,
+    SubscriptionToJSONTyped,
 } from './Subscription';
 import type { SubscriptionChargeState } from './SubscriptionChargeState';
 import {
     SubscriptionChargeStateFromJSON,
     SubscriptionChargeStateFromJSONTyped,
     SubscriptionChargeStateToJSON,
+    SubscriptionChargeStateToJSONTyped,
 } from './SubscriptionChargeState';
 import type { SubscriptionChargeProcessingType } from './SubscriptionChargeProcessingType';
 import {
     SubscriptionChargeProcessingTypeFromJSON,
     SubscriptionChargeProcessingTypeFromJSONTyped,
     SubscriptionChargeProcessingTypeToJSON,
+    SubscriptionChargeProcessingTypeToJSONTyped,
 } from './SubscriptionChargeProcessingType';
 import type { SubscriptionChargeType } from './SubscriptionChargeType';
 import {
     SubscriptionChargeTypeFromJSON,
     SubscriptionChargeTypeFromJSONTyped,
     SubscriptionChargeTypeToJSON,
+    SubscriptionChargeTypeToJSONTyped,
 } from './SubscriptionChargeType';
 
 /**
@@ -193,6 +199,8 @@ export interface SubscriptionCharge {
     readonly succeedOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionCharge interface.
  */
@@ -234,10 +242,15 @@ export function SubscriptionChargeFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function SubscriptionChargeToJSON(value?: Omit<SubscriptionCharge, 'discardedOn'|'plannedExecutionDate'|'ledgerEntries'|'discardedBy'|'plannedPurgeDate'|'externalId'|'successUrl'|'language'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'id'|'failedOn'|'failedUrl'|'succeedOn'> | null): any {
+export function SubscriptionChargeToJSON(json: any): SubscriptionCharge {
+    return SubscriptionChargeToJSONTyped(json, false);
+}
+
+export function SubscriptionChargeToJSONTyped(value?: Omit<SubscriptionCharge, 'discardedOn'|'plannedExecutionDate'|'ledgerEntries'|'discardedBy'|'plannedPurgeDate'|'externalId'|'successUrl'|'language'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'id'|'failedOn'|'failedUrl'|'succeedOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'processingType': SubscriptionChargeProcessingTypeToJSON(value['processingType']),

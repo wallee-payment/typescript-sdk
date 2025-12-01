@@ -71,10 +71,15 @@ export function DebtCollectorFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function DebtCollectorToJSON(value?: Omit<DebtCollector, 'name'|'description'|'id'> | null): any {
+export function DebtCollectorToJSON(json: any): DebtCollector {
+    return DebtCollectorToJSONTyped(json, false);
+}
+
+export function DebtCollectorToJSONTyped(value?: Omit<DebtCollector, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

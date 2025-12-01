@@ -64,10 +64,15 @@ export function AbstractAccountUpdateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function AbstractAccountUpdateToJSON(value?: AbstractAccountUpdate | null): any {
+export function AbstractAccountUpdateToJSON(json: any): AbstractAccountUpdate {
+    return AbstractAccountUpdateToJSONTyped(json, false);
+}
+
+export function AbstractAccountUpdateToJSONTyped(value?: AbstractAccountUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

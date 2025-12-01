@@ -58,3 +58,7 @@ export function TokenizationModeToJSON(value?: TokenizationMode | null): any {
     return value as any;
 }
 
+export function TokenizationModeToJSONTyped(value: any, ignoreDiscriminator: boolean): TokenizationMode {
+    return value as TokenizationMode;
+}
+

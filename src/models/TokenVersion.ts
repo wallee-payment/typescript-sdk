@@ -27,66 +27,77 @@ import {
     AddressFromJSON,
     AddressFromJSONTyped,
     AddressToJSON,
+    AddressToJSONTyped,
 } from './Address';
 import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
 import {
     PaymentConnectorConfigurationFromJSON,
     PaymentConnectorConfigurationFromJSONTyped,
     PaymentConnectorConfigurationToJSON,
+    PaymentConnectorConfigurationToJSONTyped,
 } from './PaymentConnectorConfiguration';
 import type { PaymentInformationHash } from './PaymentInformationHash';
 import {
     PaymentInformationHashFromJSON,
     PaymentInformationHashFromJSONTyped,
     PaymentInformationHashToJSON,
+    PaymentInformationHashToJSONTyped,
 } from './PaymentInformationHash';
 import type { TokenVersionState } from './TokenVersionState';
 import {
     TokenVersionStateFromJSON,
     TokenVersionStateFromJSONTyped,
     TokenVersionStateToJSON,
+    TokenVersionStateToJSONTyped,
 } from './TokenVersionState';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { PaymentMethod } from './PaymentMethod';
 import {
     PaymentMethodFromJSON,
     PaymentMethodFromJSONTyped,
     PaymentMethodToJSON,
+    PaymentMethodToJSONTyped,
 } from './PaymentMethod';
 import type { Token } from './Token';
 import {
     TokenFromJSON,
     TokenFromJSONTyped,
     TokenToJSON,
+    TokenToJSONTyped,
 } from './Token';
 import type { PaymentMethodBrand } from './PaymentMethodBrand';
 import {
     PaymentMethodBrandFromJSON,
     PaymentMethodBrandFromJSONTyped,
     PaymentMethodBrandToJSON,
+    PaymentMethodBrandToJSONTyped,
 } from './PaymentMethodBrand';
 import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
 import {
     ChargeAttemptEnvironmentFromJSON,
     ChargeAttemptEnvironmentFromJSONTyped,
     ChargeAttemptEnvironmentToJSON,
+    ChargeAttemptEnvironmentToJSONTyped,
 } from './ChargeAttemptEnvironment';
 import type { TokenVersionRetryStrategy } from './TokenVersionRetryStrategy';
 import {
     TokenVersionRetryStrategyFromJSON,
     TokenVersionRetryStrategyFromJSONTyped,
     TokenVersionRetryStrategyToJSON,
+    TokenVersionRetryStrategyToJSONTyped,
 } from './TokenVersionRetryStrategy';
 import type { TokenVersionType } from './TokenVersionType';
 import {
     TokenVersionTypeFromJSON,
     TokenVersionTypeFromJSONTyped,
     TokenVersionTypeToJSON,
+    TokenVersionTypeToJSONTyped,
 } from './TokenVersionType';
 
 /**
@@ -253,6 +264,8 @@ export interface TokenVersion {
     retryStrategy?: TokenVersionRetryStrategy;
 }
 
+
+
 /**
  * Check if a given object implements the TokenVersion interface.
  */
@@ -299,10 +312,15 @@ export function TokenVersionFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function TokenVersionToJSON(value?: Omit<TokenVersion, 'paymentInformationHashes'|'language'|'createdOn'|'retryIn'|'obsoletedOn'|'expiresOn'|'iconUrl'|'id'|'processorToken'|'plannedPurgeDate'|'version'|'lastRetriedOn'|'labels'|'linkedSpaceId'|'activatedOn'|'name'> | null): any {
+export function TokenVersionToJSON(json: any): TokenVersion {
+    return TokenVersionToJSONTyped(json, false);
+}
+
+export function TokenVersionToJSONTyped(value?: Omit<TokenVersion, 'paymentInformationHashes'|'language'|'createdOn'|'retryIn'|'obsoletedOn'|'expiresOn'|'iconUrl'|'id'|'processorToken'|'plannedPurgeDate'|'version'|'lastRetriedOn'|'labels'|'linkedSpaceId'|'activatedOn'|'name'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': TokenVersionTypeToJSON(value['type']),

@@ -27,6 +27,7 @@ import {
     CustomerFromJSON,
     CustomerFromJSONTyped,
     CustomerToJSON,
+    CustomerToJSONTyped,
 } from './Customer';
 
 /**
@@ -85,10 +86,15 @@ export function CustomerSearchResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function CustomerSearchResponseToJSON(value?: Omit<CustomerSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function CustomerSearchResponseToJSON(json: any): CustomerSearchResponse {
+    return CustomerSearchResponseToJSONTyped(json, false);
+}
+
+export function CustomerSearchResponseToJSONTyped(value?: Omit<CustomerSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

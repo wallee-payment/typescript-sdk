@@ -27,6 +27,7 @@ import {
     LocalizedStringFromJSON,
     LocalizedStringFromJSONTyped,
     LocalizedStringToJSON,
+    LocalizedStringToJSONTyped,
 } from './LocalizedString';
 
 /**
@@ -92,10 +93,15 @@ export function LegalOrganizationFormFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function LegalOrganizationFormToJSON(value?: Omit<LegalOrganizationForm, 'country'|'shortcut'|'englishDescription'|'description'|'id'> | null): any {
+export function LegalOrganizationFormToJSON(json: any): LegalOrganizationForm {
+    return LegalOrganizationFormToJSONTyped(json, false);
+}
+
+export function LegalOrganizationFormToJSONTyped(value?: Omit<LegalOrganizationForm, 'country'|'shortcut'|'englishDescription'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

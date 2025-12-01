@@ -27,18 +27,21 @@ import {
     SubscriptionProductComponentFromJSON,
     SubscriptionProductComponentFromJSONTyped,
     SubscriptionProductComponentToJSON,
+    SubscriptionProductComponentToJSONTyped,
 } from './SubscriptionProductComponent';
 import type { PersistableCurrencyAmount } from './PersistableCurrencyAmount';
 import {
     PersistableCurrencyAmountFromJSON,
     PersistableCurrencyAmountFromJSONTyped,
     PersistableCurrencyAmountToJSON,
+    PersistableCurrencyAmountToJSONTyped,
 } from './PersistableCurrencyAmount';
 import type { ProductFeeType } from './ProductFeeType';
 import {
     ProductFeeTypeFromJSON,
     ProductFeeTypeFromJSONTyped,
     ProductFeeTypeToJSON,
+    ProductFeeTypeToJSONTyped,
 } from './ProductFeeType';
 
 /**
@@ -109,6 +112,8 @@ export interface ProductPeriodFee {
     readonly ledgerEntryTitle?: { [key: string]: string; };
 }
 
+
+
 /**
  * Check if a given object implements the ProductPeriodFee interface.
  */
@@ -139,10 +144,15 @@ export function ProductPeriodFeeFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function ProductPeriodFeeToJSON(value?: Omit<ProductPeriodFee, 'periodFee'|'linkedSpaceId'|'numberOfFreeTrialPeriods'|'name'|'description'|'id'|'version'|'ledgerEntryTitle'> | null): any {
+export function ProductPeriodFeeToJSON(json: any): ProductPeriodFee {
+    return ProductPeriodFeeToJSONTyped(json, false);
+}
+
+export function ProductPeriodFeeToJSONTyped(value?: Omit<ProductPeriodFee, 'periodFee'|'linkedSpaceId'|'numberOfFreeTrialPeriods'|'name'|'description'|'id'|'version'|'ledgerEntryTitle'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'component': SubscriptionProductComponentToJSON(value['component']),

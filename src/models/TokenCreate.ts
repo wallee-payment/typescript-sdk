@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -85,6 +86,8 @@ export interface TokenCreate {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the TokenCreate interface.
  */
@@ -114,10 +117,15 @@ export function TokenCreateFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function TokenCreateToJSON(value?: TokenCreate | null): any {
+export function TokenCreateToJSON(json: any): TokenCreate {
+    return TokenCreateToJSONTyped(json, false);
+}
+
+export function TokenCreateToJSONTyped(value?: TokenCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'enabledForOneClickPayment': value['enabledForOneClickPayment'],

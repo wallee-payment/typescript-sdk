@@ -71,10 +71,15 @@ export function WebhookListenerEntityFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function WebhookListenerEntityToJSON(value?: Omit<WebhookListenerEntity, 'name'|'id'|'technicalName'> | null): any {
+export function WebhookListenerEntityToJSON(json: any): WebhookListenerEntity {
+    return WebhookListenerEntityToJSONTyped(json, false);
+}
+
+export function WebhookListenerEntityToJSONTyped(value?: Omit<WebhookListenerEntity, 'name'|'id'|'technicalName'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,18 +27,21 @@ import {
     CardholderAuthenticationFromJSON,
     CardholderAuthenticationFromJSONTyped,
     CardholderAuthenticationToJSON,
+    CardholderAuthenticationToJSONTyped,
 } from './CardholderAuthentication';
 import type { CardCryptogram } from './CardCryptogram';
 import {
     CardCryptogramFromJSON,
     CardCryptogramFromJSONTyped,
     CardCryptogramToJSON,
+    CardCryptogramToJSONTyped,
 } from './CardCryptogram';
 import type { RecurringIndicator } from './RecurringIndicator';
 import {
     RecurringIndicatorFromJSON,
     RecurringIndicatorFromJSONTyped,
     RecurringIndicatorToJSON,
+    RecurringIndicatorToJSONTyped,
 } from './RecurringIndicator';
 
 /**
@@ -79,6 +82,8 @@ export interface AuthenticatedCardData {
     cardholderAuthentication?: CardholderAuthentication;
 }
 
+
+
 /**
  * Check if a given object implements the AuthenticatedCardData interface.
  */
@@ -104,10 +109,15 @@ export function AuthenticatedCardDataFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function AuthenticatedCardDataToJSON(value?: Omit<AuthenticatedCardData, 'initialRecurringTransaction'|'tokenRequestorId'> | null): any {
+export function AuthenticatedCardDataToJSON(json: any): AuthenticatedCardData {
+    return AuthenticatedCardDataToJSONTyped(json, false);
+}
+
+export function AuthenticatedCardDataToJSONTyped(value?: Omit<AuthenticatedCardData, 'initialRecurringTransaction'|'tokenRequestorId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'recurringIndicator': RecurringIndicatorToJSON(value['recurringIndicator']),

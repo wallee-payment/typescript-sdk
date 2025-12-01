@@ -27,6 +27,7 @@ import {
     LabelDescriptorFromJSON,
     LabelDescriptorFromJSONTyped,
     LabelDescriptorToJSON,
+    LabelDescriptorToJSONTyped,
 } from './LabelDescriptor';
 
 /**
@@ -78,10 +79,15 @@ export function LabelFromJSONTyped(json: any, ignoreDiscriminator: boolean): Lab
     };
 }
 
-export function LabelToJSON(value?: Omit<Label, 'contentAsString'|'content'> | null): any {
+export function LabelToJSON(json: any): Label {
+    return LabelToJSONTyped(json, false);
+}
+
+export function LabelToJSONTyped(value?: Omit<Label, 'contentAsString'|'content'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'descriptor': LabelDescriptorToJSON(value['descriptor']),

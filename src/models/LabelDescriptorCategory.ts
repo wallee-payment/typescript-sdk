@@ -56,3 +56,7 @@ export function LabelDescriptorCategoryToJSON(value?: LabelDescriptorCategory | 
     return value as any;
 }
 
+export function LabelDescriptorCategoryToJSONTyped(value: any, ignoreDiscriminator: boolean): LabelDescriptorCategory {
+    return value as LabelDescriptorCategory;
+}
+

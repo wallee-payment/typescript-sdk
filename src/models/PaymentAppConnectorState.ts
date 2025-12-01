@@ -56,3 +56,7 @@ export function PaymentAppConnectorStateToJSON(value?: PaymentAppConnectorState 
     return value as any;
 }
 
+export function PaymentAppConnectorStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppConnectorState {
+    return value as PaymentAppConnectorState;
+}
+

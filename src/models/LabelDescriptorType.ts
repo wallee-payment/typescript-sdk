@@ -71,10 +71,15 @@ export function LabelDescriptorTypeFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function LabelDescriptorTypeToJSON(value?: Omit<LabelDescriptorType, 'name'|'description'|'id'> | null): any {
+export function LabelDescriptorTypeToJSON(json: any): LabelDescriptorType {
+    return LabelDescriptorTypeToJSONTyped(json, false);
+}
+
+export function LabelDescriptorTypeToJSONTyped(value?: Omit<LabelDescriptorType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

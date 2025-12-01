@@ -64,10 +64,15 @@ export function TaxFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tax {
     };
 }
 
-export function TaxToJSON(value?: Omit<Tax, 'rate'|'title'> | null): any {
+export function TaxToJSON(json: any): Tax {
+    return TaxToJSONTyped(json, false);
+}
+
+export function TaxToJSONTyped(value?: Omit<Tax, 'rate'|'title'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

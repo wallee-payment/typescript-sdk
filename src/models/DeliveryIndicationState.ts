@@ -58,3 +58,7 @@ export function DeliveryIndicationStateToJSON(value?: DeliveryIndicationState | 
     return value as any;
 }
 
+export function DeliveryIndicationStateToJSONTyped(value: any, ignoreDiscriminator: boolean): DeliveryIndicationState {
+    return value as DeliveryIndicationState;
+}
+

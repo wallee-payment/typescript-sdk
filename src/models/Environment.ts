@@ -56,3 +56,7 @@ export function EnvironmentToJSON(value?: Environment | null): any {
     return value as any;
 }
 
+export function EnvironmentToJSONTyped(value: any, ignoreDiscriminator: boolean): Environment {
+    return value as Environment;
+}
+

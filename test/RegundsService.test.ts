@@ -68,7 +68,7 @@ describe('RefundsTest — Refunds service tests', function () {
             }
         );
 
-        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOffline(
+        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOnline(
             {
                 id: transaction.id!,
                 space: SPACE_ID
@@ -121,7 +121,7 @@ describe('RefundsTest — Refunds service tests', function () {
             }
         );
 
-        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOffline(
+        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOnline(
             {
                 id: transaction.id!,
                 space: SPACE_ID
@@ -170,7 +170,7 @@ describe('RefundsTest — Refunds service tests', function () {
     function getRefundCreate(transaction: Transaction): RefundCreate {
         const refundCreate: RefundCreate = {
             transaction: transaction.id!,
-            type: RefundType.MerchantInitiatedOffline,
+            type: RefundType.MerchantInitiatedOnline,
             externalId: crypto.randomUUID(),
             amount: 29.95
         };

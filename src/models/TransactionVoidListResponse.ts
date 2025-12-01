@@ -27,6 +27,7 @@ import {
     TransactionVoidFromJSON,
     TransactionVoidFromJSONTyped,
     TransactionVoidToJSON,
+    TransactionVoidToJSONTyped,
 } from './TransactionVoid';
 
 /**
@@ -78,10 +79,15 @@ export function TransactionVoidListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function TransactionVoidListResponseToJSON(value?: Omit<TransactionVoidListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function TransactionVoidListResponseToJSON(json: any): TransactionVoidListResponse {
+    return TransactionVoidListResponseToJSONTyped(json, false);
+}
+
+export function TransactionVoidListResponseToJSONTyped(value?: Omit<TransactionVoidListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

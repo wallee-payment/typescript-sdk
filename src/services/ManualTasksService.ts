@@ -83,6 +83,7 @@ export interface PostManualTasksIdActionActionIdRequest {
  * 
  */
 export class ManualTasksService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -123,7 +124,6 @@ export class ManualTasksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -140,8 +140,8 @@ export class ManualTasksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/manual-tasks`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -185,7 +185,6 @@ export class ManualTasksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -202,8 +201,8 @@ export class ManualTasksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/manual-tasks/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -243,7 +242,6 @@ export class ManualTasksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -260,8 +258,8 @@ export class ManualTasksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/manual-tasks/{id}/notification`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -318,7 +316,6 @@ export class ManualTasksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -335,8 +332,8 @@ export class ManualTasksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/manual-tasks/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -383,7 +380,6 @@ export class ManualTasksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -400,8 +396,8 @@ export class ManualTasksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/manual-tasks/{id}/action/{actionId}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))).replace(`{${"actionId"}}`, encodeURIComponent(String(requestParameters['actionId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

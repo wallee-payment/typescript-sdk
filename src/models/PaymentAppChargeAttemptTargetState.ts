@@ -56,3 +56,7 @@ export function PaymentAppChargeAttemptTargetStateToJSON(value?: PaymentAppCharg
     return value as any;
 }
 
+export function PaymentAppChargeAttemptTargetStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppChargeAttemptTargetState {
+    return value as PaymentAppChargeAttemptTargetState;
+}
+

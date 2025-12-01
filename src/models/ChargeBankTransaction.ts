@@ -27,18 +27,21 @@ import {
     BankTransactionFromJSON,
     BankTransactionFromJSONTyped,
     BankTransactionToJSON,
+    BankTransactionToJSONTyped,
 } from './BankTransaction';
 import type { Transaction } from './Transaction';
 import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { TransactionCompletion } from './TransactionCompletion';
 import {
     TransactionCompletionFromJSON,
     TransactionCompletionFromJSONTyped,
     TransactionCompletionToJSON,
+    TransactionCompletionToJSONTyped,
 } from './TransactionCompletion';
 
 /**
@@ -146,10 +149,15 @@ export function ChargeBankTransactionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ChargeBankTransactionToJSON(value?: Omit<ChargeBankTransaction, 'transactionCurrencyAmount'|'linkedSpaceId'|'language'|'id'|'spaceViewId'|'linkedTransaction'|'version'|'transactionCurrencyValueAmount'> | null): any {
+export function ChargeBankTransactionToJSON(json: any): ChargeBankTransaction {
+    return ChargeBankTransactionToJSONTyped(json, false);
+}
+
+export function ChargeBankTransactionToJSONTyped(value?: Omit<ChargeBankTransaction, 'transactionCurrencyAmount'|'linkedSpaceId'|'language'|'id'|'spaceViewId'|'linkedTransaction'|'version'|'transactionCurrencyValueAmount'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'completion': TransactionCompletionToJSON(value['completion']),

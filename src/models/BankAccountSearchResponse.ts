@@ -27,6 +27,7 @@ import {
     BankAccountFromJSON,
     BankAccountFromJSONTyped,
     BankAccountToJSON,
+    BankAccountToJSONTyped,
 } from './BankAccount';
 
 /**
@@ -85,10 +86,15 @@ export function BankAccountSearchResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function BankAccountSearchResponseToJSON(value?: Omit<BankAccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function BankAccountSearchResponseToJSON(json: any): BankAccountSearchResponse {
+    return BankAccountSearchResponseToJSONTyped(json, false);
+}
+
+export function BankAccountSearchResponseToJSONTyped(value?: Omit<BankAccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

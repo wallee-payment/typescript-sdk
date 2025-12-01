@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -67,6 +68,8 @@ export interface AbstractSingleSignOnUserUpdate {
     lastname?: string;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractSingleSignOnUserUpdate interface.
  */
@@ -92,10 +95,15 @@ export function AbstractSingleSignOnUserUpdateFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function AbstractSingleSignOnUserUpdateToJSON(value?: AbstractSingleSignOnUserUpdate | null): any {
+export function AbstractSingleSignOnUserUpdateToJSON(json: any): AbstractSingleSignOnUserUpdate {
+    return AbstractSingleSignOnUserUpdateToJSONTyped(json, false);
+}
+
+export function AbstractSingleSignOnUserUpdateToJSONTyped(value?: AbstractSingleSignOnUserUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'firstname': value['firstname'],

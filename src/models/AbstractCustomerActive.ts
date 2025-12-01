@@ -99,10 +99,15 @@ export function AbstractCustomerActiveFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function AbstractCustomerActiveToJSON(value?: AbstractCustomerActive | null): any {
+export function AbstractCustomerActiveToJSON(json: any): AbstractCustomerActive {
+    return AbstractCustomerActiveToJSONTyped(json, false);
+}
+
+export function AbstractCustomerActiveToJSONTyped(value?: AbstractCustomerActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'metaData': value['metaData'],

@@ -27,6 +27,7 @@ import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 
 /**
@@ -81,10 +82,15 @@ export function TransactionLineItemVersionCreateFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function TransactionLineItemVersionCreateToJSON(value?: TransactionLineItemVersionCreate | null): any {
+export function TransactionLineItemVersionCreateToJSON(json: any): TransactionLineItemVersionCreate {
+    return TransactionLineItemVersionCreateToJSONTyped(json, false);
+}
+
+export function TransactionLineItemVersionCreateToJSONTyped(value?: TransactionLineItemVersionCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': ((value['lineItems'] as Array<any>).map(LineItemCreateToJSON)),

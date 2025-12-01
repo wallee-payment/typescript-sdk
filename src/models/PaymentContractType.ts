@@ -71,10 +71,15 @@ export function PaymentContractTypeFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function PaymentContractTypeToJSON(value?: Omit<PaymentContractType, 'name'|'description'|'id'> | null): any {
+export function PaymentContractTypeToJSON(json: any): PaymentContractType {
+    return PaymentContractTypeToJSONTyped(json, false);
+}
+
+export function PaymentContractTypeToJSONTyped(value?: Omit<PaymentContractType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 
 /**
@@ -85,10 +86,15 @@ export function TransactionSearchResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function TransactionSearchResponseToJSON(value?: Omit<TransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function TransactionSearchResponseToJSON(json: any): TransactionSearchResponse {
+    return TransactionSearchResponseToJSONTyped(json, false);
+}
+
+export function TransactionSearchResponseToJSONTyped(value?: Omit<TransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

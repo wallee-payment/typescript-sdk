@@ -27,6 +27,7 @@ import {
     TransactionVoidFromJSON,
     TransactionVoidFromJSONTyped,
     TransactionVoidToJSON,
+    TransactionVoidToJSONTyped,
 } from './TransactionVoid';
 
 /**
@@ -85,10 +86,15 @@ export function TransactionVoidSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function TransactionVoidSearchResponseToJSON(value?: Omit<TransactionVoidSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function TransactionVoidSearchResponseToJSON(json: any): TransactionVoidSearchResponse {
+    return TransactionVoidSearchResponseToJSONTyped(json, false);
+}
+
+export function TransactionVoidSearchResponseToJSONTyped(value?: Omit<TransactionVoidSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

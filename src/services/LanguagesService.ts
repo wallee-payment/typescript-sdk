@@ -61,6 +61,7 @@ export interface GetLanguagesSearchRequest {
  * 
  */
 export class LanguagesService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -78,7 +79,6 @@ export class LanguagesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/languages`;
 
@@ -91,8 +91,8 @@ export class LanguagesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/languages`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -125,7 +125,6 @@ export class LanguagesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/languages/{code}`.replace(`{${"code"}}`, encodeURIComponent(String(requestParameters['code'])));
 
@@ -138,8 +137,8 @@ export class LanguagesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/languages/{code}`.replace(`{${"code"}}`, encodeURIComponent(String(requestParameters['code']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -185,7 +184,6 @@ export class LanguagesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/languages/search`;
 
@@ -198,8 +196,8 @@ export class LanguagesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/languages/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

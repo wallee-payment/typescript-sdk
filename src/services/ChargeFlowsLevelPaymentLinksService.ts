@@ -72,6 +72,7 @@ export interface GetPaymentChargeFlowsLevelsPaymentLinksSearchRequest {
  * 
  */
 export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -112,7 +113,6 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -129,8 +129,8 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/charge-flows/levels/payment-links`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -174,7 +174,6 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -191,8 +190,8 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/charge-flows/levels/payment-links/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -245,7 +244,6 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -262,8 +260,8 @@ export class ChargeFlowsLevelPaymentLinksService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/charge-flows/levels/payment-links/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

@@ -59,3 +59,7 @@ export function SubscriptionChargeStateToJSON(value?: SubscriptionChargeState | 
     return value as any;
 }
 
+export function SubscriptionChargeStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionChargeState {
+    return value as SubscriptionChargeState;
+}
+

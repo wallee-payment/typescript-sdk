@@ -85,10 +85,15 @@ export function TwoFactorAuthenticationTypeFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function TwoFactorAuthenticationTypeToJSON(value?: Omit<TwoFactorAuthenticationType, 'feature'|'icon'|'name'|'description'|'id'> | null): any {
+export function TwoFactorAuthenticationTypeToJSON(json: any): TwoFactorAuthenticationType {
+    return TwoFactorAuthenticationTypeToJSONTyped(json, false);
+}
+
+export function TwoFactorAuthenticationTypeToJSONTyped(value?: Omit<TwoFactorAuthenticationType, 'feature'|'icon'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

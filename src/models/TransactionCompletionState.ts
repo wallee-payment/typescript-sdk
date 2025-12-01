@@ -59,3 +59,7 @@ export function TransactionCompletionStateToJSON(value?: TransactionCompletionSt
     return value as any;
 }
 
+export function TransactionCompletionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionCompletionState {
+    return value as TransactionCompletionState;
+}
+

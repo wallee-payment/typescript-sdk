@@ -27,12 +27,14 @@ import {
     SpaceAddressCreateFromJSON,
     SpaceAddressCreateFromJSONTyped,
     SpaceAddressCreateToJSON,
+    SpaceAddressCreateToJSONTyped,
 } from './SpaceAddressCreate';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -91,6 +93,8 @@ export interface SpaceUpdate {
     version: number;
 }
 
+
+
 /**
  * Check if a given object implements the SpaceUpdate interface.
  */
@@ -112,7 +116,7 @@ export function SpaceUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'requestLimit': json['requestLimit'] == null ? undefined : json['requestLimit'],
         'postalAddress': json['postalAddress'] == null ? undefined : SpaceAddressCreateFromJSON(json['postalAddress']),
         'name': json['name'] == null ? undefined : json['name'],
-        'technicalContactAddresses': json['technicalContactAddresses'] == null ? undefined : json['technicalContactAddresses'],
+        'technicalContactAddresses': json['technicalContactAddresses'] == null ? undefined : new Set(json['technicalContactAddresses']),
         'timeZone': json['timeZone'] == null ? undefined : json['timeZone'],
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'primaryCurrency': json['primaryCurrency'] == null ? undefined : json['primaryCurrency'],
@@ -120,10 +124,15 @@ export function SpaceUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function SpaceUpdateToJSON(value?: SpaceUpdate | null): any {
+export function SpaceUpdateToJSON(json: any): SpaceUpdate {
+    return SpaceUpdateToJSONTyped(json, false);
+}
+
+export function SpaceUpdateToJSONTyped(value?: SpaceUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'requestLimit': value['requestLimit'],

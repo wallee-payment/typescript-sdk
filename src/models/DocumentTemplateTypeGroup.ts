@@ -64,10 +64,15 @@ export function DocumentTemplateTypeGroupFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function DocumentTemplateTypeGroupToJSON(value?: Omit<DocumentTemplateTypeGroup, 'id'|'title'> | null): any {
+export function DocumentTemplateTypeGroupToJSON(json: any): DocumentTemplateTypeGroup {
+    return DocumentTemplateTypeGroupToJSONTyped(json, false);
+}
+
+export function DocumentTemplateTypeGroupToJSONTyped(value?: Omit<DocumentTemplateTypeGroup, 'id'|'title'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

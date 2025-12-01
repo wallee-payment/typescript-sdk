@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -115,6 +116,8 @@ export interface Token {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the Token interface.
  */
@@ -148,10 +151,15 @@ export function TokenFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tok
     };
 }
 
-export function TokenToJSON(value?: Omit<Token, 'enabledForOneClickPayment'|'customerEmailAddress'|'plannedPurgeDate'|'externalId'|'timeZone'|'language'|'createdOn'|'version'|'linkedSpaceId'|'tokenReference'|'customerId'|'id'> | null): any {
+export function TokenToJSON(json: any): Token {
+    return TokenToJSONTyped(json, false);
+}
+
+export function TokenToJSONTyped(value?: Omit<Token, 'enabledForOneClickPayment'|'customerEmailAddress'|'plannedPurgeDate'|'externalId'|'timeZone'|'language'|'createdOn'|'version'|'linkedSpaceId'|'tokenReference'|'customerId'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

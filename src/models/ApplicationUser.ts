@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { UserType } from './UserType';
 import {
     UserTypeFromJSON,
     UserTypeFromJSONTyped,
     UserTypeToJSON,
+    UserTypeToJSONTyped,
 } from './UserType';
 
 /**
@@ -97,6 +99,8 @@ export interface ApplicationUser {
     readonly primaryAccount?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ApplicationUser interface.
  */
@@ -126,10 +130,15 @@ export function ApplicationUserFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ApplicationUserToJSON(value?: Omit<ApplicationUser, 'scope'|'plannedPurgeDate'|'id'|'version'|'requestLimit'|'name'|'primaryAccount'> | null): any {
+export function ApplicationUserToJSON(json: any): ApplicationUser {
+    return ApplicationUserToJSONTyped(json, false);
+}
+
+export function ApplicationUserToJSONTyped(value?: Omit<ApplicationUser, 'scope'|'plannedPurgeDate'|'id'|'version'|'requestLimit'|'name'|'primaryAccount'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

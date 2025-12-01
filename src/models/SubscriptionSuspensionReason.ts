@@ -57,3 +57,7 @@ export function SubscriptionSuspensionReasonToJSON(value?: SubscriptionSuspensio
     return value as any;
 }
 
+export function SubscriptionSuspensionReasonToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionSuspensionReason {
+    return value as SubscriptionSuspensionReason;
+}
+

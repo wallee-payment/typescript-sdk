@@ -27,18 +27,21 @@ import {
     CustomerFromJSON,
     CustomerFromJSONTyped,
     CustomerToJSON,
+    CustomerToJSONTyped,
 } from './Customer';
 import type { CustomerAddressType } from './CustomerAddressType';
 import {
     CustomerAddressTypeFromJSON,
     CustomerAddressTypeFromJSONTyped,
     CustomerAddressTypeToJSON,
+    CustomerAddressTypeToJSONTyped,
 } from './CustomerAddressType';
 import type { CustomerPostalAddress } from './CustomerPostalAddress';
 import {
     CustomerPostalAddressFromJSON,
     CustomerPostalAddressFromJSONTyped,
     CustomerPostalAddressToJSON,
+    CustomerPostalAddressToJSONTyped,
 } from './CustomerPostalAddress';
 
 /**
@@ -97,6 +100,8 @@ export interface CustomerAddress {
     readonly defaultAddress?: boolean;
 }
 
+
+
 /**
  * Check if a given object implements the CustomerAddress interface.
  */
@@ -125,10 +130,15 @@ export function CustomerAddressFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function CustomerAddressToJSON(value?: Omit<CustomerAddress, 'linkedSpaceId'|'id'|'createdOn'|'version'|'defaultAddress'> | null): any {
+export function CustomerAddressToJSON(json: any): CustomerAddress {
+    return CustomerAddressToJSONTyped(json, false);
+}
+
+export function CustomerAddressToJSONTyped(value?: Omit<CustomerAddress, 'linkedSpaceId'|'id'|'createdOn'|'version'|'defaultAddress'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'address': CustomerPostalAddressToJSON(value['address']),

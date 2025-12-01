@@ -59,3 +59,7 @@ export function ExpressCheckoutSessionStateToJSON(value?: ExpressCheckoutSession
     return value as any;
 }
 
+export function ExpressCheckoutSessionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ExpressCheckoutSessionState {
+    return value as ExpressCheckoutSessionState;
+}
+

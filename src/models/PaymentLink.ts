@@ -27,30 +27,35 @@ import {
     PaymentLinkAddressHandlingModeFromJSON,
     PaymentLinkAddressHandlingModeFromJSONTyped,
     PaymentLinkAddressHandlingModeToJSON,
+    PaymentLinkAddressHandlingModeToJSONTyped,
 } from './PaymentLinkAddressHandlingMode';
 import type { PaymentLinkProtectionMode } from './PaymentLinkProtectionMode';
 import {
     PaymentLinkProtectionModeFromJSON,
     PaymentLinkProtectionModeFromJSONTyped,
     PaymentLinkProtectionModeToJSON,
+    PaymentLinkProtectionModeToJSONTyped,
 } from './PaymentLinkProtectionMode';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { PaymentMethodConfiguration } from './PaymentMethodConfiguration';
 import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -188,6 +193,8 @@ export interface PaymentLink {
     billingAddressHandlingMode?: PaymentLinkAddressHandlingMode;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentLink interface.
  */
@@ -206,7 +213,7 @@ export function PaymentLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean
     return {
         
         'shippingAddressHandlingMode': json['shippingAddressHandlingMode'] == null ? undefined : PaymentLinkAddressHandlingModeFromJSON(json['shippingAddressHandlingMode']),
-        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : json['allowedRedirectionDomains'],
+        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : new Set(json['allowedRedirectionDomains']),
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
         'externalId': json['externalId'] == null ? undefined : json['externalId'],
         'language': json['language'] == null ? undefined : json['language'],
@@ -228,10 +235,15 @@ export function PaymentLinkFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function PaymentLinkToJSON(value?: Omit<PaymentLink, 'allowedRedirectionDomains'|'plannedPurgeDate'|'externalId'|'language'|'availableFrom'|'version'|'url'|'lineItems'|'availableUntil'|'linkedSpaceId'|'name'|'currency'|'id'|'maximalNumberOfTransactions'|'allowedPaymentMethodConfigurations'|'appliedSpaceView'> | null): any {
+export function PaymentLinkToJSON(json: any): PaymentLink {
+    return PaymentLinkToJSONTyped(json, false);
+}
+
+export function PaymentLinkToJSONTyped(value?: Omit<PaymentLink, 'allowedRedirectionDomains'|'plannedPurgeDate'|'externalId'|'language'|'availableFrom'|'version'|'url'|'lineItems'|'availableUntil'|'linkedSpaceId'|'name'|'currency'|'id'|'maximalNumberOfTransactions'|'allowedPaymentMethodConfigurations'|'appliedSpaceView'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'shippingAddressHandlingMode': PaymentLinkAddressHandlingModeToJSON(value['shippingAddressHandlingMode']),

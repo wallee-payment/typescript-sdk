@@ -27,6 +27,7 @@ import {
     DeliveryIndicationFromJSON,
     DeliveryIndicationFromJSONTyped,
     DeliveryIndicationToJSON,
+    DeliveryIndicationToJSONTyped,
 } from './DeliveryIndication';
 
 /**
@@ -85,10 +86,15 @@ export function DeliveryIndicationSearchResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function DeliveryIndicationSearchResponseToJSON(value?: Omit<DeliveryIndicationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function DeliveryIndicationSearchResponseToJSON(json: any): DeliveryIndicationSearchResponse {
+    return DeliveryIndicationSearchResponseToJSONTyped(json, false);
+}
+
+export function DeliveryIndicationSearchResponseToJSONTyped(value?: Omit<DeliveryIndicationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

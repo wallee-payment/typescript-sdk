@@ -27,24 +27,28 @@ import {
     CardCryptogramCreateFromJSON,
     CardCryptogramCreateFromJSONTyped,
     CardCryptogramCreateToJSON,
+    CardCryptogramCreateToJSONTyped,
 } from './CardCryptogramCreate';
 import type { PanType } from './PanType';
 import {
     PanTypeFromJSON,
     PanTypeFromJSONTyped,
     PanTypeToJSON,
+    PanTypeToJSONTyped,
 } from './PanType';
 import type { CardholderAuthenticationCreate } from './CardholderAuthenticationCreate';
 import {
     CardholderAuthenticationCreateFromJSON,
     CardholderAuthenticationCreateFromJSONTyped,
     CardholderAuthenticationCreateToJSON,
+    CardholderAuthenticationCreateToJSONTyped,
 } from './CardholderAuthenticationCreate';
 import type { RecurringIndicator } from './RecurringIndicator';
 import {
     RecurringIndicatorFromJSON,
     RecurringIndicatorFromJSONTyped,
     RecurringIndicatorToJSON,
+    RecurringIndicatorToJSONTyped,
 } from './RecurringIndicator';
 
 /**
@@ -115,6 +119,8 @@ export interface AuthenticatedCardDataCreate {
     cryptogram?: CardCryptogramCreate;
 }
 
+
+
 /**
  * Check if a given object implements the AuthenticatedCardDataCreate interface.
  */
@@ -146,10 +152,15 @@ export function AuthenticatedCardDataCreateFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function AuthenticatedCardDataCreateToJSON(value?: AuthenticatedCardDataCreate | null): any {
+export function AuthenticatedCardDataCreateToJSON(json: any): AuthenticatedCardDataCreate {
+    return AuthenticatedCardDataCreateToJSONTyped(json, false);
+}
+
+export function AuthenticatedCardDataCreateToJSONTyped(value?: AuthenticatedCardDataCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'expiryDate': value['expiryDate'],

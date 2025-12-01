@@ -59,3 +59,7 @@ export function CreationEntityStateToJSON(value?: CreationEntityState | null): a
     return value as any;
 }
 
+export function CreationEntityStateToJSONTyped(value: any, ignoreDiscriminator: boolean): CreationEntityState {
+    return value as CreationEntityState;
+}
+

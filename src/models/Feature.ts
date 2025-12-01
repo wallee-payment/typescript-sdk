@@ -27,6 +27,7 @@ import {
     FeatureCategoryFromJSON,
     FeatureCategoryFromJSONTyped,
     FeatureCategoryToJSON,
+    FeatureCategoryToJSONTyped,
 } from './FeatureCategory';
 
 /**
@@ -120,10 +121,15 @@ export function FeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean): F
     };
 }
 
-export function FeatureToJSON(value?: Omit<Feature, 'requiredFeatures'|'visible'|'logoPath'|'sortOrder'|'name'|'description'|'id'|'beta'> | null): any {
+export function FeatureToJSON(json: any): Feature {
+    return FeatureToJSONTyped(json, false);
+}
+
+export function FeatureToJSONTyped(value?: Omit<Feature, 'requiredFeatures'|'visible'|'logoPath'|'sortOrder'|'name'|'description'|'id'|'beta'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'category': FeatureCategoryToJSON(value['category']),

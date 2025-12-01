@@ -45,7 +45,11 @@ export function PaymentAppProcessorDetailsFromJSONTyped(json: any, ignoreDiscrim
     return json;
 }
 
-export function PaymentAppProcessorDetailsToJSON(value?: PaymentAppProcessorDetails | null): any {
+export function PaymentAppProcessorDetailsToJSON(json: any): PaymentAppProcessorDetails {
+    return PaymentAppProcessorDetailsToJSONTyped(json, false);
+}
+
+export function PaymentAppProcessorDetailsToJSONTyped(value?: PaymentAppProcessorDetails | null, ignoreDiscriminator: boolean = false): any {
     return value;
 }
 

@@ -112,6 +112,7 @@ export interface PostApplicationUsersUserIdKeysRequest {
  * 
  */
 export class ApplicationUsersService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -133,7 +134,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'DELETE';
         const path = `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -146,8 +146,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -187,7 +187,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'DELETE';
         const path = `/application-users/{userId}/keys/{id}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -200,8 +199,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{userId}/keys/{id}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -246,7 +245,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/application-users`;
 
@@ -259,8 +257,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -297,7 +295,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -310,8 +307,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -357,7 +354,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/application-users/search`;
 
@@ -370,8 +366,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -404,7 +400,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/application-users/{userId}/keys`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
@@ -417,8 +412,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{userId}/keys`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -464,7 +459,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'PATCH';
         const path = `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -477,8 +471,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: ApplicationUserUpdateToJSON(requestParameters['applicationUserUpdate']),
@@ -518,7 +512,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'POST';
         const path = `/application-users`;
 
@@ -531,8 +524,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: ApplicationUserCreateToJSON(requestParameters['applicationUserCreate']),
@@ -566,7 +559,6 @@ export class ApplicationUsersService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'POST';
         const path = `/application-users/{userId}/keys`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId'])));
 
@@ -579,8 +571,8 @@ export class ApplicationUsersService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/application-users/{userId}/keys`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

@@ -71,10 +71,15 @@ export function DunningConditionTypeFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function DunningConditionTypeToJSON(value?: Omit<DunningConditionType, 'name'|'description'|'id'> | null): any {
+export function DunningConditionTypeToJSON(json: any): DunningConditionType {
+    return DunningConditionTypeToJSONTyped(json, false);
+}
+
+export function DunningConditionTypeToJSONTyped(value?: Omit<DunningConditionType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

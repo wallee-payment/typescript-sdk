@@ -27,6 +27,7 @@ import {
     InternalTransferBankTransactionFromJSON,
     InternalTransferBankTransactionFromJSONTyped,
     InternalTransferBankTransactionToJSON,
+    InternalTransferBankTransactionToJSONTyped,
 } from './InternalTransferBankTransaction';
 
 /**
@@ -78,10 +79,15 @@ export function InternalTransferBankTransactionListResponseFromJSONTyped(json: a
     };
 }
 
-export function InternalTransferBankTransactionListResponseToJSON(value?: Omit<InternalTransferBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function InternalTransferBankTransactionListResponseToJSON(json: any): InternalTransferBankTransactionListResponse {
+    return InternalTransferBankTransactionListResponseToJSONTyped(json, false);
+}
+
+export function InternalTransferBankTransactionListResponseToJSONTyped(value?: Omit<InternalTransferBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

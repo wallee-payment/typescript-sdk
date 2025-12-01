@@ -59,3 +59,7 @@ export function UserTypeToJSON(value?: UserType | null): any {
     return value as any;
 }
 
+export function UserTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): UserType {
+    return value as UserType;
+}
+

@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DebtCollectorCondition } from './DebtCollectorCondition';
 import {
     DebtCollectorConditionFromJSON,
     DebtCollectorConditionFromJSONTyped,
     DebtCollectorConditionToJSON,
+    DebtCollectorConditionToJSONTyped,
 } from './DebtCollectorCondition';
 
 /**
@@ -85,6 +87,8 @@ export interface DebtCollectorConfigurationCreate {
     collector: number;
 }
 
+
+
 /**
  * Check if a given object implements the DebtCollectorConfigurationCreate interface.
  */
@@ -105,7 +109,7 @@ export function DebtCollectorConfigurationCreateFromJSONTyped(json: any, ignoreD
         
         'skipReviewEnabled': json['skipReviewEnabled'] == null ? undefined : json['skipReviewEnabled'],
         'name': json['name'] == null ? undefined : json['name'],
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'conditions': json['conditions'] == null ? undefined : ((json['conditions'] as Array<any>).map(DebtCollectorConditionFromJSON)),
         'priority': json['priority'] == null ? undefined : json['priority'],
@@ -113,10 +117,15 @@ export function DebtCollectorConfigurationCreateFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function DebtCollectorConfigurationCreateToJSON(value?: DebtCollectorConfigurationCreate | null): any {
+export function DebtCollectorConfigurationCreateToJSON(json: any): DebtCollectorConfigurationCreate {
+    return DebtCollectorConfigurationCreateToJSONTyped(json, false);
+}
+
+export function DebtCollectorConfigurationCreateToJSONTyped(value?: DebtCollectorConfigurationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'skipReviewEnabled': value['skipReviewEnabled'],

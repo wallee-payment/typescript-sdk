@@ -56,3 +56,7 @@ export function ProductMeteredTierPricingToJSON(value?: ProductMeteredTierPricin
     return value as any;
 }
 
+export function ProductMeteredTierPricingToJSONTyped(value: any, ignoreDiscriminator: boolean): ProductMeteredTierPricing {
+    return value as ProductMeteredTierPricing;
+}
+

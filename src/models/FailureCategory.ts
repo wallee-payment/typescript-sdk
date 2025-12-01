@@ -59,3 +59,7 @@ export function FailureCategoryToJSON(value?: FailureCategory | null): any {
     return value as any;
 }
 
+export function FailureCategoryToJSONTyped(value: any, ignoreDiscriminator: boolean): FailureCategory {
+    return value as FailureCategory;
+}
+

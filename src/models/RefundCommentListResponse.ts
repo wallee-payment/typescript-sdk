@@ -27,6 +27,7 @@ import {
     RefundCommentFromJSON,
     RefundCommentFromJSONTyped,
     RefundCommentToJSON,
+    RefundCommentToJSONTyped,
 } from './RefundComment';
 
 /**
@@ -78,10 +79,15 @@ export function RefundCommentListResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function RefundCommentListResponseToJSON(value?: Omit<RefundCommentListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function RefundCommentListResponseToJSON(json: any): RefundCommentListResponse {
+    return RefundCommentListResponseToJSONTyped(json, false);
+}
+
+export function RefundCommentListResponseToJSONTyped(value?: Omit<RefundCommentListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

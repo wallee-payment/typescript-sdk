@@ -27,6 +27,7 @@ import {
     ApplicationUserFromJSON,
     ApplicationUserFromJSONTyped,
     ApplicationUserToJSON,
+    ApplicationUserToJSONTyped,
 } from './ApplicationUser';
 
 /**
@@ -78,10 +79,15 @@ export function ApplicationUserListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ApplicationUserListResponseToJSON(value?: Omit<ApplicationUserListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ApplicationUserListResponseToJSON(json: any): ApplicationUserListResponse {
+    return ApplicationUserListResponseToJSONTyped(json, false);
+}
+
+export function ApplicationUserListResponseToJSONTyped(value?: Omit<ApplicationUserListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

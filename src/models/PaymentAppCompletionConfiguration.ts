@@ -91,10 +91,15 @@ export function PaymentAppCompletionConfigurationFromJSONTyped(json: any, ignore
     };
 }
 
-export function PaymentAppCompletionConfigurationToJSON(value?: Omit<PaymentAppCompletionConfiguration, 'multipleCompletionsSupported'|'maximalCompletionDelayInDays'|'completionEndpoint'|'completionTimeoutInMinutes'|'voidEndpoint'> | null): any {
+export function PaymentAppCompletionConfigurationToJSON(json: any): PaymentAppCompletionConfiguration {
+    return PaymentAppCompletionConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentAppCompletionConfigurationToJSONTyped(value?: Omit<PaymentAppCompletionConfiguration, 'multipleCompletionsSupported'|'maximalCompletionDelayInDays'|'completionEndpoint'|'completionTimeoutInMinutes'|'voidEndpoint'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,18 +27,21 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 import type { LineItemCreate } from './LineItemCreate';
 import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { DebtCollectionEnvironment } from './DebtCollectionEnvironment';
 import {
     DebtCollectionEnvironmentFromJSON,
     DebtCollectionEnvironmentFromJSONTyped,
     DebtCollectionEnvironmentToJSON,
+    DebtCollectionEnvironmentToJSONTyped,
 } from './DebtCollectionEnvironment';
 
 /**
@@ -115,6 +118,8 @@ export interface DebtCollectionCaseCreate {
     collectorConfiguration?: number;
 }
 
+
+
 /**
  * Check if a given object implements the DebtCollectionCaseCreate interface.
  */
@@ -148,10 +153,15 @@ export function DebtCollectionCaseCreateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function DebtCollectionCaseCreateToJSON(value?: DebtCollectionCaseCreate | null): any {
+export function DebtCollectionCaseCreateToJSON(json: any): DebtCollectionCaseCreate {
+    return DebtCollectionCaseCreateToJSONTyped(json, false);
+}
+
+export function DebtCollectionCaseCreateToJSONTyped(value?: DebtCollectionCaseCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(LineItemCreateToJSON)),

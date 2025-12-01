@@ -27,6 +27,7 @@ import {
     BankAccountStateFromJSON,
     BankAccountStateFromJSONTyped,
     BankAccountStateToJSON,
+    BankAccountStateToJSONTyped,
 } from './BankAccountState';
 
 /**
@@ -85,6 +86,8 @@ export interface BankAccount {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the BankAccount interface.
  */
@@ -113,10 +116,15 @@ export function BankAccountFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function BankAccountToJSON(value?: Omit<BankAccount, 'identifier'|'linkedSpaceId'|'plannedPurgeDate'|'description'|'id'|'type'|'version'> | null): any {
+export function BankAccountToJSON(json: any): BankAccount {
+    return BankAccountToJSONTyped(json, false);
+}
+
+export function BankAccountToJSONTyped(value?: Omit<BankAccount, 'identifier'|'linkedSpaceId'|'plannedPurgeDate'|'description'|'id'|'type'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': BankAccountStateToJSON(value['state']),

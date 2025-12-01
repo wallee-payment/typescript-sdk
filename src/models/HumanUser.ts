@@ -27,6 +27,7 @@ import {
     TwoFactorAuthenticationTypeFromJSON,
     TwoFactorAuthenticationTypeFromJSONTyped,
     TwoFactorAuthenticationTypeToJSON,
+    TwoFactorAuthenticationTypeToJSONTyped,
 } from './TwoFactorAuthenticationType';
 
 /**
@@ -141,10 +142,15 @@ export function HumanUserFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function HumanUserToJSON(value?: Omit<HumanUser, 'mobilePhoneNumber'|'twoFactorEnabled'|'emailAddress'|'firstname'|'emailAddressVerified'|'scope'|'timeZone'|'language'|'mobilePhoneVerified'|'primaryAccount'|'lastname'> | null): any {
+export function HumanUserToJSON(json: any): HumanUser {
+    return HumanUserToJSONTyped(json, false);
+}
+
+export function HumanUserToJSONTyped(value?: Omit<HumanUser, 'mobilePhoneNumber'|'twoFactorEnabled'|'emailAddress'|'firstname'|'emailAddressVerified'|'scope'|'timeZone'|'language'|'mobilePhoneVerified'|'primaryAccount'|'lastname'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'twoFactorType': TwoFactorAuthenticationTypeToJSON(value['twoFactorType']),

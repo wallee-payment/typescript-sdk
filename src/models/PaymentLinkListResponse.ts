@@ -27,6 +27,7 @@ import {
     PaymentLinkFromJSON,
     PaymentLinkFromJSONTyped,
     PaymentLinkToJSON,
+    PaymentLinkToJSONTyped,
 } from './PaymentLink';
 
 /**
@@ -78,10 +79,15 @@ export function PaymentLinkListResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function PaymentLinkListResponseToJSON(value?: Omit<PaymentLinkListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function PaymentLinkListResponseToJSON(json: any): PaymentLinkListResponse {
+    return PaymentLinkListResponseToJSONTyped(json, false);
+}
+
+export function PaymentLinkListResponseToJSONTyped(value?: Omit<PaymentLinkListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

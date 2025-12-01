@@ -27,6 +27,7 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 
 /**
@@ -128,10 +129,15 @@ export function SubscriberUpdateFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function SubscriberUpdateToJSON(value?: SubscriberUpdate | null): any {
+export function SubscriberUpdateToJSON(json: any): SubscriberUpdate {
+    return SubscriberUpdateToJSONTyped(json, false);
+}
+
+export function SubscriberUpdateToJSONTyped(value?: SubscriberUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

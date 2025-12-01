@@ -27,6 +27,7 @@ import {
     SpaceFromJSON,
     SpaceFromJSONTyped,
     SpaceToJSON,
+    SpaceToJSONTyped,
 } from './Space';
 
 /**
@@ -85,10 +86,15 @@ export function SpaceSearchResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function SpaceSearchResponseToJSON(value?: Omit<SpaceSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SpaceSearchResponseToJSON(json: any): SpaceSearchResponse {
+    return SpaceSearchResponseToJSONTyped(json, false);
+}
+
+export function SpaceSearchResponseToJSONTyped(value?: Omit<SpaceSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

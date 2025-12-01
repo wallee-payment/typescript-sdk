@@ -27,6 +27,7 @@ import {
     ChargeFlowLevelFromJSON,
     ChargeFlowLevelFromJSONTyped,
     ChargeFlowLevelToJSON,
+    ChargeFlowLevelToJSONTyped,
 } from './ChargeFlowLevel';
 
 /**
@@ -78,10 +79,15 @@ export function ChargeFlowLevelListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ChargeFlowLevelListResponseToJSON(value?: Omit<ChargeFlowLevelListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ChargeFlowLevelListResponseToJSON(json: any): ChargeFlowLevelListResponse {
+    return ChargeFlowLevelListResponseToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelListResponseToJSONTyped(value?: Omit<ChargeFlowLevelListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

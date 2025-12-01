@@ -27,6 +27,7 @@ import {
     RestAddressFormatFromJSON,
     RestAddressFormatFromJSONTyped,
     RestAddressFormatToJSON,
+    RestAddressFormatToJSONTyped,
 } from './RestAddressFormat';
 
 /**
@@ -93,16 +94,21 @@ export function RestCountryFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'isoCode2': json['isoCode2'] == null ? undefined : json['isoCode2'],
         'addressFormat': json['addressFormat'] == null ? undefined : RestAddressFormatFromJSON(json['addressFormat']),
         'isoCode3': json['isoCode3'] == null ? undefined : json['isoCode3'],
-        'stateCodes': json['stateCodes'] == null ? undefined : json['stateCodes'],
+        'stateCodes': json['stateCodes'] == null ? undefined : new Set(json['stateCodes']),
         'name': json['name'] == null ? undefined : json['name'],
         'numericCode': json['numericCode'] == null ? undefined : json['numericCode'],
     };
 }
 
-export function RestCountryToJSON(value?: Omit<RestCountry, 'isoCode2'|'isoCode3'|'stateCodes'|'name'|'numericCode'> | null): any {
+export function RestCountryToJSON(json: any): RestCountry {
+    return RestCountryToJSONTyped(json, false);
+}
+
+export function RestCountryToJSONTyped(value?: Omit<RestCountry, 'isoCode2'|'isoCode3'|'stateCodes'|'name'|'numericCode'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'addressFormat': RestAddressFormatToJSON(value['addressFormat']),

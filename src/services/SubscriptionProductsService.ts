@@ -104,6 +104,7 @@ export interface PostSubscriptionsProductsIdRetireRequest {
  * 
  */
 export class SubscriptionProductsService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -144,7 +145,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -161,8 +161,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -206,7 +206,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -223,8 +222,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -277,7 +276,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -294,8 +292,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -348,7 +346,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -365,8 +362,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: SubscriptionProductActiveToJSON(requestParameters['subscriptionProductActive']),
@@ -413,7 +410,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -430,8 +426,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: SubscriptionProductCreateToJSON(requestParameters['subscriptionProductCreate']),
@@ -485,7 +481,6 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -502,8 +497,8 @@ export class SubscriptionProductsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/subscriptions/products/{id}/retire`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: SubscriptionProductRetirementRequestToJSON(requestParameters['subscriptionProductRetirementRequest']),

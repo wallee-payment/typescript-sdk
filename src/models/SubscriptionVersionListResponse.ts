@@ -27,6 +27,7 @@ import {
     SubscriptionVersionFromJSON,
     SubscriptionVersionFromJSONTyped,
     SubscriptionVersionToJSON,
+    SubscriptionVersionToJSONTyped,
 } from './SubscriptionVersion';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriptionVersionListResponseFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function SubscriptionVersionListResponseToJSON(value?: Omit<SubscriptionVersionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriptionVersionListResponseToJSON(json: any): SubscriptionVersionListResponse {
+    return SubscriptionVersionListResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionVersionListResponseToJSONTyped(value?: Omit<SubscriptionVersionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

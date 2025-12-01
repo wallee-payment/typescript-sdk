@@ -64,10 +64,15 @@ export function SubscriptionInitializeSubscriberPresentRequestFromJSONTyped(json
     };
 }
 
-export function SubscriptionInitializeSubscriberPresentRequestToJSON(value?: SubscriptionInitializeSubscriberPresentRequest | null): any {
+export function SubscriptionInitializeSubscriberPresentRequestToJSON(json: any): SubscriptionInitializeSubscriberPresentRequest {
+    return SubscriptionInitializeSubscriberPresentRequestToJSONTyped(json, false);
+}
+
+export function SubscriptionInitializeSubscriberPresentRequestToJSONTyped(value?: SubscriptionInitializeSubscriberPresentRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'successUrl': value['successUrl'],

@@ -27,6 +27,7 @@ import {
     SubscriptionPeriodBillFromJSON,
     SubscriptionPeriodBillFromJSONTyped,
     SubscriptionPeriodBillToJSON,
+    SubscriptionPeriodBillToJSONTyped,
 } from './SubscriptionPeriodBill';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriptionPeriodBillListResponseFromJSONTyped(json: any, ignor
     };
 }
 
-export function SubscriptionPeriodBillListResponseToJSON(value?: Omit<SubscriptionPeriodBillListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriptionPeriodBillListResponseToJSON(json: any): SubscriptionPeriodBillListResponse {
+    return SubscriptionPeriodBillListResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionPeriodBillListResponseToJSONTyped(value?: Omit<SubscriptionPeriodBillListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

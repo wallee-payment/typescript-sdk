@@ -27,18 +27,21 @@ import {
     SubscriptionProductComponentFromJSON,
     SubscriptionProductComponentFromJSONTyped,
     SubscriptionProductComponentToJSON,
+    SubscriptionProductComponentToJSONTyped,
 } from './SubscriptionProductComponent';
 import type { PersistableCurrencyAmount } from './PersistableCurrencyAmount';
 import {
     PersistableCurrencyAmountFromJSON,
     PersistableCurrencyAmountFromJSONTyped,
     PersistableCurrencyAmountToJSON,
+    PersistableCurrencyAmountToJSONTyped,
 } from './PersistableCurrencyAmount';
 import type { ProductFeeType } from './ProductFeeType';
 import {
     ProductFeeTypeFromJSON,
     ProductFeeTypeFromJSONTyped,
     ProductFeeTypeToJSON,
+    ProductFeeTypeToJSONTyped,
 } from './ProductFeeType';
 
 /**
@@ -109,6 +112,8 @@ export interface ProductSetupFee {
     readonly onUpgradeCreditedAmount?: Set<PersistableCurrencyAmount>;
 }
 
+
+
 /**
  * Check if a given object implements the ProductSetupFee interface.
  */
@@ -139,10 +144,15 @@ export function ProductSetupFeeFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ProductSetupFeeToJSON(value?: Omit<ProductSetupFee, 'linkedSpaceId'|'name'|'description'|'setupFee'|'id'|'onDowngradeCreditedAmount'|'version'|'onUpgradeCreditedAmount'> | null): any {
+export function ProductSetupFeeToJSON(json: any): ProductSetupFee {
+    return ProductSetupFeeToJSONTyped(json, false);
+}
+
+export function ProductSetupFeeToJSONTyped(value?: Omit<ProductSetupFee, 'linkedSpaceId'|'name'|'description'|'setupFee'|'id'|'onDowngradeCreditedAmount'|'version'|'onUpgradeCreditedAmount'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'component': SubscriptionProductComponentToJSON(value['component']),

@@ -27,6 +27,7 @@ import {
     ConditionTypeFromJSON,
     ConditionTypeFromJSONTyped,
     ConditionTypeToJSON,
+    ConditionTypeToJSONTyped,
 } from './ConditionType';
 
 /**
@@ -85,10 +86,15 @@ export function ConditionTypeSearchResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ConditionTypeSearchResponseToJSON(value?: Omit<ConditionTypeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ConditionTypeSearchResponseToJSON(json: any): ConditionTypeSearchResponse {
+    return ConditionTypeSearchResponseToJSONTyped(json, false);
+}
+
+export function ConditionTypeSearchResponseToJSONTyped(value?: Omit<ConditionTypeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

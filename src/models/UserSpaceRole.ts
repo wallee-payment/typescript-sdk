@@ -85,10 +85,15 @@ export function UserSpaceRoleFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function UserSpaceRoleToJSON(value?: Omit<UserSpaceRole, 'role'|'id'|'user'|'version'|'space'> | null): any {
+export function UserSpaceRoleToJSON(json: any): UserSpaceRole {
+    return UserSpaceRoleToJSONTyped(json, false);
+}
+
+export function UserSpaceRoleToJSONTyped(value?: Omit<UserSpaceRole, 'role'|'id'|'user'|'version'|'space'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -56,3 +56,7 @@ export function SubscriptionChargeProcessingTypeToJSON(value?: SubscriptionCharg
     return value as any;
 }
 
+export function SubscriptionChargeProcessingTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionChargeProcessingType {
+    return value as SubscriptionChargeProcessingType;
+}
+

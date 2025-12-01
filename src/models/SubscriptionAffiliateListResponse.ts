@@ -27,6 +27,7 @@ import {
     SubscriptionAffiliateFromJSON,
     SubscriptionAffiliateFromJSONTyped,
     SubscriptionAffiliateToJSON,
+    SubscriptionAffiliateToJSONTyped,
 } from './SubscriptionAffiliate';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriptionAffiliateListResponseFromJSONTyped(json: any, ignore
     };
 }
 
-export function SubscriptionAffiliateListResponseToJSON(value?: Omit<SubscriptionAffiliateListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriptionAffiliateListResponseToJSON(json: any): SubscriptionAffiliateListResponse {
+    return SubscriptionAffiliateListResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionAffiliateListResponseToJSONTyped(value?: Omit<SubscriptionAffiliateListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

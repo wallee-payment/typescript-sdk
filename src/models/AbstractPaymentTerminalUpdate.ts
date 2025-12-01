@@ -57,10 +57,15 @@ export function AbstractPaymentTerminalUpdateFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function AbstractPaymentTerminalUpdateToJSON(value?: AbstractPaymentTerminalUpdate | null): any {
+export function AbstractPaymentTerminalUpdateToJSON(json: any): AbstractPaymentTerminalUpdate {
+    return AbstractPaymentTerminalUpdateToJSONTyped(json, false);
+}
+
+export function AbstractPaymentTerminalUpdateToJSONTyped(value?: AbstractPaymentTerminalUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

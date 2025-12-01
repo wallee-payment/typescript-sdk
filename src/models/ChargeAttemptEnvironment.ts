@@ -56,3 +56,7 @@ export function ChargeAttemptEnvironmentToJSON(value?: ChargeAttemptEnvironment 
     return value as any;
 }
 
+export function ChargeAttemptEnvironmentToJSONTyped(value: any, ignoreDiscriminator: boolean): ChargeAttemptEnvironment {
+    return value as ChargeAttemptEnvironment;
+}
+

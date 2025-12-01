@@ -27,24 +27,28 @@ import {
     BillingDayCustomizationFromJSON,
     BillingDayCustomizationFromJSONTyped,
     BillingDayCustomizationToJSON,
+    BillingDayCustomizationToJSONTyped,
 } from './BillingDayCustomization';
 import type { BillingCycleType } from './BillingCycleType';
 import {
     BillingCycleTypeFromJSON,
     BillingCycleTypeFromJSONTyped,
     BillingCycleTypeToJSON,
+    BillingCycleTypeToJSONTyped,
 } from './BillingCycleType';
 import type { DisplayableDayOfWeek } from './DisplayableDayOfWeek';
 import {
     DisplayableDayOfWeekFromJSON,
     DisplayableDayOfWeekFromJSONTyped,
     DisplayableDayOfWeekToJSON,
+    DisplayableDayOfWeekToJSONTyped,
 } from './DisplayableDayOfWeek';
 import type { DisplayableMonth } from './DisplayableMonth';
 import {
     DisplayableMonthFromJSON,
     DisplayableMonthFromJSONTyped,
     DisplayableMonthToJSON,
+    DisplayableMonthToJSONTyped,
 } from './DisplayableMonth';
 
 /**
@@ -91,6 +95,8 @@ export interface BillingCycleModel {
     billingCycleType: BillingCycleType;
 }
 
+
+
 /**
  * Check if a given object implements the BillingCycleModel interface.
  */
@@ -119,10 +125,15 @@ export function BillingCycleModelFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function BillingCycleModelToJSON(value?: BillingCycleModel | null): any {
+export function BillingCycleModelToJSON(json: any): BillingCycleModel {
+    return BillingCycleModelToJSONTyped(json, false);
+}
+
+export function BillingCycleModelToJSONTyped(value?: BillingCycleModel | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'month': DisplayableMonthToJSON(value['month']),

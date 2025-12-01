@@ -27,6 +27,7 @@ import {
     SalesChannelFromJSON,
     SalesChannelFromJSONTyped,
     SalesChannelToJSON,
+    SalesChannelToJSONTyped,
 } from './SalesChannel';
 
 /**
@@ -85,10 +86,15 @@ export function SalesChannelSearchResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function SalesChannelSearchResponseToJSON(value?: Omit<SalesChannelSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SalesChannelSearchResponseToJSON(json: any): SalesChannelSearchResponse {
+    return SalesChannelSearchResponseToJSONTyped(json, false);
+}
+
+export function SalesChannelSearchResponseToJSONTyped(value?: Omit<SalesChannelSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

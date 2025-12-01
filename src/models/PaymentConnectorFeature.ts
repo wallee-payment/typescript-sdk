@@ -64,10 +64,15 @@ export function PaymentConnectorFeatureFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function PaymentConnectorFeatureToJSON(value?: Omit<PaymentConnectorFeature, 'displayName'|'id'> | null): any {
+export function PaymentConnectorFeatureToJSON(json: any): PaymentConnectorFeature {
+    return PaymentConnectorFeatureToJSONTyped(json, false);
+}
+
+export function PaymentConnectorFeatureToJSONTyped(value?: Omit<PaymentConnectorFeature, 'displayName'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

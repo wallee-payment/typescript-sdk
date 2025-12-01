@@ -27,12 +27,14 @@ import {
     SubscriptionComponentReferenceConfigurationFromJSON,
     SubscriptionComponentReferenceConfigurationFromJSONTyped,
     SubscriptionComponentReferenceConfigurationToJSON,
+    SubscriptionComponentReferenceConfigurationToJSONTyped,
 } from './SubscriptionComponentReferenceConfiguration';
 import type { SubscriptionPending } from './SubscriptionPending';
 import {
     SubscriptionPendingFromJSON,
     SubscriptionPendingFromJSONTyped,
     SubscriptionPendingToJSON,
+    SubscriptionPendingToJSONTyped,
 } from './SubscriptionPending';
 
 /**
@@ -91,10 +93,15 @@ export function SubscriptionCreateRequestFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function SubscriptionCreateRequestToJSON(value?: SubscriptionCreateRequest | null): any {
+export function SubscriptionCreateRequestToJSON(json: any): SubscriptionCreateRequest {
+    return SubscriptionCreateRequestToJSONTyped(json, false);
+}
+
+export function SubscriptionCreateRequestToJSONTyped(value?: SubscriptionCreateRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'componentConfigurations': value['componentConfigurations'] == null ? undefined : (Array.from(value['componentConfigurations'] as Set<any>).map(SubscriptionComponentReferenceConfigurationToJSON)),

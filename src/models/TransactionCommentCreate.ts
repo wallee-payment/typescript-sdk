@@ -65,10 +65,15 @@ export function TransactionCommentCreateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function TransactionCommentCreateToJSON(value?: TransactionCommentCreate | null): any {
+export function TransactionCommentCreateToJSON(json: any): TransactionCommentCreate {
+    return TransactionCommentCreateToJSONTyped(json, false);
+}
+
+export function TransactionCommentCreateToJSONTyped(value?: TransactionCommentCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

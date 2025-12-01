@@ -90,6 +90,7 @@ export interface PostRolesRequest {
  * 
  */
 export class RolesService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -111,7 +112,6 @@ export class RolesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'DELETE';
         const path = `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -124,8 +124,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -171,7 +171,6 @@ export class RolesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/roles`;
 
@@ -184,8 +183,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -222,7 +221,6 @@ export class RolesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -235,8 +233,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -282,7 +280,6 @@ export class RolesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/roles/search`;
 
@@ -295,8 +292,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -342,7 +339,6 @@ export class RolesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'PATCH';
         const path = `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -355,8 +351,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: RoleUpdateToJSON(requestParameters['roleUpdate']),
@@ -396,7 +392,6 @@ export class RolesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'POST';
         const path = `/roles`;
 
@@ -409,8 +404,8 @@ export class RolesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/roles`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: RoleCreateToJSON(requestParameters['roleCreate']),

@@ -27,18 +27,21 @@ import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { PaymentLinkAddressHandlingMode } from './PaymentLinkAddressHandlingMode';
 import {
     PaymentLinkAddressHandlingModeFromJSON,
     PaymentLinkAddressHandlingModeFromJSONTyped,
     PaymentLinkAddressHandlingModeToJSON,
+    PaymentLinkAddressHandlingModeToJSONTyped,
 } from './PaymentLinkAddressHandlingMode';
 import type { PaymentMethodConfiguration } from './PaymentMethodConfiguration';
 import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -128,6 +131,8 @@ export interface AbstractPaymentLinkUpdate {
     billingAddressHandlingMode?: PaymentLinkAddressHandlingMode;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractPaymentLinkUpdate interface.
  */
@@ -148,7 +153,7 @@ export function AbstractPaymentLinkUpdateFromJSONTyped(json: any, ignoreDiscrimi
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemCreateFromJSON)),
         'availableUntil': json['availableUntil'] == null ? undefined : (new Date(json['availableUntil'])),
         'shippingAddressHandlingMode': json['shippingAddressHandlingMode'] == null ? undefined : PaymentLinkAddressHandlingModeFromJSON(json['shippingAddressHandlingMode']),
-        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : json['allowedRedirectionDomains'],
+        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : new Set(json['allowedRedirectionDomains']),
         'name': json['name'] == null ? undefined : json['name'],
         'currency': json['currency'] == null ? undefined : json['currency'],
         'language': json['language'] == null ? undefined : json['language'],
@@ -160,10 +165,15 @@ export function AbstractPaymentLinkUpdateFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function AbstractPaymentLinkUpdateToJSON(value?: AbstractPaymentLinkUpdate | null): any {
+export function AbstractPaymentLinkUpdateToJSON(json: any): AbstractPaymentLinkUpdate {
+    return AbstractPaymentLinkUpdateToJSONTyped(json, false);
+}
+
+export function AbstractPaymentLinkUpdateToJSONTyped(value?: AbstractPaymentLinkUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(LineItemCreateToJSON)),

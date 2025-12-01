@@ -78,10 +78,15 @@ export function StaticValueFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function StaticValueToJSON(value?: Omit<StaticValue, 'features'|'name'|'description'|'id'> | null): any {
+export function StaticValueToJSON(json: any): StaticValue {
+    return StaticValueToJSONTyped(json, false);
+}
+
+export function StaticValueToJSONTyped(value?: Omit<StaticValue, 'features'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -57,3 +57,7 @@ export function OneClickPaymentModeToJSON(value?: OneClickPaymentMode | null): a
     return value as any;
 }
 
+export function OneClickPaymentModeToJSONTyped(value: any, ignoreDiscriminator: boolean): OneClickPaymentMode {
+    return value as OneClickPaymentMode;
+}
+

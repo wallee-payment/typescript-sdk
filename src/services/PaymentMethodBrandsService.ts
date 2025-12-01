@@ -69,6 +69,7 @@ export interface GetPaymentMethodBrandsSearchRequest {
  * 
  */
 export class PaymentMethodBrandsService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -102,7 +103,6 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/payment/method-brands`;
 
@@ -115,8 +115,8 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/method-brands`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -153,7 +153,6 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/payment/method-brands/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -166,8 +165,8 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/method-brands/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -213,7 +212,6 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/payment/method-brands/search`;
 
@@ -226,8 +224,8 @@ export class PaymentMethodBrandsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/method-brands/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

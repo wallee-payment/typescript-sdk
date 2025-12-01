@@ -27,6 +27,7 @@ import {
     DataCollectionTypeFromJSON,
     DataCollectionTypeFromJSONTyped,
     DataCollectionTypeToJSON,
+    DataCollectionTypeToJSONTyped,
 } from './DataCollectionType';
 
 /**
@@ -96,7 +97,7 @@ export function PaymentMethodFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'supportedCurrencies': json['supportedCurrencies'] == null ? undefined : json['supportedCurrencies'],
+        'supportedCurrencies': json['supportedCurrencies'] == null ? undefined : new Set(json['supportedCurrencies']),
         'dataCollectionTypes': json['dataCollectionTypes'] == null ? undefined : (new Set((json['dataCollectionTypes'] as Array<any>).map(DataCollectionTypeFromJSON))),
         'imagePath': json['imagePath'] == null ? undefined : json['imagePath'],
         'name': json['name'] == null ? undefined : json['name'],
@@ -106,10 +107,15 @@ export function PaymentMethodFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function PaymentMethodToJSON(value?: Omit<PaymentMethod, 'supportedCurrencies'|'dataCollectionTypes'|'imagePath'|'name'|'description'|'merchantDescription'|'id'> | null): any {
+export function PaymentMethodToJSON(json: any): PaymentMethod {
+    return PaymentMethodToJSONTyped(json, false);
+}
+
+export function PaymentMethodToJSONTyped(value?: Omit<PaymentMethod, 'supportedCurrencies'|'dataCollectionTypes'|'imagePath'|'name'|'description'|'merchantDescription'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

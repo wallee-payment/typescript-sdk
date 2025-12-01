@@ -27,18 +27,21 @@ import {
     LineItemTypeFromJSON,
     LineItemTypeFromJSONTyped,
     LineItemTypeToJSON,
+    LineItemTypeToJSONTyped,
 } from './LineItemType';
 import type { LineItemAttribute } from './LineItemAttribute';
 import {
     LineItemAttributeFromJSON,
     LineItemAttributeFromJSONTyped,
     LineItemAttributeToJSON,
+    LineItemAttributeToJSONTyped,
 } from './LineItemAttribute';
 import type { Tax } from './Tax';
 import {
     TaxFromJSON,
     TaxFromJSONTyped,
     TaxToJSON,
+    TaxToJSONTyped,
 } from './Tax';
 
 /**
@@ -175,6 +178,8 @@ export interface LineItem {
     readonly uniqueId?: string;
 }
 
+
+
 /**
  * Check if a given object implements the LineItem interface.
  */
@@ -216,10 +221,15 @@ export function LineItemFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function LineItemToJSON(value?: Omit<LineItem, 'taxAmountPerUnit'|'undiscountedAmountExcludingTax'|'quantity'|'undiscountedUnitPriceIncludingTax'|'amountExcludingTax'|'undiscountedAmountIncludingTax'|'taxes'|'unitPriceIncludingTax'|'discountExcludingTax'|'shippingRequired'|'unitPriceExcludingTax'|'name'|'attributes'|'undiscountedUnitPriceExcludingTax'|'amountIncludingTax'|'discountIncludingTax'|'sku'|'taxAmount'|'aggregatedTaxRate'|'uniqueId'> | null): any {
+export function LineItemToJSON(json: any): LineItem {
+    return LineItemToJSONTyped(json, false);
+}
+
+export function LineItemToJSONTyped(value?: Omit<LineItem, 'taxAmountPerUnit'|'undiscountedAmountExcludingTax'|'quantity'|'undiscountedUnitPriceIncludingTax'|'amountExcludingTax'|'undiscountedAmountIncludingTax'|'taxes'|'unitPriceIncludingTax'|'discountExcludingTax'|'shippingRequired'|'unitPriceExcludingTax'|'name'|'attributes'|'undiscountedUnitPriceExcludingTax'|'amountIncludingTax'|'discountIncludingTax'|'sku'|'taxAmount'|'aggregatedTaxRate'|'uniqueId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': LineItemTypeToJSON(value['type']),

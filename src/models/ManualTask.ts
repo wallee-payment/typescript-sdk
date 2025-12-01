@@ -27,12 +27,14 @@ import {
     ManualTaskActionFromJSON,
     ManualTaskActionFromJSONTyped,
     ManualTaskActionToJSON,
+    ManualTaskActionToJSONTyped,
 } from './ManualTaskAction';
 import type { ManualTaskState } from './ManualTaskState';
 import {
     ManualTaskStateFromJSON,
     ManualTaskStateFromJSONTyped,
     ManualTaskStateToJSON,
+    ManualTaskStateToJSONTyped,
 } from './ManualTaskState';
 
 /**
@@ -97,6 +99,8 @@ export interface ManualTask {
     readonly createdOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the ManualTask interface.
  */
@@ -126,10 +130,15 @@ export function ManualTaskFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function ManualTaskToJSON(value?: Omit<ManualTask, 'linkedSpaceId'|'contextEntityId'|'plannedPurgeDate'|'expiresOn'|'id'|'type'|'actions'|'createdOn'> | null): any {
+export function ManualTaskToJSON(json: any): ManualTask {
+    return ManualTaskToJSONTyped(json, false);
+}
+
+export function ManualTaskToJSONTyped(value?: Omit<ManualTask, 'linkedSpaceId'|'contextEntityId'|'plannedPurgeDate'|'expiresOn'|'id'|'type'|'actions'|'createdOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': ManualTaskStateToJSON(value['state']),

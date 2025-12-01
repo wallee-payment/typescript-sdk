@@ -79,10 +79,15 @@ export function SubscriptionUpdateFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function SubscriptionUpdateToJSON(value?: SubscriptionUpdate | null): any {
+export function SubscriptionUpdateToJSON(json: any): SubscriptionUpdate {
+    return SubscriptionUpdateToJSONTyped(json, false);
+}
+
+export function SubscriptionUpdateToJSONTyped(value?: SubscriptionUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'description': value['description'],

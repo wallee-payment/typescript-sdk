@@ -27,6 +27,7 @@ import {
     RestCustomerEmailAddressFromJSON,
     RestCustomerEmailAddressFromJSONTyped,
     RestCustomerEmailAddressToJSON,
+    RestCustomerEmailAddressToJSONTyped,
 } from './RestCustomerEmailAddress';
 
 /**
@@ -78,10 +79,15 @@ export function CustomerEmailAddressListResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function CustomerEmailAddressListResponseToJSON(value?: Omit<CustomerEmailAddressListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CustomerEmailAddressListResponseToJSON(json: any): CustomerEmailAddressListResponse {
+    return CustomerEmailAddressListResponseToJSONTyped(json, false);
+}
+
+export function CustomerEmailAddressListResponseToJSONTyped(value?: Omit<CustomerEmailAddressListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -58,3 +58,7 @@ export function FacadeUserFriendlyQueryStatusModelToJSON(value?: FacadeUserFrien
     return value as any;
 }
 
+export function FacadeUserFriendlyQueryStatusModelToJSONTyped(value: any, ignoreDiscriminator: boolean): FacadeUserFriendlyQueryStatusModel {
+    return value as FacadeUserFriendlyQueryStatusModel;
+}
+

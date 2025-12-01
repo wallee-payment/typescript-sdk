@@ -60,3 +60,7 @@ export function TransactionUserInterfaceTypeToJSON(value?: TransactionUserInterf
     return value as any;
 }
 
+export function TransactionUserInterfaceTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionUserInterfaceType {
+    return value as TransactionUserInterfaceType;
+}
+

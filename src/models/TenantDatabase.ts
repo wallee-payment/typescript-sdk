@@ -71,10 +71,15 @@ export function TenantDatabaseFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function TenantDatabaseToJSON(value?: Omit<TenantDatabase, 'name'|'id'|'version'> | null): any {
+export function TenantDatabaseToJSON(json: any): TenantDatabase {
+    return TenantDatabaseToJSONTyped(json, false);
+}
+
+export function TenantDatabaseToJSONTyped(value?: Omit<TenantDatabase, 'name'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

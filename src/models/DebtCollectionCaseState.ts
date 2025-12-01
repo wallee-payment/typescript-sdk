@@ -61,3 +61,7 @@ export function DebtCollectionCaseStateToJSON(value?: DebtCollectionCaseState | 
     return value as any;
 }
 
+export function DebtCollectionCaseStateToJSONTyped(value: any, ignoreDiscriminator: boolean): DebtCollectionCaseState {
+    return value as DebtCollectionCaseState;
+}
+

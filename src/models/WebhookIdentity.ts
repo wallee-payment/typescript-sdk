@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -73,6 +74,8 @@ export interface WebhookIdentity {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the WebhookIdentity interface.
  */
@@ -99,10 +102,15 @@ export function WebhookIdentityFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function WebhookIdentityToJSON(value?: Omit<WebhookIdentity, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function WebhookIdentityToJSON(json: any): WebhookIdentity {
+    return WebhookIdentityToJSONTyped(json, false);
+}
+
+export function WebhookIdentityToJSONTyped(value?: Omit<WebhookIdentity, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

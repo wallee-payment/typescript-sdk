@@ -79,10 +79,15 @@ export function AccountCreateFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AccountCreateToJSON(value?: AccountCreate | null): any {
+export function AccountCreateToJSON(json: any): AccountCreate {
+    return AccountCreateToJSONTyped(json, false);
+}
+
+export function AccountCreateToJSONTyped(value?: AccountCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

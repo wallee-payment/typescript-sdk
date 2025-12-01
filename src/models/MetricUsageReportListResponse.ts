@@ -27,6 +27,7 @@ import {
     SubscriptionMetricUsageReportFromJSON,
     SubscriptionMetricUsageReportFromJSONTyped,
     SubscriptionMetricUsageReportToJSON,
+    SubscriptionMetricUsageReportToJSONTyped,
 } from './SubscriptionMetricUsageReport';
 
 /**
@@ -78,10 +79,15 @@ export function MetricUsageReportListResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function MetricUsageReportListResponseToJSON(value?: Omit<MetricUsageReportListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function MetricUsageReportListResponseToJSON(json: any): MetricUsageReportListResponse {
+    return MetricUsageReportListResponseToJSONTyped(json, false);
+}
+
+export function MetricUsageReportListResponseToJSONTyped(value?: Omit<MetricUsageReportListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

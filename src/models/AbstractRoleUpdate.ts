@@ -27,6 +27,7 @@ import {
     PermissionFromJSON,
     PermissionFromJSONTyped,
     PermissionToJSON,
+    PermissionToJSONTyped,
 } from './Permission';
 
 /**
@@ -78,10 +79,15 @@ export function AbstractRoleUpdateFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function AbstractRoleUpdateToJSON(value?: AbstractRoleUpdate | null): any {
+export function AbstractRoleUpdateToJSON(json: any): AbstractRoleUpdate {
+    return AbstractRoleUpdateToJSONTyped(json, false);
+}
+
+export function AbstractRoleUpdateToJSONTyped(value?: AbstractRoleUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'permissions': value['permissions'] == null ? undefined : (Array.from(value['permissions'] as Set<any>).map(PermissionToJSON)),

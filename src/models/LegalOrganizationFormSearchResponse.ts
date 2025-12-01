@@ -27,6 +27,7 @@ import {
     LegalOrganizationFormFromJSON,
     LegalOrganizationFormFromJSONTyped,
     LegalOrganizationFormToJSON,
+    LegalOrganizationFormToJSONTyped,
 } from './LegalOrganizationForm';
 
 /**
@@ -85,10 +86,15 @@ export function LegalOrganizationFormSearchResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function LegalOrganizationFormSearchResponseToJSON(value?: Omit<LegalOrganizationFormSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function LegalOrganizationFormSearchResponseToJSON(json: any): LegalOrganizationFormSearchResponse {
+    return LegalOrganizationFormSearchResponseToJSONTyped(json, false);
+}
+
+export function LegalOrganizationFormSearchResponseToJSONTyped(value?: Omit<LegalOrganizationFormSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

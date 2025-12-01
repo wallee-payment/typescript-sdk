@@ -92,10 +92,15 @@ export function UserAccountRoleFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function UserAccountRoleToJSON(value?: Omit<UserAccountRole, 'role'|'id'|'appliesOnSubAccount'|'user'|'version'|'account'> | null): any {
+export function UserAccountRoleToJSON(json: any): UserAccountRole {
+    return UserAccountRoleToJSONTyped(json, false);
+}
+
+export function UserAccountRoleToJSONTyped(value?: Omit<UserAccountRole, 'role'|'id'|'appliesOnSubAccount'|'user'|'version'|'account'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

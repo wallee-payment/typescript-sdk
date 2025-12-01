@@ -56,3 +56,7 @@ export function TransactionVoidModeToJSON(value?: TransactionVoidMode | null): a
     return value as any;
 }
 
+export function TransactionVoidModeToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionVoidMode {
+    return value as TransactionVoidMode;
+}
+

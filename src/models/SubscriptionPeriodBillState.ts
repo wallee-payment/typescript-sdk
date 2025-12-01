@@ -56,3 +56,7 @@ export function SubscriptionPeriodBillStateToJSON(value?: SubscriptionPeriodBill
     return value as any;
 }
 
+export function SubscriptionPeriodBillStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionPeriodBillState {
+    return value as SubscriptionPeriodBillState;
+}
+

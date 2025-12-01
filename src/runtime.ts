@@ -37,8 +37,7 @@ export interface ConfigurationParameters {
 }
 
 export class Configuration {
-    constructor(private configuration: ConfigurationParameters = {}) {
-    }
+    constructor(private configuration: ConfigurationParameters = {}) {}
 
     set config(configuration: Configuration) {
         this.configuration = configuration;
@@ -109,12 +108,12 @@ export class BaseAPI {
     }
 
     withPreMiddleware<T extends BaseAPI>(this: T, ...preMiddlewares: Array<Middleware['pre']>) {
-        const middlewares = preMiddlewares.map((pre) => ({pre}));
+        const middlewares = preMiddlewares.map((pre) => ({ pre }));
         return this.withMiddleware<T>(...middlewares);
     }
 
     withPostMiddleware<T extends BaseAPI>(this: T, ...postMiddlewares: Array<Middleware['post']>) {
-        const middlewares = postMiddlewares.map((post) => ({post}));
+        const middlewares = postMiddlewares.map((post) => ({ post }));
         return this.withMiddleware<T>(...middlewares);
     }
 
@@ -136,7 +135,7 @@ export class BaseAPI {
     }
 
     protected async request(context: RequestOpts, initOverrides?: RequestInit | InitOverrideFunction): Promise<Response> {
-        const {url, init} = await this.createFetchParams(context, initOverrides);
+        const { url, init } = await this.createFetchParams(context, initOverrides);
         const response = await this.fetchApi(url, init);
         if (response && (response.status >= 200 && response.status < 300)) {
             return response;
@@ -182,11 +181,11 @@ export class BaseAPI {
         if (isFormData(overriddenInit.body)
             || (overriddenInit.body instanceof URLSearchParams)
             || isBlob(overriddenInit.body)) {
-            body = overriddenInit.body;
+          body = overriddenInit.body;
         } else if (this.isJsonMime(headers['Content-Type'])) {
-            body = JSON.stringify(overriddenInit.body);
+          body = JSON.stringify(overriddenInit.body);
         } else {
-            body = overriddenInit.body;
+          body = overriddenInit.body;
         }
 
         const init: RequestInit = {
@@ -194,12 +193,12 @@ export class BaseAPI {
             body
         };
 
-        return {url, init};
+        return { url, init };
     }
 
     private addMetaHeaders(headerParameters: HTTPHeaders) {
         let defaultHeaders = {
-            'x-meta-sdk-version': '5.1.0',
+            'x-meta-sdk-version': '5.2.0',
             'x-meta-sdk-language': 'typescript',
             'x-meta-sdk-provider': 'wallee',
             'x-meta-sdk-language-version': this.getVersion(),
@@ -216,7 +215,7 @@ export class BaseAPI {
     }
 
     private fetchApi = async (url: string, init: RequestInit) => {
-        let fetchParams = {url, init};
+        let fetchParams = { url, init };
         for (const middleware of this.middleware) {
             if (middleware.pre) {
                 fetchParams = await middleware.pre({
@@ -241,11 +240,11 @@ export class BaseAPI {
                 }
             }
             if (response === undefined) {
-                if (e instanceof Error) {
-                    throw new FetchError(e, 'The request failed and the interceptors did not return an alternative response');
-                } else {
-                    throw e;
-                }
+              if (e instanceof Error) {
+                throw new FetchError(e, 'The request failed and the interceptors did not return an alternative response');
+              } else {
+                throw e;
+              }
             }
         }
         for (const middleware of this.middleware) {
@@ -283,7 +282,6 @@ function isFormData(value: any): value is FormData {
 
 export class ResponseError extends Error {
     override name: "ResponseError" = "ResponseError";
-
     constructor(public response: Response, msg?: string) {
         super(msg);
     }
@@ -291,7 +289,6 @@ export class ResponseError extends Error {
 
 export class FetchError extends Error {
     override name: "FetchError" = "FetchError";
-
     constructor(public cause: Error, msg?: string) {
         super(msg);
     }
@@ -299,7 +296,6 @@ export class FetchError extends Error {
 
 export class RequiredError extends Error {
     override name: "RequiredError" = "RequiredError";
-
     constructor(public field: string, msg?: string) {
         super(msg);
     }
@@ -317,22 +313,12 @@ export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 export type Json = any;
 export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD';
 export type HTTPHeaders = { [key: string]: string };
-export type HTTPQuery = {
-    [key: string]: string | number | null | boolean | Array<string | number | null | boolean> | Set<string | number | null | boolean> | HTTPQuery
-};
+export type HTTPQuery = { [key: string]: string | number | null | boolean | Array<string | number | null | boolean> | Set<string | number | null | boolean> | HTTPQuery };
 export type HTTPBody = Json | FormData | URLSearchParams;
-export type HTTPRequestInit = {
-    headers?: HTTPHeaders;
-    method: HTTPMethod;
-    credentials?: RequestCredentials;
-    body?: HTTPBody
-};
+export type HTTPRequestInit = { headers?: HTTPHeaders; method: HTTPMethod; credentials?: RequestCredentials; body?: HTTPBody };
 export type ModelPropertyNaming = 'camelCase' | 'snake_case' | 'PascalCase' | 'original';
 
-export type InitOverrideFunction = (requestContext: {
-    init: HTTPRequestInit,
-    context: RequestOpts
-}) => Promise<RequestInit>
+export type InitOverrideFunction = (requestContext: { init: HTTPRequestInit, context: RequestOpts }) => Promise<RequestInit>
 
 export interface FetchParams {
     url: string;
@@ -357,10 +343,8 @@ export function querystring(params: HTTPQuery, prefix: string = ''): string {
 function querystringSingleKey(key: string, value: string | number | null | undefined | boolean | Array<string | number | null | boolean> | Set<string | number | null | boolean> | HTTPQuery, keyPrefix: string = ''): string {
     const fullKey = keyPrefix + (keyPrefix.length ? `[${key}]` : key);
     if (value instanceof Array) {
-        const multiValue =
-            value
-                .map(singleValue => encodeURIComponent(String(singleValue)))
-                .join(',');
+        const multiValue = value.map(singleValue => encodeURIComponent(String(singleValue)))
+            .join(`&${encodeURIComponent(fullKey)}=`);
         return `${encodeURIComponent(fullKey)}=${multiValue}`;
     }
     if (value instanceof Set) {
@@ -376,11 +360,17 @@ function querystringSingleKey(key: string, value: string | number | null | undef
     return `${encodeURIComponent(fullKey)}=${encodeURIComponent(String(value))}`;
 }
 
+export function exists(json: any, key: string) {
+    const value = json[key];
+    return value !== null && value !== undefined;
+}
+
 export function mapValues(data: any, fn: (item: any) => any) {
-    return Object.keys(data).reduce(
-        (acc, key) => ({...acc, [key]: fn(data[key])}),
-        {}
-    );
+    const result: { [key: string]: any } = {};
+    for (const key of Object.keys(data)) {
+        result[key] = fn(data[key]);
+    }
+    return result;
 }
 
 export function canConsumeForm(consumes: Consume[]): boolean {
@@ -419,15 +409,12 @@ export interface ErrorContext {
 
 export interface Middleware {
     pre?(context: RequestContext): Promise<FetchParams | void>;
-
     post?(context: ResponseContext): Promise<Response | void>;
-
     onError?(context: ErrorContext): Promise<Response | void>;
 }
 
 export interface ApiResponse<T> {
     raw: Response;
-
     value(): Promise<T>;
 }
 
@@ -436,8 +423,7 @@ export interface ResponseTransformer<T> {
 }
 
 export class JSONApiResponse<T> {
-    constructor(public raw: Response, private transformer: ResponseTransformer<T> = (jsonValue: any) => jsonValue) {
-    }
+    constructor(public raw: Response, private transformer: ResponseTransformer<T> = (jsonValue: any) => jsonValue) {}
 
     async value(): Promise<T> {
         return this.transformer(await this.raw.json());
@@ -445,8 +431,7 @@ export class JSONApiResponse<T> {
 }
 
 export class VoidApiResponse {
-    constructor(public raw: Response) {
-    }
+    constructor(public raw: Response) {}
 
     async value(): Promise<void> {
         return undefined;
@@ -454,8 +439,7 @@ export class VoidApiResponse {
 }
 
 export class BlobApiResponse {
-    constructor(public raw: Response) {
-    }
+    constructor(public raw: Response) {}
 
     async value(): Promise<Blob> {
         return await this.raw.blob();
@@ -463,8 +447,7 @@ export class BlobApiResponse {
 }
 
 export class TextApiResponse {
-    constructor(public raw: Response) {
-    }
+    constructor(public raw: Response) {}
 
     async value(): Promise<string> {
         return await this.raw.text();

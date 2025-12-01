@@ -27,6 +27,7 @@ import {
     WebhookUrlFromJSON,
     WebhookUrlFromJSONTyped,
     WebhookUrlToJSON,
+    WebhookUrlToJSONTyped,
 } from './WebhookUrl';
 
 /**
@@ -78,10 +79,15 @@ export function WebhookURLListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function WebhookURLListResponseToJSON(value?: Omit<WebhookURLListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function WebhookURLListResponseToJSON(json: any): WebhookURLListResponse {
+    return WebhookURLListResponseToJSONTyped(json, false);
+}
+
+export function WebhookURLListResponseToJSONTyped(value?: Omit<WebhookURLListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -78,10 +78,15 @@ export function SubscriptionMetricTypeFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SubscriptionMetricTypeToJSON(value?: Omit<SubscriptionMetricType, 'feature'|'name'|'description'|'id'> | null): any {
+export function SubscriptionMetricTypeToJSON(json: any): SubscriptionMetricType {
+    return SubscriptionMetricTypeToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricTypeToJSONTyped(value?: Omit<SubscriptionMetricType, 'feature'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

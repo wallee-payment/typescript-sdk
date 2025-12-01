@@ -64,3 +64,7 @@ export function RestAddressFormatFieldToJSON(value?: RestAddressFormatField | nu
     return value as any;
 }
 
+export function RestAddressFormatFieldToJSONTyped(value: any, ignoreDiscriminator: boolean): RestAddressFormatField {
+    return value as RestAddressFormatField;
+}
+

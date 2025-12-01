@@ -57,10 +57,15 @@ export function AbstractTransactionCommentActiveFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function AbstractTransactionCommentActiveToJSON(value?: AbstractTransactionCommentActive | null): any {
+export function AbstractTransactionCommentActiveToJSON(json: any): AbstractTransactionCommentActive {
+    return AbstractTransactionCommentActiveToJSONTyped(json, false);
+}
+
+export function AbstractTransactionCommentActiveToJSONTyped(value?: AbstractTransactionCommentActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

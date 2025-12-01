@@ -57,3 +57,7 @@ export function TokenVersionRetryStrategyToJSON(value?: TokenVersionRetryStrateg
     return value as any;
 }
 
+export function TokenVersionRetryStrategyToJSONTyped(value: any, ignoreDiscriminator: boolean): TokenVersionRetryStrategy {
+    return value as TokenVersionRetryStrategy;
+}
+

@@ -92,10 +92,15 @@ export function PaymentMethodBrandFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function PaymentMethodBrandToJSON(value?: Omit<PaymentMethodBrand, 'grayImagePath'|'imagePath'|'name'|'description'|'paymentMethod'|'id'> | null): any {
+export function PaymentMethodBrandToJSON(json: any): PaymentMethodBrand {
+    return PaymentMethodBrandToJSONTyped(json, false);
+}
+
+export function PaymentMethodBrandToJSONTyped(value?: Omit<PaymentMethodBrand, 'grayImagePath'|'imagePath'|'name'|'description'|'paymentMethod'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

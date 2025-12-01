@@ -27,6 +27,7 @@ import {
     TransactionInvoiceFromJSON,
     TransactionInvoiceFromJSONTyped,
     TransactionInvoiceToJSON,
+    TransactionInvoiceToJSONTyped,
 } from './TransactionInvoice';
 
 /**
@@ -78,10 +79,15 @@ export function InvoiceListResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function InvoiceListResponseToJSON(value?: Omit<InvoiceListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function InvoiceListResponseToJSON(json: any): InvoiceListResponse {
+    return InvoiceListResponseToJSONTyped(json, false);
+}
+
+export function InvoiceListResponseToJSONTyped(value?: Omit<InvoiceListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

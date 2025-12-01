@@ -57,3 +57,7 @@ export function CustomerAddressTypeToJSON(value?: CustomerAddressType | null): a
     return value as any;
 }
 
+export function CustomerAddressTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): CustomerAddressType {
+    return value as CustomerAddressType;
+}
+

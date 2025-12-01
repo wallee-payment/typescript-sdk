@@ -27,6 +27,7 @@ import {
     CurrencyBankAccountFromJSON,
     CurrencyBankAccountFromJSONTyped,
     CurrencyBankAccountToJSON,
+    CurrencyBankAccountToJSONTyped,
 } from './CurrencyBankAccount';
 
 /**
@@ -85,10 +86,15 @@ export function CurrencyBankAccountSearchResponseFromJSONTyped(json: any, ignore
     };
 }
 
-export function CurrencyBankAccountSearchResponseToJSON(value?: Omit<CurrencyBankAccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function CurrencyBankAccountSearchResponseToJSON(json: any): CurrencyBankAccountSearchResponse {
+    return CurrencyBankAccountSearchResponseToJSONTyped(json, false);
+}
+
+export function CurrencyBankAccountSearchResponseToJSONTyped(value?: Omit<CurrencyBankAccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

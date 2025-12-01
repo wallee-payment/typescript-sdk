@@ -148,10 +148,15 @@ export function PaymentTerminalAddressFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function PaymentTerminalAddressToJSON(value?: Omit<PaymentTerminalAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'givenName'|'postcode'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null): any {
+export function PaymentTerminalAddressToJSON(json: any): PaymentTerminalAddress {
+    return PaymentTerminalAddressToJSONTyped(json, false);
+}
+
+export function PaymentTerminalAddressToJSONTyped(value?: Omit<PaymentTerminalAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'givenName'|'postcode'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     FacadeUserFriendlyQueryStatusModelFromJSON,
     FacadeUserFriendlyQueryStatusModelFromJSONTyped,
     FacadeUserFriendlyQueryStatusModelToJSON,
+    FacadeUserFriendlyQueryStatusModelToJSONTyped,
 } from './FacadeUserFriendlyQueryStatusModel';
 
 /**
@@ -97,6 +98,8 @@ export interface SubmittedAnalyticsQueryExecution {
     status?: FacadeUserFriendlyQueryStatusModel;
 }
 
+
+
 /**
  * Check if a given object implements the SubmittedAnalyticsQueryExecution interface.
  */
@@ -127,10 +130,15 @@ export function SubmittedAnalyticsQueryExecutionFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function SubmittedAnalyticsQueryExecutionToJSON(value?: Omit<SubmittedAnalyticsQueryExecution, 'queryExternalId'|'accountId'|'totalBilledExecutionTimeMs'|'createdTimestamp'|'downloadRequests'|'originalQuery'|'scannedBytes'|'portalQueryToken'|'resultFileBytes'> | null): any {
+export function SubmittedAnalyticsQueryExecutionToJSON(json: any): SubmittedAnalyticsQueryExecution {
+    return SubmittedAnalyticsQueryExecutionToJSONTyped(json, false);
+}
+
+export function SubmittedAnalyticsQueryExecutionToJSONTyped(value?: Omit<SubmittedAnalyticsQueryExecution, 'queryExternalId'|'accountId'|'totalBilledExecutionTimeMs'|'createdTimestamp'|'downloadRequests'|'originalQuery'|'scannedBytes'|'portalQueryToken'|'resultFileBytes'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'status': FacadeUserFriendlyQueryStatusModelToJSON(value['status']),

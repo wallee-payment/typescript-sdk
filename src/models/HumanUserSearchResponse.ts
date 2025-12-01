@@ -27,6 +27,7 @@ import {
     HumanUserFromJSON,
     HumanUserFromJSONTyped,
     HumanUserToJSON,
+    HumanUserToJSONTyped,
 } from './HumanUser';
 
 /**
@@ -85,10 +86,15 @@ export function HumanUserSearchResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function HumanUserSearchResponseToJSON(value?: Omit<HumanUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function HumanUserSearchResponseToJSON(json: any): HumanUserSearchResponse {
+    return HumanUserSearchResponseToJSONTyped(json, false);
+}
+
+export function HumanUserSearchResponseToJSONTyped(value?: Omit<HumanUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

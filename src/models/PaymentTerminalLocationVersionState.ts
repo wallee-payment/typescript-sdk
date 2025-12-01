@@ -59,3 +59,7 @@ export function PaymentTerminalLocationVersionStateToJSON(value?: PaymentTermina
     return value as any;
 }
 
+export function PaymentTerminalLocationVersionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentTerminalLocationVersionState {
+    return value as PaymentTerminalLocationVersionState;
+}
+

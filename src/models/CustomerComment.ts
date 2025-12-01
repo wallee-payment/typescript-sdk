@@ -27,6 +27,7 @@ import {
     CustomerFromJSON,
     CustomerFromJSONTyped,
     CustomerToJSON,
+    CustomerToJSONTyped,
 } from './Customer';
 
 /**
@@ -127,10 +128,15 @@ export function CustomerCommentFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function CustomerCommentToJSON(value?: Omit<CustomerComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null): any {
+export function CustomerCommentToJSON(json: any): CustomerComment {
+    return CustomerCommentToJSONTyped(json, false);
+}
+
+export function CustomerCommentToJSONTyped(value?: Omit<CustomerComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'customer': CustomerToJSON(value['customer']),

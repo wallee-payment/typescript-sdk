@@ -27,12 +27,14 @@ import {
     PaymentProcessorFromJSON,
     PaymentProcessorFromJSONTyped,
     PaymentProcessorToJSON,
+    PaymentProcessorToJSONTyped,
 } from './PaymentProcessor';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -97,6 +99,8 @@ export interface PaymentProcessorConfiguration {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentProcessorConfiguration interface.
  */
@@ -126,10 +130,15 @@ export function PaymentProcessorConfigurationFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function PaymentProcessorConfigurationToJSON(value?: Omit<PaymentProcessorConfiguration, 'linkedSpaceId'|'applicationManaged'|'contractId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function PaymentProcessorConfigurationToJSON(json: any): PaymentProcessorConfiguration {
+    return PaymentProcessorConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentProcessorConfigurationToJSONTyped(value?: Omit<PaymentProcessorConfiguration, 'linkedSpaceId'|'applicationManaged'|'contractId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

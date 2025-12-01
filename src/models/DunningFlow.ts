@@ -27,12 +27,14 @@ import {
     DunningFlowTypeFromJSON,
     DunningFlowTypeFromJSONTyped,
     DunningFlowTypeToJSON,
+    DunningFlowTypeToJSONTyped,
 } from './DunningFlowType';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -97,6 +99,8 @@ export interface DunningFlow {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the DunningFlow interface.
  */
@@ -126,10 +130,15 @@ export function DunningFlowFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function DunningFlowToJSON(value?: Omit<DunningFlow, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'conditions'|'priority'|'version'> | null): any {
+export function DunningFlowToJSON(json: any): DunningFlow {
+    return DunningFlowToJSONTyped(json, false);
+}
+
+export function DunningFlowToJSONTyped(value?: Omit<DunningFlow, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'conditions'|'priority'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

@@ -27,24 +27,28 @@ import {
     SubscriptionProductComponentFromJSON,
     SubscriptionProductComponentFromJSONTyped,
     SubscriptionProductComponentToJSON,
+    SubscriptionProductComponentToJSONTyped,
 } from './SubscriptionProductComponent';
 import type { ProductFeeType } from './ProductFeeType';
 import {
     ProductFeeTypeFromJSON,
     ProductFeeTypeFromJSONTyped,
     ProductFeeTypeToJSON,
+    ProductFeeTypeToJSONTyped,
 } from './ProductFeeType';
 import type { ProductMeteredTierPricing } from './ProductMeteredTierPricing';
 import {
     ProductMeteredTierPricingFromJSON,
     ProductMeteredTierPricingFromJSONTyped,
     ProductMeteredTierPricingToJSON,
+    ProductMeteredTierPricingToJSONTyped,
 } from './ProductMeteredTierPricing';
 import type { SubscriptionMetric } from './SubscriptionMetric';
 import {
     SubscriptionMetricFromJSON,
     SubscriptionMetricFromJSONTyped,
     SubscriptionMetricToJSON,
+    SubscriptionMetricToJSONTyped,
 } from './SubscriptionMetric';
 
 /**
@@ -109,6 +113,8 @@ export interface ProductMeteredFee {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ProductMeteredFee interface.
  */
@@ -138,10 +144,15 @@ export function ProductMeteredFeeFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function ProductMeteredFeeToJSON(value?: Omit<ProductMeteredFee, 'linkedSpaceId'|'name'|'description'|'id'|'version'> | null): any {
+export function ProductMeteredFeeToJSON(json: any): ProductMeteredFee {
+    return ProductMeteredFeeToJSONTyped(json, false);
+}
+
+export function ProductMeteredFeeToJSONTyped(value?: Omit<ProductMeteredFee, 'linkedSpaceId'|'name'|'description'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'component': SubscriptionProductComponentToJSON(value['component']),

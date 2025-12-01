@@ -78,10 +78,15 @@ export function RestCountryStateFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function RestCountryStateToJSON(value?: Omit<RestCountryState, 'code'|'countryCode'|'name'|'id'> | null): any {
+export function RestCountryStateToJSON(json: any): RestCountryState {
+    return RestCountryStateToJSONTyped(json, false);
+}
+
+export function RestCountryStateToJSONTyped(value?: Omit<RestCountryState, 'code'|'countryCode'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

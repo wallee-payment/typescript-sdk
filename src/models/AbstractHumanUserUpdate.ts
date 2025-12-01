@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -85,6 +86,8 @@ export interface AbstractHumanUserUpdate {
     lastname?: string;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractHumanUserUpdate interface.
  */
@@ -113,10 +116,15 @@ export function AbstractHumanUserUpdateFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function AbstractHumanUserUpdateToJSON(value?: AbstractHumanUserUpdate | null): any {
+export function AbstractHumanUserUpdateToJSON(json: any): AbstractHumanUserUpdate {
+    return AbstractHumanUserUpdateToJSONTyped(json, false);
+}
+
+export function AbstractHumanUserUpdateToJSONTyped(value?: AbstractHumanUserUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'mobilePhoneNumber': value['mobilePhoneNumber'],

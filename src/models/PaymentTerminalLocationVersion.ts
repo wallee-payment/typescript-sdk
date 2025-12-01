@@ -27,18 +27,21 @@ import {
     PaymentTerminalAddressFromJSON,
     PaymentTerminalAddressFromJSONTyped,
     PaymentTerminalAddressToJSON,
+    PaymentTerminalAddressToJSONTyped,
 } from './PaymentTerminalAddress';
 import type { PaymentTerminalLocationVersionState } from './PaymentTerminalLocationVersionState';
 import {
     PaymentTerminalLocationVersionStateFromJSON,
     PaymentTerminalLocationVersionStateFromJSONTyped,
     PaymentTerminalLocationVersionStateToJSON,
+    PaymentTerminalLocationVersionStateToJSONTyped,
 } from './PaymentTerminalLocationVersionState';
 import type { PaymentTerminalLocation } from './PaymentTerminalLocation';
 import {
     PaymentTerminalLocationFromJSON,
     PaymentTerminalLocationFromJSONTyped,
     PaymentTerminalLocationToJSON,
+    PaymentTerminalLocationToJSONTyped,
 } from './PaymentTerminalLocation';
 
 /**
@@ -115,6 +118,8 @@ export interface PaymentTerminalLocationVersion {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentTerminalLocationVersion interface.
  */
@@ -146,10 +151,15 @@ export function PaymentTerminalLocationVersionFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function PaymentTerminalLocationVersionToJSON(value?: Omit<PaymentTerminalLocationVersion, 'linkedSpaceId'|'createdBy'|'plannedPurgeDate'|'versionAppliedImmediately'|'id'|'createdOn'|'version'> | null): any {
+export function PaymentTerminalLocationVersionToJSON(json: any): PaymentTerminalLocationVersion {
+    return PaymentTerminalLocationVersionToJSONTyped(json, false);
+}
+
+export function PaymentTerminalLocationVersionToJSONTyped(value?: Omit<PaymentTerminalLocationVersion, 'linkedSpaceId'|'createdBy'|'plannedPurgeDate'|'versionAppliedImmediately'|'id'|'createdOn'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'address': PaymentTerminalAddressToJSON(value['address']),

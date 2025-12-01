@@ -64,10 +64,15 @@ export function PaymentInformationHashTypeFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function PaymentInformationHashTypeToJSON(value?: Omit<PaymentInformationHashType, 'name'|'id'> | null): any {
+export function PaymentInformationHashTypeToJSON(json: any): PaymentInformationHashType {
+    return PaymentInformationHashTypeToJSONTyped(json, false);
+}
+
+export function PaymentInformationHashTypeToJSONTyped(value?: Omit<PaymentInformationHashType, 'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

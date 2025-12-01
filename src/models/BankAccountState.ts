@@ -58,3 +58,7 @@ export function BankAccountStateToJSON(value?: BankAccountState | null): any {
     return value as any;
 }
 
+export function BankAccountStateToJSONTyped(value: any, ignoreDiscriminator: boolean): BankAccountState {
+    return value as BankAccountState;
+}
+

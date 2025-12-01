@@ -65,10 +65,15 @@ export function RefundCommentCreateFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function RefundCommentCreateToJSON(value?: RefundCommentCreate | null): any {
+export function RefundCommentCreateToJSON(json: any): RefundCommentCreate {
+    return RefundCommentCreateToJSONTyped(json, false);
+}
+
+export function RefundCommentCreateToJSONTyped(value?: RefundCommentCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

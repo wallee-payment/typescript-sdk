@@ -27,6 +27,7 @@ import {
     RoleFromJSON,
     RoleFromJSONTyped,
     RoleToJSON,
+    RoleToJSONTyped,
 } from './Role';
 
 /**
@@ -85,10 +86,15 @@ export function RoleSearchResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function RoleSearchResponseToJSON(value?: Omit<RoleSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function RoleSearchResponseToJSON(json: any): RoleSearchResponse {
+    return RoleSearchResponseToJSONTyped(json, false);
+}
+
+export function RoleSearchResponseToJSONTyped(value?: Omit<RoleSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

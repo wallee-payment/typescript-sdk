@@ -57,3 +57,7 @@ export function ProductFeeTypeToJSON(value?: ProductFeeType | null): any {
     return value as any;
 }
 
+export function ProductFeeTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): ProductFeeType {
+    return value as ProductFeeType;
+}
+

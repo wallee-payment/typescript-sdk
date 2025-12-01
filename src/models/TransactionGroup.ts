@@ -27,6 +27,7 @@ import {
     TransactionGroupStateFromJSON,
     TransactionGroupStateFromJSONTyped,
     TransactionGroupStateToJSON,
+    TransactionGroupStateToJSONTyped,
 } from './TransactionGroupState';
 
 /**
@@ -85,6 +86,8 @@ export interface TransactionGroup {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionGroup interface.
  */
@@ -113,10 +116,15 @@ export function TransactionGroupFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function TransactionGroupToJSON(value?: Omit<TransactionGroup, 'beginDate'|'linkedSpaceId'|'endDate'|'customerId'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function TransactionGroupToJSON(json: any): TransactionGroup {
+    return TransactionGroupToJSONTyped(json, false);
+}
+
+export function TransactionGroupToJSONTyped(value?: Omit<TransactionGroup, 'beginDate'|'linkedSpaceId'|'endDate'|'customerId'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': TransactionGroupStateToJSON(value['state']),

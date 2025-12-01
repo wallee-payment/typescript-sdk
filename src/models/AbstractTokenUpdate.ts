@@ -92,10 +92,15 @@ export function AbstractTokenUpdateFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function AbstractTokenUpdateToJSON(value?: AbstractTokenUpdate | null): any {
+export function AbstractTokenUpdateToJSON(json: any): AbstractTokenUpdate {
+    return AbstractTokenUpdateToJSONTyped(json, false);
+}
+
+export function AbstractTokenUpdateToJSONTyped(value?: AbstractTokenUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'enabledForOneClickPayment': value['enabledForOneClickPayment'],

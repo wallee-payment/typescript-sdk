@@ -71,10 +71,15 @@ export function LineItemReductionFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function LineItemReductionToJSON(value?: Omit<LineItemReduction, 'quantityReduction'|'unitPriceReduction'|'lineItemUniqueId'> | null): any {
+export function LineItemReductionToJSON(json: any): LineItemReduction {
+    return LineItemReductionToJSONTyped(json, false);
+}
+
+export function LineItemReductionToJSONTyped(value?: Omit<LineItemReduction, 'quantityReduction'|'unitPriceReduction'|'lineItemUniqueId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

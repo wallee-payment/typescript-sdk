@@ -99,10 +99,15 @@ export function CustomerCreateFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function CustomerCreateToJSON(value?: CustomerCreate | null): any {
+export function CustomerCreateToJSON(json: any): CustomerCreate {
+    return CustomerCreateToJSONTyped(json, false);
+}
+
+export function CustomerCreateToJSONTyped(value?: CustomerCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'metaData': value['metaData'],

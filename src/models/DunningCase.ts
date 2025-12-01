@@ -27,18 +27,21 @@ import {
     DunningFlowFromJSON,
     DunningFlowFromJSONTyped,
     DunningFlowToJSON,
+    DunningFlowToJSONTyped,
 } from './DunningFlow';
 import type { DunningCaseState } from './DunningCaseState';
 import {
     DunningCaseStateFromJSON,
     DunningCaseStateFromJSONTyped,
     DunningCaseStateToJSON,
+    DunningCaseStateToJSONTyped,
 } from './DunningCaseState';
 import type { TransactionInvoice } from './TransactionInvoice';
 import {
     TransactionInvoiceFromJSON,
     TransactionInvoiceFromJSONTyped,
     TransactionInvoiceToJSON,
+    TransactionInvoiceToJSONTyped,
 } from './TransactionInvoice';
 
 /**
@@ -127,6 +130,8 @@ export interface DunningCase {
     flow?: DunningFlow;
 }
 
+
+
 /**
  * Check if a given object implements the DunningCase interface.
  */
@@ -160,10 +165,15 @@ export function DunningCaseFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function DunningCaseToJSON(value?: Omit<DunningCase, 'canceledOn'|'derecognizedOn'|'plannedPurgeDate'|'createdOn'|'version'|'linkedSpaceId'|'succeededOn'|'id'|'linkedTransaction'|'failedOn'> | null): any {
+export function DunningCaseToJSON(json: any): DunningCase {
+    return DunningCaseToJSONTyped(json, false);
+}
+
+export function DunningCaseToJSONTyped(value?: Omit<DunningCase, 'canceledOn'|'derecognizedOn'|'plannedPurgeDate'|'createdOn'|'version'|'linkedSpaceId'|'succeededOn'|'id'|'linkedTransaction'|'failedOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'initialInvoice': TransactionInvoiceToJSON(value['initialInvoice']),

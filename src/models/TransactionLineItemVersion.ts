@@ -27,30 +27,35 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { TransactionLineItemVersionState } from './TransactionLineItemVersionState';
 import {
     TransactionLineItemVersionStateFromJSON,
     TransactionLineItemVersionStateFromJSONTyped,
     TransactionLineItemVersionStateToJSON,
+    TransactionLineItemVersionStateToJSONTyped,
 } from './TransactionLineItemVersionState';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 
 /**
@@ -193,6 +198,8 @@ export interface TransactionLineItemVersion {
     transaction?: Transaction;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionLineItemVersion interface.
  */
@@ -235,10 +242,15 @@ export function TransactionLineItemVersionFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function TransactionLineItemVersionToJSON(value?: Omit<TransactionLineItemVersion, 'amount'|'plannedPurgeDate'|'processingOn'|'externalId'|'language'|'spaceViewId'|'createdOn'|'version'|'labels'|'lineItems'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'succeededOn'|'id'|'linkedTransaction'|'taxAmount'|'failedOn'> | null): any {
+export function TransactionLineItemVersionToJSON(json: any): TransactionLineItemVersion {
+    return TransactionLineItemVersionToJSONTyped(json, false);
+}
+
+export function TransactionLineItemVersionToJSONTyped(value?: Omit<TransactionLineItemVersion, 'amount'|'plannedPurgeDate'|'processingOn'|'externalId'|'language'|'spaceViewId'|'createdOn'|'version'|'labels'|'lineItems'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'succeededOn'|'id'|'linkedTransaction'|'taxAmount'|'failedOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'failureReason': FailureReasonToJSON(value['failureReason']),

@@ -27,6 +27,7 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 
 /**
@@ -78,10 +79,15 @@ export function TransactionListResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function TransactionListResponseToJSON(value?: Omit<TransactionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function TransactionListResponseToJSON(json: any): TransactionListResponse {
+    return TransactionListResponseToJSONTyped(json, false);
+}
+
+export function TransactionListResponseToJSONTyped(value?: Omit<TransactionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

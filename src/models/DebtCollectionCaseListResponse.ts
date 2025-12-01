@@ -27,6 +27,7 @@ import {
     DebtCollectionCaseFromJSON,
     DebtCollectionCaseFromJSONTyped,
     DebtCollectionCaseToJSON,
+    DebtCollectionCaseToJSONTyped,
 } from './DebtCollectionCase';
 
 /**
@@ -78,10 +79,15 @@ export function DebtCollectionCaseListResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function DebtCollectionCaseListResponseToJSON(value?: Omit<DebtCollectionCaseListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DebtCollectionCaseListResponseToJSON(json: any): DebtCollectionCaseListResponse {
+    return DebtCollectionCaseListResponseToJSONTyped(json, false);
+}
+
+export function DebtCollectionCaseListResponseToJSONTyped(value?: Omit<DebtCollectionCaseListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     SubscriptionProductStateFromJSON,
     SubscriptionProductStateFromJSONTyped,
     SubscriptionProductStateToJSON,
+    SubscriptionProductStateToJSONTyped,
 } from './SubscriptionProductState';
 
 /**
@@ -79,6 +80,8 @@ export interface SubscriptionProductCreate {
     reference: string;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionProductCreate interface.
  */
@@ -107,10 +110,15 @@ export function SubscriptionProductCreateFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function SubscriptionProductCreateToJSON(value?: SubscriptionProductCreate | null): any {
+export function SubscriptionProductCreateToJSON(json: any): SubscriptionProductCreate {
+    return SubscriptionProductCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionProductCreateToJSONTyped(value?: SubscriptionProductCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'sortOrder': value['sortOrder'],

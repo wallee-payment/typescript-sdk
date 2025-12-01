@@ -27,12 +27,14 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -109,6 +111,8 @@ export interface SubscriberActive {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriberActive interface.
  */
@@ -141,10 +145,15 @@ export function SubscriberActiveFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function SubscriberActiveToJSON(value?: SubscriberActive | null): any {
+export function SubscriberActiveToJSON(json: any): SubscriberActive {
+    return SubscriberActiveToJSONTyped(json, false);
+}
+
+export function SubscriberActiveToJSONTyped(value?: SubscriberActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

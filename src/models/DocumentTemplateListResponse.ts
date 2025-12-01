@@ -27,6 +27,7 @@ import {
     DocumentTemplateFromJSON,
     DocumentTemplateFromJSONTyped,
     DocumentTemplateToJSON,
+    DocumentTemplateToJSONTyped,
 } from './DocumentTemplate';
 
 /**
@@ -78,10 +79,15 @@ export function DocumentTemplateListResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function DocumentTemplateListResponseToJSON(value?: Omit<DocumentTemplateListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DocumentTemplateListResponseToJSON(json: any): DocumentTemplateListResponse {
+    return DocumentTemplateListResponseToJSONTyped(json, false);
+}
+
+export function DocumentTemplateListResponseToJSONTyped(value?: Omit<DocumentTemplateListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

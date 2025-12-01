@@ -27,6 +27,7 @@ import {
     ChargeAttemptFromJSON,
     ChargeAttemptFromJSONTyped,
     ChargeAttemptToJSON,
+    ChargeAttemptToJSONTyped,
 } from './ChargeAttempt';
 
 /**
@@ -85,10 +86,15 @@ export function ChargeAttemptSearchResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ChargeAttemptSearchResponseToJSON(value?: Omit<ChargeAttemptSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ChargeAttemptSearchResponseToJSON(json: any): ChargeAttemptSearchResponse {
+    return ChargeAttemptSearchResponseToJSONTyped(json, false);
+}
+
+export function ChargeAttemptSearchResponseToJSONTyped(value?: Omit<ChargeAttemptSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

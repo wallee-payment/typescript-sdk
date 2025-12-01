@@ -59,3 +59,7 @@ export function PaymentTerminalConfigurationVersionStateToJSON(value?: PaymentTe
     return value as any;
 }
 
+export function PaymentTerminalConfigurationVersionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentTerminalConfigurationVersionState {
+    return value as PaymentTerminalConfigurationVersionState;
+}
+

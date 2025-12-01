@@ -27,6 +27,7 @@ import {
     LabelDescriptorGroupFromJSON,
     LabelDescriptorGroupFromJSONTyped,
     LabelDescriptorGroupToJSON,
+    LabelDescriptorGroupToJSONTyped,
 } from './LabelDescriptorGroup';
 
 /**
@@ -78,10 +79,15 @@ export function LabelDescriptorGroupListResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function LabelDescriptorGroupListResponseToJSON(value?: Omit<LabelDescriptorGroupListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function LabelDescriptorGroupListResponseToJSON(json: any): LabelDescriptorGroupListResponse {
+    return LabelDescriptorGroupListResponseToJSONTyped(json, false);
+}
+
+export function LabelDescriptorGroupListResponseToJSONTyped(value?: Omit<LabelDescriptorGroupListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

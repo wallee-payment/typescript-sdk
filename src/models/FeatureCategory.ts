@@ -78,10 +78,15 @@ export function FeatureCategoryFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function FeatureCategoryToJSON(value?: Omit<FeatureCategory, 'name'|'description'|'orderWeight'|'id'> | null): any {
+export function FeatureCategoryToJSON(json: any): FeatureCategory {
+    return FeatureCategoryToJSONTyped(json, false);
+}
+
+export function FeatureCategoryToJSONTyped(value?: Omit<FeatureCategory, 'name'|'description'|'orderWeight'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

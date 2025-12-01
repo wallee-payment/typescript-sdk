@@ -27,12 +27,14 @@ import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { ExpressCheckoutShippingOption } from './ExpressCheckoutShippingOption';
 import {
     ExpressCheckoutShippingOptionFromJSON,
     ExpressCheckoutShippingOptionFromJSONTyped,
     ExpressCheckoutShippingOptionToJSON,
+    ExpressCheckoutShippingOptionToJSONTyped,
 } from './ExpressCheckoutShippingOption';
 
 /**
@@ -77,10 +79,15 @@ export function ExpressCheckoutSessionCreateFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function ExpressCheckoutSessionCreateToJSON(value?: ExpressCheckoutSessionCreate | null): any {
+export function ExpressCheckoutSessionCreateToJSON(json: any): ExpressCheckoutSessionCreate {
+    return ExpressCheckoutSessionCreateToJSONTyped(json, false);
+}
+
+export function ExpressCheckoutSessionCreateToJSONTyped(value?: ExpressCheckoutSessionCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(LineItemToJSON)),

@@ -27,12 +27,14 @@ import {
     OneClickPaymentModeFromJSON,
     OneClickPaymentModeFromJSONTyped,
     OneClickPaymentModeToJSON,
+    OneClickPaymentModeToJSONTyped,
 } from './OneClickPaymentMode';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -91,6 +93,8 @@ export interface PaymentMethodConfigurationActive {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentMethodConfigurationActive interface.
  */
@@ -120,10 +124,15 @@ export function PaymentMethodConfigurationActiveFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function PaymentMethodConfigurationActiveToJSON(value?: PaymentMethodConfigurationActive | null): any {
+export function PaymentMethodConfigurationActiveToJSON(json: any): PaymentMethodConfigurationActive {
+    return PaymentMethodConfigurationActiveToJSONTyped(json, false);
+}
+
+export function PaymentMethodConfigurationActiveToJSONTyped(value?: PaymentMethodConfigurationActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'imageResourcePath': value['imageResourcePath'],

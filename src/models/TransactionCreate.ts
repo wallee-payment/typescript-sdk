@@ -27,42 +27,49 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 import type { CustomersPresence } from './CustomersPresence';
 import {
     CustomersPresenceFromJSON,
     CustomersPresenceFromJSONTyped,
     CustomersPresenceToJSON,
+    CustomersPresenceToJSONTyped,
 } from './CustomersPresence';
 import type { LineItemCreate } from './LineItemCreate';
 import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { TransactionEnvironmentSelectionStrategy } from './TransactionEnvironmentSelectionStrategy';
 import {
     TransactionEnvironmentSelectionStrategyFromJSON,
     TransactionEnvironmentSelectionStrategyFromJSONTyped,
     TransactionEnvironmentSelectionStrategyToJSON,
+    TransactionEnvironmentSelectionStrategyToJSONTyped,
 } from './TransactionEnvironmentSelectionStrategy';
 import type { TokenizationMode } from './TokenizationMode';
 import {
     TokenizationModeFromJSON,
     TokenizationModeFromJSONTyped,
     TokenizationModeToJSON,
+    TokenizationModeToJSONTyped,
 } from './TokenizationMode';
 import type { TransactionCompletionBehavior } from './TransactionCompletionBehavior';
 import {
     TransactionCompletionBehaviorFromJSON,
     TransactionCompletionBehaviorFromJSONTyped,
     TransactionCompletionBehaviorToJSON,
+    TransactionCompletionBehaviorToJSONTyped,
 } from './TransactionCompletionBehavior';
 import type { Environment } from './Environment';
 import {
     EnvironmentFromJSON,
     EnvironmentFromJSONTyped,
     EnvironmentToJSON,
+    EnvironmentToJSONTyped,
 } from './Environment';
 
 /**
@@ -235,6 +242,8 @@ export interface TransactionCreate {
     customersPresence?: CustomersPresence;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionCreate interface.
  */
@@ -283,10 +292,15 @@ export function TransactionCreateFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function TransactionCreateToJSON(value?: TransactionCreate | null): any {
+export function TransactionCreateToJSON(json: any): TransactionCreate {
+    return TransactionCreateToJSONTyped(json, false);
+}
+
+export function TransactionCreateToJSONTyped(value?: TransactionCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'customerEmailAddress': value['customerEmailAddress'],

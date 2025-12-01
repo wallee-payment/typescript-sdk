@@ -27,12 +27,14 @@ import {
     ConditionFromJSON,
     ConditionFromJSONTyped,
     ConditionToJSON,
+    ConditionToJSONTyped,
 } from './Condition';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -91,6 +93,8 @@ export interface ChargeFlow {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ChargeFlow interface.
  */
@@ -119,10 +123,15 @@ export function ChargeFlowFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function ChargeFlowToJSON(value?: Omit<ChargeFlow, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'conditions'|'priority'|'version'> | null): any {
+export function ChargeFlowToJSON(json: any): ChargeFlow {
+    return ChargeFlowToJSONTyped(json, false);
+}
+
+export function ChargeFlowToJSONTyped(value?: Omit<ChargeFlow, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'conditions'|'priority'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

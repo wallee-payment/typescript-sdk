@@ -27,18 +27,21 @@ import {
     BankTransactionFromJSON,
     BankTransactionFromJSONTyped,
     BankTransactionToJSON,
+    BankTransactionToJSONTyped,
 } from './BankTransaction';
 import type { Refund } from './Refund';
 import {
     RefundFromJSON,
     RefundFromJSONTyped,
     RefundToJSON,
+    RefundToJSONTyped,
 } from './Refund';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 
 /**
@@ -146,10 +149,15 @@ export function RefundRecoveryBankTransactionFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function RefundRecoveryBankTransactionToJSON(value?: Omit<RefundRecoveryBankTransaction, 'lineItems'|'linkedSpaceId'|'refundCurrencyValueAmount'|'refundCurrencyAmount'|'language'|'id'|'spaceViewId'|'linkedTransaction'|'version'> | null): any {
+export function RefundRecoveryBankTransactionToJSON(json: any): RefundRecoveryBankTransaction {
+    return RefundRecoveryBankTransactionToJSONTyped(json, false);
+}
+
+export function RefundRecoveryBankTransactionToJSONTyped(value?: Omit<RefundRecoveryBankTransaction, 'lineItems'|'linkedSpaceId'|'refundCurrencyValueAmount'|'refundCurrencyAmount'|'language'|'id'|'spaceViewId'|'linkedTransaction'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'bankTransaction': BankTransactionToJSON(value['bankTransaction']),

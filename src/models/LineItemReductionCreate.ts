@@ -74,10 +74,15 @@ export function LineItemReductionCreateFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function LineItemReductionCreateToJSON(value?: LineItemReductionCreate | null): any {
+export function LineItemReductionCreateToJSON(json: any): LineItemReductionCreate {
+    return LineItemReductionCreateToJSONTyped(json, false);
+}
+
+export function LineItemReductionCreateToJSONTyped(value?: LineItemReductionCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'quantityReduction': value['quantityReduction'],

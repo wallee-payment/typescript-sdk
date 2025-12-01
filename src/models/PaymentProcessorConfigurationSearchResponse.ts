@@ -27,6 +27,7 @@ import {
     PaymentProcessorConfigurationFromJSON,
     PaymentProcessorConfigurationFromJSONTyped,
     PaymentProcessorConfigurationToJSON,
+    PaymentProcessorConfigurationToJSONTyped,
 } from './PaymentProcessorConfiguration';
 
 /**
@@ -85,10 +86,15 @@ export function PaymentProcessorConfigurationSearchResponseFromJSONTyped(json: a
     };
 }
 
-export function PaymentProcessorConfigurationSearchResponseToJSON(value?: Omit<PaymentProcessorConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function PaymentProcessorConfigurationSearchResponseToJSON(json: any): PaymentProcessorConfigurationSearchResponse {
+    return PaymentProcessorConfigurationSearchResponseToJSONTyped(json, false);
+}
+
+export function PaymentProcessorConfigurationSearchResponseToJSONTyped(value?: Omit<PaymentProcessorConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

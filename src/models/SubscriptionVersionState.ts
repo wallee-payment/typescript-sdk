@@ -60,3 +60,7 @@ export function SubscriptionVersionStateToJSON(value?: SubscriptionVersionState 
     return value as any;
 }
 
+export function SubscriptionVersionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionVersionState {
+    return value as SubscriptionVersionState;
+}
+

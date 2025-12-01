@@ -57,3 +57,7 @@ export function TokenVersionStateToJSON(value?: TokenVersionState | null): any {
     return value as any;
 }
 
+export function TokenVersionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TokenVersionState {
+    return value as TokenVersionState;
+}
+

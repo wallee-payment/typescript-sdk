@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -61,6 +62,8 @@ export interface AbstractSubscriptionAffiliateUpdate {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractSubscriptionAffiliateUpdate interface.
  */
@@ -85,10 +88,15 @@ export function AbstractSubscriptionAffiliateUpdateFromJSONTyped(json: any, igno
     };
 }
 
-export function AbstractSubscriptionAffiliateUpdateToJSON(value?: AbstractSubscriptionAffiliateUpdate | null): any {
+export function AbstractSubscriptionAffiliateUpdateToJSON(json: any): AbstractSubscriptionAffiliateUpdate {
+    return AbstractSubscriptionAffiliateUpdateToJSONTyped(json, false);
+}
+
+export function AbstractSubscriptionAffiliateUpdateToJSONTyped(value?: AbstractSubscriptionAffiliateUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'metaData': value['metaData'],

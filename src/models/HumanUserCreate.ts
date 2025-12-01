@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -91,6 +92,8 @@ export interface HumanUserCreate {
     primaryAccount?: number;
 }
 
+
+
 /**
  * Check if a given object implements the HumanUserCreate interface.
  */
@@ -120,10 +123,15 @@ export function HumanUserCreateFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function HumanUserCreateToJSON(value?: HumanUserCreate | null): any {
+export function HumanUserCreateToJSON(json: any): HumanUserCreate {
+    return HumanUserCreateToJSONTyped(json, false);
+}
+
+export function HumanUserCreateToJSONTyped(value?: HumanUserCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'mobilePhoneNumber': value['mobilePhoneNumber'],

@@ -78,10 +78,15 @@ export function DebtCollectionCaseSourceFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function DebtCollectionCaseSourceToJSON(value?: Omit<DebtCollectionCaseSource, 'forcedPreparingState'|'name'|'description'|'id'> | null): any {
+export function DebtCollectionCaseSourceToJSON(json: any): DebtCollectionCaseSource {
+    return DebtCollectionCaseSourceToJSONTyped(json, false);
+}
+
+export function DebtCollectionCaseSourceToJSONTyped(value?: Omit<DebtCollectionCaseSource, 'forcedPreparingState'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

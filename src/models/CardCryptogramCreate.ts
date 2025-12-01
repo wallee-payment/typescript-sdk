@@ -65,10 +65,15 @@ export function CardCryptogramCreateFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function CardCryptogramCreateToJSON(value?: CardCryptogramCreate | null): any {
+export function CardCryptogramCreateToJSON(json: any): CardCryptogramCreate {
+    return CardCryptogramCreateToJSONTyped(json, false);
+}
+
+export function CardCryptogramCreateToJSONTyped(value?: CardCryptogramCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'eci': value['eci'],

@@ -27,6 +27,7 @@ import {
     GenderFromJSON,
     GenderFromJSONTyped,
     GenderToJSON,
+    GenderToJSONTyped,
 } from './Gender';
 
 /**
@@ -157,6 +158,8 @@ export interface CustomerPostalAddressCreate {
     salutation?: string;
 }
 
+
+
 /**
  * Check if a given object implements the CustomerPostalAddressCreate interface.
  */
@@ -197,10 +200,15 @@ export function CustomerPostalAddressCreateFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function CustomerPostalAddressCreateToJSON(value?: CustomerPostalAddressCreate | null): any {
+export function CustomerPostalAddressCreateToJSON(json: any): CustomerPostalAddressCreate {
+    return CustomerPostalAddressCreateToJSONTyped(json, false);
+}
+
+export function CustomerPostalAddressCreateToJSONTyped(value?: CustomerPostalAddressCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'country': value['country'],

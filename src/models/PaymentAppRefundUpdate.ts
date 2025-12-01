@@ -27,6 +27,7 @@ import {
     PaymentAppRefundTargetStateFromJSON,
     PaymentAppRefundTargetStateFromJSONTyped,
     PaymentAppRefundTargetStateToJSON,
+    PaymentAppRefundTargetStateToJSONTyped,
 } from './PaymentAppRefundTargetState';
 
 /**
@@ -55,6 +56,8 @@ export interface PaymentAppRefundUpdate {
     failureReason?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppRefundUpdate interface.
  */
@@ -78,10 +81,15 @@ export function PaymentAppRefundUpdateFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function PaymentAppRefundUpdateToJSON(value?: PaymentAppRefundUpdate | null): any {
+export function PaymentAppRefundUpdateToJSON(json: any): PaymentAppRefundUpdate {
+    return PaymentAppRefundUpdateToJSONTyped(json, false);
+}
+
+export function PaymentAppRefundUpdateToJSONTyped(value?: PaymentAppRefundUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

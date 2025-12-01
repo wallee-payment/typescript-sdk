@@ -27,6 +27,7 @@ import {
     PaymentTerminalLocationStateFromJSON,
     PaymentTerminalLocationStateFromJSONTyped,
     PaymentTerminalLocationStateToJSON,
+    PaymentTerminalLocationStateToJSONTyped,
 } from './PaymentTerminalLocationState';
 
 /**
@@ -41,6 +42,12 @@ export interface PaymentTerminalLocation {
      * @memberof PaymentTerminalLocation
      */
     readonly linkedSpaceId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentTerminalLocation
+     */
+    readonly productionMerchantId?: string;
     /**
      * The name used to identify the payment terminal location.
      * @type {string}
@@ -79,6 +86,8 @@ export interface PaymentTerminalLocation {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentTerminalLocation interface.
  */
@@ -97,6 +106,7 @@ export function PaymentTerminalLocationFromJSONTyped(json: any, ignoreDiscrimina
     return {
         
         'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
+        'productionMerchantId': json['productionMerchantId'] == null ? undefined : json['productionMerchantId'],
         'name': json['name'] == null ? undefined : json['name'],
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
         'externalId': json['externalId'] == null ? undefined : json['externalId'],
@@ -106,10 +116,15 @@ export function PaymentTerminalLocationFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function PaymentTerminalLocationToJSON(value?: Omit<PaymentTerminalLocation, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'externalId'|'id'|'version'> | null): any {
+export function PaymentTerminalLocationToJSON(json: any): PaymentTerminalLocation {
+    return PaymentTerminalLocationToJSONTyped(json, false);
+}
+
+export function PaymentTerminalLocationToJSONTyped(value?: Omit<PaymentTerminalLocation, 'linkedSpaceId'|'productionMerchantId'|'name'|'plannedPurgeDate'|'externalId'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': PaymentTerminalLocationStateToJSON(value['state']),

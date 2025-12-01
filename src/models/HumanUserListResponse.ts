@@ -27,6 +27,7 @@ import {
     HumanUserFromJSON,
     HumanUserFromJSONTyped,
     HumanUserToJSON,
+    HumanUserToJSONTyped,
 } from './HumanUser';
 
 /**
@@ -78,10 +79,15 @@ export function HumanUserListResponseFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function HumanUserListResponseToJSON(value?: Omit<HumanUserListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function HumanUserListResponseToJSON(json: any): HumanUserListResponse {
+    return HumanUserListResponseToJSONTyped(json, false);
+}
+
+export function HumanUserListResponseToJSONTyped(value?: Omit<HumanUserListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

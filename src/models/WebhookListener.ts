@@ -27,18 +27,21 @@ import {
     WebhookUrlFromJSON,
     WebhookUrlFromJSONTyped,
     WebhookUrlToJSON,
+    WebhookUrlToJSONTyped,
 } from './WebhookUrl';
 import type { WebhookIdentity } from './WebhookIdentity';
 import {
     WebhookIdentityFromJSON,
     WebhookIdentityFromJSONTyped,
     WebhookIdentityToJSON,
+    WebhookIdentityToJSONTyped,
 } from './WebhookIdentity';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -121,6 +124,8 @@ export interface WebhookListener {
     url?: WebhookUrl;
 }
 
+
+
 /**
  * Check if a given object implements the WebhookListener interface.
  */
@@ -139,7 +144,7 @@ export function WebhookListenerFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
-        'entityStates': json['entityStates'] == null ? undefined : json['entityStates'],
+        'entityStates': json['entityStates'] == null ? undefined : new Set(json['entityStates']),
         'identity': json['identity'] == null ? undefined : WebhookIdentityFromJSON(json['identity']),
         'name': json['name'] == null ? undefined : json['name'],
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
@@ -153,10 +158,15 @@ export function WebhookListenerFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function WebhookListenerToJSON(value?: Omit<WebhookListener, 'linkedSpaceId'|'entityStates'|'name'|'plannedPurgeDate'|'id'|'notifyEveryChange'|'version'|'enablePayloadSignatureAndState'|'entity'> | null): any {
+export function WebhookListenerToJSON(json: any): WebhookListener {
+    return WebhookListenerToJSONTyped(json, false);
+}
+
+export function WebhookListenerToJSONTyped(value?: Omit<WebhookListener, 'linkedSpaceId'|'entityStates'|'name'|'plannedPurgeDate'|'id'|'notifyEveryChange'|'version'|'enablePayloadSignatureAndState'|'entity'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'identity': WebhookIdentityToJSON(value['identity']),

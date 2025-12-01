@@ -27,6 +27,7 @@ import {
     DunningFlowLevelFromJSON,
     DunningFlowLevelFromJSONTyped,
     DunningFlowLevelToJSON,
+    DunningFlowLevelToJSONTyped,
 } from './DunningFlowLevel';
 
 /**
@@ -78,10 +79,15 @@ export function DunningFlowLevelListResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function DunningFlowLevelListResponseToJSON(value?: Omit<DunningFlowLevelListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DunningFlowLevelListResponseToJSON(json: any): DunningFlowLevelListResponse {
+    return DunningFlowLevelListResponseToJSONTyped(json, false);
+}
+
+export function DunningFlowLevelListResponseToJSONTyped(value?: Omit<DunningFlowLevelListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

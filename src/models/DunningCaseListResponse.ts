@@ -27,6 +27,7 @@ import {
     DunningCaseFromJSON,
     DunningCaseFromJSONTyped,
     DunningCaseToJSON,
+    DunningCaseToJSONTyped,
 } from './DunningCase';
 
 /**
@@ -78,10 +79,15 @@ export function DunningCaseListResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function DunningCaseListResponseToJSON(value?: Omit<DunningCaseListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DunningCaseListResponseToJSON(json: any): DunningCaseListResponse {
+    return DunningCaseListResponseToJSONTyped(json, false);
+}
+
+export function DunningCaseListResponseToJSONTyped(value?: Omit<DunningCaseListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

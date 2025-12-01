@@ -27,6 +27,7 @@ import {
     StaticValueFromJSON,
     StaticValueFromJSONTyped,
     StaticValueToJSON,
+    StaticValueToJSONTyped,
 } from './StaticValue';
 
 /**
@@ -85,10 +86,15 @@ export function StaticValueSearchResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function StaticValueSearchResponseToJSON(value?: Omit<StaticValueSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function StaticValueSearchResponseToJSON(json: any): StaticValueSearchResponse {
+    return StaticValueSearchResponseToJSONTyped(json, false);
+}
+
+export function StaticValueSearchResponseToJSONTyped(value?: Omit<StaticValueSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

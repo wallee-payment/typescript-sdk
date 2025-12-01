@@ -27,6 +27,7 @@ import {
     SubscriptionPeriodBillFromJSON,
     SubscriptionPeriodBillFromJSONTyped,
     SubscriptionPeriodBillToJSON,
+    SubscriptionPeriodBillToJSONTyped,
 } from './SubscriptionPeriodBill';
 
 /**
@@ -85,10 +86,15 @@ export function SubscriptionPeriodBillSearchResponseFromJSONTyped(json: any, ign
     };
 }
 
-export function SubscriptionPeriodBillSearchResponseToJSON(value?: Omit<SubscriptionPeriodBillSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SubscriptionPeriodBillSearchResponseToJSON(json: any): SubscriptionPeriodBillSearchResponse {
+    return SubscriptionPeriodBillSearchResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionPeriodBillSearchResponseToJSONTyped(value?: Omit<SubscriptionPeriodBillSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

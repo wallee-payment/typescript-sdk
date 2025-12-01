@@ -27,6 +27,7 @@ import {
     FailureCategoryFromJSON,
     FailureCategoryFromJSONTyped,
     FailureCategoryToJSON,
+    FailureCategoryToJSONTyped,
 } from './FailureCategory';
 
 /**
@@ -61,6 +62,8 @@ export interface FailureReason {
     category?: FailureCategory;
 }
 
+
+
 /**
  * Check if a given object implements the FailureReason interface.
  */
@@ -85,10 +88,15 @@ export function FailureReasonFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function FailureReasonToJSON(value?: Omit<FailureReason, 'name'|'description'|'id'> | null): any {
+export function FailureReasonToJSON(json: any): FailureReason {
+    return FailureReasonToJSONTyped(json, false);
+}
+
+export function FailureReasonToJSONTyped(value?: Omit<FailureReason, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'category': FailureCategoryToJSON(value['category']),

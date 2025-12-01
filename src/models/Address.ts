@@ -27,12 +27,14 @@ import {
     GenderFromJSON,
     GenderFromJSONTyped,
     GenderToJSON,
+    GenderToJSONTyped,
 } from './Gender';
 import type { LegalOrganizationForm } from './LegalOrganizationForm';
 import {
     LegalOrganizationFormFromJSON,
     LegalOrganizationFormFromJSONTyped,
     LegalOrganizationFormToJSON,
+    LegalOrganizationFormToJSONTyped,
 } from './LegalOrganizationForm';
 
 /**
@@ -163,6 +165,8 @@ export interface Address {
     readonly salutation?: string;
 }
 
+
+
 /**
  * Check if a given object implements the Address interface.
  */
@@ -203,10 +207,15 @@ export function AddressFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
     };
 }
 
-export function AddressToJSON(value?: Omit<Address, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'commercialRegisterNumber'|'socialSecurityNumber'|'givenName'|'postcode'|'salesTaxNumber'|'dateOfBirth'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null): any {
+export function AddressToJSON(json: any): Address {
+    return AddressToJSONTyped(json, false);
+}
+
+export function AddressToJSONTyped(value?: Omit<Address, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'commercialRegisterNumber'|'socialSecurityNumber'|'givenName'|'postcode'|'salesTaxNumber'|'dateOfBirth'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'gender': GenderToJSON(value['gender']),

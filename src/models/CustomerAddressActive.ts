@@ -27,12 +27,14 @@ import {
     CustomerAddressTypeFromJSON,
     CustomerAddressTypeFromJSONTyped,
     CustomerAddressTypeToJSON,
+    CustomerAddressTypeToJSONTyped,
 } from './CustomerAddressType';
 import type { CustomerPostalAddressCreate } from './CustomerPostalAddressCreate';
 import {
     CustomerPostalAddressCreateFromJSON,
     CustomerPostalAddressCreateFromJSONTyped,
     CustomerPostalAddressCreateToJSON,
+    CustomerPostalAddressCreateToJSONTyped,
 } from './CustomerPostalAddressCreate';
 
 /**
@@ -61,6 +63,8 @@ export interface CustomerAddressActive {
     version: number;
 }
 
+
+
 /**
  * Check if a given object implements the CustomerAddressActive interface.
  */
@@ -85,10 +89,15 @@ export function CustomerAddressActiveFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function CustomerAddressActiveToJSON(value?: CustomerAddressActive | null): any {
+export function CustomerAddressActiveToJSON(json: any): CustomerAddressActive {
+    return CustomerAddressActiveToJSONTyped(json, false);
+}
+
+export function CustomerAddressActiveToJSONTyped(value?: CustomerAddressActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'address': CustomerPostalAddressCreateToJSON(value['address']),

@@ -58,3 +58,7 @@ export function TransactionVoidStateToJSON(value?: TransactionVoidState | null):
     return value as any;
 }
 
+export function TransactionVoidStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionVoidState {
+    return value as TransactionVoidState;
+}
+

@@ -85,10 +85,15 @@ export function RestApiErrorResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function RestApiErrorResponseToJSON(value?: Omit<RestApiErrorResponse, 'date'|'code'|'id'|'message'|'errors'> | null): any {
+export function RestApiErrorResponseToJSON(json: any): RestApiErrorResponse {
+    return RestApiErrorResponseToJSONTyped(json, false);
+}
+
+export function RestApiErrorResponseToJSONTyped(value?: Omit<RestApiErrorResponse, 'date'|'code'|'id'|'message'|'errors'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -98,6 +98,7 @@ export interface PostAccountsIdDeactivateRequest {
  * 
  */
 export class AccountsService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -119,7 +120,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'DELETE';
         const path = `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -132,8 +132,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -179,7 +179,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/accounts`;
 
@@ -192,8 +191,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -230,7 +229,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -243,8 +241,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -290,7 +288,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/accounts/search`;
 
@@ -303,8 +300,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/search`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -350,7 +347,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'PATCH';
         const path = `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -363,8 +359,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: AccountUpdateToJSON(requestParameters['accountUpdate']),
@@ -404,7 +400,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         const method = 'POST';
         const path = `/accounts`;
 
@@ -417,8 +412,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: AccountCreateToJSON(requestParameters['accountCreate']),
@@ -452,7 +447,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'POST';
         const path = `/accounts/{id}/activate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -465,8 +459,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/{id}/activate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -498,7 +492,6 @@ export class AccountsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'POST';
         const path = `/accounts/{id}/deactivate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -511,8 +504,8 @@ export class AccountsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/accounts/{id}/deactivate`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

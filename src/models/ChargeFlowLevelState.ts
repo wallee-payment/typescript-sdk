@@ -57,3 +57,7 @@ export function ChargeFlowLevelStateToJSON(value?: ChargeFlowLevelState | null):
     return value as any;
 }
 
+export function ChargeFlowLevelStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ChargeFlowLevelState {
+    return value as ChargeFlowLevelState;
+}
+

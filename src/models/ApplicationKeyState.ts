@@ -57,3 +57,7 @@ export function ApplicationKeyStateToJSON(value?: ApplicationKeyState | null): a
     return value as any;
 }
 
+export function ApplicationKeyStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ApplicationKeyState {
+    return value as ApplicationKeyState;
+}
+

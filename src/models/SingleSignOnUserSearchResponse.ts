@@ -27,6 +27,7 @@ import {
     SingleSignOnUserFromJSON,
     SingleSignOnUserFromJSONTyped,
     SingleSignOnUserToJSON,
+    SingleSignOnUserToJSONTyped,
 } from './SingleSignOnUser';
 
 /**
@@ -85,10 +86,15 @@ export function SingleSignOnUserSearchResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function SingleSignOnUserSearchResponseToJSON(value?: Omit<SingleSignOnUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SingleSignOnUserSearchResponseToJSON(json: any): SingleSignOnUserSearchResponse {
+    return SingleSignOnUserSearchResponseToJSONTyped(json, false);
+}
+
+export function SingleSignOnUserSearchResponseToJSONTyped(value?: Omit<SingleSignOnUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

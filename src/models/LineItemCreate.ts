@@ -27,18 +27,21 @@ import {
     LineItemAttributeCreateFromJSON,
     LineItemAttributeCreateFromJSONTyped,
     LineItemAttributeCreateToJSON,
+    LineItemAttributeCreateToJSONTyped,
 } from './LineItemAttributeCreate';
 import type { LineItemType } from './LineItemType';
 import {
     LineItemTypeFromJSON,
     LineItemTypeFromJSONTyped,
     LineItemTypeToJSON,
+    LineItemTypeToJSONTyped,
 } from './LineItemType';
 import type { TaxCreate } from './TaxCreate';
 import {
     TaxCreateFromJSON,
     TaxCreateFromJSONTyped,
     TaxCreateToJSON,
+    TaxCreateToJSONTyped,
 } from './TaxCreate';
 
 /**
@@ -109,6 +112,8 @@ export interface LineItemCreate {
     uniqueId: string;
 }
 
+
+
 /**
  * Check if a given object implements the LineItemCreate interface.
  */
@@ -144,10 +149,15 @@ export function LineItemCreateFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function LineItemCreateToJSON(value?: LineItemCreate | null): any {
+export function LineItemCreateToJSON(json: any): LineItemCreate {
+    return LineItemCreateToJSONTyped(json, false);
+}
+
+export function LineItemCreateToJSONTyped(value?: LineItemCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'shippingRequired': value['shippingRequired'],

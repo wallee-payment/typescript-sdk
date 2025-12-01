@@ -57,10 +57,15 @@ export function AbstractCustomerCommentActiveFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function AbstractCustomerCommentActiveToJSON(value?: AbstractCustomerCommentActive | null): any {
+export function AbstractCustomerCommentActiveToJSON(json: any): AbstractCustomerCommentActive {
+    return AbstractCustomerCommentActiveToJSONTyped(json, false);
+}
+
+export function AbstractCustomerCommentActiveToJSONTyped(value?: AbstractCustomerCommentActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

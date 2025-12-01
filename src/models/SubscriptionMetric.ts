@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { SubscriptionMetricType } from './SubscriptionMetricType';
 import {
     SubscriptionMetricTypeFromJSON,
     SubscriptionMetricTypeFromJSONTyped,
     SubscriptionMetricTypeToJSON,
+    SubscriptionMetricTypeToJSONTyped,
 } from './SubscriptionMetricType';
 
 /**
@@ -91,6 +93,8 @@ export interface SubscriptionMetric {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionMetric interface.
  */
@@ -119,10 +123,15 @@ export function SubscriptionMetricFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function SubscriptionMetricToJSON(value?: Omit<SubscriptionMetric, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'description'|'id'|'version'> | null): any {
+export function SubscriptionMetricToJSON(json: any): SubscriptionMetric {
+    return SubscriptionMetricToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricToJSONTyped(value?: Omit<SubscriptionMetric, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'description'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

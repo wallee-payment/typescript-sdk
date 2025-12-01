@@ -27,6 +27,7 @@ import {
     SubscriptionProductComponentReferenceStateFromJSON,
     SubscriptionProductComponentReferenceStateFromJSONTyped,
     SubscriptionProductComponentReferenceStateToJSON,
+    SubscriptionProductComponentReferenceStateToJSONTyped,
 } from './SubscriptionProductComponentReferenceState';
 
 /**
@@ -79,6 +80,8 @@ export interface SubscriptionProductComponentReference {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionProductComponentReference interface.
  */
@@ -106,10 +109,15 @@ export function SubscriptionProductComponentReferenceFromJSONTyped(json: any, ig
     };
 }
 
-export function SubscriptionProductComponentReferenceToJSON(value?: Omit<SubscriptionProductComponentReference, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'sku'|'version'> | null): any {
+export function SubscriptionProductComponentReferenceToJSON(json: any): SubscriptionProductComponentReference {
+    return SubscriptionProductComponentReferenceToJSONTyped(json, false);
+}
+
+export function SubscriptionProductComponentReferenceToJSONTyped(value?: Omit<SubscriptionProductComponentReference, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'sku'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': SubscriptionProductComponentReferenceStateToJSON(value['state']),

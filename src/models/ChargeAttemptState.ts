@@ -57,3 +57,7 @@ export function ChargeAttemptStateToJSON(value?: ChargeAttemptState | null): any
     return value as any;
 }
 
+export function ChargeAttemptStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ChargeAttemptState {
+    return value as ChargeAttemptState;
+}
+

@@ -27,6 +27,7 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -85,10 +86,15 @@ export function ManualTaskTypeFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function ManualTaskTypeToJSON(value?: Omit<ManualTaskType, 'features'|'name'|'description'|'id'> | null): any {
+export function ManualTaskTypeToJSON(json: any): ManualTaskType {
+    return ManualTaskTypeToJSONTyped(json, false);
+}
+
+export function ManualTaskTypeToJSONTyped(value?: Omit<ManualTaskType, 'features'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -57,3 +57,7 @@ export function ManualTaskStateToJSON(value?: ManualTaskState | null): any {
     return value as any;
 }
 
+export function ManualTaskStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ManualTaskState {
+    return value as ManualTaskState;
+}
+

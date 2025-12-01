@@ -71,10 +71,15 @@ export function DebtCollectionReceiptSourceFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function DebtCollectionReceiptSourceToJSON(value?: Omit<DebtCollectionReceiptSource, 'name'|'description'|'id'> | null): any {
+export function DebtCollectionReceiptSourceToJSON(json: any): DebtCollectionReceiptSource {
+    return DebtCollectionReceiptSourceToJSONTyped(json, false);
+}
+
+export function DebtCollectionReceiptSourceToJSONTyped(value?: Omit<DebtCollectionReceiptSource, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

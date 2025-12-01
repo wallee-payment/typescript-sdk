@@ -27,6 +27,7 @@ import {
     ProductSetupFeeFromJSON,
     ProductSetupFeeFromJSONTyped,
     ProductSetupFeeToJSON,
+    ProductSetupFeeToJSONTyped,
 } from './ProductSetupFee';
 
 /**
@@ -85,10 +86,15 @@ export function ProductSetupFeeSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function ProductSetupFeeSearchResponseToJSON(value?: Omit<ProductSetupFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ProductSetupFeeSearchResponseToJSON(json: any): ProductSetupFeeSearchResponse {
+    return ProductSetupFeeSearchResponseToJSONTyped(json, false);
+}
+
+export function ProductSetupFeeSearchResponseToJSONTyped(value?: Omit<ProductSetupFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

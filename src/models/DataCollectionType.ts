@@ -56,3 +56,7 @@ export function DataCollectionTypeToJSON(value?: DataCollectionType | null): any
     return value as any;
 }
 
+export function DataCollectionTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): DataCollectionType {
+    return value as DataCollectionType;
+}
+

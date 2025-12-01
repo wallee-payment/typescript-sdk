@@ -27,6 +27,7 @@ import {
     ChargeFlowLevelFromJSON,
     ChargeFlowLevelFromJSONTyped,
     ChargeFlowLevelToJSON,
+    ChargeFlowLevelToJSONTyped,
 } from './ChargeFlowLevel';
 
 /**
@@ -85,10 +86,15 @@ export function ChargeFlowLevelSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function ChargeFlowLevelSearchResponseToJSON(value?: Omit<ChargeFlowLevelSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ChargeFlowLevelSearchResponseToJSON(json: any): ChargeFlowLevelSearchResponse {
+    return ChargeFlowLevelSearchResponseToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelSearchResponseToJSONTyped(value?: Omit<ChargeFlowLevelSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

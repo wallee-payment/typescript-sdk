@@ -27,6 +27,7 @@ import {
     StaticValueFromJSON,
     StaticValueFromJSONTyped,
     StaticValueToJSON,
+    StaticValueToJSONTyped,
 } from './StaticValue';
 
 /**
@@ -78,10 +79,15 @@ export function StaticValueListResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function StaticValueListResponseToJSON(value?: Omit<StaticValueListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function StaticValueListResponseToJSON(json: any): StaticValueListResponse {
+    return StaticValueListResponseToJSONTyped(json, false);
+}
+
+export function StaticValueListResponseToJSONTyped(value?: Omit<StaticValueListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

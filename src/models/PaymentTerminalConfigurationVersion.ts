@@ -27,12 +27,14 @@ import {
     PaymentTerminalConfigurationVersionStateFromJSON,
     PaymentTerminalConfigurationVersionStateFromJSONTyped,
     PaymentTerminalConfigurationVersionStateToJSON,
+    PaymentTerminalConfigurationVersionStateToJSONTyped,
 } from './PaymentTerminalConfigurationVersionState';
 import type { PaymentTerminalConfiguration } from './PaymentTerminalConfiguration';
 import {
     PaymentTerminalConfigurationFromJSON,
     PaymentTerminalConfigurationFromJSONTyped,
     PaymentTerminalConfigurationToJSON,
+    PaymentTerminalConfigurationToJSONTyped,
 } from './PaymentTerminalConfiguration';
 
 /**
@@ -127,6 +129,8 @@ export interface PaymentTerminalConfigurationVersion {
     state?: PaymentTerminalConfigurationVersionState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentTerminalConfigurationVersion interface.
  */
@@ -161,10 +165,15 @@ export function PaymentTerminalConfigurationVersionFromJSONTyped(json: any, igno
     };
 }
 
-export function PaymentTerminalConfigurationVersionToJSON(value?: Omit<PaymentTerminalConfigurationVersion, 'maintenanceWindowStart'|'plannedPurgeDate'|'timeZone'|'versionAppliedImmediately'|'createdOn'|'version'|'linkedSpaceId'|'connectorConfigurations'|'createdBy'|'defaultCurrency'|'maintenanceWindowDuration'|'id'> | null): any {
+export function PaymentTerminalConfigurationVersionToJSON(json: any): PaymentTerminalConfigurationVersion {
+    return PaymentTerminalConfigurationVersionToJSONTyped(json, false);
+}
+
+export function PaymentTerminalConfigurationVersionToJSONTyped(value?: Omit<PaymentTerminalConfigurationVersion, 'maintenanceWindowStart'|'plannedPurgeDate'|'timeZone'|'versionAppliedImmediately'|'createdOn'|'version'|'linkedSpaceId'|'connectorConfigurations'|'createdBy'|'defaultCurrency'|'maintenanceWindowDuration'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'configuration': PaymentTerminalConfigurationToJSON(value['_configuration']),

@@ -65,10 +65,15 @@ export function CustomerCommentCreateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function CustomerCommentCreateToJSON(value?: CustomerCommentCreate | null): any {
+export function CustomerCommentCreateToJSON(json: any): CustomerCommentCreate {
+    return CustomerCommentCreateToJSONTyped(json, false);
+}
+
+export function CustomerCommentCreateToJSONTyped(value?: CustomerCommentCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

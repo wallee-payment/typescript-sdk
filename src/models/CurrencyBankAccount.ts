@@ -27,12 +27,14 @@ import {
     BankAccountEnvironmentFromJSON,
     BankAccountEnvironmentFromJSONTyped,
     BankAccountEnvironmentToJSON,
+    BankAccountEnvironmentToJSONTyped,
 } from './BankAccountEnvironment';
 import type { BankAccount } from './BankAccount';
 import {
     BankAccountFromJSON,
     BankAccountFromJSONTyped,
     BankAccountToJSON,
+    BankAccountToJSONTyped,
 } from './BankAccount';
 
 /**
@@ -79,6 +81,8 @@ export interface CurrencyBankAccount {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the CurrencyBankAccount interface.
  */
@@ -105,10 +109,15 @@ export function CurrencyBankAccountFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function CurrencyBankAccountToJSON(value?: Omit<CurrencyBankAccount, 'linkedSpaceId'|'currency'|'id'|'version'> | null): any {
+export function CurrencyBankAccountToJSON(json: any): CurrencyBankAccount {
+    return CurrencyBankAccountToJSONTyped(json, false);
+}
+
+export function CurrencyBankAccountToJSONTyped(value?: Omit<CurrencyBankAccount, 'linkedSpaceId'|'currency'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'bankAccount': BankAccountToJSON(value['bankAccount']),

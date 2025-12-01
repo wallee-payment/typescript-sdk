@@ -27,6 +27,7 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -134,10 +135,15 @@ export function PermissionFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function PermissionToJSON(value?: Omit<Permission, 'parent'|'name'|'pathToRoot'|'webAppEnabled'|'description'|'id'|'leaf'|'title'|'group'|'twoFactorRequired'> | null): any {
+export function PermissionToJSON(json: any): Permission {
+    return PermissionToJSONTyped(json, false);
+}
+
+export function PermissionToJSONTyped(value?: Omit<Permission, 'parent'|'name'|'pathToRoot'|'webAppEnabled'|'description'|'id'|'leaf'|'title'|'group'|'twoFactorRequired'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feature': FeatureToJSON(value['feature']),

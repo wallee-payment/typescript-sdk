@@ -27,6 +27,7 @@ import {
     RefundCommentFromJSON,
     RefundCommentFromJSONTyped,
     RefundCommentToJSON,
+    RefundCommentToJSONTyped,
 } from './RefundComment';
 
 /**
@@ -85,10 +86,15 @@ export function RefundCommentSearchResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function RefundCommentSearchResponseToJSON(value?: Omit<RefundCommentSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function RefundCommentSearchResponseToJSON(json: any): RefundCommentSearchResponse {
+    return RefundCommentSearchResponseToJSONTyped(json, false);
+}
+
+export function RefundCommentSearchResponseToJSONTyped(value?: Omit<RefundCommentSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

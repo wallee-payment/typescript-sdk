@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -73,6 +74,8 @@ export interface SubscriptionAffiliateCreate {
     externalId: string;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionAffiliateCreate interface.
  */
@@ -101,10 +104,15 @@ export function SubscriptionAffiliateCreateFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function SubscriptionAffiliateCreateToJSON(value?: SubscriptionAffiliateCreate | null): any {
+export function SubscriptionAffiliateCreateToJSON(json: any): SubscriptionAffiliateCreate {
+    return SubscriptionAffiliateCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionAffiliateCreateToJSONTyped(value?: SubscriptionAffiliateCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'metaData': value['metaData'],

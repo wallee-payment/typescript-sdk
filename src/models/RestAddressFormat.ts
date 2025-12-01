@@ -27,6 +27,7 @@ import {
     RestAddressFormatFieldFromJSON,
     RestAddressFormatFieldFromJSONTyped,
     RestAddressFormatFieldToJSON,
+    RestAddressFormatFieldToJSONTyped,
 } from './RestAddressFormatField';
 
 /**
@@ -85,10 +86,15 @@ export function RestAddressFormatFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function RestAddressFormatToJSON(value?: Omit<RestAddressFormat, 'postCodeExamples'|'requiredFields'|'usedFields'|'postCodeRegex'> | null): any {
+export function RestAddressFormatToJSON(json: any): RestAddressFormat {
+    return RestAddressFormatToJSONTyped(json, false);
+}
+
+export function RestAddressFormatToJSONTyped(value?: Omit<RestAddressFormat, 'postCodeExamples'|'requiredFields'|'usedFields'|'postCodeRegex'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

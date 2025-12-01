@@ -27,6 +27,7 @@ import {
     TokenFromJSON,
     TokenFromJSONTyped,
     TokenToJSON,
+    TokenToJSONTyped,
 } from './Token';
 
 /**
@@ -78,10 +79,15 @@ export function TokenListResponseFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function TokenListResponseToJSON(value?: Omit<TokenListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function TokenListResponseToJSON(json: any): TokenListResponse {
+    return TokenListResponseToJSONTyped(json, false);
+}
+
+export function TokenListResponseToJSONTyped(value?: Omit<TokenListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

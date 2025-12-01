@@ -27,18 +27,21 @@ import {
     DunningFlowFromJSON,
     DunningFlowFromJSONTyped,
     DunningFlowToJSON,
+    DunningFlowToJSONTyped,
 } from './DunningFlow';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DocumentTemplate } from './DocumentTemplate';
 import {
     DocumentTemplateFromJSON,
     DocumentTemplateFromJSONTyped,
     DocumentTemplateToJSON,
+    DocumentTemplateToJSONTyped,
 } from './DocumentTemplate';
 
 /**
@@ -127,6 +130,8 @@ export interface DunningFlowLevel {
     flow?: DunningFlow;
 }
 
+
+
 /**
  * Check if a given object implements the DunningFlowLevel interface.
  */
@@ -160,10 +165,15 @@ export function DunningFlowLevelFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function DunningFlowLevelToJSON(value?: Omit<DunningFlowLevel, 'period'|'plannedPurgeDate'|'priority'|'title'|'processor'|'version'|'linkedSpaceId'|'documentText'|'name'|'id'> | null): any {
+export function DunningFlowLevelToJSON(json: any): DunningFlowLevel {
+    return DunningFlowLevelToJSONTyped(json, false);
+}
+
+export function DunningFlowLevelToJSONTyped(value?: Omit<DunningFlowLevel, 'period'|'plannedPurgeDate'|'priority'|'title'|'processor'|'version'|'linkedSpaceId'|'documentText'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reminderTemplate': DocumentTemplateToJSON(value['reminderTemplate']),

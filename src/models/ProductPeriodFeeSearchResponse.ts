@@ -27,6 +27,7 @@ import {
     ProductPeriodFeeFromJSON,
     ProductPeriodFeeFromJSONTyped,
     ProductPeriodFeeToJSON,
+    ProductPeriodFeeToJSONTyped,
 } from './ProductPeriodFee';
 
 /**
@@ -85,10 +86,15 @@ export function ProductPeriodFeeSearchResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function ProductPeriodFeeSearchResponseToJSON(value?: Omit<ProductPeriodFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ProductPeriodFeeSearchResponseToJSON(json: any): ProductPeriodFeeSearchResponse {
+    return ProductPeriodFeeSearchResponseToJSONTyped(json, false);
+}
+
+export function ProductPeriodFeeSearchResponseToJSONTyped(value?: Omit<ProductPeriodFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

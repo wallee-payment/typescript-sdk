@@ -27,6 +27,7 @@ import {
     PaymentConnectorFromJSON,
     PaymentConnectorFromJSONTyped,
     PaymentConnectorToJSON,
+    PaymentConnectorToJSONTyped,
 } from './PaymentConnector';
 
 /**
@@ -85,10 +86,15 @@ export function PaymentConnectorSearchResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function PaymentConnectorSearchResponseToJSON(value?: Omit<PaymentConnectorSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function PaymentConnectorSearchResponseToJSON(json: any): PaymentConnectorSearchResponse {
+    return PaymentConnectorSearchResponseToJSONTyped(json, false);
+}
+
+export function PaymentConnectorSearchResponseToJSONTyped(value?: Omit<PaymentConnectorSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

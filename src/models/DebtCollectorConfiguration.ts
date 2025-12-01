@@ -27,18 +27,21 @@ import {
     DebtCollectorFromJSON,
     DebtCollectorFromJSONTyped,
     DebtCollectorToJSON,
+    DebtCollectorToJSONTyped,
 } from './DebtCollector';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DebtCollectorCondition } from './DebtCollectorCondition';
 import {
     DebtCollectorConditionFromJSON,
     DebtCollectorConditionFromJSONTyped,
     DebtCollectorConditionToJSON,
+    DebtCollectorConditionToJSONTyped,
 } from './DebtCollectorCondition';
 
 /**
@@ -115,6 +118,8 @@ export interface DebtCollectorConfiguration {
     collector?: DebtCollector;
 }
 
+
+
 /**
  * Check if a given object implements the DebtCollectorConfiguration interface.
  */
@@ -136,7 +141,7 @@ export function DebtCollectorConfigurationFromJSONTyped(json: any, ignoreDiscrim
         'skipReviewEnabled': json['skipReviewEnabled'] == null ? undefined : json['skipReviewEnabled'],
         'name': json['name'] == null ? undefined : json['name'],
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'conditions': json['conditions'] == null ? undefined : ((json['conditions'] as Array<any>).map(DebtCollectorConditionFromJSON)),
@@ -146,10 +151,15 @@ export function DebtCollectorConfigurationFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function DebtCollectorConfigurationToJSON(value?: Omit<DebtCollectorConfiguration, 'linkedSpaceId'|'skipReviewEnabled'|'name'|'plannedPurgeDate'|'enabledSpaceViews'|'id'|'conditions'|'priority'|'version'> | null): any {
+export function DebtCollectorConfigurationToJSON(json: any): DebtCollectorConfiguration {
+    return DebtCollectorConfigurationToJSONTyped(json, false);
+}
+
+export function DebtCollectorConfigurationToJSONTyped(value?: Omit<DebtCollectorConfiguration, 'linkedSpaceId'|'skipReviewEnabled'|'name'|'plannedPurgeDate'|'enabledSpaceViews'|'id'|'conditions'|'priority'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

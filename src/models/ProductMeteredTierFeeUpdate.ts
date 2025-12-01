@@ -27,6 +27,7 @@ import {
     PersistableCurrencyAmountUpdateFromJSON,
     PersistableCurrencyAmountUpdateFromJSONTyped,
     PersistableCurrencyAmountUpdateToJSON,
+    PersistableCurrencyAmountUpdateToJSONTyped,
 } from './PersistableCurrencyAmountUpdate';
 
 /**
@@ -86,10 +87,15 @@ export function ProductMeteredTierFeeUpdateFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ProductMeteredTierFeeUpdateToJSON(value?: ProductMeteredTierFeeUpdate | null): any {
+export function ProductMeteredTierFeeUpdateToJSON(json: any): ProductMeteredTierFeeUpdate {
+    return ProductMeteredTierFeeUpdateToJSONTyped(json, false);
+}
+
+export function ProductMeteredTierFeeUpdateToJSONTyped(value?: ProductMeteredTierFeeUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'startRange': value['startRange'],

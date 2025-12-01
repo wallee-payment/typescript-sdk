@@ -27,24 +27,28 @@ import {
     SubscriptionSuspensionReasonFromJSON,
     SubscriptionSuspensionReasonFromJSONTyped,
     SubscriptionSuspensionReasonToJSON,
+    SubscriptionSuspensionReasonToJSONTyped,
 } from './SubscriptionSuspensionReason';
 import type { SubscriptionSuspensionAction } from './SubscriptionSuspensionAction';
 import {
     SubscriptionSuspensionActionFromJSON,
     SubscriptionSuspensionActionFromJSONTyped,
     SubscriptionSuspensionActionToJSON,
+    SubscriptionSuspensionActionToJSONTyped,
 } from './SubscriptionSuspensionAction';
 import type { Subscription } from './Subscription';
 import {
     SubscriptionFromJSON,
     SubscriptionFromJSONTyped,
     SubscriptionToJSON,
+    SubscriptionToJSONTyped,
 } from './Subscription';
 import type { SubscriptionSuspensionState } from './SubscriptionSuspensionState';
 import {
     SubscriptionSuspensionStateFromJSON,
     SubscriptionSuspensionStateFromJSONTyped,
     SubscriptionSuspensionStateToJSON,
+    SubscriptionSuspensionStateToJSONTyped,
 } from './SubscriptionSuspensionState';
 
 /**
@@ -139,6 +143,8 @@ export interface SubscriptionSuspension {
     state?: SubscriptionSuspensionState;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionSuspension interface.
  */
@@ -173,10 +179,15 @@ export function SubscriptionSuspensionFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SubscriptionSuspensionToJSON(value?: Omit<SubscriptionSuspension, 'effectiveEndDate'|'note'|'periodBill'|'plannedPurgeDate'|'language'|'createdOn'|'version'|'plannedEndDate'|'linkedSpaceId'|'id'> | null): any {
+export function SubscriptionSuspensionToJSON(json: any): SubscriptionSuspension {
+    return SubscriptionSuspensionToJSONTyped(json, false);
+}
+
+export function SubscriptionSuspensionToJSONTyped(value?: Omit<SubscriptionSuspension, 'effectiveEndDate'|'note'|'periodBill'|'plannedPurgeDate'|'language'|'createdOn'|'version'|'plannedEndDate'|'linkedSpaceId'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reason': SubscriptionSuspensionReasonToJSON(value['reason']),

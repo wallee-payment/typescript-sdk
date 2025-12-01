@@ -59,3 +59,7 @@ export function PaymentContractStateToJSON(value?: PaymentContractState | null):
     return value as any;
 }
 
+export function PaymentContractStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentContractState {
+    return value as PaymentContractState;
+}
+

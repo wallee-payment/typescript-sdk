@@ -64,10 +64,15 @@ export function SubscriptionProductRetirementRequestFromJSONTyped(json: any, ign
     };
 }
 
-export function SubscriptionProductRetirementRequestToJSON(value?: SubscriptionProductRetirementRequest | null): any {
+export function SubscriptionProductRetirementRequestToJSON(json: any): SubscriptionProductRetirementRequest {
+    return SubscriptionProductRetirementRequestToJSONTyped(json, false);
+}
+
+export function SubscriptionProductRetirementRequestToJSONTyped(value?: SubscriptionProductRetirementRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'respectTerminationPeriods': value['respectTerminationPeriods'],

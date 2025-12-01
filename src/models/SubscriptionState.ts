@@ -62,3 +62,7 @@ export function SubscriptionStateToJSON(value?: SubscriptionState | null): any {
     return value as any;
 }
 
+export function SubscriptionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionState {
+    return value as SubscriptionState;
+}
+

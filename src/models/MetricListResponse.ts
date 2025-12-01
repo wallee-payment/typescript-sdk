@@ -27,6 +27,7 @@ import {
     SubscriptionMetricFromJSON,
     SubscriptionMetricFromJSONTyped,
     SubscriptionMetricToJSON,
+    SubscriptionMetricToJSONTyped,
 } from './SubscriptionMetric';
 
 /**
@@ -78,10 +79,15 @@ export function MetricListResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function MetricListResponseToJSON(value?: Omit<MetricListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function MetricListResponseToJSON(json: any): MetricListResponse {
+    return MetricListResponseToJSONTyped(json, false);
+}
+
+export function MetricListResponseToJSONTyped(value?: Omit<MetricListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

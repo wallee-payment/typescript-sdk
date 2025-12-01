@@ -27,6 +27,7 @@ import {
     TokenVersionFromJSON,
     TokenVersionFromJSONTyped,
     TokenVersionToJSON,
+    TokenVersionToJSONTyped,
 } from './TokenVersion';
 
 /**
@@ -85,10 +86,15 @@ export function TokenVersionSearchResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function TokenVersionSearchResponseToJSON(value?: Omit<TokenVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function TokenVersionSearchResponseToJSON(json: any): TokenVersionSearchResponse {
+    return TokenVersionSearchResponseToJSONTyped(json, false);
+}
+
+export function TokenVersionSearchResponseToJSONTyped(value?: Omit<TokenVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

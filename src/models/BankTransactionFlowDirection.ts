@@ -56,3 +56,7 @@ export function BankTransactionFlowDirectionToJSON(value?: BankTransactionFlowDi
     return value as any;
 }
 
+export function BankTransactionFlowDirectionToJSONTyped(value: any, ignoreDiscriminator: boolean): BankTransactionFlowDirection {
+    return value as BankTransactionFlowDirection;
+}
+

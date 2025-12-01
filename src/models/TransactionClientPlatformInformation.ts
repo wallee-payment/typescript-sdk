@@ -106,10 +106,15 @@ export function TransactionClientPlatformInformationFromJSONTyped(json: any, ign
     };
 }
 
-export function TransactionClientPlatformInformationToJSON(value?: Omit<TransactionClientPlatformInformation, 'spaceId'|'integrationType'|'osVersion'|'platformType'|'sdkVersion'|'id'|'version'|'transaction'> | null): any {
+export function TransactionClientPlatformInformationToJSON(json: any): TransactionClientPlatformInformation {
+    return TransactionClientPlatformInformationToJSONTyped(json, false);
+}
+
+export function TransactionClientPlatformInformationToJSONTyped(value?: Omit<TransactionClientPlatformInformation, 'spaceId'|'integrationType'|'osVersion'|'platformType'|'sdkVersion'|'id'|'version'|'transaction'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

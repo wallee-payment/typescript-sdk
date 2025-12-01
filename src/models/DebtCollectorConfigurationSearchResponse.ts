@@ -27,6 +27,7 @@ import {
     DebtCollectorConfigurationFromJSON,
     DebtCollectorConfigurationFromJSONTyped,
     DebtCollectorConfigurationToJSON,
+    DebtCollectorConfigurationToJSONTyped,
 } from './DebtCollectorConfiguration';
 
 /**
@@ -85,10 +86,15 @@ export function DebtCollectorConfigurationSearchResponseFromJSONTyped(json: any,
     };
 }
 
-export function DebtCollectorConfigurationSearchResponseToJSON(value?: Omit<DebtCollectorConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function DebtCollectorConfigurationSearchResponseToJSON(json: any): DebtCollectorConfigurationSearchResponse {
+    return DebtCollectorConfigurationSearchResponseToJSONTyped(json, false);
+}
+
+export function DebtCollectorConfigurationSearchResponseToJSONTyped(value?: Omit<DebtCollectorConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -57,3 +57,7 @@ export function ManualTaskActionStyleToJSON(value?: ManualTaskActionStyle | null
     return value as any;
 }
 
+export function ManualTaskActionStyleToJSONTyped(value: any, ignoreDiscriminator: boolean): ManualTaskActionStyle {
+    return value as ManualTaskActionStyle;
+}
+

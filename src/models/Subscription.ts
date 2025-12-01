@@ -27,30 +27,35 @@ import {
     SubscriptionAffiliateFromJSON,
     SubscriptionAffiliateFromJSONTyped,
     SubscriptionAffiliateToJSON,
+    SubscriptionAffiliateToJSONTyped,
 } from './SubscriptionAffiliate';
 import type { Subscriber } from './Subscriber';
 import {
     SubscriberFromJSON,
     SubscriberFromJSONTyped,
     SubscriberToJSON,
+    SubscriberToJSONTyped,
 } from './Subscriber';
 import type { SubscriptionState } from './SubscriptionState';
 import {
     SubscriptionStateFromJSON,
     SubscriptionStateFromJSONTyped,
     SubscriptionStateToJSON,
+    SubscriptionStateToJSONTyped,
 } from './SubscriptionState';
 import type { Token } from './Token';
 import {
     TokenFromJSON,
     TokenFromJSONTyped,
     TokenToJSON,
+    TokenToJSONTyped,
 } from './Token';
 import type { SubscriptionProductVersion } from './SubscriptionProductVersion';
 import {
     SubscriptionProductVersionFromJSON,
     SubscriptionProductVersionFromJSONTyped,
     SubscriptionProductVersionToJSON,
+    SubscriptionProductVersionToJSONTyped,
 } from './SubscriptionProductVersion';
 
 /**
@@ -181,6 +186,8 @@ export interface Subscription {
     readonly terminationScheduledOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the Subscription interface.
  */
@@ -221,10 +228,15 @@ export function SubscriptionFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function SubscriptionToJSON(value?: Omit<Subscription, 'plannedPurgeDate'|'terminatedBy'|'description'|'language'|'initializedOn'|'createdOn'|'version'|'reference'|'terminatedOn'|'linkedSpaceId'|'activatedOn'|'terminatingOn'|'plannedTerminationDate'|'id'|'terminationScheduledOn'> | null): any {
+export function SubscriptionToJSON(json: any): Subscription {
+    return SubscriptionToJSONTyped(json, false);
+}
+
+export function SubscriptionToJSONTyped(value?: Omit<Subscription, 'plannedPurgeDate'|'terminatedBy'|'description'|'language'|'initializedOn'|'createdOn'|'version'|'reference'|'terminatedOn'|'linkedSpaceId'|'activatedOn'|'terminatingOn'|'plannedTerminationDate'|'id'|'terminationScheduledOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'subscriber': SubscriberToJSON(value['subscriber']),

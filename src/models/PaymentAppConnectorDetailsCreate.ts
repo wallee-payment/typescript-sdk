@@ -57,10 +57,15 @@ export function PaymentAppConnectorDetailsCreateFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function PaymentAppConnectorDetailsCreateToJSON(value?: PaymentAppConnectorDetailsCreate | null): any {
+export function PaymentAppConnectorDetailsCreateToJSON(json: any): PaymentAppConnectorDetailsCreate {
+    return PaymentAppConnectorDetailsCreateToJSONTyped(json, false);
+}
+
+export function PaymentAppConnectorDetailsCreateToJSONTyped(value?: PaymentAppConnectorDetailsCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'externalId': value['externalId'],

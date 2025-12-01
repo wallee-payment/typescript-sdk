@@ -27,24 +27,28 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 import type { LineItemCreate } from './LineItemCreate';
 import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { TokenizationMode } from './TokenizationMode';
 import {
     TokenizationModeFromJSON,
     TokenizationModeFromJSONTyped,
     TokenizationModeToJSON,
+    TokenizationModeToJSONTyped,
 } from './TokenizationMode';
 import type { TransactionCompletionBehavior } from './TransactionCompletionBehavior';
 import {
     TransactionCompletionBehaviorFromJSON,
     TransactionCompletionBehaviorFromJSONTyped,
     TransactionCompletionBehaviorToJSON,
+    TransactionCompletionBehaviorToJSONTyped,
 } from './TransactionCompletionBehavior';
 
 /**
@@ -169,6 +173,8 @@ export interface AbstractTransactionPending {
     failedUrl?: string;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractTransactionPending interface.
  */
@@ -208,10 +214,15 @@ export function AbstractTransactionPendingFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function AbstractTransactionPendingToJSON(value?: AbstractTransactionPending | null): any {
+export function AbstractTransactionPendingToJSON(json: any): AbstractTransactionPending {
+    return AbstractTransactionPendingToJSONTyped(json, false);
+}
+
+export function AbstractTransactionPendingToJSONTyped(value?: AbstractTransactionPending | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'customerEmailAddress': value['customerEmailAddress'],

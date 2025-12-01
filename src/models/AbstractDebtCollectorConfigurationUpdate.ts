@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DebtCollectorCondition } from './DebtCollectorCondition';
 import {
     DebtCollectorConditionFromJSON,
     DebtCollectorConditionFromJSONTyped,
     DebtCollectorConditionToJSON,
+    DebtCollectorConditionToJSONTyped,
 } from './DebtCollectorCondition';
 
 /**
@@ -79,6 +81,8 @@ export interface AbstractDebtCollectorConfigurationUpdate {
     priority?: number;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractDebtCollectorConfigurationUpdate interface.
  */
@@ -98,17 +102,22 @@ export function AbstractDebtCollectorConfigurationUpdateFromJSONTyped(json: any,
         
         'skipReviewEnabled': json['skipReviewEnabled'] == null ? undefined : json['skipReviewEnabled'],
         'name': json['name'] == null ? undefined : json['name'],
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'conditions': json['conditions'] == null ? undefined : ((json['conditions'] as Array<any>).map(DebtCollectorConditionFromJSON)),
         'priority': json['priority'] == null ? undefined : json['priority'],
     };
 }
 
-export function AbstractDebtCollectorConfigurationUpdateToJSON(value?: AbstractDebtCollectorConfigurationUpdate | null): any {
+export function AbstractDebtCollectorConfigurationUpdateToJSON(json: any): AbstractDebtCollectorConfigurationUpdate {
+    return AbstractDebtCollectorConfigurationUpdateToJSONTyped(json, false);
+}
+
+export function AbstractDebtCollectorConfigurationUpdateToJSONTyped(value?: AbstractDebtCollectorConfigurationUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'skipReviewEnabled': value['skipReviewEnabled'],

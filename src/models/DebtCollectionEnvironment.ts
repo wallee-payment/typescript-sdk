@@ -56,3 +56,7 @@ export function DebtCollectionEnvironmentToJSON(value?: DebtCollectionEnvironmen
     return value as any;
 }
 
+export function DebtCollectionEnvironmentToJSONTyped(value: any, ignoreDiscriminator: boolean): DebtCollectionEnvironment {
+    return value as DebtCollectionEnvironment;
+}
+

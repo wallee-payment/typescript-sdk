@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { Feature } from './Feature';
 import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -127,6 +129,8 @@ export interface Scope {
     readonly sandboxDomainName?: string;
 }
 
+
+
 /**
  * Check if a given object implements the Scope interface.
  */
@@ -161,10 +165,15 @@ export function ScopeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sco
     };
 }
 
-export function ScopeToJSON(value?: Omit<Scope, 'plannedPurgeDate'|'sslActive'|'version'|'machineName'|'url'|'features'|'themes'|'port'|'preprodDomainName'|'domainName'|'name'|'id'|'sandboxDomainName'> | null): any {
+export function ScopeToJSON(json: any): Scope {
+    return ScopeToJSONTyped(json, false);
+}
+
+export function ScopeToJSONTyped(value?: Omit<Scope, 'plannedPurgeDate'|'sslActive'|'version'|'machineName'|'url'|'features'|'themes'|'port'|'preprodDomainName'|'domainName'|'name'|'id'|'sandboxDomainName'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

@@ -27,6 +27,7 @@ import {
     TokenizedCardDataCreateFromJSON,
     TokenizedCardDataCreateFromJSONTyped,
     TokenizedCardDataCreateToJSON,
+    TokenizedCardDataCreateToJSONTyped,
 } from './TokenizedCardDataCreate';
 
 /**
@@ -71,10 +72,15 @@ export function TokenizedCardRequestFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function TokenizedCardRequestToJSON(value?: TokenizedCardRequest | null): any {
+export function TokenizedCardRequestToJSON(json: any): TokenizedCardRequest {
+    return TokenizedCardRequestToJSONTyped(json, false);
+}
+
+export function TokenizedCardRequestToJSONTyped(value?: TokenizedCardRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'cardData': TokenizedCardDataCreateToJSON(value['cardData']),

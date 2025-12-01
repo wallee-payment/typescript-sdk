@@ -27,6 +27,7 @@ import {
     TransactionClientPlatformInformationFromJSON,
     TransactionClientPlatformInformationFromJSONTyped,
     TransactionClientPlatformInformationToJSON,
+    TransactionClientPlatformInformationToJSONTyped,
 } from './TransactionClientPlatformInformation';
 
 /**
@@ -85,10 +86,15 @@ export function ClientPlatformInformationSearchResponseFromJSONTyped(json: any, 
     };
 }
 
-export function ClientPlatformInformationSearchResponseToJSON(value?: Omit<ClientPlatformInformationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ClientPlatformInformationSearchResponseToJSON(json: any): ClientPlatformInformationSearchResponse {
+    return ClientPlatformInformationSearchResponseToJSONTyped(json, false);
+}
+
+export function ClientPlatformInformationSearchResponseToJSONTyped(value?: Omit<ClientPlatformInformationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

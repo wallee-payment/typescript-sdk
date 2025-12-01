@@ -59,3 +59,7 @@ export function LineItemTypeToJSON(value?: LineItemType | null): any {
     return value as any;
 }
 
+export function LineItemTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): LineItemType {
+    return value as LineItemType;
+}
+

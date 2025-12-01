@@ -27,36 +27,42 @@ import {
     ConditionFromJSON,
     ConditionFromJSONTyped,
     ConditionToJSON,
+    ConditionToJSONTyped,
 } from './Condition';
 import type { SalesChannel } from './SalesChannel';
 import {
     SalesChannelFromJSON,
     SalesChannelFromJSONTyped,
     SalesChannelToJSON,
+    SalesChannelToJSONTyped,
 } from './SalesChannel';
 import type { PaymentConnector } from './PaymentConnector';
 import {
     PaymentConnectorFromJSON,
     PaymentConnectorFromJSONTyped,
     PaymentConnectorToJSON,
+    PaymentConnectorToJSONTyped,
 } from './PaymentConnector';
 import type { PaymentProcessorConfiguration } from './PaymentProcessorConfiguration';
 import {
     PaymentProcessorConfigurationFromJSON,
     PaymentProcessorConfigurationFromJSONTyped,
     PaymentProcessorConfigurationToJSON,
+    PaymentProcessorConfigurationToJSONTyped,
 } from './PaymentProcessorConfiguration';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { PaymentMethodConfiguration } from './PaymentMethodConfiguration';
 import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -157,6 +163,8 @@ export interface PaymentConnectorConfiguration {
     readonly conditions?: Array<Condition>;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentConnectorConfiguration interface.
  */
@@ -184,7 +192,7 @@ export function PaymentConnectorConfigurationFromJSONTyped(json: any, ignoreDisc
         'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
         'connector': json['connector'] == null ? undefined : PaymentConnectorFromJSON(json['connector']),
         'name': json['name'] == null ? undefined : json['name'],
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'applicableForTransactionProcessing': json['applicableForTransactionProcessing'] == null ? undefined : json['applicableForTransactionProcessing'],
@@ -192,10 +200,15 @@ export function PaymentConnectorConfigurationFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function PaymentConnectorConfigurationToJSON(value?: Omit<PaymentConnectorConfiguration, 'imagePath'|'plannedPurgeDate'|'priority'|'enabledSalesChannels'|'version'|'linkedSpaceId'|'name'|'enabledSpaceViews'|'id'|'applicableForTransactionProcessing'|'conditions'> | null): any {
+export function PaymentConnectorConfigurationToJSON(json: any): PaymentConnectorConfiguration {
+    return PaymentConnectorConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentConnectorConfigurationToJSONTyped(value?: Omit<PaymentConnectorConfiguration, 'imagePath'|'plannedPurgeDate'|'priority'|'enabledSalesChannels'|'version'|'linkedSpaceId'|'name'|'enabledSpaceViews'|'id'|'applicableForTransactionProcessing'|'conditions'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'paymentMethodConfiguration': PaymentMethodConfigurationToJSON(value['paymentMethodConfiguration']),

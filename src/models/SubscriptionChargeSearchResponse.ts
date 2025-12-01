@@ -27,6 +27,7 @@ import {
     SubscriptionChargeFromJSON,
     SubscriptionChargeFromJSONTyped,
     SubscriptionChargeToJSON,
+    SubscriptionChargeToJSONTyped,
 } from './SubscriptionCharge';
 
 /**
@@ -85,10 +86,15 @@ export function SubscriptionChargeSearchResponseFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function SubscriptionChargeSearchResponseToJSON(value?: Omit<SubscriptionChargeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SubscriptionChargeSearchResponseToJSON(json: any): SubscriptionChargeSearchResponse {
+    return SubscriptionChargeSearchResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionChargeSearchResponseToJSONTyped(value?: Omit<SubscriptionChargeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

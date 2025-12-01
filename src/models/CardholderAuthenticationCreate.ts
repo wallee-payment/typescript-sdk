@@ -27,12 +27,14 @@ import {
     CardAuthenticationVersionFromJSON,
     CardAuthenticationVersionFromJSONTyped,
     CardAuthenticationVersionToJSON,
+    CardAuthenticationVersionToJSONTyped,
 } from './CardAuthenticationVersion';
 import type { CardAuthenticationResponse } from './CardAuthenticationResponse';
 import {
     CardAuthenticationResponseFromJSON,
     CardAuthenticationResponseFromJSONTyped,
     CardAuthenticationResponseToJSON,
+    CardAuthenticationResponseToJSONTyped,
 } from './CardAuthenticationResponse';
 
 /**
@@ -73,6 +75,8 @@ export interface CardholderAuthenticationCreate {
     version: CardAuthenticationVersion;
 }
 
+
+
 /**
  * Check if a given object implements the CardholderAuthenticationCreate interface.
  */
@@ -100,10 +104,15 @@ export function CardholderAuthenticationCreateFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function CardholderAuthenticationCreateToJSON(value?: CardholderAuthenticationCreate | null): any {
+export function CardholderAuthenticationCreateToJSON(json: any): CardholderAuthenticationCreate {
+    return CardholderAuthenticationCreateToJSONTyped(json, false);
+}
+
+export function CardholderAuthenticationCreateToJSONTyped(value?: CardholderAuthenticationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'authenticationIdentifier': value['authenticationIdentifier'],

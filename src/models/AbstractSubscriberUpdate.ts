@@ -27,6 +27,7 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 
 /**
@@ -120,10 +121,15 @@ export function AbstractSubscriberUpdateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function AbstractSubscriberUpdateToJSON(value?: AbstractSubscriberUpdate | null): any {
+export function AbstractSubscriberUpdateToJSON(json: any): AbstractSubscriberUpdate {
+    return AbstractSubscriberUpdateToJSONTyped(json, false);
+}
+
+export function AbstractSubscriberUpdateToJSONTyped(value?: AbstractSubscriberUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

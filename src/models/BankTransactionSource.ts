@@ -71,10 +71,15 @@ export function BankTransactionSourceFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function BankTransactionSourceToJSON(value?: Omit<BankTransactionSource, 'name'|'description'|'id'> | null): any {
+export function BankTransactionSourceToJSON(json: any): BankTransactionSource {
+    return BankTransactionSourceToJSONTyped(json, false);
+}
+
+export function BankTransactionSourceToJSONTyped(value?: Omit<BankTransactionSource, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

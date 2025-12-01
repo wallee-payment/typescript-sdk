@@ -85,10 +85,15 @@ export function SubscriptionComponentConfigurationFromJSONTyped(json: any, ignor
     };
 }
 
-export function SubscriptionComponentConfigurationToJSON(value?: Omit<SubscriptionComponentConfiguration, 'linkedSpaceId'|'component'|'quantity'|'id'|'version'> | null): any {
+export function SubscriptionComponentConfigurationToJSON(json: any): SubscriptionComponentConfiguration {
+    return SubscriptionComponentConfigurationToJSONTyped(json, false);
+}
+
+export function SubscriptionComponentConfigurationToJSONTyped(value?: Omit<SubscriptionComponentConfiguration, 'linkedSpaceId'|'component'|'quantity'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

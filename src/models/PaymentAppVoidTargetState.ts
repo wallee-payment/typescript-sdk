@@ -56,3 +56,7 @@ export function PaymentAppVoidTargetStateToJSON(value?: PaymentAppVoidTargetStat
     return value as any;
 }
 
+export function PaymentAppVoidTargetStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppVoidTargetState {
+    return value as PaymentAppVoidTargetState;
+}
+

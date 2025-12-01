@@ -71,10 +71,15 @@ export function DebtCollectorConditionTypeFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function DebtCollectorConditionTypeToJSON(value?: Omit<DebtCollectorConditionType, 'name'|'description'|'id'> | null): any {
+export function DebtCollectorConditionTypeToJSON(json: any): DebtCollectorConditionType {
+    return DebtCollectorConditionTypeToJSONTyped(json, false);
+}
+
+export function DebtCollectorConditionTypeToJSONTyped(value?: Omit<DebtCollectorConditionType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

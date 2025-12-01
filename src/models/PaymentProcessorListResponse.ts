@@ -27,6 +27,7 @@ import {
     PaymentProcessorFromJSON,
     PaymentProcessorFromJSONTyped,
     PaymentProcessorToJSON,
+    PaymentProcessorToJSONTyped,
 } from './PaymentProcessor';
 
 /**
@@ -78,10 +79,15 @@ export function PaymentProcessorListResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function PaymentProcessorListResponseToJSON(value?: Omit<PaymentProcessorListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function PaymentProcessorListResponseToJSON(json: any): PaymentProcessorListResponse {
+    return PaymentProcessorListResponseToJSONTyped(json, false);
+}
+
+export function PaymentProcessorListResponseToJSONTyped(value?: Omit<PaymentProcessorListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

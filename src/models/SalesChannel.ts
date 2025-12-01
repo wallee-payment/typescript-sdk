@@ -78,10 +78,15 @@ export function SalesChannelFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function SalesChannelToJSON(value?: Omit<SalesChannel, 'sortOrder'|'name'|'description'|'id'> | null): any {
+export function SalesChannelToJSON(json: any): SalesChannel {
+    return SalesChannelToJSONTyped(json, false);
+}
+
+export function SalesChannelToJSONTyped(value?: Omit<SalesChannel, 'sortOrder'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

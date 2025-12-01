@@ -27,18 +27,21 @@ import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { PaymentLinkAddressHandlingMode } from './PaymentLinkAddressHandlingMode';
 import {
     PaymentLinkAddressHandlingModeFromJSON,
     PaymentLinkAddressHandlingModeFromJSONTyped,
     PaymentLinkAddressHandlingModeToJSON,
+    PaymentLinkAddressHandlingModeToJSONTyped,
 } from './PaymentLinkAddressHandlingMode';
 import type { PaymentMethodConfiguration } from './PaymentMethodConfiguration';
 import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -134,6 +137,8 @@ export interface PaymentLinkUpdate {
     billingAddressHandlingMode?: PaymentLinkAddressHandlingMode;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentLinkUpdate interface.
  */
@@ -153,7 +158,7 @@ export function PaymentLinkUpdateFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'shippingAddressHandlingMode': json['shippingAddressHandlingMode'] == null ? undefined : PaymentLinkAddressHandlingModeFromJSON(json['shippingAddressHandlingMode']),
-        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : json['allowedRedirectionDomains'],
+        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : new Set(json['allowedRedirectionDomains']),
         'language': json['language'] == null ? undefined : json['language'],
         'version': json['version'],
         'availableFrom': json['availableFrom'] == null ? undefined : (new Date(json['availableFrom'])),
@@ -168,10 +173,15 @@ export function PaymentLinkUpdateFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function PaymentLinkUpdateToJSON(value?: PaymentLinkUpdate | null): any {
+export function PaymentLinkUpdateToJSON(json: any): PaymentLinkUpdate {
+    return PaymentLinkUpdateToJSONTyped(json, false);
+}
+
+export function PaymentLinkUpdateToJSONTyped(value?: PaymentLinkUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'shippingAddressHandlingMode': PaymentLinkAddressHandlingModeToJSON(value['shippingAddressHandlingMode']),

@@ -27,6 +27,7 @@ import {
     ConditionTypeFromJSON,
     ConditionTypeFromJSONTyped,
     ConditionTypeToJSON,
+    ConditionTypeToJSONTyped,
 } from './ConditionType';
 
 /**
@@ -78,10 +79,15 @@ export function ConditionTypeListResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function ConditionTypeListResponseToJSON(value?: Omit<ConditionTypeListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ConditionTypeListResponseToJSON(json: any): ConditionTypeListResponse {
+    return ConditionTypeListResponseToJSONTyped(json, false);
+}
+
+export function ConditionTypeListResponseToJSONTyped(value?: Omit<ConditionTypeListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

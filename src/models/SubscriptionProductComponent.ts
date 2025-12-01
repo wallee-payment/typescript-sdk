@@ -27,18 +27,21 @@ import {
     SubscriptionProductComponentReferenceFromJSON,
     SubscriptionProductComponentReferenceFromJSONTyped,
     SubscriptionProductComponentReferenceToJSON,
+    SubscriptionProductComponentReferenceToJSONTyped,
 } from './SubscriptionProductComponentReference';
 import type { SubscriptionProductComponentGroup } from './SubscriptionProductComponentGroup';
 import {
     SubscriptionProductComponentGroupFromJSON,
     SubscriptionProductComponentGroupFromJSONTyped,
     SubscriptionProductComponentGroupToJSON,
+    SubscriptionProductComponentGroupToJSONTyped,
 } from './SubscriptionProductComponentGroup';
 import type { TaxClass } from './TaxClass';
 import {
     TaxClassFromJSON,
     TaxClassFromJSONTyped,
     TaxClassToJSON,
+    TaxClassToJSONTyped,
 } from './TaxClass';
 
 /**
@@ -167,10 +170,15 @@ export function SubscriptionProductComponentFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function SubscriptionProductComponentToJSON(value?: Omit<SubscriptionProductComponent, 'description'|'componentChangeWeight'|'maximalQuantity'|'version'|'minimalQuantity'|'linkedSpaceId'|'quantityStep'|'sortOrder'|'name'|'id'|'defaultComponent'> | null): any {
+export function SubscriptionProductComponentToJSON(json: any): SubscriptionProductComponent {
+    return SubscriptionProductComponentToJSONTyped(json, false);
+}
+
+export function SubscriptionProductComponentToJSONTyped(value?: Omit<SubscriptionProductComponent, 'description'|'componentChangeWeight'|'maximalQuantity'|'version'|'minimalQuantity'|'linkedSpaceId'|'quantityStep'|'sortOrder'|'name'|'id'|'defaultComponent'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'taxClass': TaxClassToJSON(value['taxClass']),

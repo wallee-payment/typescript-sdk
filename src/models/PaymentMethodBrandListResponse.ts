@@ -27,6 +27,7 @@ import {
     PaymentMethodBrandFromJSON,
     PaymentMethodBrandFromJSONTyped,
     PaymentMethodBrandToJSON,
+    PaymentMethodBrandToJSONTyped,
 } from './PaymentMethodBrand';
 
 /**
@@ -78,10 +79,15 @@ export function PaymentMethodBrandListResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function PaymentMethodBrandListResponseToJSON(value?: Omit<PaymentMethodBrandListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function PaymentMethodBrandListResponseToJSON(json: any): PaymentMethodBrandListResponse {
+    return PaymentMethodBrandListResponseToJSONTyped(json, false);
+}
+
+export function PaymentMethodBrandListResponseToJSONTyped(value?: Omit<PaymentMethodBrandListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

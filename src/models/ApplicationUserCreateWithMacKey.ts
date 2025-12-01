@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { UserType } from './UserType';
 import {
     UserTypeFromJSON,
     UserTypeFromJSONTyped,
     UserTypeToJSON,
+    UserTypeToJSONTyped,
 } from './UserType';
 
 /**
@@ -103,6 +105,8 @@ export interface ApplicationUserCreateWithMacKey {
     readonly macKey?: string;
 }
 
+
+
 /**
  * Check if a given object implements the ApplicationUserCreateWithMacKey interface.
  */
@@ -133,10 +137,15 @@ export function ApplicationUserCreateWithMacKeyFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function ApplicationUserCreateWithMacKeyToJSON(value?: Omit<ApplicationUserCreateWithMacKey, 'scope'|'plannedPurgeDate'|'id'|'version'|'requestLimit'|'name'|'primaryAccount'|'macKey'> | null): any {
+export function ApplicationUserCreateWithMacKeyToJSON(json: any): ApplicationUserCreateWithMacKey {
+    return ApplicationUserCreateWithMacKeyToJSONTyped(json, false);
+}
+
+export function ApplicationUserCreateWithMacKeyToJSONTyped(value?: Omit<ApplicationUserCreateWithMacKey, 'scope'|'plannedPurgeDate'|'id'|'version'|'requestLimit'|'name'|'primaryAccount'|'macKey'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

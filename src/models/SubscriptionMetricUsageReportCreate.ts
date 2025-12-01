@@ -89,10 +89,15 @@ export function SubscriptionMetricUsageReportCreateFromJSONTyped(json: any, igno
     };
 }
 
-export function SubscriptionMetricUsageReportCreateToJSON(value?: SubscriptionMetricUsageReportCreate | null): any {
+export function SubscriptionMetricUsageReportCreateToJSON(json: any): SubscriptionMetricUsageReportCreate {
+    return SubscriptionMetricUsageReportCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricUsageReportCreateToJSONTyped(value?: SubscriptionMetricUsageReportCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'consumedUnits': value['consumedUnits'],

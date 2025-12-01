@@ -56,3 +56,7 @@ export function PaymentAppRefundTargetStateToJSON(value?: PaymentAppRefundTarget
     return value as any;
 }
 
+export function PaymentAppRefundTargetStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppRefundTargetState {
+    return value as PaymentAppRefundTargetState;
+}
+

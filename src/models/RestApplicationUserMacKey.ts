@@ -27,6 +27,7 @@ import {
     ApplicationKeyStateFromJSON,
     ApplicationKeyStateFromJSONTyped,
     ApplicationKeyStateToJSON,
+    ApplicationKeyStateToJSONTyped,
 } from './ApplicationKeyState';
 
 /**
@@ -55,6 +56,8 @@ export interface RestApplicationUserMacKey {
     state?: ApplicationKeyState;
 }
 
+
+
 /**
  * Check if a given object implements the RestApplicationUserMacKey interface.
  */
@@ -78,10 +81,15 @@ export function RestApplicationUserMacKeyFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function RestApplicationUserMacKeyToJSON(value?: Omit<RestApplicationUserMacKey, 'creationTime'|'id'> | null): any {
+export function RestApplicationUserMacKeyToJSON(json: any): RestApplicationUserMacKey {
+    return RestApplicationUserMacKeyToJSONTyped(json, false);
+}
+
+export function RestApplicationUserMacKeyToJSONTyped(value?: Omit<RestApplicationUserMacKey, 'creationTime'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': ApplicationKeyStateToJSON(value['state']),

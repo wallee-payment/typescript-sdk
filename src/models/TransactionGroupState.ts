@@ -57,3 +57,7 @@ export function TransactionGroupStateToJSON(value?: TransactionGroupState | null
     return value as any;
 }
 
+export function TransactionGroupStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionGroupState {
+    return value as TransactionGroupState;
+}
+

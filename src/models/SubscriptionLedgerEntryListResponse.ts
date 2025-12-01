@@ -27,6 +27,7 @@ import {
     SubscriptionLedgerEntryFromJSON,
     SubscriptionLedgerEntryFromJSONTyped,
     SubscriptionLedgerEntryToJSON,
+    SubscriptionLedgerEntryToJSONTyped,
 } from './SubscriptionLedgerEntry';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriptionLedgerEntryListResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function SubscriptionLedgerEntryListResponseToJSON(value?: Omit<SubscriptionLedgerEntryListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriptionLedgerEntryListResponseToJSON(json: any): SubscriptionLedgerEntryListResponse {
+    return SubscriptionLedgerEntryListResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionLedgerEntryListResponseToJSONTyped(value?: Omit<SubscriptionLedgerEntryListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

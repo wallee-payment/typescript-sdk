@@ -27,6 +27,7 @@ import {
     RenderedTerminalReceiptFromJSON,
     RenderedTerminalReceiptFromJSONTyped,
     RenderedTerminalReceiptToJSON,
+    RenderedTerminalReceiptToJSONTyped,
 } from './RenderedTerminalReceipt';
 
 /**
@@ -78,10 +79,15 @@ export function RenderedTerminalReceiptListResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function RenderedTerminalReceiptListResponseToJSON(value?: Omit<RenderedTerminalReceiptListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function RenderedTerminalReceiptListResponseToJSON(json: any): RenderedTerminalReceiptListResponse {
+    return RenderedTerminalReceiptListResponseToJSONTyped(json, false);
+}
+
+export function RenderedTerminalReceiptListResponseToJSONTyped(value?: Omit<RenderedTerminalReceiptListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

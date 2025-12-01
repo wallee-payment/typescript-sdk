@@ -27,12 +27,14 @@ import {
     AddressCreateFromJSON,
     AddressCreateFromJSONTyped,
     AddressCreateToJSON,
+    AddressCreateToJSONTyped,
 } from './AddressCreate';
 import type { LineItemCreate } from './LineItemCreate';
 import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 
 /**
@@ -107,10 +109,15 @@ export function TransactionInvoiceReplacementFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function TransactionInvoiceReplacementToJSON(value?: TransactionInvoiceReplacement | null): any {
+export function TransactionInvoiceReplacementToJSON(json: any): TransactionInvoiceReplacement {
+    return TransactionInvoiceReplacementToJSONTyped(json, false);
+}
+
+export function TransactionInvoiceReplacementToJSONTyped(value?: TransactionInvoiceReplacement | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': ((value['lineItems'] as Array<any>).map(LineItemCreateToJSON)),

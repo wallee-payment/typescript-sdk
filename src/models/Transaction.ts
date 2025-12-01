@@ -27,90 +27,105 @@ import {
     CustomersPresenceFromJSON,
     CustomersPresenceFromJSONTyped,
     CustomersPresenceToJSON,
+    CustomersPresenceToJSONTyped,
 } from './CustomersPresence';
 import type { TransactionState } from './TransactionState';
 import {
     TransactionStateFromJSON,
     TransactionStateFromJSONTyped,
     TransactionStateToJSON,
+    TransactionStateToJSONTyped,
 } from './TransactionState';
 import type { TransactionEnvironmentSelectionStrategy } from './TransactionEnvironmentSelectionStrategy';
 import {
     TransactionEnvironmentSelectionStrategyFromJSON,
     TransactionEnvironmentSelectionStrategyFromJSONTyped,
     TransactionEnvironmentSelectionStrategyToJSON,
+    TransactionEnvironmentSelectionStrategyToJSONTyped,
 } from './TransactionEnvironmentSelectionStrategy';
 import type { Address } from './Address';
 import {
     AddressFromJSON,
     AddressFromJSONTyped,
     AddressToJSON,
+    AddressToJSONTyped,
 } from './Address';
 import type { TokenizationMode } from './TokenizationMode';
 import {
     TokenizationModeFromJSON,
     TokenizationModeFromJSONTyped,
     TokenizationModeToJSON,
+    TokenizationModeToJSONTyped,
 } from './TokenizationMode';
 import type { TransactionUserInterfaceType } from './TransactionUserInterfaceType';
 import {
     TransactionUserInterfaceTypeFromJSON,
     TransactionUserInterfaceTypeFromJSONTyped,
     TransactionUserInterfaceTypeToJSON,
+    TransactionUserInterfaceTypeToJSONTyped,
 } from './TransactionUserInterfaceType';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { TransactionGroup } from './TransactionGroup';
 import {
     TransactionGroupFromJSON,
     TransactionGroupFromJSONTyped,
     TransactionGroupToJSON,
+    TransactionGroupToJSONTyped,
 } from './TransactionGroup';
 import type { Token } from './Token';
 import {
     TokenFromJSON,
     TokenFromJSONTyped,
     TokenToJSON,
+    TokenToJSONTyped,
 } from './Token';
 import type { PaymentTerminal } from './PaymentTerminal';
 import {
     PaymentTerminalFromJSON,
     PaymentTerminalFromJSONTyped,
     PaymentTerminalToJSON,
+    PaymentTerminalToJSONTyped,
 } from './PaymentTerminal';
 import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
 import {
     PaymentConnectorConfigurationFromJSON,
     PaymentConnectorConfigurationFromJSONTyped,
     PaymentConnectorConfigurationToJSON,
+    PaymentConnectorConfigurationToJSONTyped,
 } from './PaymentConnectorConfiguration';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { TransactionCompletionBehavior } from './TransactionCompletionBehavior';
 import {
     TransactionCompletionBehaviorFromJSON,
     TransactionCompletionBehaviorFromJSONTyped,
     TransactionCompletionBehaviorToJSON,
+    TransactionCompletionBehaviorToJSONTyped,
 } from './TransactionCompletionBehavior';
 import type { Environment } from './Environment';
 import {
     EnvironmentFromJSON,
     EnvironmentFromJSONTyped,
     EnvironmentToJSON,
+    EnvironmentToJSONTyped,
 } from './Environment';
 import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
 import {
     ChargeAttemptEnvironmentFromJSON,
     ChargeAttemptEnvironmentFromJSONTyped,
     ChargeAttemptEnvironmentToJSON,
+    ChargeAttemptEnvironmentToJSONTyped,
 } from './ChargeAttemptEnvironment';
 
 /**
@@ -541,6 +556,8 @@ export interface Transaction {
     readonly failedUrl?: string;
 }
 
+
+
 /**
  * Check if a given object implements the Transaction interface.
  */
@@ -631,10 +648,15 @@ export function TransactionFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function TransactionToJSON(value?: Omit<Transaction, 'totalSettledAmount'|'deviceSessionIdentifier'|'processingOn'|'invoiceMerchantReference'|'language'|'confirmedOn'|'lineItems'|'acceptLanguageHeader'|'javaEnabled'|'confirmedBy'|'id'|'windowWidth'|'allowedPaymentMethodConfigurations'|'chargeRetryEnabled'|'acceptHeader'|'userAgentHeader'|'shippingMethod'|'plannedPurgeDate'|'successUrl'|'timeZone'|'spaceViewId'|'userFailureMessage'|'version'|'internetProtocolAddressCountry'|'linkedSpaceId'|'deliveryDecisionMadeOn'|'autoConfirmationEnabled'|'totalAppliedFees'|'failedOn'|'refundedAmount'|'authorizationAmount'|'screenWidth'|'customerEmailAddress'|'windowHeight'|'authorizationTimeoutOn'|'allowedPaymentMethodBrands'|'createdOn'|'metaData'|'emailsDisabled'|'customerId'|'currency'|'merchantReference'|'authorizationSalesChannel'|'yearsToKeep'|'completedAmount'|'screenHeight'|'internetProtocolAddress'|'endOfLife'|'screenColorDepth'|'createdBy'|'completedOn'|'completionTimeoutOn'|'authorizedOn'|'failedUrl'> | null): any {
+export function TransactionToJSON(json: any): Transaction {
+    return TransactionToJSONTyped(json, false);
+}
+
+export function TransactionToJSONTyped(value?: Omit<Transaction, 'totalSettledAmount'|'deviceSessionIdentifier'|'processingOn'|'invoiceMerchantReference'|'language'|'confirmedOn'|'lineItems'|'acceptLanguageHeader'|'javaEnabled'|'confirmedBy'|'id'|'windowWidth'|'allowedPaymentMethodConfigurations'|'chargeRetryEnabled'|'acceptHeader'|'userAgentHeader'|'shippingMethod'|'plannedPurgeDate'|'successUrl'|'timeZone'|'spaceViewId'|'userFailureMessage'|'version'|'internetProtocolAddressCountry'|'linkedSpaceId'|'deliveryDecisionMadeOn'|'autoConfirmationEnabled'|'totalAppliedFees'|'failedOn'|'refundedAmount'|'authorizationAmount'|'screenWidth'|'customerEmailAddress'|'windowHeight'|'authorizationTimeoutOn'|'allowedPaymentMethodBrands'|'createdOn'|'metaData'|'emailsDisabled'|'customerId'|'currency'|'merchantReference'|'authorizationSalesChannel'|'yearsToKeep'|'completedAmount'|'screenHeight'|'internetProtocolAddress'|'endOfLife'|'screenColorDepth'|'createdBy'|'completedOn'|'completionTimeoutOn'|'authorizedOn'|'failedUrl'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'parent': TransactionToJSON(value['parent']),

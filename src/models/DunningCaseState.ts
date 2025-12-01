@@ -60,3 +60,7 @@ export function DunningCaseStateToJSON(value?: DunningCaseState | null): any {
     return value as any;
 }
 
+export function DunningCaseStateToJSONTyped(value: any, ignoreDiscriminator: boolean): DunningCaseState {
+    return value as DunningCaseState;
+}
+

@@ -27,6 +27,7 @@ import {
     ChargeBankTransactionFromJSON,
     ChargeBankTransactionFromJSONTyped,
     ChargeBankTransactionToJSON,
+    ChargeBankTransactionToJSONTyped,
 } from './ChargeBankTransaction';
 
 /**
@@ -78,10 +79,15 @@ export function ChargeBankTransactionListResponseFromJSONTyped(json: any, ignore
     };
 }
 
-export function ChargeBankTransactionListResponseToJSON(value?: Omit<ChargeBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ChargeBankTransactionListResponseToJSON(json: any): ChargeBankTransactionListResponse {
+    return ChargeBankTransactionListResponseToJSONTyped(json, false);
+}
+
+export function ChargeBankTransactionListResponseToJSONTyped(value?: Omit<ChargeBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

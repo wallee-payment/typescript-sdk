@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -61,6 +62,8 @@ export interface WebhookUrlUpdate {
     version: number;
 }
 
+
+
 /**
  * Check if a given object implements the WebhookUrlUpdate interface.
  */
@@ -86,10 +89,15 @@ export function WebhookUrlUpdateFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function WebhookUrlUpdateToJSON(value?: WebhookUrlUpdate | null): any {
+export function WebhookUrlUpdateToJSON(json: any): WebhookUrlUpdate {
+    return WebhookUrlUpdateToJSONTyped(json, false);
+}
+
+export function WebhookUrlUpdateToJSONTyped(value?: WebhookUrlUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

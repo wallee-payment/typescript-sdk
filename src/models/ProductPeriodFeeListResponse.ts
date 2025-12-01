@@ -27,6 +27,7 @@ import {
     ProductPeriodFeeFromJSON,
     ProductPeriodFeeFromJSONTyped,
     ProductPeriodFeeToJSON,
+    ProductPeriodFeeToJSONTyped,
 } from './ProductPeriodFee';
 
 /**
@@ -78,10 +79,15 @@ export function ProductPeriodFeeListResponseFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function ProductPeriodFeeListResponseToJSON(value?: Omit<ProductPeriodFeeListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ProductPeriodFeeListResponseToJSON(json: any): ProductPeriodFeeListResponse {
+    return ProductPeriodFeeListResponseToJSONTyped(json, false);
+}
+
+export function ProductPeriodFeeListResponseToJSONTyped(value?: Omit<ProductPeriodFeeListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

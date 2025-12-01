@@ -27,18 +27,21 @@ import {
     ScopeFromJSON,
     ScopeFromJSONTyped,
     ScopeToJSON,
+    ScopeToJSONTyped,
 } from './Scope';
 import type { AccountState } from './AccountState';
 import {
     AccountStateFromJSON,
     AccountStateFromJSONTyped,
     AccountStateToJSON,
+    AccountStateToJSONTyped,
 } from './AccountState';
 import type { AccountType } from './AccountType';
 import {
     AccountTypeFromJSON,
     AccountTypeFromJSONTyped,
     AccountTypeToJSON,
+    AccountTypeToJSONTyped,
 } from './AccountType';
 
 /**
@@ -145,6 +148,8 @@ export interface Account {
     readonly subaccountLimit?: number;
 }
 
+
+
 /**
  * Check if a given object implements the Account interface.
  */
@@ -181,10 +186,15 @@ export function AccountFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
     };
 }
 
-export function AccountToJSON(value?: Omit<Account, 'activeOrRestrictedActive'|'deletedOn'|'plannedPurgeDate'|'active'|'createdOn'|'version'|'deletedBy'|'restrictedActive'|'createdBy'|'name'|'id'|'subaccountLimit'> | null): any {
+export function AccountToJSON(json: any): Account {
+    return AccountToJSONTyped(json, false);
+}
+
+export function AccountToJSONTyped(value?: Omit<Account, 'activeOrRestrictedActive'|'deletedOn'|'plannedPurgeDate'|'active'|'createdOn'|'version'|'deletedBy'|'restrictedActive'|'createdBy'|'name'|'id'|'subaccountLimit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'parentAccount': AccountToJSON(value['parentAccount']),

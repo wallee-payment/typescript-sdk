@@ -27,6 +27,7 @@ import {
     ChargeBankTransactionFromJSON,
     ChargeBankTransactionFromJSONTyped,
     ChargeBankTransactionToJSON,
+    ChargeBankTransactionToJSONTyped,
 } from './ChargeBankTransaction';
 
 /**
@@ -85,10 +86,15 @@ export function ChargeBankTransactionSearchResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function ChargeBankTransactionSearchResponseToJSON(value?: Omit<ChargeBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ChargeBankTransactionSearchResponseToJSON(json: any): ChargeBankTransactionSearchResponse {
+    return ChargeBankTransactionSearchResponseToJSONTyped(json, false);
+}
+
+export function ChargeBankTransactionSearchResponseToJSONTyped(value?: Omit<ChargeBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

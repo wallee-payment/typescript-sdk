@@ -57,3 +57,7 @@ export function TransactionCompletionBehaviorToJSON(value?: TransactionCompletio
     return value as any;
 }
 
+export function TransactionCompletionBehaviorToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionCompletionBehavior {
+    return value as TransactionCompletionBehavior;
+}
+

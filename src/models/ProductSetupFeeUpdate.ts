@@ -27,6 +27,7 @@ import {
     PersistableCurrencyAmountUpdateFromJSON,
     PersistableCurrencyAmountUpdateFromJSONTyped,
     PersistableCurrencyAmountUpdateToJSON,
+    PersistableCurrencyAmountUpdateToJSONTyped,
 } from './PersistableCurrencyAmountUpdate';
 
 /**
@@ -107,10 +108,15 @@ export function ProductSetupFeeUpdateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ProductSetupFeeUpdateToJSON(value?: ProductSetupFeeUpdate | null): any {
+export function ProductSetupFeeUpdateToJSON(json: any): ProductSetupFeeUpdate {
+    return ProductSetupFeeUpdateToJSONTyped(json, false);
+}
+
+export function ProductSetupFeeUpdateToJSONTyped(value?: ProductSetupFeeUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'component': value['component'],

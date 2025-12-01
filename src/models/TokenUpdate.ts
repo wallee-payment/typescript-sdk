@@ -100,10 +100,15 @@ export function TokenUpdateFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function TokenUpdateToJSON(value?: TokenUpdate | null): any {
+export function TokenUpdateToJSON(json: any): TokenUpdate {
+    return TokenUpdateToJSONTyped(json, false);
+}
+
+export function TokenUpdateToJSONTyped(value?: TokenUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'enabledForOneClickPayment': value['enabledForOneClickPayment'],

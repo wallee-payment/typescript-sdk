@@ -27,6 +27,7 @@ import {
     CustomerAddressFromJSON,
     CustomerAddressFromJSONTyped,
     CustomerAddressToJSON,
+    CustomerAddressToJSONTyped,
 } from './CustomerAddress';
 
 /**
@@ -85,10 +86,15 @@ export function CustomerAddressSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function CustomerAddressSearchResponseToJSON(value?: Omit<CustomerAddressSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function CustomerAddressSearchResponseToJSON(json: any): CustomerAddressSearchResponse {
+    return CustomerAddressSearchResponseToJSONTyped(json, false);
+}
+
+export function CustomerAddressSearchResponseToJSONTyped(value?: Omit<CustomerAddressSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -71,10 +71,15 @@ export function CompletionLineItemFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function CompletionLineItemToJSON(value?: Omit<CompletionLineItem, 'amount'|'quantity'|'uniqueId'> | null): any {
+export function CompletionLineItemToJSON(json: any): CompletionLineItem {
+    return CompletionLineItemToJSONTyped(json, false);
+}
+
+export function CompletionLineItemToJSONTyped(value?: Omit<CompletionLineItem, 'amount'|'quantity'|'uniqueId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

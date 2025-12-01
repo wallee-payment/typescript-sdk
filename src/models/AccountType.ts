@@ -57,3 +57,7 @@ export function AccountTypeToJSON(value?: AccountType | null): any {
     return value as any;
 }
 
+export function AccountTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): AccountType {
+    return value as AccountType;
+}
+

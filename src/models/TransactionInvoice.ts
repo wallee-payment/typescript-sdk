@@ -27,30 +27,35 @@ import {
     AddressFromJSON,
     AddressFromJSONTyped,
     AddressToJSON,
+    AddressToJSONTyped,
 } from './Address';
 import type { Environment } from './Environment';
 import {
     EnvironmentFromJSON,
     EnvironmentFromJSONTyped,
     EnvironmentToJSON,
+    EnvironmentToJSONTyped,
 } from './Environment';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { TransactionInvoiceState } from './TransactionInvoiceState';
 import {
     TransactionInvoiceStateFromJSON,
     TransactionInvoiceStateFromJSONTyped,
     TransactionInvoiceStateToJSON,
+    TransactionInvoiceStateToJSONTyped,
 } from './TransactionInvoiceState';
 import type { TransactionCompletion } from './TransactionCompletion';
 import {
     TransactionCompletionFromJSON,
     TransactionCompletionFromJSONTyped,
     TransactionCompletionToJSON,
+    TransactionCompletionToJSONTyped,
 } from './TransactionCompletion';
 
 /**
@@ -199,6 +204,8 @@ export interface TransactionInvoice {
     readonly merchantReference?: string;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionInvoice interface.
  */
@@ -242,10 +249,15 @@ export function TransactionInvoiceFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function TransactionInvoiceToJSON(value?: Omit<TransactionInvoice, 'derecognizedOn'|'amount'|'dueOn'|'outstandingAmount'|'plannedPurgeDate'|'externalId'|'timeZone'|'language'|'spaceViewId'|'createdOn'|'paidOn'|'version'|'lineItems'|'linkedSpaceId'|'derecognizedBy'|'id'|'linkedTransaction'|'taxAmount'|'merchantReference'> | null): any {
+export function TransactionInvoiceToJSON(json: any): TransactionInvoice {
+    return TransactionInvoiceToJSONTyped(json, false);
+}
+
+export function TransactionInvoiceToJSONTyped(value?: Omit<TransactionInvoice, 'derecognizedOn'|'amount'|'dueOn'|'outstandingAmount'|'plannedPurgeDate'|'externalId'|'timeZone'|'language'|'spaceViewId'|'createdOn'|'paidOn'|'version'|'lineItems'|'linkedSpaceId'|'derecognizedBy'|'id'|'linkedTransaction'|'taxAmount'|'merchantReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'completion': TransactionCompletionToJSON(value['completion']),

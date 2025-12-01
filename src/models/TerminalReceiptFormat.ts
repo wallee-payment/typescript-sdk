@@ -56,3 +56,7 @@ export function TerminalReceiptFormatToJSON(value?: TerminalReceiptFormat | null
     return value as any;
 }
 
+export function TerminalReceiptFormatToJSONTyped(value: any, ignoreDiscriminator: boolean): TerminalReceiptFormat {
+    return value as TerminalReceiptFormat;
+}
+

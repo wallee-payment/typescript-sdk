@@ -27,6 +27,7 @@ import {
     RefundRecoveryBankTransactionFromJSON,
     RefundRecoveryBankTransactionFromJSONTyped,
     RefundRecoveryBankTransactionToJSON,
+    RefundRecoveryBankTransactionToJSONTyped,
 } from './RefundRecoveryBankTransaction';
 
 /**
@@ -85,10 +86,15 @@ export function RefundRecoveryBankTransactionSearchResponseFromJSONTyped(json: a
     };
 }
 
-export function RefundRecoveryBankTransactionSearchResponseToJSON(value?: Omit<RefundRecoveryBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function RefundRecoveryBankTransactionSearchResponseToJSON(json: any): RefundRecoveryBankTransactionSearchResponse {
+    return RefundRecoveryBankTransactionSearchResponseToJSONTyped(json, false);
+}
+
+export function RefundRecoveryBankTransactionSearchResponseToJSONTyped(value?: Omit<RefundRecoveryBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

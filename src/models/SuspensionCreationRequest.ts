@@ -27,6 +27,7 @@ import {
     SubscriptionSuspensionActionFromJSON,
     SubscriptionSuspensionActionFromJSONTyped,
     SubscriptionSuspensionActionToJSON,
+    SubscriptionSuspensionActionToJSONTyped,
 } from './SubscriptionSuspensionAction';
 
 /**
@@ -55,6 +56,8 @@ export interface SuspensionCreationRequest {
     plannedEndDate?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the SuspensionCreationRequest interface.
  */
@@ -78,10 +81,15 @@ export function SuspensionCreationRequestFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function SuspensionCreationRequestToJSON(value?: SuspensionCreationRequest | null): any {
+export function SuspensionCreationRequestToJSON(json: any): SuspensionCreationRequest {
+    return SuspensionCreationRequestToJSONTyped(json, false);
+}
+
+export function SuspensionCreationRequestToJSONTyped(value?: SuspensionCreationRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'note': value['note'],

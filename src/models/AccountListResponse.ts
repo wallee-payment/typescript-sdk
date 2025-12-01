@@ -27,6 +27,7 @@ import {
     AccountFromJSON,
     AccountFromJSONTyped,
     AccountToJSON,
+    AccountToJSONTyped,
 } from './Account';
 
 /**
@@ -78,10 +79,15 @@ export function AccountListResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function AccountListResponseToJSON(value?: Omit<AccountListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function AccountListResponseToJSON(json: any): AccountListResponse {
+    return AccountListResponseToJSONTyped(json, false);
+}
+
+export function AccountListResponseToJSONTyped(value?: Omit<AccountListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

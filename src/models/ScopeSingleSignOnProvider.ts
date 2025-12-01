@@ -27,12 +27,14 @@ import {
     ScopeFromJSON,
     ScopeFromJSONTyped,
     ScopeToJSON,
+    ScopeToJSONTyped,
 } from './Scope';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -85,6 +87,8 @@ export interface ScopeSingleSignOnProvider {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the ScopeSingleSignOnProvider interface.
  */
@@ -112,10 +116,15 @@ export function ScopeSingleSignOnProviderFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function ScopeSingleSignOnProviderToJSON(value?: Omit<ScopeSingleSignOnProvider, 'signInUrl'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function ScopeSingleSignOnProviderToJSON(json: any): ScopeSingleSignOnProvider {
+    return ScopeSingleSignOnProviderToJSONTyped(json, false);
+}
+
+export function ScopeSingleSignOnProviderToJSONTyped(value?: Omit<ScopeSingleSignOnProvider, 'signInUrl'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'scope': ScopeToJSON(value['scope']),

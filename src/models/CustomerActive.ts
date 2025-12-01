@@ -107,10 +107,15 @@ export function CustomerActiveFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function CustomerActiveToJSON(value?: CustomerActive | null): any {
+export function CustomerActiveToJSON(json: any): CustomerActive {
+    return CustomerActiveToJSONTyped(json, false);
+}
+
+export function CustomerActiveToJSONTyped(value?: CustomerActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'metaData': value['metaData'],

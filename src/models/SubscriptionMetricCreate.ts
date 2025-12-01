@@ -73,10 +73,15 @@ export function SubscriptionMetricCreateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function SubscriptionMetricCreateToJSON(value?: SubscriptionMetricCreate | null): any {
+export function SubscriptionMetricCreateToJSON(json: any): SubscriptionMetricCreate {
+    return SubscriptionMetricCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricCreateToJSONTyped(value?: SubscriptionMetricCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

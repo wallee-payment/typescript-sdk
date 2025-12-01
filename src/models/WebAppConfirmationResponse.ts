@@ -27,6 +27,7 @@ import {
     SpaceFromJSON,
     SpaceFromJSONTyped,
     SpaceToJSON,
+    SpaceToJSONTyped,
 } from './Space';
 
 /**
@@ -92,10 +93,15 @@ export function WebAppConfirmationResponseFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function WebAppConfirmationResponseToJSON(value?: Omit<WebAppConfirmationResponse, 'access_token'|'scope'|'state'|'token_type'> | null): any {
+export function WebAppConfirmationResponseToJSON(json: any): WebAppConfirmationResponse {
+    return WebAppConfirmationResponseToJSONTyped(json, false);
+}
+
+export function WebAppConfirmationResponseToJSONTyped(value?: Omit<WebAppConfirmationResponse, 'access_token'|'scope'|'state'|'token_type'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'space': SpaceToJSON(value['space']),

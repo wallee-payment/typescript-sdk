@@ -99,10 +99,15 @@ export function RestLanguageFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function RestLanguageToJSON(value?: Omit<RestLanguage, 'primaryOfGroup'|'countryCode'|'iso2Code'|'name'|'ietfCode'|'iso3Code'|'pluralExpression'> | null): any {
+export function RestLanguageToJSON(json: any): RestLanguage {
+    return RestLanguageToJSONTyped(json, false);
+}
+
+export function RestLanguageToJSONTyped(value?: Omit<RestLanguage, 'primaryOfGroup'|'countryCode'|'iso2Code'|'name'|'ietfCode'|'iso3Code'|'pluralExpression'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     TaxFromJSON,
     TaxFromJSONTyped,
     TaxToJSON,
+    TaxToJSONTyped,
 } from './Tax';
 
 /**
@@ -99,10 +100,15 @@ export function PaymentAdjustmentFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function PaymentAdjustmentToJSON(value?: Omit<PaymentAdjustment, 'amountExcludingTax'|'rateInPercentage'|'id'|'amountIncludingTax'|'type'> | null): any {
+export function PaymentAdjustmentToJSON(json: any): PaymentAdjustment {
+    return PaymentAdjustmentToJSONTyped(json, false);
+}
+
+export function PaymentAdjustmentToJSONTyped(value?: Omit<PaymentAdjustment, 'amountExcludingTax'|'rateInPercentage'|'id'|'amountIncludingTax'|'type'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'tax': TaxToJSON(value['tax']),

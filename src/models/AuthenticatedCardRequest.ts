@@ -27,6 +27,7 @@ import {
     AuthenticatedCardDataCreateFromJSON,
     AuthenticatedCardDataCreateFromJSONTyped,
     AuthenticatedCardDataCreateToJSON,
+    AuthenticatedCardDataCreateToJSONTyped,
 } from './AuthenticatedCardDataCreate';
 
 /**
@@ -71,10 +72,15 @@ export function AuthenticatedCardRequestFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function AuthenticatedCardRequestToJSON(value?: AuthenticatedCardRequest | null): any {
+export function AuthenticatedCardRequestToJSON(json: any): AuthenticatedCardRequest {
+    return AuthenticatedCardRequestToJSONTyped(json, false);
+}
+
+export function AuthenticatedCardRequestToJSONTyped(value?: AuthenticatedCardRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'cardData': AuthenticatedCardDataCreateToJSON(value['cardData']),

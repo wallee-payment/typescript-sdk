@@ -64,10 +64,15 @@ export function RestCustomerEmailAddressFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function RestCustomerEmailAddressToJSON(value?: Omit<RestCustomerEmailAddress, 'emailAddress'|'createdOn'> | null): any {
+export function RestCustomerEmailAddressToJSON(json: any): RestCustomerEmailAddress {
+    return RestCustomerEmailAddressToJSONTyped(json, false);
+}
+
+export function RestCustomerEmailAddressToJSONTyped(value?: Omit<RestCustomerEmailAddress, 'emailAddress'|'createdOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

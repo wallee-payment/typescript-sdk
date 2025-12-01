@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -48,6 +49,8 @@ export interface AbstractPaymentProcessorConfigurationActive {
      */
     state?: CreationEntityState;
 }
+
+
 
 /**
  * Check if a given object implements the AbstractPaymentProcessorConfigurationActive interface.
@@ -71,10 +74,15 @@ export function AbstractPaymentProcessorConfigurationActiveFromJSONTyped(json: a
     };
 }
 
-export function AbstractPaymentProcessorConfigurationActiveToJSON(value?: AbstractPaymentProcessorConfigurationActive | null): any {
+export function AbstractPaymentProcessorConfigurationActiveToJSON(json: any): AbstractPaymentProcessorConfigurationActive {
+    return AbstractPaymentProcessorConfigurationActiveToJSONTyped(json, false);
+}
+
+export function AbstractPaymentProcessorConfigurationActiveToJSONTyped(value?: AbstractPaymentProcessorConfigurationActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

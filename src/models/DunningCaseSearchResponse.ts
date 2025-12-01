@@ -27,6 +27,7 @@ import {
     DunningCaseFromJSON,
     DunningCaseFromJSONTyped,
     DunningCaseToJSON,
+    DunningCaseToJSONTyped,
 } from './DunningCase';
 
 /**
@@ -85,10 +86,15 @@ export function DunningCaseSearchResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function DunningCaseSearchResponseToJSON(value?: Omit<DunningCaseSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function DunningCaseSearchResponseToJSON(json: any): DunningCaseSearchResponse {
+    return DunningCaseSearchResponseToJSONTyped(json, false);
+}
+
+export function DunningCaseSearchResponseToJSONTyped(value?: Omit<DunningCaseSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

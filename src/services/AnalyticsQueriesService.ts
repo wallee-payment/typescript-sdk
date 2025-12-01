@@ -90,6 +90,7 @@ export interface PostAnalyticsQueriesSubmitRequest {
  * 
  */
 export class AnalyticsQueriesService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -117,7 +118,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -134,8 +134,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryExternalId/{queryExternalId}`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -174,7 +174,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -191,8 +190,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryToken/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -246,7 +245,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -263,8 +261,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries`,
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -306,7 +304,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -323,8 +320,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryExternalId/{queryExternalId}`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -367,7 +364,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -384,8 +380,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryExternalId/{queryExternalId}/result`.replace(`{${"queryExternalId"}}`, encodeURIComponent(String(requestParameters['queryExternalId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -441,7 +437,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -458,8 +453,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryToken/{queryToken}`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -502,7 +497,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -519,8 +513,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/queryToken/{queryToken}/result`.replace(`{${"queryToken"}}`, encodeURIComponent(String(requestParameters['queryToken']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -587,7 +581,6 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['account'] != null) {
             headerParameters['Account'] = String(requestParameters['account']);
         }
@@ -604,8 +597,8 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/analytics/queries/submit`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: AnalyticsQueryExecutionRequestToJSON(requestParameters['analyticsQueryExecutionRequest']),

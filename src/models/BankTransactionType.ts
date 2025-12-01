@@ -71,10 +71,15 @@ export function BankTransactionTypeFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function BankTransactionTypeToJSON(value?: Omit<BankTransactionType, 'name'|'description'|'id'> | null): any {
+export function BankTransactionTypeToJSON(json: any): BankTransactionType {
+    return BankTransactionTypeToJSONTyped(json, false);
+}
+
+export function BankTransactionTypeToJSONTyped(value?: Omit<BankTransactionType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

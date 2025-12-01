@@ -27,6 +27,7 @@ import {
     RestApiErrorResponseFromJSON,
     RestApiErrorResponseFromJSONTyped,
     RestApiErrorResponseToJSON,
+    RestApiErrorResponseToJSONTyped,
 } from './RestApiErrorResponse';
 
 /**
@@ -85,10 +86,15 @@ export function RestApiBulkOperationResultFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function RestApiBulkOperationResultToJSON(value?: Omit<RestApiBulkOperationResult, 'link'|'id'|'statusCode'> | null): any {
+export function RestApiBulkOperationResultToJSON(json: any): RestApiBulkOperationResult {
+    return RestApiBulkOperationResultToJSONTyped(json, false);
+}
+
+export function RestApiBulkOperationResultToJSONTyped(value?: Omit<RestApiBulkOperationResult, 'link'|'id'|'statusCode'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'error': RestApiErrorResponseToJSON(value['error']),

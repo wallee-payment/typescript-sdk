@@ -27,6 +27,7 @@ import {
     UserAccountRoleFromJSON,
     UserAccountRoleFromJSONTyped,
     UserAccountRoleToJSON,
+    UserAccountRoleToJSONTyped,
 } from './UserAccountRole';
 
 /**
@@ -78,10 +79,15 @@ export function UserAccountRoleListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function UserAccountRoleListResponseToJSON(value?: Omit<UserAccountRoleListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function UserAccountRoleListResponseToJSON(json: any): UserAccountRoleListResponse {
+    return UserAccountRoleListResponseToJSONTyped(json, false);
+}
+
+export function UserAccountRoleListResponseToJSONTyped(value?: Omit<UserAccountRoleListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

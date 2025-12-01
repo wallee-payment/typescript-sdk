@@ -27,72 +27,84 @@ import {
     CustomersPresenceFromJSON,
     CustomersPresenceFromJSONTyped,
     CustomersPresenceToJSON,
+    CustomersPresenceToJSONTyped,
 } from './CustomersPresence';
 import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
 import {
     PaymentConnectorConfigurationFromJSON,
     PaymentConnectorConfigurationFromJSONTyped,
     PaymentConnectorConfigurationToJSON,
+    PaymentConnectorConfigurationToJSONTyped,
 } from './PaymentConnectorConfiguration';
 import type { WalletType } from './WalletType';
 import {
     WalletTypeFromJSON,
     WalletTypeFromJSONTyped,
     WalletTypeToJSON,
+    WalletTypeToJSONTyped,
 } from './WalletType';
 import type { ChargeAttemptState } from './ChargeAttemptState';
 import {
     ChargeAttemptStateFromJSON,
     ChargeAttemptStateFromJSONTyped,
     ChargeAttemptStateToJSON,
+    ChargeAttemptStateToJSONTyped,
 } from './ChargeAttemptState';
 import type { ConnectorInvocation } from './ConnectorInvocation';
 import {
     ConnectorInvocationFromJSON,
     ConnectorInvocationFromJSONTyped,
     ConnectorInvocationToJSON,
+    ConnectorInvocationToJSONTyped,
 } from './ConnectorInvocation';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { TransactionCompletionBehavior } from './TransactionCompletionBehavior';
 import {
     TransactionCompletionBehaviorFromJSON,
     TransactionCompletionBehaviorFromJSONTyped,
     TransactionCompletionBehaviorToJSON,
+    TransactionCompletionBehaviorToJSONTyped,
 } from './TransactionCompletionBehavior';
 import type { Charge } from './Charge';
 import {
     ChargeFromJSON,
     ChargeFromJSONTyped,
     ChargeToJSON,
+    ChargeToJSONTyped,
 } from './Charge';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { PaymentTerminal } from './PaymentTerminal';
 import {
     PaymentTerminalFromJSON,
     PaymentTerminalFromJSONTyped,
     PaymentTerminalToJSON,
+    PaymentTerminalToJSONTyped,
 } from './PaymentTerminal';
 import type { TokenVersion } from './TokenVersion';
 import {
     TokenVersionFromJSON,
     TokenVersionFromJSONTyped,
     TokenVersionToJSON,
+    TokenVersionToJSONTyped,
 } from './TokenVersion';
 import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
 import {
     ChargeAttemptEnvironmentFromJSON,
     ChargeAttemptEnvironmentFromJSONTyped,
     ChargeAttemptEnvironmentToJSON,
+    ChargeAttemptEnvironmentToJSONTyped,
 } from './ChargeAttemptEnvironment';
 
 /**
@@ -277,6 +289,8 @@ export interface ChargeAttempt {
     readonly failedOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the ChargeAttempt interface.
  */
@@ -326,10 +340,15 @@ export function ChargeAttemptFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function ChargeAttemptToJSON(value?: Omit<ChargeAttempt, 'language'|'salesChannel'|'createdOn'|'initializingTokenVersion'|'succeededOn'|'id'|'linkedTransaction'|'redirectionUrl'|'plannedPurgeDate'|'timeZone'|'spaceViewId'|'userFailureMessage'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'nextUpdateOn'|'failedOn'> | null): any {
+export function ChargeAttemptToJSON(json: any): ChargeAttempt {
+    return ChargeAttemptToJSONTyped(json, false);
+}
+
+export function ChargeAttemptToJSONTyped(value?: Omit<ChargeAttempt, 'language'|'salesChannel'|'createdOn'|'initializingTokenVersion'|'succeededOn'|'id'|'linkedTransaction'|'redirectionUrl'|'plannedPurgeDate'|'timeZone'|'spaceViewId'|'userFailureMessage'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'nextUpdateOn'|'failedOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'tokenVersion': TokenVersionToJSON(value['tokenVersion']),

@@ -27,18 +27,21 @@ import {
     ProductFeeTypeFromJSON,
     ProductFeeTypeFromJSONTyped,
     ProductFeeTypeToJSON,
+    ProductFeeTypeToJSONTyped,
 } from './ProductFeeType';
 import type { SubscriptionLedgerEntryState } from './SubscriptionLedgerEntryState';
 import {
     SubscriptionLedgerEntryStateFromJSON,
     SubscriptionLedgerEntryStateFromJSONTyped,
     SubscriptionLedgerEntryStateToJSON,
+    SubscriptionLedgerEntryStateToJSONTyped,
 } from './SubscriptionLedgerEntryState';
 import type { Tax } from './Tax';
 import {
     TaxFromJSON,
     TaxFromJSONTyped,
     TaxToJSON,
+    TaxToJSONTyped,
 } from './Tax';
 
 /**
@@ -181,6 +184,8 @@ export interface SubscriptionLedgerEntry {
     readonly aggregatedTaxRate?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionLedgerEntry interface.
  */
@@ -223,10 +228,15 @@ export function SubscriptionLedgerEntryFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function SubscriptionLedgerEntryToJSON(value?: Omit<SubscriptionLedgerEntry, 'quantity'|'amountExcludingTax'|'plannedPurgeDate'|'subscriptionVersion'|'externalId'|'taxes'|'title'|'createdOn'|'version'|'componentReferenceName'|'subscriptionMetricId'|'linkedSpaceId'|'proRataCalculated'|'createdBy'|'componentReferenceSku'|'id'|'amountIncludingTax'|'discountIncludingTax'|'taxAmount'|'aggregatedTaxRate'> | null): any {
+export function SubscriptionLedgerEntryToJSON(json: any): SubscriptionLedgerEntry {
+    return SubscriptionLedgerEntryToJSONTyped(json, false);
+}
+
+export function SubscriptionLedgerEntryToJSONTyped(value?: Omit<SubscriptionLedgerEntry, 'quantity'|'amountExcludingTax'|'plannedPurgeDate'|'subscriptionVersion'|'externalId'|'taxes'|'title'|'createdOn'|'version'|'componentReferenceName'|'subscriptionMetricId'|'linkedSpaceId'|'proRataCalculated'|'createdBy'|'componentReferenceSku'|'id'|'amountIncludingTax'|'discountIncludingTax'|'taxAmount'|'aggregatedTaxRate'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feeType': ProductFeeTypeToJSON(value['feeType']),

@@ -27,24 +27,28 @@ import {
     BillingCycleModelFromJSON,
     BillingCycleModelFromJSONTyped,
     BillingCycleModelToJSON,
+    BillingCycleModelToJSONTyped,
 } from './BillingCycleModel';
 import type { TaxCalculation } from './TaxCalculation';
 import {
     TaxCalculationFromJSON,
     TaxCalculationFromJSONTyped,
     TaxCalculationToJSON,
+    TaxCalculationToJSONTyped,
 } from './TaxCalculation';
 import type { SubscriptionProduct } from './SubscriptionProduct';
 import {
     SubscriptionProductFromJSON,
     SubscriptionProductFromJSONTyped,
     SubscriptionProductToJSON,
+    SubscriptionProductToJSONTyped,
 } from './SubscriptionProduct';
 import type { SubscriptionProductVersionState } from './SubscriptionProductVersionState';
 import {
     SubscriptionProductVersionStateFromJSON,
     SubscriptionProductVersionStateFromJSONTyped,
     SubscriptionProductVersionStateToJSON,
+    SubscriptionProductVersionStateToJSONTyped,
 } from './SubscriptionProductVersionState';
 
 /**
@@ -187,6 +191,8 @@ export interface SubscriptionProductVersion {
     readonly numberOfNoticePeriods?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionProductVersion interface.
  */
@@ -205,7 +211,7 @@ export function SubscriptionProductVersionFromJSONTyped(json: any, ignoreDiscrim
     return {
         
         'retiringFinishedOn': json['retiringFinishedOn'] == null ? undefined : (new Date(json['retiringFinishedOn'])),
-        'enabledCurrencies': json['enabledCurrencies'] == null ? undefined : json['enabledCurrencies'],
+        'enabledCurrencies': json['enabledCurrencies'] == null ? undefined : new Set(json['enabledCurrencies']),
         'product': json['product'] == null ? undefined : SubscriptionProductFromJSON(json['product']),
         'retiringStartedOn': json['retiringStartedOn'] == null ? undefined : (new Date(json['retiringStartedOn'])),
         'taxCalculation': json['taxCalculation'] == null ? undefined : TaxCalculationFromJSON(json['taxCalculation']),
@@ -229,10 +235,15 @@ export function SubscriptionProductVersionFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function SubscriptionProductVersionToJSON(value?: Omit<SubscriptionProductVersion, 'retiringFinishedOn'|'enabledCurrencies'|'retiringStartedOn'|'plannedPurgeDate'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'activatedOn'|'billingCycle'|'defaultCurrency'|'name'|'minimalNumberOfPeriods'|'obsoletedOn'|'comment'|'id'|'incrementNumber'|'numberOfNoticePeriods'> | null): any {
+export function SubscriptionProductVersionToJSON(json: any): SubscriptionProductVersion {
+    return SubscriptionProductVersionToJSONTyped(json, false);
+}
+
+export function SubscriptionProductVersionToJSONTyped(value?: Omit<SubscriptionProductVersion, 'retiringFinishedOn'|'enabledCurrencies'|'retiringStartedOn'|'plannedPurgeDate'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'activatedOn'|'billingCycle'|'defaultCurrency'|'name'|'minimalNumberOfPeriods'|'obsoletedOn'|'comment'|'id'|'incrementNumber'|'numberOfNoticePeriods'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'product': SubscriptionProductToJSON(value['product']),

@@ -27,6 +27,7 @@ import {
     LabelDescriptorFromJSON,
     LabelDescriptorFromJSONTyped,
     LabelDescriptorToJSON,
+    LabelDescriptorToJSONTyped,
 } from './LabelDescriptor';
 
 /**
@@ -85,10 +86,15 @@ export function LabelDescriptorSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function LabelDescriptorSearchResponseToJSON(value?: Omit<LabelDescriptorSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function LabelDescriptorSearchResponseToJSON(json: any): LabelDescriptorSearchResponse {
+    return LabelDescriptorSearchResponseToJSONTyped(json, false);
+}
+
+export function LabelDescriptorSearchResponseToJSONTyped(value?: Omit<LabelDescriptorSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

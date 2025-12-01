@@ -57,3 +57,7 @@ export function TransactionEnvironmentSelectionStrategyToJSON(value?: Transactio
     return value as any;
 }
 
+export function TransactionEnvironmentSelectionStrategyToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionEnvironmentSelectionStrategy {
+    return value as TransactionEnvironmentSelectionStrategy;
+}
+

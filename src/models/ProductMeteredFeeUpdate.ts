@@ -27,6 +27,7 @@ import {
     ProductMeteredTierPricingFromJSON,
     ProductMeteredTierPricingFromJSONTyped,
     ProductMeteredTierPricingToJSON,
+    ProductMeteredTierPricingToJSONTyped,
 } from './ProductMeteredTierPricing';
 
 /**
@@ -73,6 +74,8 @@ export interface ProductMeteredFeeUpdate {
     version: number;
 }
 
+
+
 /**
  * Check if a given object implements the ProductMeteredFeeUpdate interface.
  */
@@ -100,10 +103,15 @@ export function ProductMeteredFeeUpdateFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function ProductMeteredFeeUpdateToJSON(value?: ProductMeteredFeeUpdate | null): any {
+export function ProductMeteredFeeUpdateToJSON(json: any): ProductMeteredFeeUpdate {
+    return ProductMeteredFeeUpdateToJSONTyped(json, false);
+}
+
+export function ProductMeteredFeeUpdateToJSONTyped(value?: ProductMeteredFeeUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'component': value['component'],

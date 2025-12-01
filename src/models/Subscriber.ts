@@ -27,12 +27,14 @@ import {
     AddressFromJSON,
     AddressFromJSONTyped,
     AddressToJSON,
+    AddressToJSONTyped,
 } from './Address';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -133,6 +135,8 @@ export interface Subscriber {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the Subscriber interface.
  */
@@ -168,10 +172,15 @@ export function SubscriberFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function SubscriberToJSON(value?: Omit<Subscriber, 'plannedPurgeDate'|'description'|'externalId'|'language'|'version'|'reference'|'additionalAllowedPaymentMethodConfigurations'|'linkedSpaceId'|'metaData'|'emailAddress'|'disallowedPaymentMethodConfigurations'|'id'> | null): any {
+export function SubscriberToJSON(json: any): Subscriber {
+    return SubscriberToJSONTyped(json, false);
+}
+
+export function SubscriberToJSONTyped(value?: Omit<Subscriber, 'plannedPurgeDate'|'description'|'externalId'|'language'|'version'|'reference'|'additionalAllowedPaymentMethodConfigurations'|'linkedSpaceId'|'metaData'|'emailAddress'|'disallowedPaymentMethodConfigurations'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'shippingAddress': AddressToJSON(value['shippingAddress']),

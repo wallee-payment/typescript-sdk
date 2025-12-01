@@ -64,10 +64,15 @@ export function AbstractSubscriptionMetricUpdateFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function AbstractSubscriptionMetricUpdateToJSON(value?: AbstractSubscriptionMetricUpdate | null): any {
+export function AbstractSubscriptionMetricUpdateToJSON(json: any): AbstractSubscriptionMetricUpdate {
+    return AbstractSubscriptionMetricUpdateToJSONTyped(json, false);
+}
+
+export function AbstractSubscriptionMetricUpdateToJSONTyped(value?: AbstractSubscriptionMetricUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

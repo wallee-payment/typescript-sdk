@@ -61,3 +61,7 @@ export function TransactionInvoiceStateToJSON(value?: TransactionInvoiceState | 
     return value as any;
 }
 
+export function TransactionInvoiceStateToJSONTyped(value: any, ignoreDiscriminator: boolean): TransactionInvoiceState {
+    return value as TransactionInvoiceState;
+}
+

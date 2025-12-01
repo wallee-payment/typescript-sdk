@@ -66,3 +66,7 @@ export function DisplayableMonthToJSON(value?: DisplayableMonth | null): any {
     return value as any;
 }
 
+export function DisplayableMonthToJSONTyped(value: any, ignoreDiscriminator: boolean): DisplayableMonth {
+    return value as DisplayableMonth;
+}
+

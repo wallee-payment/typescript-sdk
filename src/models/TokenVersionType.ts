@@ -27,6 +27,7 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -85,10 +86,15 @@ export function TokenVersionTypeFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function TokenVersionTypeToJSON(value?: Omit<TokenVersionType, 'name'|'description'|'id'> | null): any {
+export function TokenVersionTypeToJSON(json: any): TokenVersionType {
+    return TokenVersionTypeToJSONTyped(json, false);
+}
+
+export function TokenVersionTypeToJSONTyped(value?: Omit<TokenVersionType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feature': FeatureToJSON(value['feature']),

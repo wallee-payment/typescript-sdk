@@ -74,10 +74,15 @@ export function CompletionLineItemCreateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function CompletionLineItemCreateToJSON(value?: CompletionLineItemCreate | null): any {
+export function CompletionLineItemCreateToJSON(json: any): CompletionLineItemCreate {
+    return CompletionLineItemCreateToJSONTyped(json, false);
+}
+
+export function CompletionLineItemCreateToJSONTyped(value?: CompletionLineItemCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'amount': value['amount'],

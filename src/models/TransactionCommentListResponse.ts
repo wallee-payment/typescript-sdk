@@ -27,6 +27,7 @@ import {
     TransactionCommentFromJSON,
     TransactionCommentFromJSONTyped,
     TransactionCommentToJSON,
+    TransactionCommentToJSONTyped,
 } from './TransactionComment';
 
 /**
@@ -78,10 +79,15 @@ export function TransactionCommentListResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function TransactionCommentListResponseToJSON(value?: Omit<TransactionCommentListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function TransactionCommentListResponseToJSON(json: any): TransactionCommentListResponse {
+    return TransactionCommentListResponseToJSONTyped(json, false);
+}
+
+export function TransactionCommentListResponseToJSONTyped(value?: Omit<TransactionCommentListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

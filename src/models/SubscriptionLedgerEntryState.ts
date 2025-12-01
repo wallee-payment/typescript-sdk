@@ -57,3 +57,7 @@ export function SubscriptionLedgerEntryStateToJSON(value?: SubscriptionLedgerEnt
     return value as any;
 }
 
+export function SubscriptionLedgerEntryStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionLedgerEntryState {
+    return value as SubscriptionLedgerEntryState;
+}
+

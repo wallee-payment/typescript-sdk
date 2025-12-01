@@ -27,6 +27,7 @@ import {
     PaymentTerminalFromJSON,
     PaymentTerminalFromJSONTyped,
     PaymentTerminalToJSON,
+    PaymentTerminalToJSONTyped,
 } from './PaymentTerminal';
 
 /**
@@ -78,10 +79,15 @@ export function TerminalListResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function TerminalListResponseToJSON(value?: Omit<TerminalListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function TerminalListResponseToJSON(json: any): TerminalListResponse {
+    return TerminalListResponseToJSONTyped(json, false);
+}
+
+export function TerminalListResponseToJSONTyped(value?: Omit<TerminalListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

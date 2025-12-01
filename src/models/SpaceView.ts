@@ -27,12 +27,14 @@ import {
     SpaceFromJSON,
     SpaceFromJSONTyped,
     SpaceToJSON,
+    SpaceToJSONTyped,
 } from './Space';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -85,6 +87,8 @@ export interface SpaceView {
     space?: Space;
 }
 
+
+
 /**
  * Check if a given object implements the SpaceView interface.
  */
@@ -112,10 +116,15 @@ export function SpaceViewFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function SpaceViewToJSON(value?: Omit<SpaceView, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function SpaceViewToJSON(json: any): SpaceView {
+    return SpaceViewToJSONTyped(json, false);
+}
+
+export function SpaceViewToJSONTyped(value?: Omit<SpaceView, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

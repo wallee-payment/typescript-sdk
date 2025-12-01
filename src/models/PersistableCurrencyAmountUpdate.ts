@@ -64,10 +64,15 @@ export function PersistableCurrencyAmountUpdateFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function PersistableCurrencyAmountUpdateToJSON(value?: PersistableCurrencyAmountUpdate | null): any {
+export function PersistableCurrencyAmountUpdateToJSON(json: any): PersistableCurrencyAmountUpdate {
+    return PersistableCurrencyAmountUpdateToJSONTyped(json, false);
+}
+
+export function PersistableCurrencyAmountUpdateToJSONTyped(value?: PersistableCurrencyAmountUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'amount': value['amount'],

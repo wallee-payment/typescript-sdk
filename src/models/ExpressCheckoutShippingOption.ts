@@ -99,10 +99,15 @@ export function ExpressCheckoutShippingOptionFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function ExpressCheckoutShippingOptionToJSON(value?: Omit<ExpressCheckoutShippingOption, 'amount'|'description'|'currency'|'id'|'label'|'taxAmount'|'selected'> | null): any {
+export function ExpressCheckoutShippingOptionToJSON(json: any): ExpressCheckoutShippingOption {
+    return ExpressCheckoutShippingOptionToJSONTyped(json, false);
+}
+
+export function ExpressCheckoutShippingOptionToJSONTyped(value?: Omit<ExpressCheckoutShippingOption, 'amount'|'description'|'currency'|'id'|'label'|'taxAmount'|'selected'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

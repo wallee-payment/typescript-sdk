@@ -57,3 +57,7 @@ export function CustomersPresenceToJSON(value?: CustomersPresence | null): any {
     return value as any;
 }
 
+export function CustomersPresenceToJSONTyped(value: any, ignoreDiscriminator: boolean): CustomersPresence {
+    return value as CustomersPresence;
+}
+

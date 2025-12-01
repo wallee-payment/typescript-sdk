@@ -56,3 +56,7 @@ export function SortingOrderToJSON(value?: SortingOrder | null): any {
     return value as any;
 }
 
+export function SortingOrderToJSONTyped(value: any, ignoreDiscriminator: boolean): SortingOrder {
+    return value as SortingOrder;
+}
+

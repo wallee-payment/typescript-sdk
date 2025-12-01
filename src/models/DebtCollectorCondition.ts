@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DebtCollectorConditionType } from './DebtCollectorConditionType';
 import {
     DebtCollectorConditionTypeFromJSON,
     DebtCollectorConditionTypeFromJSONTyped,
     DebtCollectorConditionTypeToJSON,
+    DebtCollectorConditionTypeToJSONTyped,
 } from './DebtCollectorConditionType';
 
 /**
@@ -85,6 +87,8 @@ export interface DebtCollectorCondition {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the DebtCollectorCondition interface.
  */
@@ -112,10 +116,15 @@ export function DebtCollectorConditionFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function DebtCollectorConditionToJSON(value?: Omit<DebtCollectorCondition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function DebtCollectorConditionToJSON(json: any): DebtCollectorCondition {
+    return DebtCollectorConditionToJSONTyped(json, false);
+}
+
+export function DebtCollectorConditionToJSONTyped(value?: Omit<DebtCollectorCondition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

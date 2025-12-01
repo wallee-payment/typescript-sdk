@@ -27,6 +27,7 @@ import {
     SubscriptionProductVersionRetirementFromJSON,
     SubscriptionProductVersionRetirementFromJSONTyped,
     SubscriptionProductVersionRetirementToJSON,
+    SubscriptionProductVersionRetirementToJSONTyped,
 } from './SubscriptionProductVersionRetirement';
 
 /**
@@ -78,10 +79,15 @@ export function ProductVersionRetirementListResponseFromJSONTyped(json: any, ign
     };
 }
 
-export function ProductVersionRetirementListResponseToJSON(value?: Omit<ProductVersionRetirementListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ProductVersionRetirementListResponseToJSON(json: any): ProductVersionRetirementListResponse {
+    return ProductVersionRetirementListResponseToJSONTyped(json, false);
+}
+
+export function ProductVersionRetirementListResponseToJSONTyped(value?: Omit<ProductVersionRetirementListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

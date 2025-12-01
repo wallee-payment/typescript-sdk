@@ -27,18 +27,21 @@ import {
     PaymentContractStateFromJSON,
     PaymentContractStateFromJSONTyped,
     PaymentContractStateToJSON,
+    PaymentContractStateToJSONTyped,
 } from './PaymentContractState';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { PaymentContractType } from './PaymentContractType';
 import {
     PaymentContractTypeFromJSON,
     PaymentContractTypeFromJSONTyped,
     PaymentContractTypeToJSON,
+    PaymentContractTypeToJSONTyped,
 } from './PaymentContractType';
 
 /**
@@ -139,6 +142,8 @@ export interface PaymentContract {
     readonly account?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentContract interface.
  */
@@ -174,10 +179,15 @@ export function PaymentContractFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function PaymentContractToJSON(value?: Omit<PaymentContract, 'terminatedBy'|'externalId'|'createdOn'|'version'|'terminatedOn'|'activatedOn'|'startTerminatingOn'|'createdBy'|'contractIdentifier'|'rejectedOn'|'id'|'account'> | null): any {
+export function PaymentContractToJSON(json: any): PaymentContract {
+    return PaymentContractToJSONTyped(json, false);
+}
+
+export function PaymentContractToJSONTyped(value?: Omit<PaymentContract, 'terminatedBy'|'externalId'|'createdOn'|'version'|'terminatedOn'|'activatedOn'|'startTerminatingOn'|'createdBy'|'contractIdentifier'|'rejectedOn'|'id'|'account'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'contractType': PaymentContractTypeToJSON(value['contractType']),

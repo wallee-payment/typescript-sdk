@@ -108,6 +108,7 @@ export interface PostCustomersCustomerIdAddressesIdDefaultRequest {
  * 
  */
 export class CustomerAddressesService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -142,7 +143,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -159,8 +159,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses/{id}`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -219,7 +219,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -236,8 +235,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -288,7 +287,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -305,8 +303,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses/{id}`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -366,7 +364,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -383,8 +380,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses/search`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -444,7 +441,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -461,8 +457,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses/{id}`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: CustomerAddressActiveToJSON(requestParameters['customerAddressActive']),
@@ -516,7 +512,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -533,8 +528,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: CustomerAddressCreateToJSON(requestParameters['customerAddressCreate']),
@@ -582,7 +577,6 @@ export class CustomerAddressesService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -599,8 +593,8 @@ export class CustomerAddressesService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/customers/{customerId}/addresses/{id}/default`.replace(`{${"customerId"}}`, encodeURIComponent(String(requestParameters['customerId']))).replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

@@ -56,3 +56,7 @@ export function GenderToJSON(value?: Gender | null): any {
     return value as any;
 }
 
+export function GenderToJSONTyped(value: any, ignoreDiscriminator: boolean): Gender {
+    return value as Gender;
+}
+

@@ -64,10 +64,15 @@ export function LineItemAttributeFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function LineItemAttributeToJSON(value?: Omit<LineItemAttribute, 'label'|'value'> | null): any {
+export function LineItemAttributeToJSON(json: any): LineItemAttribute {
+    return LineItemAttributeToJSONTyped(json, false);
+}
+
+export function LineItemAttributeToJSONTyped(value?: Omit<LineItemAttribute, 'label'|'value'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

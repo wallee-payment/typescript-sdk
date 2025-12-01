@@ -120,10 +120,15 @@ export function DebtCollectionReceiptFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function DebtCollectionReceiptToJSON(value?: Omit<DebtCollectionReceipt, 'linkedSpaceId'|'amount'|'createdBy'|'plannedPurgeDate'|'externalId'|'debtCollectionCase'|'id'|'source'|'createdOn'|'version'> | null): any {
+export function DebtCollectionReceiptToJSON(json: any): DebtCollectionReceipt {
+    return DebtCollectionReceiptToJSONTyped(json, false);
+}
+
+export function DebtCollectionReceiptToJSONTyped(value?: Omit<DebtCollectionReceipt, 'linkedSpaceId'|'amount'|'createdBy'|'plannedPurgeDate'|'externalId'|'debtCollectionCase'|'id'|'source'|'createdOn'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

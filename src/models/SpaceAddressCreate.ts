@@ -155,10 +155,15 @@ export function SpaceAddressCreateFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function SpaceAddressCreateToJSON(value?: SpaceAddressCreate | null): any {
+export function SpaceAddressCreateToJSON(json: any): SpaceAddressCreate {
+    return SpaceAddressCreateToJSONTyped(json, false);
+}
+
+export function SpaceAddressCreateToJSONTyped(value?: SpaceAddressCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'country': value['country'],

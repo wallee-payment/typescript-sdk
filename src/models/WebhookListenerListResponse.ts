@@ -27,6 +27,7 @@ import {
     WebhookListenerFromJSON,
     WebhookListenerFromJSONTyped,
     WebhookListenerToJSON,
+    WebhookListenerToJSONTyped,
 } from './WebhookListener';
 
 /**
@@ -78,10 +79,15 @@ export function WebhookListenerListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function WebhookListenerListResponseToJSON(value?: Omit<WebhookListenerListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function WebhookListenerListResponseToJSON(json: any): WebhookListenerListResponse {
+    return WebhookListenerListResponseToJSONTyped(json, false);
+}
+
+export function WebhookListenerListResponseToJSONTyped(value?: Omit<WebhookListenerListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

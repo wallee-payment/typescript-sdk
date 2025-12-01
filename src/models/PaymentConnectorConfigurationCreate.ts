@@ -27,18 +27,21 @@ import {
     ConditionFromJSON,
     ConditionFromJSONTyped,
     ConditionToJSON,
+    ConditionToJSONTyped,
 } from './Condition';
 import type { SalesChannel } from './SalesChannel';
 import {
     SalesChannelFromJSON,
     SalesChannelFromJSONTyped,
     SalesChannelToJSON,
+    SalesChannelToJSONTyped,
 } from './SalesChannel';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -103,6 +106,8 @@ export interface PaymentConnectorConfigurationCreate {
     processorConfiguration: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentConnectorConfigurationCreate interface.
  */
@@ -125,7 +130,7 @@ export function PaymentConnectorConfigurationCreateFromJSONTyped(json: any, igno
     return {
         
         'name': json['name'] == null ? undefined : json['name'],
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'conditions': json['conditions'] == null ? undefined : ((json['conditions'] as Array<any>).map(ConditionFromJSON)),
         'priority': json['priority'] == null ? undefined : json['priority'],
         'enabledSalesChannels': json['enabledSalesChannels'] == null ? undefined : (new Set((json['enabledSalesChannels'] as Array<any>).map(SalesChannelFromJSON))),
@@ -136,10 +141,15 @@ export function PaymentConnectorConfigurationCreateFromJSONTyped(json: any, igno
     };
 }
 
-export function PaymentConnectorConfigurationCreateToJSON(value?: PaymentConnectorConfigurationCreate | null): any {
+export function PaymentConnectorConfigurationCreateToJSON(json: any): PaymentConnectorConfigurationCreate {
+    return PaymentConnectorConfigurationCreateToJSONTyped(json, false);
+}
+
+export function PaymentConnectorConfigurationCreateToJSONTyped(value?: PaymentConnectorConfigurationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

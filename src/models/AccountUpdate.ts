@@ -72,10 +72,15 @@ export function AccountUpdateFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AccountUpdateToJSON(value?: AccountUpdate | null): any {
+export function AccountUpdateToJSON(json: any): AccountUpdate {
+    return AccountUpdateToJSONTyped(json, false);
+}
+
+export function AccountUpdateToJSONTyped(value?: AccountUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

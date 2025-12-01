@@ -27,6 +27,7 @@ import {
     ExternalTransferBankTransactionFromJSON,
     ExternalTransferBankTransactionFromJSONTyped,
     ExternalTransferBankTransactionToJSON,
+    ExternalTransferBankTransactionToJSONTyped,
 } from './ExternalTransferBankTransaction';
 
 /**
@@ -78,10 +79,15 @@ export function ExternalTransferBankTransactionListResponseFromJSONTyped(json: a
     };
 }
 
-export function ExternalTransferBankTransactionListResponseToJSON(value?: Omit<ExternalTransferBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ExternalTransferBankTransactionListResponseToJSON(json: any): ExternalTransferBankTransactionListResponse {
+    return ExternalTransferBankTransactionListResponseToJSONTyped(json, false);
+}
+
+export function ExternalTransferBankTransactionListResponseToJSONTyped(value?: Omit<ExternalTransferBankTransactionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

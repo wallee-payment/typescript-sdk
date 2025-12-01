@@ -27,12 +27,14 @@ import {
     PaymentTerminalConfigurationStateFromJSON,
     PaymentTerminalConfigurationStateFromJSONTyped,
     PaymentTerminalConfigurationStateToJSON,
+    PaymentTerminalConfigurationStateToJSONTyped,
 } from './PaymentTerminalConfigurationState';
 import type { PaymentTerminalType } from './PaymentTerminalType';
 import {
     PaymentTerminalTypeFromJSON,
     PaymentTerminalTypeFromJSONTyped,
     PaymentTerminalTypeToJSON,
+    PaymentTerminalTypeToJSONTyped,
 } from './PaymentTerminalType';
 
 /**
@@ -85,6 +87,8 @@ export interface PaymentTerminalConfiguration {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentTerminalConfiguration interface.
  */
@@ -112,10 +116,15 @@ export function PaymentTerminalConfigurationFromJSONTyped(json: any, ignoreDiscr
     };
 }
 
-export function PaymentTerminalConfigurationToJSON(value?: Omit<PaymentTerminalConfiguration, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function PaymentTerminalConfigurationToJSON(json: any): PaymentTerminalConfiguration {
+    return PaymentTerminalConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentTerminalConfigurationToJSONTyped(value?: Omit<PaymentTerminalConfiguration, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': PaymentTerminalConfigurationStateToJSON(value['state']),

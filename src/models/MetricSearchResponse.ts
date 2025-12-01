@@ -27,6 +27,7 @@ import {
     SubscriptionMetricFromJSON,
     SubscriptionMetricFromJSONTyped,
     SubscriptionMetricToJSON,
+    SubscriptionMetricToJSONTyped,
 } from './SubscriptionMetric';
 
 /**
@@ -85,10 +86,15 @@ export function MetricSearchResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function MetricSearchResponseToJSON(value?: Omit<MetricSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function MetricSearchResponseToJSON(json: any): MetricSearchResponse {
+    return MetricSearchResponseToJSONTyped(json, false);
+}
+
+export function MetricSearchResponseToJSONTyped(value?: Omit<MetricSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     ManualTaskFromJSON,
     ManualTaskFromJSONTyped,
     ManualTaskToJSON,
+    ManualTaskToJSONTyped,
 } from './ManualTask';
 
 /**
@@ -78,10 +79,15 @@ export function ManualTaskListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function ManualTaskListResponseToJSON(value?: Omit<ManualTaskListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ManualTaskListResponseToJSON(json: any): ManualTaskListResponse {
+    return ManualTaskListResponseToJSONTyped(json, false);
+}
+
+export function ManualTaskListResponseToJSONTyped(value?: Omit<ManualTaskListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,24 +27,28 @@ import {
     DeliveryIndicationStateFromJSON,
     DeliveryIndicationStateFromJSONTyped,
     DeliveryIndicationStateToJSON,
+    DeliveryIndicationStateToJSONTyped,
 } from './DeliveryIndicationState';
 import type { Transaction } from './Transaction';
 import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { DeliveryIndicationDecisionReason } from './DeliveryIndicationDecisionReason';
 import {
     DeliveryIndicationDecisionReasonFromJSON,
     DeliveryIndicationDecisionReasonFromJSONTyped,
     DeliveryIndicationDecisionReasonToJSON,
+    DeliveryIndicationDecisionReasonToJSONTyped,
 } from './DeliveryIndicationDecisionReason';
 import type { TransactionCompletion } from './TransactionCompletion';
 import {
     TransactionCompletionFromJSON,
     TransactionCompletionFromJSONTyped,
     TransactionCompletionToJSON,
+    TransactionCompletionToJSONTyped,
 } from './TransactionCompletion';
 
 /**
@@ -139,6 +143,8 @@ export interface DeliveryIndication {
     transaction?: Transaction;
 }
 
+
+
 /**
  * Check if a given object implements the DeliveryIndication interface.
  */
@@ -173,10 +179,15 @@ export function DeliveryIndicationFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function DeliveryIndicationToJSON(value?: Omit<DeliveryIndication, 'plannedPurgeDate'|'automaticallyDecidedOn'|'createdOn'|'linkedSpaceId'|'manuallyDecidedBy'|'timeoutOn'|'manualDecisionTimeoutOn'|'manuallyDecidedOn'|'id'|'linkedTransaction'> | null): any {
+export function DeliveryIndicationToJSON(json: any): DeliveryIndication {
+    return DeliveryIndicationToJSONTyped(json, false);
+}
+
+export function DeliveryIndicationToJSONTyped(value?: Omit<DeliveryIndication, 'plannedPurgeDate'|'automaticallyDecidedOn'|'createdOn'|'linkedSpaceId'|'manuallyDecidedBy'|'timeoutOn'|'manualDecisionTimeoutOn'|'manuallyDecidedOn'|'id'|'linkedTransaction'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'completion': TransactionCompletionToJSON(value['completion']),

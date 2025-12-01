@@ -27,6 +27,7 @@ import {
     ProductMeteredFeeFromJSON,
     ProductMeteredFeeFromJSONTyped,
     ProductMeteredFeeToJSON,
+    ProductMeteredFeeToJSONTyped,
 } from './ProductMeteredFee';
 
 /**
@@ -85,10 +86,15 @@ export function ProductMeteredFeeSearchResponseFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function ProductMeteredFeeSearchResponseToJSON(value?: Omit<ProductMeteredFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ProductMeteredFeeSearchResponseToJSON(json: any): ProductMeteredFeeSearchResponse {
+    return ProductMeteredFeeSearchResponseToJSONTyped(json, false);
+}
+
+export function ProductMeteredFeeSearchResponseToJSONTyped(value?: Omit<ProductMeteredFeeSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

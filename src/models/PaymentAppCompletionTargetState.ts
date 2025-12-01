@@ -56,3 +56,7 @@ export function PaymentAppCompletionTargetStateToJSON(value?: PaymentAppCompleti
     return value as any;
 }
 
+export function PaymentAppCompletionTargetStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppCompletionTargetState {
+    return value as PaymentAppCompletionTargetState;
+}
+

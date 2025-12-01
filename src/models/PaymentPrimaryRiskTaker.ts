@@ -57,3 +57,7 @@ export function PaymentPrimaryRiskTakerToJSON(value?: PaymentPrimaryRiskTaker | 
     return value as any;
 }
 
+export function PaymentPrimaryRiskTakerToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentPrimaryRiskTaker {
+    return value as PaymentPrimaryRiskTaker;
+}
+

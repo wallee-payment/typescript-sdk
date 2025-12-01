@@ -27,6 +27,7 @@ import {
     ChargeFlowLevelPaymentLinkFromJSON,
     ChargeFlowLevelPaymentLinkFromJSONTyped,
     ChargeFlowLevelPaymentLinkToJSON,
+    ChargeFlowLevelPaymentLinkToJSONTyped,
 } from './ChargeFlowLevelPaymentLink';
 
 /**
@@ -85,10 +86,15 @@ export function ChargeFlowLevelPaymentLinkSearchResponseFromJSONTyped(json: any,
     };
 }
 
-export function ChargeFlowLevelPaymentLinkSearchResponseToJSON(value?: Omit<ChargeFlowLevelPaymentLinkSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ChargeFlowLevelPaymentLinkSearchResponseToJSON(json: any): ChargeFlowLevelPaymentLinkSearchResponse {
+    return ChargeFlowLevelPaymentLinkSearchResponseToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelPaymentLinkSearchResponseToJSONTyped(value?: Omit<ChargeFlowLevelPaymentLinkSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

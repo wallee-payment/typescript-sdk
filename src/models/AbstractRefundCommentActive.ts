@@ -57,10 +57,15 @@ export function AbstractRefundCommentActiveFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function AbstractRefundCommentActiveToJSON(value?: AbstractRefundCommentActive | null): any {
+export function AbstractRefundCommentActiveToJSON(json: any): AbstractRefundCommentActive {
+    return AbstractRefundCommentActiveToJSONTyped(json, false);
+}
+
+export function AbstractRefundCommentActiveToJSONTyped(value?: AbstractRefundCommentActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

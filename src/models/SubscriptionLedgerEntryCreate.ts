@@ -27,6 +27,7 @@ import {
     TaxCreateFromJSON,
     TaxCreateFromJSONTyped,
     TaxCreateToJSON,
+    TaxCreateToJSONTyped,
 } from './TaxCreate';
 
 /**
@@ -118,10 +119,15 @@ export function SubscriptionLedgerEntryCreateFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function SubscriptionLedgerEntryCreateToJSON(value?: SubscriptionLedgerEntryCreate | null): any {
+export function SubscriptionLedgerEntryCreateToJSON(json: any): SubscriptionLedgerEntryCreate {
+    return SubscriptionLedgerEntryCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionLedgerEntryCreateToJSONTyped(value?: SubscriptionLedgerEntryCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'quantity': value['quantity'],

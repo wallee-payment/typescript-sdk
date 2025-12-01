@@ -27,6 +27,7 @@ import {
     ChargeFlowLevelPaymentLinkFromJSON,
     ChargeFlowLevelPaymentLinkFromJSONTyped,
     ChargeFlowLevelPaymentLinkToJSON,
+    ChargeFlowLevelPaymentLinkToJSONTyped,
 } from './ChargeFlowLevelPaymentLink';
 
 /**
@@ -78,10 +79,15 @@ export function ChargeFlowLevelPaymentLinkListResponseFromJSONTyped(json: any, i
     };
 }
 
-export function ChargeFlowLevelPaymentLinkListResponseToJSON(value?: Omit<ChargeFlowLevelPaymentLinkListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ChargeFlowLevelPaymentLinkListResponseToJSON(json: any): ChargeFlowLevelPaymentLinkListResponse {
+    return ChargeFlowLevelPaymentLinkListResponseToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelPaymentLinkListResponseToJSONTyped(value?: Omit<ChargeFlowLevelPaymentLinkListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

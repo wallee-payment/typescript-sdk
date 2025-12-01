@@ -27,6 +27,7 @@ import {
     SubscriptionVersionFromJSON,
     SubscriptionVersionFromJSONTyped,
     SubscriptionVersionToJSON,
+    SubscriptionVersionToJSONTyped,
 } from './SubscriptionVersion';
 
 /**
@@ -85,10 +86,15 @@ export function SubscriptionVersionSearchResponseFromJSONTyped(json: any, ignore
     };
 }
 
-export function SubscriptionVersionSearchResponseToJSON(value?: Omit<SubscriptionVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SubscriptionVersionSearchResponseToJSON(json: any): SubscriptionVersionSearchResponse {
+    return SubscriptionVersionSearchResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionVersionSearchResponseToJSONTyped(value?: Omit<SubscriptionVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

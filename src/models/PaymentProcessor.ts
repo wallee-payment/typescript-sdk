@@ -102,10 +102,15 @@ export function PaymentProcessorFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function PaymentProcessorToJSON(value?: Omit<PaymentProcessor, 'companyName'|'headquartersLocation'|'logoPath'|'name'|'description'|'id'|'productName'> | null): any {
+export function PaymentProcessorToJSON(json: any): PaymentProcessor {
+    return PaymentProcessorToJSONTyped(json, false);
+}
+
+export function PaymentProcessorToJSONTyped(value?: Omit<PaymentProcessor, 'companyName'|'headquartersLocation'|'logoPath'|'name'|'description'|'id'|'productName'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,24 +27,28 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { ChargeType } from './ChargeType';
 import {
     ChargeTypeFromJSON,
     ChargeTypeFromJSONTyped,
     ChargeTypeToJSON,
+    ChargeTypeToJSONTyped,
 } from './ChargeType';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { ChargeState } from './ChargeState';
 import {
     ChargeStateFromJSON,
     ChargeStateFromJSONTyped,
     ChargeStateToJSON,
+    ChargeStateToJSONTyped,
 } from './ChargeState';
 
 /**
@@ -139,6 +143,8 @@ export interface Charge {
     transaction?: Transaction;
 }
 
+
+
 /**
  * Check if a given object implements the Charge interface.
  */
@@ -173,10 +179,15 @@ export function ChargeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ch
     };
 }
 
-export function ChargeToJSON(value?: Omit<Charge, 'plannedPurgeDate'|'timeZone'|'language'|'spaceViewId'|'userFailureMessage'|'createdOn'|'version'|'linkedSpaceId'|'timeoutOn'|'id'> | null): any {
+export function ChargeToJSON(json: any): Charge {
+    return ChargeToJSONTyped(json, false);
+}
+
+export function ChargeToJSONTyped(value?: Omit<Charge, 'plannedPurgeDate'|'timeZone'|'language'|'spaceViewId'|'userFailureMessage'|'createdOn'|'version'|'linkedSpaceId'|'timeoutOn'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': ChargeTypeToJSON(value['type']),

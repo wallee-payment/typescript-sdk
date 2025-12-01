@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -55,6 +56,8 @@ export interface PaymentProcessorConfigurationCreate {
     processor: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentProcessorConfigurationCreate interface.
  */
@@ -79,10 +82,15 @@ export function PaymentProcessorConfigurationCreateFromJSONTyped(json: any, igno
     };
 }
 
-export function PaymentProcessorConfigurationCreateToJSON(value?: PaymentProcessorConfigurationCreate | null): any {
+export function PaymentProcessorConfigurationCreateToJSON(json: any): PaymentProcessorConfigurationCreate {
+    return PaymentProcessorConfigurationCreateToJSONTyped(json, false);
+}
+
+export function PaymentProcessorConfigurationCreateToJSONTyped(value?: PaymentProcessorConfigurationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

@@ -64,10 +64,15 @@ export function SubscriptionComponentReferenceConfigurationFromJSONTyped(json: a
     };
 }
 
-export function SubscriptionComponentReferenceConfigurationToJSON(value?: SubscriptionComponentReferenceConfiguration | null): any {
+export function SubscriptionComponentReferenceConfigurationToJSON(json: any): SubscriptionComponentReferenceConfiguration {
+    return SubscriptionComponentReferenceConfigurationToJSONTyped(json, false);
+}
+
+export function SubscriptionComponentReferenceConfigurationToJSONTyped(value?: SubscriptionComponentReferenceConfiguration | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'quantity': value['quantity'],

@@ -27,6 +27,7 @@ import {
     RoleFromJSON,
     RoleFromJSONTyped,
     RoleToJSON,
+    RoleToJSONTyped,
 } from './Role';
 
 /**
@@ -78,10 +79,15 @@ export function RoleListResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function RoleListResponseToJSON(value?: Omit<RoleListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function RoleListResponseToJSON(json: any): RoleListResponse {
+    return RoleListResponseToJSONTyped(json, false);
+}
+
+export function RoleListResponseToJSONTyped(value?: Omit<RoleListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

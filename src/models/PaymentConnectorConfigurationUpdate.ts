@@ -27,12 +27,14 @@ import {
     ConditionFromJSON,
     ConditionFromJSONTyped,
     ConditionToJSON,
+    ConditionToJSONTyped,
 } from './Condition';
 import type { SalesChannel } from './SalesChannel';
 import {
     SalesChannelFromJSON,
     SalesChannelFromJSONTyped,
     SalesChannelToJSON,
+    SalesChannelToJSONTyped,
 } from './SalesChannel';
 
 /**
@@ -98,7 +100,7 @@ export function PaymentConnectorConfigurationUpdateFromJSONTyped(json: any, igno
     return {
         
         'name': json['name'] == null ? undefined : json['name'],
-        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : json['enabledSpaceViews'],
+        'enabledSpaceViews': json['enabledSpaceViews'] == null ? undefined : new Set(json['enabledSpaceViews']),
         'conditions': json['conditions'] == null ? undefined : ((json['conditions'] as Array<any>).map(ConditionFromJSON)),
         'priority': json['priority'] == null ? undefined : json['priority'],
         'enabledSalesChannels': json['enabledSalesChannels'] == null ? undefined : (new Set((json['enabledSalesChannels'] as Array<any>).map(SalesChannelFromJSON))),
@@ -106,10 +108,15 @@ export function PaymentConnectorConfigurationUpdateFromJSONTyped(json: any, igno
     };
 }
 
-export function PaymentConnectorConfigurationUpdateToJSON(value?: PaymentConnectorConfigurationUpdate | null): any {
+export function PaymentConnectorConfigurationUpdateToJSON(json: any): PaymentConnectorConfigurationUpdate {
+    return PaymentConnectorConfigurationUpdateToJSONTyped(json, false);
+}
+
+export function PaymentConnectorConfigurationUpdateToJSONTyped(value?: PaymentConnectorConfigurationUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

@@ -62,3 +62,7 @@ export function PanTypeToJSON(value?: PanType | null): any {
     return value as any;
 }
 
+export function PanTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): PanType {
+    return value as PanType;
+}
+

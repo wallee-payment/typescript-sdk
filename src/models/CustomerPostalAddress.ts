@@ -27,12 +27,14 @@ import {
     GenderFromJSON,
     GenderFromJSONTyped,
     GenderToJSON,
+    GenderToJSONTyped,
 } from './Gender';
 import type { LegalOrganizationForm } from './LegalOrganizationForm';
 import {
     LegalOrganizationFormFromJSON,
     LegalOrganizationFormFromJSONTyped,
     LegalOrganizationFormToJSON,
+    LegalOrganizationFormToJSONTyped,
 } from './LegalOrganizationForm';
 
 /**
@@ -163,6 +165,8 @@ export interface CustomerPostalAddress {
     readonly salutation?: string;
 }
 
+
+
 /**
  * Check if a given object implements the CustomerPostalAddress interface.
  */
@@ -203,10 +207,15 @@ export function CustomerPostalAddressFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function CustomerPostalAddressToJSON(value?: Omit<CustomerPostalAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'commercialRegisterNumber'|'socialSecurityNumber'|'givenName'|'postcode'|'salesTaxNumber'|'dateOfBirth'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null): any {
+export function CustomerPostalAddressToJSON(json: any): CustomerPostalAddress {
+    return CustomerPostalAddressToJSONTyped(json, false);
+}
+
+export function CustomerPostalAddressToJSONTyped(value?: Omit<CustomerPostalAddress, 'country'|'mobilePhoneNumber'|'organizationName'|'city'|'commercialRegisterNumber'|'socialSecurityNumber'|'givenName'|'postcode'|'salesTaxNumber'|'dateOfBirth'|'dependentLocality'|'emailAddress'|'phoneNumber'|'sortingCode'|'street'|'familyName'|'postalState'|'salutation'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'gender': GenderToJSON(value['gender']),

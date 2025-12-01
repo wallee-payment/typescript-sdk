@@ -58,3 +58,7 @@ export function RoleStateToJSON(value?: RoleState | null): any {
     return value as any;
 }
 
+export function RoleStateToJSONTyped(value: any, ignoreDiscriminator: boolean): RoleState {
+    return value as RoleState;
+}
+

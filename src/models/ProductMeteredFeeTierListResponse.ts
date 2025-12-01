@@ -27,6 +27,7 @@ import {
     ProductMeteredTierFeeFromJSON,
     ProductMeteredTierFeeFromJSONTyped,
     ProductMeteredTierFeeToJSON,
+    ProductMeteredTierFeeToJSONTyped,
 } from './ProductMeteredTierFee';
 
 /**
@@ -78,10 +79,15 @@ export function ProductMeteredFeeTierListResponseFromJSONTyped(json: any, ignore
     };
 }
 
-export function ProductMeteredFeeTierListResponseToJSON(value?: Omit<ProductMeteredFeeTierListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ProductMeteredFeeTierListResponseToJSON(json: any): ProductMeteredFeeTierListResponse {
+    return ProductMeteredFeeTierListResponseToJSONTyped(json, false);
+}
+
+export function ProductMeteredFeeTierListResponseToJSONTyped(value?: Omit<ProductMeteredFeeTierListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

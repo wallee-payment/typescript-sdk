@@ -27,6 +27,7 @@ import {
     SubscriptionLedgerEntryFromJSON,
     SubscriptionLedgerEntryFromJSONTyped,
     SubscriptionLedgerEntryToJSON,
+    SubscriptionLedgerEntryToJSONTyped,
 } from './SubscriptionLedgerEntry';
 
 /**
@@ -85,10 +86,15 @@ export function SubscriptionLedgerEntrySearchResponseFromJSONTyped(json: any, ig
     };
 }
 
-export function SubscriptionLedgerEntrySearchResponseToJSON(value?: Omit<SubscriptionLedgerEntrySearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function SubscriptionLedgerEntrySearchResponseToJSON(json: any): SubscriptionLedgerEntrySearchResponse {
+    return SubscriptionLedgerEntrySearchResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionLedgerEntrySearchResponseToJSONTyped(value?: Omit<SubscriptionLedgerEntrySearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

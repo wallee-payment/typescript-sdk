@@ -58,3 +58,7 @@ export function ChargeTypeToJSON(value?: ChargeType | null): any {
     return value as any;
 }
 
+export function ChargeTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): ChargeType {
+    return value as ChargeType;
+}
+

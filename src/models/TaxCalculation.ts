@@ -27,8 +27,8 @@
  * @export
  */
 export const TaxCalculation = {
-    Included: 'TAX_INCLUDED',
-    NotIncluded: 'TAX_NOT_INCLUDED'
+    TaxIncluded: 'TAX_INCLUDED',
+    TaxNotIncluded: 'TAX_NOT_INCLUDED'
 } as const;
 export type TaxCalculation = typeof TaxCalculation[keyof typeof TaxCalculation];
 
@@ -54,5 +54,9 @@ export function TaxCalculationFromJSONTyped(json: any, ignoreDiscriminator: bool
 
 export function TaxCalculationToJSON(value?: TaxCalculation | null): any {
     return value as any;
+}
+
+export function TaxCalculationToJSONTyped(value: any, ignoreDiscriminator: boolean): TaxCalculation {
+    return value as TaxCalculation;
 }
 

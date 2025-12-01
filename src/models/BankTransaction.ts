@@ -27,24 +27,28 @@ import {
     BankTransactionFlowDirectionFromJSON,
     BankTransactionFlowDirectionFromJSONTyped,
     BankTransactionFlowDirectionToJSON,
+    BankTransactionFlowDirectionToJSONTyped,
 } from './BankTransactionFlowDirection';
 import type { BankTransactionState } from './BankTransactionState';
 import {
     BankTransactionStateFromJSON,
     BankTransactionStateFromJSONTyped,
     BankTransactionStateToJSON,
+    BankTransactionStateToJSONTyped,
 } from './BankTransactionState';
 import type { CurrencyBankAccount } from './CurrencyBankAccount';
 import {
     CurrencyBankAccountFromJSON,
     CurrencyBankAccountFromJSONTyped,
     CurrencyBankAccountToJSON,
+    CurrencyBankAccountToJSONTyped,
 } from './CurrencyBankAccount';
 import type { PaymentAdjustment } from './PaymentAdjustment';
 import {
     PaymentAdjustmentFromJSON,
     PaymentAdjustmentFromJSONTyped,
     PaymentAdjustmentToJSON,
+    PaymentAdjustmentToJSONTyped,
 } from './PaymentAdjustment';
 
 /**
@@ -169,6 +173,8 @@ export interface BankTransaction {
     readonly totalAdjustmentAmountIncludingTax?: number;
 }
 
+
+
 /**
  * Check if a given object implements the BankTransaction interface.
  */
@@ -208,10 +214,15 @@ export function BankTransactionFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function BankTransactionToJSON(value?: Omit<BankTransaction, 'adjustments'|'plannedPurgeDate'|'externalId'|'postingAmount'|'source'|'valueDate'|'type'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'valueAmount'|'createdBy'|'id'|'paymentDate'|'totalAdjustmentAmountIncludingTax'> | null): any {
+export function BankTransactionToJSON(json: any): BankTransaction {
+    return BankTransactionToJSONTyped(json, false);
+}
+
+export function BankTransactionToJSONTyped(value?: Omit<BankTransaction, 'adjustments'|'plannedPurgeDate'|'externalId'|'postingAmount'|'source'|'valueDate'|'type'|'createdOn'|'version'|'reference'|'linkedSpaceId'|'valueAmount'|'createdBy'|'id'|'paymentDate'|'totalAdjustmentAmountIncludingTax'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'currencyBankAccount': CurrencyBankAccountToJSON(value['currencyBankAccount']),

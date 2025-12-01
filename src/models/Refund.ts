@@ -27,54 +27,63 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { RefundType } from './RefundType';
 import {
     RefundTypeFromJSON,
     RefundTypeFromJSONTyped,
     RefundTypeToJSON,
+    RefundTypeToJSONTyped,
 } from './RefundType';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { Environment } from './Environment';
 import {
     EnvironmentFromJSON,
     EnvironmentFromJSONTyped,
     EnvironmentToJSON,
+    EnvironmentToJSONTyped,
 } from './Environment';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { Tax } from './Tax';
 import {
     TaxFromJSON,
     TaxFromJSONTyped,
     TaxToJSON,
+    TaxToJSONTyped,
 } from './Tax';
 import type { LineItemReduction } from './LineItemReduction';
 import {
     LineItemReductionFromJSON,
     LineItemReductionFromJSONTyped,
     LineItemReductionToJSON,
+    LineItemReductionToJSONTyped,
 } from './LineItemReduction';
 import type { RefundState } from './RefundState';
 import {
     RefundStateFromJSON,
     RefundStateFromJSONTyped,
     RefundStateToJSON,
+    RefundStateToJSONTyped,
 } from './RefundState';
 
 /**
@@ -277,6 +286,8 @@ export interface Refund {
     readonly processorReference?: string;
 }
 
+
+
 /**
  * Check if a given object implements the Refund interface.
  */
@@ -329,10 +340,15 @@ export function RefundFromJSONTyped(json: any, ignoreDiscriminator: boolean): Re
     };
 }
 
-export function RefundToJSON(value?: Omit<Refund, 'totalSettledAmount'|'reductions'|'baseLineItems'|'processingOn'|'taxes'|'language'|'createdOn'|'lineItems'|'succeededOn'|'reducedLineItems'|'id'|'merchantReference'|'completion'|'amount'|'plannedPurgeDate'|'externalId'|'timeZone'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'updatedInvoice'|'totalAppliedFees'|'failedOn'|'processorReference'> | null): any {
+export function RefundToJSON(json: any): Refund {
+    return RefundToJSONTyped(json, false);
+}
+
+export function RefundToJSONTyped(value?: Omit<Refund, 'totalSettledAmount'|'reductions'|'baseLineItems'|'processingOn'|'taxes'|'language'|'createdOn'|'lineItems'|'succeededOn'|'reducedLineItems'|'id'|'merchantReference'|'completion'|'amount'|'plannedPurgeDate'|'externalId'|'timeZone'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'updatedInvoice'|'totalAppliedFees'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': RefundTypeToJSON(value['type']),

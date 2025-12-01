@@ -60,3 +60,7 @@ export function PaymentTerminalStateToJSON(value?: PaymentTerminalState | null):
     return value as any;
 }
 
+export function PaymentTerminalStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentTerminalState {
+    return value as PaymentTerminalState;
+}
+

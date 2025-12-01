@@ -58,3 +58,7 @@ export function BillingCycleTypeToJSON(value?: BillingCycleType | null): any {
     return value as any;
 }
 
+export function BillingCycleTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): BillingCycleType {
+    return value as BillingCycleType;
+}
+

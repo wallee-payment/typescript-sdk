@@ -27,6 +27,7 @@ import {
     RefundFromJSON,
     RefundFromJSONTyped,
     RefundToJSON,
+    RefundToJSONTyped,
 } from './Refund';
 
 /**
@@ -85,10 +86,15 @@ export function RefundSearchResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function RefundSearchResponseToJSON(value?: Omit<RefundSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function RefundSearchResponseToJSON(json: any): RefundSearchResponse {
+    return RefundSearchResponseToJSONTyped(json, false);
+}
+
+export function RefundSearchResponseToJSONTyped(value?: Omit<RefundSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

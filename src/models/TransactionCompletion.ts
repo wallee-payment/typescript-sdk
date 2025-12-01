@@ -27,36 +27,42 @@ import {
     TransactionCompletionStateFromJSON,
     TransactionCompletionStateFromJSONTyped,
     TransactionCompletionStateToJSON,
+    TransactionCompletionStateToJSONTyped,
 } from './TransactionCompletionState';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { TransactionCompletionMode } from './TransactionCompletionMode';
 import {
     TransactionCompletionModeFromJSON,
     TransactionCompletionModeFromJSONTyped,
     TransactionCompletionModeToJSON,
+    TransactionCompletionModeToJSONTyped,
 } from './TransactionCompletionMode';
 import type { TransactionLineItemVersion } from './TransactionLineItemVersion';
 import {
     TransactionLineItemVersionFromJSON,
     TransactionLineItemVersionFromJSONTyped,
     TransactionLineItemVersionToJSON,
+    TransactionLineItemVersionToJSONTyped,
 } from './TransactionLineItemVersion';
 
 /**
@@ -253,6 +259,8 @@ export interface TransactionCompletion {
     readonly processorReference?: string;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionCompletion interface.
  */
@@ -304,10 +312,15 @@ export function TransactionCompletionFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function TransactionCompletionToJSON(value?: Omit<TransactionCompletion, 'statementDescriptor'|'baseLineItems'|'processingOn'|'invoiceMerchantReference'|'language'|'remainingLineItems'|'createdOn'|'lineItems'|'succeededOn'|'id'|'linkedTransaction'|'paymentInformation'|'amount'|'lastCompletion'|'plannedPurgeDate'|'externalId'|'timeZone'|'spaceViewId'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'taxAmount'|'failedOn'|'processorReference'> | null): any {
+export function TransactionCompletionToJSON(json: any): TransactionCompletion {
+    return TransactionCompletionToJSONTyped(json, false);
+}
+
+export function TransactionCompletionToJSONTyped(value?: Omit<TransactionCompletion, 'statementDescriptor'|'baseLineItems'|'processingOn'|'invoiceMerchantReference'|'language'|'remainingLineItems'|'createdOn'|'lineItems'|'succeededOn'|'id'|'linkedTransaction'|'paymentInformation'|'amount'|'lastCompletion'|'plannedPurgeDate'|'externalId'|'timeZone'|'spaceViewId'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'taxAmount'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItemVersion': TransactionLineItemVersionToJSON(value['lineItemVersion']),

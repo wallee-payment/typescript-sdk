@@ -72,10 +72,15 @@ export function PaymentTerminalPreparingFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function PaymentTerminalPreparingToJSON(value?: PaymentTerminalPreparing | null): any {
+export function PaymentTerminalPreparingToJSON(json: any): PaymentTerminalPreparing {
+    return PaymentTerminalPreparingToJSONTyped(json, false);
+}
+
+export function PaymentTerminalPreparingToJSONTyped(value?: PaymentTerminalPreparing | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

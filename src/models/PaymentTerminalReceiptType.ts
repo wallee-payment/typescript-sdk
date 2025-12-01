@@ -71,10 +71,15 @@ export function PaymentTerminalReceiptTypeFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function PaymentTerminalReceiptTypeToJSON(value?: Omit<PaymentTerminalReceiptType, 'name'|'description'|'id'> | null): any {
+export function PaymentTerminalReceiptTypeToJSON(json: any): PaymentTerminalReceiptType {
+    return PaymentTerminalReceiptTypeToJSONTyped(json, false);
+}
+
+export function PaymentTerminalReceiptTypeToJSONTyped(value?: Omit<PaymentTerminalReceiptType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

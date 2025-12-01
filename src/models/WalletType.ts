@@ -27,6 +27,7 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -99,10 +100,15 @@ export function WalletTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function WalletTypeToJSON(value?: Omit<WalletType, 'sortOrder'|'name'|'description'|'navigationPath'|'id'> | null): any {
+export function WalletTypeToJSON(json: any): WalletType {
+    return WalletTypeToJSONTyped(json, false);
+}
+
+export function WalletTypeToJSONTyped(value?: Omit<WalletType, 'sortOrder'|'name'|'description'|'navigationPath'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feature': FeatureToJSON(value['feature']),

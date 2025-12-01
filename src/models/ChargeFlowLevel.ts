@@ -27,24 +27,28 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { Charge } from './Charge';
 import {
     ChargeFromJSON,
     ChargeFromJSONTyped,
     ChargeToJSON,
+    ChargeToJSONTyped,
 } from './Charge';
 import type { ChargeFlowLevelConfiguration } from './ChargeFlowLevelConfiguration';
 import {
     ChargeFlowLevelConfigurationFromJSON,
     ChargeFlowLevelConfigurationFromJSONTyped,
     ChargeFlowLevelConfigurationToJSON,
+    ChargeFlowLevelConfigurationToJSONTyped,
 } from './ChargeFlowLevelConfiguration';
 import type { ChargeFlowLevelState } from './ChargeFlowLevelState';
 import {
     ChargeFlowLevelStateFromJSON,
     ChargeFlowLevelStateFromJSONTyped,
     ChargeFlowLevelStateToJSON,
+    ChargeFlowLevelStateToJSONTyped,
 } from './ChargeFlowLevelState';
 
 /**
@@ -133,6 +137,8 @@ export interface ChargeFlowLevel {
     transaction?: Transaction;
 }
 
+
+
 /**
  * Check if a given object implements the ChargeFlowLevel interface.
  */
@@ -166,10 +172,15 @@ export function ChargeFlowLevelFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function ChargeFlowLevelToJSON(value?: Omit<ChargeFlowLevel, 'plannedPurgeDate'|'createdOn'|'version'|'linkedSpaceId'|'timeoutOn'|'id'|'linkedTransaction'> | null): any {
+export function ChargeFlowLevelToJSON(json: any): ChargeFlowLevel {
+    return ChargeFlowLevelToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelToJSONTyped(value?: Omit<ChargeFlowLevel, 'plannedPurgeDate'|'createdOn'|'version'|'linkedSpaceId'|'timeoutOn'|'id'|'linkedTransaction'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'synchronousCharge': ChargeToJSON(value['synchronousCharge']),

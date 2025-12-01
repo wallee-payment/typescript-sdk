@@ -56,3 +56,7 @@ export function BankAccountEnvironmentToJSON(value?: BankAccountEnvironment | nu
     return value as any;
 }
 
+export function BankAccountEnvironmentToJSONTyped(value: any, ignoreDiscriminator: boolean): BankAccountEnvironment {
+    return value as BankAccountEnvironment;
+}
+

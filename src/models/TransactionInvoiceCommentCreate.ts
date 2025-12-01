@@ -65,10 +65,15 @@ export function TransactionInvoiceCommentCreateFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function TransactionInvoiceCommentCreateToJSON(value?: TransactionInvoiceCommentCreate | null): any {
+export function TransactionInvoiceCommentCreateToJSON(json: any): TransactionInvoiceCommentCreate {
+    return TransactionInvoiceCommentCreateToJSONTyped(json, false);
+}
+
+export function TransactionInvoiceCommentCreateToJSONTyped(value?: TransactionInvoiceCommentCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

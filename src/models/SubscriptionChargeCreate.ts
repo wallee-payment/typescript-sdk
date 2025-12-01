@@ -27,6 +27,7 @@ import {
     SubscriptionChargeProcessingTypeFromJSON,
     SubscriptionChargeProcessingTypeFromJSONTyped,
     SubscriptionChargeProcessingTypeToJSON,
+    SubscriptionChargeProcessingTypeToJSONTyped,
 } from './SubscriptionChargeProcessingType';
 
 /**
@@ -79,6 +80,8 @@ export interface SubscriptionChargeCreate {
     failedUrl?: string;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionChargeCreate interface.
  */
@@ -109,10 +112,15 @@ export function SubscriptionChargeCreateFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function SubscriptionChargeCreateToJSON(value?: SubscriptionChargeCreate | null): any {
+export function SubscriptionChargeCreateToJSON(json: any): SubscriptionChargeCreate {
+    return SubscriptionChargeCreateToJSONTyped(json, false);
+}
+
+export function SubscriptionChargeCreateToJSONTyped(value?: SubscriptionChargeCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

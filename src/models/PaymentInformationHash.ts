@@ -27,6 +27,7 @@ import {
     PaymentInformationHashTypeFromJSON,
     PaymentInformationHashTypeFromJSONTyped,
     PaymentInformationHashTypeToJSON,
+    PaymentInformationHashTypeToJSONTyped,
 } from './PaymentInformationHashType';
 
 /**
@@ -78,10 +79,15 @@ export function PaymentInformationHashFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function PaymentInformationHashToJSON(value?: Omit<PaymentInformationHash, 'id'|'value'> | null): any {
+export function PaymentInformationHashToJSON(json: any): PaymentInformationHash {
+    return PaymentInformationHashToJSONTyped(json, false);
+}
+
+export function PaymentInformationHashToJSONTyped(value?: Omit<PaymentInformationHash, 'id'|'value'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': PaymentInformationHashTypeToJSON(value['type']),

@@ -27,30 +27,35 @@ import {
     TransactionVoidModeFromJSON,
     TransactionVoidModeFromJSONTyped,
     TransactionVoidModeToJSON,
+    TransactionVoidModeToJSONTyped,
 } from './TransactionVoidMode';
 import type { Transaction } from './Transaction';
 import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 import type { TransactionVoidState } from './TransactionVoidState';
 import {
     TransactionVoidStateFromJSON,
     TransactionVoidStateFromJSONTyped,
     TransactionVoidStateToJSON,
+    TransactionVoidStateToJSONTyped,
 } from './TransactionVoidState';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 
 /**
@@ -175,6 +180,8 @@ export interface TransactionVoid {
     readonly processorReference?: string;
 }
 
+
+
 /**
  * Check if a given object implements the TransactionVoid interface.
  */
@@ -214,10 +221,15 @@ export function TransactionVoidFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function TransactionVoidToJSON(value?: Omit<TransactionVoid, 'plannedPurgeDate'|'language'|'spaceViewId'|'createdOn'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'succeededOn'|'id'|'linkedTransaction'|'failedOn'|'processorReference'> | null): any {
+export function TransactionVoidToJSON(json: any): TransactionVoid {
+    return TransactionVoidToJSONTyped(json, false);
+}
+
+export function TransactionVoidToJSONTyped(value?: Omit<TransactionVoid, 'plannedPurgeDate'|'language'|'spaceViewId'|'createdOn'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'succeededOn'|'id'|'linkedTransaction'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'mode': TransactionVoidModeToJSON(value['mode']),

@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { DocumentTemplateType } from './DocumentTemplateType';
 import {
     DocumentTemplateTypeFromJSON,
     DocumentTemplateTypeFromJSONTyped,
     DocumentTemplateTypeToJSON,
+    DocumentTemplateTypeToJSONTyped,
 } from './DocumentTemplateType';
 
 /**
@@ -109,6 +111,8 @@ export interface DocumentTemplate {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the DocumentTemplate interface.
  */
@@ -140,10 +144,15 @@ export function DocumentTemplateFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function DocumentTemplateToJSON(value?: Omit<DocumentTemplate, 'deliveryEnabled'|'linkedSpaceId'|'spaceId'|'defaultTemplate'|'name'|'plannedPurgeDate'|'templateResource'|'id'|'version'> | null): any {
+export function DocumentTemplateToJSON(json: any): DocumentTemplate {
+    return DocumentTemplateToJSONTyped(json, false);
+}
+
+export function DocumentTemplateToJSONTyped(value?: Omit<DocumentTemplate, 'deliveryEnabled'|'linkedSpaceId'|'spaceId'|'defaultTemplate'|'name'|'plannedPurgeDate'|'templateResource'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

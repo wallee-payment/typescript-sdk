@@ -27,6 +27,7 @@ import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 
 /**
@@ -127,10 +128,15 @@ export function DebtCollectionCaseDocumentFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function DebtCollectionCaseDocumentToJSON(value?: Omit<DebtCollectionCaseDocument, 'linkedSpaceId'|'fileName'|'plannedPurgeDate'|'debtCollectionCase'|'id'|'mimeType'|'createdOn'|'version'|'uniqueId'|'labels'> | null): any {
+export function DebtCollectionCaseDocumentToJSON(json: any): DebtCollectionCaseDocument {
+    return DebtCollectionCaseDocumentToJSONTyped(json, false);
+}
+
+export function DebtCollectionCaseDocumentToJSONTyped(value?: Omit<DebtCollectionCaseDocument, 'linkedSpaceId'|'fileName'|'plannedPurgeDate'|'debtCollectionCase'|'id'|'mimeType'|'createdOn'|'version'|'uniqueId'|'labels'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

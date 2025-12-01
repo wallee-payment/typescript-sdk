@@ -27,6 +27,7 @@ import {
     PaymentTerminalReceiptTypeFromJSON,
     PaymentTerminalReceiptTypeFromJSONTyped,
     PaymentTerminalReceiptTypeToJSON,
+    PaymentTerminalReceiptTypeToJSONTyped,
 } from './PaymentTerminalReceiptType';
 
 /**
@@ -85,10 +86,15 @@ export function RenderedTerminalReceiptFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function RenderedTerminalReceiptToJSON(value?: Omit<RenderedTerminalReceipt, 'printed'|'data'|'mimeType'> | null): any {
+export function RenderedTerminalReceiptToJSON(json: any): RenderedTerminalReceipt {
+    return RenderedTerminalReceiptToJSONTyped(json, false);
+}
+
+export function RenderedTerminalReceiptToJSONTyped(value?: Omit<RenderedTerminalReceipt, 'printed'|'data'|'mimeType'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'receiptType': PaymentTerminalReceiptTypeToJSON(value['receiptType']),

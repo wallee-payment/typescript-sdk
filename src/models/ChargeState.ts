@@ -57,3 +57,7 @@ export function ChargeStateToJSON(value?: ChargeState | null): any {
     return value as any;
 }
 
+export function ChargeStateToJSONTyped(value: any, ignoreDiscriminator: boolean): ChargeState {
+    return value as ChargeState;
+}
+

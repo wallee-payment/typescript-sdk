@@ -56,3 +56,7 @@ export function PaymentLinkProtectionModeToJSON(value?: PaymentLinkProtectionMod
     return value as any;
 }
 
+export function PaymentLinkProtectionModeToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentLinkProtectionMode {
+    return value as PaymentLinkProtectionMode;
+}
+

@@ -27,24 +27,28 @@ import {
     AccountFromJSON,
     AccountFromJSONTyped,
     AccountToJSON,
+    AccountToJSONTyped,
 } from './Account';
 import type { SpaceAddress } from './SpaceAddress';
 import {
     SpaceAddressFromJSON,
     SpaceAddressFromJSONTyped,
     SpaceAddressToJSON,
+    SpaceAddressToJSONTyped,
 } from './SpaceAddress';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { TenantDatabase } from './TenantDatabase';
 import {
     TenantDatabaseFromJSON,
     TenantDatabaseFromJSONTyped,
     TenantDatabaseToJSON,
+    TenantDatabaseToJSONTyped,
 } from './TenantDatabase';
 
 /**
@@ -169,6 +173,8 @@ export interface Space {
     account?: Account;
 }
 
+
+
 /**
  * Check if a given object implements the Space interface.
  */
@@ -201,17 +207,22 @@ export function SpaceFromJSONTyped(json: any, ignoreDiscriminator: boolean): Spa
         'restrictedActive': json['restrictedActive'] == null ? undefined : json['restrictedActive'],
         'createdBy': json['createdBy'] == null ? undefined : json['createdBy'],
         'name': json['name'] == null ? undefined : json['name'],
-        'technicalContactAddresses': json['technicalContactAddresses'] == null ? undefined : json['technicalContactAddresses'],
+        'technicalContactAddresses': json['technicalContactAddresses'] == null ? undefined : new Set(json['technicalContactAddresses']),
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'account': json['account'] == null ? undefined : AccountFromJSON(json['account']),
     };
 }
 
-export function SpaceToJSON(value?: Omit<Space, 'activeOrRestrictedActive'|'deletedOn'|'plannedPurgeDate'|'active'|'timeZone'|'createdOn'|'primaryCurrency'|'version'|'deletedBy'|'requestLimit'|'restrictedActive'|'createdBy'|'name'|'technicalContactAddresses'|'id'> | null): any {
+export function SpaceToJSON(json: any): Space {
+    return SpaceToJSONTyped(json, false);
+}
+
+export function SpaceToJSONTyped(value?: Omit<Space, 'activeOrRestrictedActive'|'deletedOn'|'plannedPurgeDate'|'active'|'timeZone'|'createdOn'|'primaryCurrency'|'version'|'deletedBy'|'requestLimit'|'restrictedActive'|'createdBy'|'name'|'technicalContactAddresses'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'database': TenantDatabaseToJSON(value['database']),

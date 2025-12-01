@@ -65,10 +65,15 @@ export function TransactionCommentActiveFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function TransactionCommentActiveToJSON(value?: TransactionCommentActive | null): any {
+export function TransactionCommentActiveToJSON(json: any): TransactionCommentActive {
+    return TransactionCommentActiveToJSONTyped(json, false);
+}
+
+export function TransactionCommentActiveToJSONTyped(value?: TransactionCommentActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'content': value['content'],

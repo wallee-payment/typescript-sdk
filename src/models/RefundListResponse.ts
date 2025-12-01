@@ -27,6 +27,7 @@ import {
     RefundFromJSON,
     RefundFromJSONTyped,
     RefundToJSON,
+    RefundToJSONTyped,
 } from './Refund';
 
 /**
@@ -78,10 +79,15 @@ export function RefundListResponseFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function RefundListResponseToJSON(value?: Omit<RefundListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function RefundListResponseToJSON(json: any): RefundListResponse {
+    return RefundListResponseToJSONTyped(json, false);
+}
+
+export function RefundListResponseToJSONTyped(value?: Omit<RefundListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

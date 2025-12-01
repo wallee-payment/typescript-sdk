@@ -27,12 +27,14 @@ import {
     TaxCalculationFromJSON,
     TaxCalculationFromJSONTyped,
     TaxCalculationToJSON,
+    TaxCalculationToJSONTyped,
 } from './TaxCalculation';
 import type { SubscriptionProductVersionState } from './SubscriptionProductVersionState';
 import {
     SubscriptionProductVersionStateFromJSON,
     SubscriptionProductVersionStateFromJSONTyped,
     SubscriptionProductVersionStateToJSON,
+    SubscriptionProductVersionStateToJSONTyped,
 } from './SubscriptionProductVersionState';
 
 /**
@@ -109,6 +111,8 @@ export interface SubscriptionProductVersionPending {
     version: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionProductVersionPending interface.
  */
@@ -127,7 +131,7 @@ export function SubscriptionProductVersionPendingFromJSONTyped(json: any, ignore
     }
     return {
         
-        'enabledCurrencies': json['enabledCurrencies'] == null ? undefined : json['enabledCurrencies'],
+        'enabledCurrencies': json['enabledCurrencies'] == null ? undefined : new Set(json['enabledCurrencies']),
         'product': json['product'] == null ? undefined : json['product'],
         'taxCalculation': json['taxCalculation'] == null ? undefined : TaxCalculationFromJSON(json['taxCalculation']),
         'billingCycle': json['billingCycle'] == null ? undefined : json['billingCycle'],
@@ -141,10 +145,15 @@ export function SubscriptionProductVersionPendingFromJSONTyped(json: any, ignore
     };
 }
 
-export function SubscriptionProductVersionPendingToJSON(value?: SubscriptionProductVersionPending | null): any {
+export function SubscriptionProductVersionPendingToJSON(json: any): SubscriptionProductVersionPending {
+    return SubscriptionProductVersionPendingToJSONTyped(json, false);
+}
+
+export function SubscriptionProductVersionPendingToJSONTyped(value?: SubscriptionProductVersionPending | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'enabledCurrencies': value['enabledCurrencies'] == null ? undefined : Array.from(value['enabledCurrencies'] as Set<any>),

@@ -127,10 +127,15 @@ export function CustomerFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function CustomerToJSON(value?: Omit<Customer, 'linkedSpaceId'|'metaData'|'emailAddress'|'familyName'|'givenName'|'preferredCurrency'|'customerId'|'language'|'id'|'createdOn'|'version'> | null): any {
+export function CustomerToJSON(json: any): Customer {
+    return CustomerToJSONTyped(json, false);
+}
+
+export function CustomerToJSONTyped(value?: Omit<Customer, 'linkedSpaceId'|'metaData'|'emailAddress'|'familyName'|'givenName'|'preferredCurrency'|'customerId'|'language'|'id'|'createdOn'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     ApplicationUserFromJSON,
     ApplicationUserFromJSONTyped,
     ApplicationUserToJSON,
+    ApplicationUserToJSONTyped,
 } from './ApplicationUser';
 
 /**
@@ -85,10 +86,15 @@ export function ApplicationUserSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function ApplicationUserSearchResponseToJSON(value?: Omit<ApplicationUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ApplicationUserSearchResponseToJSON(json: any): ApplicationUserSearchResponse {
+    return ApplicationUserSearchResponseToJSONTyped(json, false);
+}
+
+export function ApplicationUserSearchResponseToJSONTyped(value?: Omit<ApplicationUserSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

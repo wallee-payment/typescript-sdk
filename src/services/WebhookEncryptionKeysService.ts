@@ -44,6 +44,7 @@ export interface GetWebhooksEncryptionKeysIdRequest {
  */
 export class WebhookEncryptionKeysService extends runtime.BaseAPI {
     protected static cache: Map<string, string> = new Map();
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -64,7 +65,6 @@ export class WebhookEncryptionKeysService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         const method = 'GET';
         const path = `/webhooks/encryption-keys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
 
@@ -77,8 +77,8 @@ export class WebhookEncryptionKeysService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/webhooks/encryption-keys/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);

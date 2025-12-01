@@ -78,10 +78,15 @@ export function DunningFlowTypeFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function DunningFlowTypeToJSON(value?: Omit<DunningFlowType, 'specificCountry'|'name'|'description'|'id'> | null): any {
+export function DunningFlowTypeToJSON(json: any): DunningFlowType {
+    return DunningFlowTypeToJSONTyped(json, false);
+}
+
+export function DunningFlowTypeToJSONTyped(value?: Omit<DunningFlowType, 'specificCountry'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

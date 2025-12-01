@@ -27,6 +27,7 @@ import {
     TransactionInvoiceFromJSON,
     TransactionInvoiceFromJSONTyped,
     TransactionInvoiceToJSON,
+    TransactionInvoiceToJSONTyped,
 } from './TransactionInvoice';
 
 /**
@@ -85,10 +86,15 @@ export function InvoiceSearchResponseFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function InvoiceSearchResponseToJSON(value?: Omit<InvoiceSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function InvoiceSearchResponseToJSON(json: any): InvoiceSearchResponse {
+    return InvoiceSearchResponseToJSONTyped(json, false);
+}
+
+export function InvoiceSearchResponseToJSONTyped(value?: Omit<InvoiceSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

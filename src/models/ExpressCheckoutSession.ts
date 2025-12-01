@@ -27,24 +27,28 @@ import {
     ExpressCheckoutWalletTypeFromJSON,
     ExpressCheckoutWalletTypeFromJSONTyped,
     ExpressCheckoutWalletTypeToJSON,
+    ExpressCheckoutWalletTypeToJSONTyped,
 } from './ExpressCheckoutWalletType';
 import type { ExpressCheckoutSessionState } from './ExpressCheckoutSessionState';
 import {
     ExpressCheckoutSessionStateFromJSON,
     ExpressCheckoutSessionStateFromJSONTyped,
     ExpressCheckoutSessionStateToJSON,
+    ExpressCheckoutSessionStateToJSONTyped,
 } from './ExpressCheckoutSessionState';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { ExpressCheckoutShippingOption } from './ExpressCheckoutShippingOption';
 import {
     ExpressCheckoutShippingOptionFromJSON,
     ExpressCheckoutShippingOptionFromJSONTyped,
     ExpressCheckoutShippingOptionToJSON,
+    ExpressCheckoutShippingOptionToJSONTyped,
 } from './ExpressCheckoutShippingOption';
 
 /**
@@ -97,6 +101,8 @@ export interface ExpressCheckoutSession {
     readonly shippingOptions?: Array<ExpressCheckoutShippingOption>;
 }
 
+
+
 /**
  * Check if a given object implements the ExpressCheckoutSession interface.
  */
@@ -124,10 +130,15 @@ export function ExpressCheckoutSessionFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function ExpressCheckoutSessionToJSON(value?: Omit<ExpressCheckoutSession, 'lineItems'|'linkedSpaceId'|'metaData'|'id'|'shippingOptions'> | null): any {
+export function ExpressCheckoutSessionToJSON(json: any): ExpressCheckoutSession {
+    return ExpressCheckoutSessionToJSONTyped(json, false);
+}
+
+export function ExpressCheckoutSessionToJSONTyped(value?: Omit<ExpressCheckoutSession, 'lineItems'|'linkedSpaceId'|'metaData'|'id'|'shippingOptions'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'walletType': ExpressCheckoutWalletTypeToJSON(value['walletType']),

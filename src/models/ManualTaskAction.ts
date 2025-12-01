@@ -27,6 +27,7 @@ import {
     ManualTaskActionStyleFromJSON,
     ManualTaskActionStyleFromJSONTyped,
     ManualTaskActionStyleToJSON,
+    ManualTaskActionStyleToJSONTyped,
 } from './ManualTaskActionStyle';
 
 /**
@@ -61,6 +62,8 @@ export interface ManualTaskAction {
     readonly label?: { [key: string]: string; };
 }
 
+
+
 /**
  * Check if a given object implements the ManualTaskAction interface.
  */
@@ -85,10 +88,15 @@ export function ManualTaskActionFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function ManualTaskActionToJSON(value?: Omit<ManualTaskAction, 'taskType'|'id'|'label'> | null): any {
+export function ManualTaskActionToJSON(json: any): ManualTaskAction {
+    return ManualTaskActionToJSONTyped(json, false);
+}
+
+export function ManualTaskActionToJSONTyped(value?: Omit<ManualTaskAction, 'taskType'|'id'|'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'style': ManualTaskActionStyleToJSON(value['style']),

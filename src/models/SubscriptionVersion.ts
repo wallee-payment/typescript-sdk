@@ -27,30 +27,35 @@ import {
     SubscriptionVersionStateFromJSON,
     SubscriptionVersionStateFromJSONTyped,
     SubscriptionVersionStateToJSON,
+    SubscriptionVersionStateToJSONTyped,
 } from './SubscriptionVersionState';
 import type { BillingCycleModel } from './BillingCycleModel';
 import {
     BillingCycleModelFromJSON,
     BillingCycleModelFromJSONTyped,
     BillingCycleModelToJSON,
+    BillingCycleModelToJSONTyped,
 } from './BillingCycleModel';
 import type { SubscriptionComponentConfiguration } from './SubscriptionComponentConfiguration';
 import {
     SubscriptionComponentConfigurationFromJSON,
     SubscriptionComponentConfigurationFromJSONTyped,
     SubscriptionComponentConfigurationToJSON,
+    SubscriptionComponentConfigurationToJSONTyped,
 } from './SubscriptionComponentConfiguration';
 import type { Subscription } from './Subscription';
 import {
     SubscriptionFromJSON,
     SubscriptionFromJSONTyped,
     SubscriptionToJSON,
+    SubscriptionToJSONTyped,
 } from './Subscription';
 import type { SubscriptionProductVersion } from './SubscriptionProductVersion';
 import {
     SubscriptionProductVersionFromJSON,
     SubscriptionProductVersionFromJSONTyped,
     SubscriptionProductVersionToJSON,
+    SubscriptionProductVersionToJSONTyped,
 } from './SubscriptionProductVersion';
 
 /**
@@ -175,6 +180,8 @@ export interface SubscriptionVersion {
     readonly failedOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionVersion interface.
  */
@@ -214,10 +221,15 @@ export function SubscriptionVersionFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function SubscriptionVersionToJSON(value?: Omit<SubscriptionVersion, 'plannedPurgeDate'|'language'|'createdOn'|'version'|'terminatedOn'|'linkedSpaceId'|'terminationIssuedOn'|'componentConfigurations'|'activatedOn'|'terminatingOn'|'billingCurrency'|'expectedLastPeriodEnd'|'plannedTerminationDate'|'id'|'failedOn'> | null): any {
+export function SubscriptionVersionToJSON(json: any): SubscriptionVersion {
+    return SubscriptionVersionToJSONTyped(json, false);
+}
+
+export function SubscriptionVersionToJSONTyped(value?: Omit<SubscriptionVersion, 'plannedPurgeDate'|'language'|'createdOn'|'version'|'terminatedOn'|'linkedSpaceId'|'terminationIssuedOn'|'componentConfigurations'|'activatedOn'|'terminatingOn'|'billingCurrency'|'expectedLastPeriodEnd'|'plannedTerminationDate'|'id'|'failedOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'subscription': SubscriptionToJSON(value['subscription']),

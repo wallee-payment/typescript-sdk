@@ -27,6 +27,7 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -85,10 +86,15 @@ export function DunningFlowLevelProcessorFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function DunningFlowLevelProcessorToJSON(value?: Omit<DunningFlowLevelProcessor, 'name'|'description'|'id'> | null): any {
+export function DunningFlowLevelProcessorToJSON(json: any): DunningFlowLevelProcessor {
+    return DunningFlowLevelProcessorToJSONTyped(json, false);
+}
+
+export function DunningFlowLevelProcessorToJSONTyped(value?: Omit<DunningFlowLevelProcessor, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feature': FeatureToJSON(value['feature']),

@@ -66,10 +66,15 @@ export function TaxCreateFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function TaxCreateToJSON(value?: TaxCreate | null): any {
+export function TaxCreateToJSON(json: any): TaxCreate {
+    return TaxCreateToJSONTyped(json, false);
+}
+
+export function TaxCreateToJSONTyped(value?: TaxCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'rate': value['rate'],

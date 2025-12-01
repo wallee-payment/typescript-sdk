@@ -72,10 +72,15 @@ export function SubscriptionMetricActiveFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function SubscriptionMetricActiveToJSON(value?: SubscriptionMetricActive | null): any {
+export function SubscriptionMetricActiveToJSON(json: any): SubscriptionMetricActive {
+    return SubscriptionMetricActiveToJSONTyped(json, false);
+}
+
+export function SubscriptionMetricActiveToJSONTyped(value?: SubscriptionMetricActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

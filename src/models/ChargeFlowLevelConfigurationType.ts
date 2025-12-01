@@ -78,10 +78,15 @@ export function ChargeFlowLevelConfigurationTypeFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function ChargeFlowLevelConfigurationTypeToJSON(value?: Omit<ChargeFlowLevelConfigurationType, 'name'|'description'|'id'|'label'> | null): any {
+export function ChargeFlowLevelConfigurationTypeToJSON(json: any): ChargeFlowLevelConfigurationType {
+    return ChargeFlowLevelConfigurationTypeToJSONTyped(json, false);
+}
+
+export function ChargeFlowLevelConfigurationTypeToJSONTyped(value?: Omit<ChargeFlowLevelConfigurationType, 'name'|'description'|'id'|'label'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

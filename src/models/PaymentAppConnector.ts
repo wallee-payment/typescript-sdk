@@ -27,30 +27,35 @@ import {
     PaymentAppProcessorFromJSON,
     PaymentAppProcessorFromJSONTyped,
     PaymentAppProcessorToJSON,
+    PaymentAppProcessorToJSONTyped,
 } from './PaymentAppProcessor';
 import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
 import {
     PaymentConnectorConfigurationFromJSON,
     PaymentConnectorConfigurationFromJSONTyped,
     PaymentConnectorConfigurationToJSON,
+    PaymentConnectorConfigurationToJSONTyped,
 } from './PaymentConnectorConfiguration';
 import type { PaymentAppConnectorState } from './PaymentAppConnectorState';
 import {
     PaymentAppConnectorStateFromJSON,
     PaymentAppConnectorStateFromJSONTyped,
     PaymentAppConnectorStateToJSON,
+    PaymentAppConnectorStateToJSONTyped,
 } from './PaymentAppConnectorState';
 import type { PaymentAppCompletionConfiguration } from './PaymentAppCompletionConfiguration';
 import {
     PaymentAppCompletionConfigurationFromJSON,
     PaymentAppCompletionConfigurationFromJSONTyped,
     PaymentAppCompletionConfigurationToJSON,
+    PaymentAppCompletionConfigurationToJSONTyped,
 } from './PaymentAppCompletionConfiguration';
 import type { PaymentAppRefundConfiguration } from './PaymentAppRefundConfiguration';
 import {
     PaymentAppRefundConfigurationFromJSON,
     PaymentAppRefundConfigurationFromJSONTyped,
     PaymentAppRefundConfigurationToJSON,
+    PaymentAppRefundConfigurationToJSONTyped,
 } from './PaymentAppRefundConfiguration';
 
 /**
@@ -145,6 +150,8 @@ export interface PaymentAppConnector {
     refundConfiguration?: PaymentAppRefundConfiguration;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppConnector interface.
  */
@@ -179,10 +186,15 @@ export function PaymentAppConnectorFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function PaymentAppConnectorToJSON(value?: Omit<PaymentAppConnector, 'paymentPageEndpoint'|'externalId'|'updatedOn'|'createdOn'|'version'|'linkedSpaceId'|'authorizationTimeout'|'name'|'id'> | null): any {
+export function PaymentAppConnectorToJSON(json: any): PaymentAppConnector {
+    return PaymentAppConnectorToJSONTyped(json, false);
+}
+
+export function PaymentAppConnectorToJSONTyped(value?: Omit<PaymentAppConnector, 'paymentPageEndpoint'|'externalId'|'updatedOn'|'createdOn'|'version'|'linkedSpaceId'|'authorizationTimeout'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'completionConfiguration': PaymentAppCompletionConfigurationToJSON(value['completionConfiguration']),

@@ -27,6 +27,7 @@ import {
     SubscriberFromJSON,
     SubscriberFromJSONTyped,
     SubscriberToJSON,
+    SubscriberToJSONTyped,
 } from './Subscriber';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriberListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SubscriberListResponseToJSON(value?: Omit<SubscriberListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriberListResponseToJSON(json: any): SubscriberListResponse {
+    return SubscriberListResponseToJSONTyped(json, false);
+}
+
+export function SubscriberListResponseToJSONTyped(value?: Omit<SubscriberListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

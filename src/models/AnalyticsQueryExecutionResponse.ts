@@ -57,10 +57,15 @@ export function AnalyticsQueryExecutionResponseFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function AnalyticsQueryExecutionResponseToJSON(value?: Omit<AnalyticsQueryExecutionResponse, 'queryToken'> | null): any {
+export function AnalyticsQueryExecutionResponseToJSON(json: any): AnalyticsQueryExecutionResponse {
+    return AnalyticsQueryExecutionResponseToJSONTyped(json, false);
+}
+
+export function AnalyticsQueryExecutionResponseToJSONTyped(value?: Omit<AnalyticsQueryExecutionResponse, 'queryToken'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

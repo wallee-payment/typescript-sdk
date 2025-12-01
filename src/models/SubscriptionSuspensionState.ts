@@ -56,3 +56,7 @@ export function SubscriptionSuspensionStateToJSON(value?: SubscriptionSuspension
     return value as any;
 }
 
+export function SubscriptionSuspensionStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionSuspensionState {
+    return value as SubscriptionSuspensionState;
+}
+

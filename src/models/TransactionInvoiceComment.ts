@@ -27,6 +27,7 @@ import {
     TransactionInvoiceFromJSON,
     TransactionInvoiceFromJSONTyped,
     TransactionInvoiceToJSON,
+    TransactionInvoiceToJSONTyped,
 } from './TransactionInvoice';
 
 /**
@@ -127,10 +128,15 @@ export function TransactionInvoiceCommentFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function TransactionInvoiceCommentToJSON(value?: Omit<TransactionInvoiceComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null): any {
+export function TransactionInvoiceCommentToJSON(json: any): TransactionInvoiceComment {
+    return TransactionInvoiceCommentToJSONTyped(json, false);
+}
+
+export function TransactionInvoiceCommentToJSONTyped(value?: Omit<TransactionInvoiceComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'transactionInvoice': TransactionInvoiceToJSON(value['transactionInvoice']),

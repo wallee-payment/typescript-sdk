@@ -27,6 +27,7 @@ import {
     SubscriptionProductComponentGroupFromJSON,
     SubscriptionProductComponentGroupFromJSONTyped,
     SubscriptionProductComponentGroupToJSON,
+    SubscriptionProductComponentGroupToJSONTyped,
 } from './SubscriptionProductComponentGroup';
 
 /**
@@ -85,10 +86,15 @@ export function ProductComponentGroupSearchResponseFromJSONTyped(json: any, igno
     };
 }
 
-export function ProductComponentGroupSearchResponseToJSON(value?: Omit<ProductComponentGroupSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ProductComponentGroupSearchResponseToJSON(json: any): ProductComponentGroupSearchResponse {
+    return ProductComponentGroupSearchResponseToJSONTyped(json, false);
+}
+
+export function ProductComponentGroupSearchResponseToJSONTyped(value?: Omit<ProductComponentGroupSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

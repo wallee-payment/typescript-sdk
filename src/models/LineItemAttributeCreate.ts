@@ -66,10 +66,15 @@ export function LineItemAttributeCreateFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function LineItemAttributeCreateToJSON(value?: LineItemAttributeCreate | null): any {
+export function LineItemAttributeCreateToJSON(json: any): LineItemAttributeCreate {
+    return LineItemAttributeCreateToJSONTyped(json, false);
+}
+
+export function LineItemAttributeCreateToJSONTyped(value?: LineItemAttributeCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'label': value['label'],

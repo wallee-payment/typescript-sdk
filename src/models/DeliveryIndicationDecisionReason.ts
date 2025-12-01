@@ -71,10 +71,15 @@ export function DeliveryIndicationDecisionReasonFromJSONTyped(json: any, ignoreD
     };
 }
 
-export function DeliveryIndicationDecisionReasonToJSON(value?: Omit<DeliveryIndicationDecisionReason, 'name'|'description'|'id'> | null): any {
+export function DeliveryIndicationDecisionReasonToJSON(json: any): DeliveryIndicationDecisionReason {
+    return DeliveryIndicationDecisionReasonToJSONTyped(json, false);
+}
+
+export function DeliveryIndicationDecisionReasonToJSONTyped(value?: Omit<DeliveryIndicationDecisionReason, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

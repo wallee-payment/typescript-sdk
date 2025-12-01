@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -79,6 +80,8 @@ export interface WebhookListenerCreate {
     url: number;
 }
 
+
+
 /**
  * Check if a given object implements the WebhookListenerCreate interface.
  */
@@ -98,7 +101,7 @@ export function WebhookListenerCreateFromJSONTyped(json: any, ignoreDiscriminato
     }
     return {
         
-        'entityStates': json['entityStates'] == null ? undefined : json['entityStates'],
+        'entityStates': json['entityStates'] == null ? undefined : new Set(json['entityStates']),
         'name': json['name'] == null ? undefined : json['name'],
         'state': json['state'] == null ? undefined : CreationEntityStateFromJSON(json['state']),
         'notifyEveryChange': json['notifyEveryChange'] == null ? undefined : json['notifyEveryChange'],
@@ -108,10 +111,15 @@ export function WebhookListenerCreateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function WebhookListenerCreateToJSON(value?: WebhookListenerCreate | null): any {
+export function WebhookListenerCreateToJSON(json: any): WebhookListenerCreate {
+    return WebhookListenerCreateToJSONTyped(json, false);
+}
+
+export function WebhookListenerCreateToJSONTyped(value?: WebhookListenerCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'entityStates': value['entityStates'] == null ? undefined : Array.from(value['entityStates'] as Set<any>),

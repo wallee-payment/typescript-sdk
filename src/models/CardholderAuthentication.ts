@@ -27,12 +27,14 @@ import {
     CardAuthenticationVersionFromJSON,
     CardAuthenticationVersionFromJSONTyped,
     CardAuthenticationVersionToJSON,
+    CardAuthenticationVersionToJSONTyped,
 } from './CardAuthenticationVersion';
 import type { CardAuthenticationResponse } from './CardAuthenticationResponse';
 import {
     CardAuthenticationResponseFromJSON,
     CardAuthenticationResponseFromJSONTyped,
     CardAuthenticationResponseToJSON,
+    CardAuthenticationResponseToJSONTyped,
 } from './CardAuthenticationResponse';
 
 /**
@@ -73,6 +75,8 @@ export interface CardholderAuthentication {
     version?: CardAuthenticationVersion;
 }
 
+
+
 /**
  * Check if a given object implements the CardholderAuthentication interface.
  */
@@ -98,10 +102,15 @@ export function CardholderAuthenticationFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function CardholderAuthenticationToJSON(value?: Omit<CardholderAuthentication, 'authenticationIdentifier'|'electronicCommerceIndicator'|'authenticationValue'> | null): any {
+export function CardholderAuthenticationToJSON(json: any): CardholderAuthentication {
+    return CardholderAuthenticationToJSONTyped(json, false);
+}
+
+export function CardholderAuthenticationToJSONTyped(value?: Omit<CardholderAuthentication, 'authenticationIdentifier'|'electronicCommerceIndicator'|'authenticationValue'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'authenticationResponse': CardAuthenticationResponseToJSON(value['authenticationResponse']),

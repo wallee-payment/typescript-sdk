@@ -58,3 +58,7 @@ export function RefundTypeToJSON(value?: RefundType | null): any {
     return value as any;
 }
 
+export function RefundTypeToJSONTyped(value: any, ignoreDiscriminator: boolean): RefundType {
+    return value as RefundType;
+}
+

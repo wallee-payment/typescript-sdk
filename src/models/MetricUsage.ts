@@ -78,10 +78,15 @@ export function MetricUsageFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function MetricUsageToJSON(value?: Omit<MetricUsage, 'consumedUnits'|'metricDescription'|'metricName'|'metricId'> | null): any {
+export function MetricUsageToJSON(json: any): MetricUsage {
+    return MetricUsageToJSONTyped(json, false);
+}
+
+export function MetricUsageToJSONTyped(value?: Omit<MetricUsage, 'consumedUnits'|'metricDescription'|'metricName'|'metricId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

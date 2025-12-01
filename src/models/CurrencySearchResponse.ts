@@ -27,6 +27,7 @@ import {
     RestCurrencyFromJSON,
     RestCurrencyFromJSONTyped,
     RestCurrencyToJSON,
+    RestCurrencyToJSONTyped,
 } from './RestCurrency';
 
 /**
@@ -85,10 +86,15 @@ export function CurrencySearchResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function CurrencySearchResponseToJSON(value?: Omit<CurrencySearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function CurrencySearchResponseToJSON(json: any): CurrencySearchResponse {
+    return CurrencySearchResponseToJSONTyped(json, false);
+}
+
+export function CurrencySearchResponseToJSONTyped(value?: Omit<CurrencySearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

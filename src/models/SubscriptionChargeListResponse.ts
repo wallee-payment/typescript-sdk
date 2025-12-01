@@ -27,6 +27,7 @@ import {
     SubscriptionChargeFromJSON,
     SubscriptionChargeFromJSONTyped,
     SubscriptionChargeToJSON,
+    SubscriptionChargeToJSONTyped,
 } from './SubscriptionCharge';
 
 /**
@@ -78,10 +79,15 @@ export function SubscriptionChargeListResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function SubscriptionChargeListResponseToJSON(value?: Omit<SubscriptionChargeListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SubscriptionChargeListResponseToJSON(json: any): SubscriptionChargeListResponse {
+    return SubscriptionChargeListResponseToJSONTyped(json, false);
+}
+
+export function SubscriptionChargeListResponseToJSONTyped(value?: Omit<SubscriptionChargeListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

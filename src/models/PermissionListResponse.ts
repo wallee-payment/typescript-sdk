@@ -27,6 +27,7 @@ import {
     PermissionFromJSON,
     PermissionFromJSONTyped,
     PermissionToJSON,
+    PermissionToJSONTyped,
 } from './Permission';
 
 /**
@@ -78,10 +79,15 @@ export function PermissionListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function PermissionListResponseToJSON(value?: Omit<PermissionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function PermissionListResponseToJSON(json: any): PermissionListResponse {
+    return PermissionListResponseToJSONTyped(json, false);
+}
+
+export function PermissionListResponseToJSONTyped(value?: Omit<PermissionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

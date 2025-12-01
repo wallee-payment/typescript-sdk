@@ -27,6 +27,7 @@ import {
     GenderFromJSON,
     GenderFromJSONTyped,
     GenderToJSON,
+    GenderToJSONTyped,
 } from './Gender';
 
 /**
@@ -157,6 +158,8 @@ export interface AddressCreate {
     salutation?: string;
 }
 
+
+
 /**
  * Check if a given object implements the AddressCreate interface.
  */
@@ -197,10 +200,15 @@ export function AddressCreateFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AddressCreateToJSON(value?: AddressCreate | null): any {
+export function AddressCreateToJSON(json: any): AddressCreate {
+    return AddressCreateToJSONTyped(json, false);
+}
+
+export function AddressCreateToJSONTyped(value?: AddressCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'country': value['country'],

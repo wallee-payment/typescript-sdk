@@ -27,12 +27,14 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { ConditionType } from './ConditionType';
 import {
     ConditionTypeFromJSON,
     ConditionTypeFromJSONTyped,
     ConditionTypeToJSON,
+    ConditionTypeToJSONTyped,
 } from './ConditionType';
 
 /**
@@ -85,6 +87,8 @@ export interface Condition {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the Condition interface.
  */
@@ -112,10 +116,15 @@ export function ConditionFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function ConditionToJSON(value?: Omit<Condition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function ConditionToJSON(json: any): Condition {
+    return ConditionToJSONTyped(json, false);
+}
+
+export function ConditionToJSONTyped(value?: Omit<Condition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'conditionType': ConditionTypeToJSON(value['conditionType']),

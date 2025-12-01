@@ -27,6 +27,7 @@ import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -85,10 +86,15 @@ export function PaymentMethodConfigurationSearchResponseFromJSONTyped(json: any,
     };
 }
 
-export function PaymentMethodConfigurationSearchResponseToJSON(value?: Omit<PaymentMethodConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function PaymentMethodConfigurationSearchResponseToJSON(json: any): PaymentMethodConfigurationSearchResponse {
+    return PaymentMethodConfigurationSearchResponseToJSONTyped(json, false);
+}
+
+export function PaymentMethodConfigurationSearchResponseToJSONTyped(value?: Omit<PaymentMethodConfigurationSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

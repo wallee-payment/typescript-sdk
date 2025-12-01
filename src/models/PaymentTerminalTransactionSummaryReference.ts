@@ -78,10 +78,15 @@ export function PaymentTerminalTransactionSummaryReferenceFromJSONTyped(json: an
     };
 }
 
-export function PaymentTerminalTransactionSummaryReferenceToJSON(value?: Omit<PaymentTerminalTransactionSummaryReference, 'linkedSpaceId'|'id'|'terminalId'|'terminalIdentifier'> | null): any {
+export function PaymentTerminalTransactionSummaryReferenceToJSON(json: any): PaymentTerminalTransactionSummaryReference {
+    return PaymentTerminalTransactionSummaryReferenceToJSONTyped(json, false);
+}
+
+export function PaymentTerminalTransactionSummaryReferenceToJSONTyped(value?: Omit<PaymentTerminalTransactionSummaryReference, 'linkedSpaceId'|'id'|'terminalId'|'terminalIdentifier'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

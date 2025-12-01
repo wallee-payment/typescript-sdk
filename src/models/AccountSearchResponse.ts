@@ -27,6 +27,7 @@ import {
     AccountFromJSON,
     AccountFromJSONTyped,
     AccountToJSON,
+    AccountToJSONTyped,
 } from './Account';
 
 /**
@@ -85,10 +86,15 @@ export function AccountSearchResponseFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function AccountSearchResponseToJSON(value?: Omit<AccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function AccountSearchResponseToJSON(json: any): AccountSearchResponse {
+    return AccountSearchResponseToJSONTyped(json, false);
+}
+
+export function AccountSearchResponseToJSONTyped(value?: Omit<AccountSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

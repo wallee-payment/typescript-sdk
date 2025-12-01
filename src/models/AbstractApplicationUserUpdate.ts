@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -55,6 +56,8 @@ export interface AbstractApplicationUserUpdate {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractApplicationUserUpdate interface.
  */
@@ -78,10 +81,15 @@ export function AbstractApplicationUserUpdateFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function AbstractApplicationUserUpdateToJSON(value?: AbstractApplicationUserUpdate | null): any {
+export function AbstractApplicationUserUpdateToJSON(json: any): AbstractApplicationUserUpdate {
+    return AbstractApplicationUserUpdateToJSONTyped(json, false);
+}
+
+export function AbstractApplicationUserUpdateToJSONTyped(value?: AbstractApplicationUserUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'requestLimit': value['requestLimit'],

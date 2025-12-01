@@ -86,10 +86,15 @@ export function SubscriptionProductComponentGroupUpdateFromJSONTyped(json: any, 
     };
 }
 
-export function SubscriptionProductComponentGroupUpdateToJSON(value?: SubscriptionProductComponentGroupUpdate | null): any {
+export function SubscriptionProductComponentGroupUpdateToJSON(json: any): SubscriptionProductComponentGroupUpdate {
+    return SubscriptionProductComponentGroupUpdateToJSONTyped(json, false);
+}
+
+export function SubscriptionProductComponentGroupUpdateToJSONTyped(value?: SubscriptionProductComponentGroupUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'productVersion': value['productVersion'],

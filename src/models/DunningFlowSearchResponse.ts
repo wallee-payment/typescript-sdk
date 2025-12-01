@@ -27,6 +27,7 @@ import {
     DunningFlowFromJSON,
     DunningFlowFromJSONTyped,
     DunningFlowToJSON,
+    DunningFlowToJSONTyped,
 } from './DunningFlow';
 
 /**
@@ -85,10 +86,15 @@ export function DunningFlowSearchResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function DunningFlowSearchResponseToJSON(value?: Omit<DunningFlowSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function DunningFlowSearchResponseToJSON(json: any): DunningFlowSearchResponse {
+    return DunningFlowSearchResponseToJSONTyped(json, false);
+}
+
+export function DunningFlowSearchResponseToJSONTyped(value?: Omit<DunningFlowSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

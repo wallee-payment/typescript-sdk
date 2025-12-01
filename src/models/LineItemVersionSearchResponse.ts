@@ -27,6 +27,7 @@ import {
     TransactionLineItemVersionFromJSON,
     TransactionLineItemVersionFromJSONTyped,
     TransactionLineItemVersionToJSON,
+    TransactionLineItemVersionToJSONTyped,
 } from './TransactionLineItemVersion';
 
 /**
@@ -85,10 +86,15 @@ export function LineItemVersionSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function LineItemVersionSearchResponseToJSON(value?: Omit<LineItemVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function LineItemVersionSearchResponseToJSON(json: any): LineItemVersionSearchResponse {
+    return LineItemVersionSearchResponseToJSONTyped(json, false);
+}
+
+export function LineItemVersionSearchResponseToJSONTyped(value?: Omit<LineItemVersionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

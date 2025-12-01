@@ -58,3 +58,7 @@ export function ConnectorInvocationStageToJSON(value?: ConnectorInvocationStage 
     return value as any;
 }
 
+export function ConnectorInvocationStageToJSONTyped(value: any, ignoreDiscriminator: boolean): ConnectorInvocationStage {
+    return value as ConnectorInvocationStage;
+}
+

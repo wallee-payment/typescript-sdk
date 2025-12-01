@@ -71,10 +71,15 @@ export function PaymentAppRefundConfigurationCreateFromJSONTyped(json: any, igno
     };
 }
 
-export function PaymentAppRefundConfigurationCreateToJSON(value?: PaymentAppRefundConfigurationCreate | null): any {
+export function PaymentAppRefundConfigurationCreateToJSON(json: any): PaymentAppRefundConfigurationCreate {
+    return PaymentAppRefundConfigurationCreateToJSONTyped(json, false);
+}
+
+export function PaymentAppRefundConfigurationCreateToJSONTyped(value?: PaymentAppRefundConfigurationCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'refundTimeoutInMinutes': value['refundTimeoutInMinutes'],

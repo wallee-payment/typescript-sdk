@@ -27,6 +27,7 @@ import {
     CustomerCommentFromJSON,
     CustomerCommentFromJSONTyped,
     CustomerCommentToJSON,
+    CustomerCommentToJSONTyped,
 } from './CustomerComment';
 
 /**
@@ -78,10 +79,15 @@ export function CustomerCommentListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function CustomerCommentListResponseToJSON(value?: Omit<CustomerCommentListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CustomerCommentListResponseToJSON(json: any): CustomerCommentListResponse {
+    return CustomerCommentListResponseToJSONTyped(json, false);
+}
+
+export function CustomerCommentListResponseToJSONTyped(value?: Omit<CustomerCommentListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

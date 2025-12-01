@@ -27,6 +27,7 @@ import {
     SubscriptionProductFromJSON,
     SubscriptionProductFromJSONTyped,
     SubscriptionProductToJSON,
+    SubscriptionProductToJSONTyped,
 } from './SubscriptionProduct';
 
 /**
@@ -106,10 +107,15 @@ export function SubscriptionProductRetirementFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function SubscriptionProductRetirementToJSON(value?: Omit<SubscriptionProductRetirement, 'linkedSpaceId'|'respectTerminationPeriods'|'id'|'createdOn'|'version'> | null): any {
+export function SubscriptionProductRetirementToJSON(json: any): SubscriptionProductRetirement {
+    return SubscriptionProductRetirementToJSONTyped(json, false);
+}
+
+export function SubscriptionProductRetirementToJSONTyped(value?: Omit<SubscriptionProductRetirement, 'linkedSpaceId'|'respectTerminationPeriods'|'id'|'createdOn'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'product': SubscriptionProductToJSON(value['product']),

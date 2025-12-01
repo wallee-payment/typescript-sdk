@@ -27,6 +27,7 @@ import {
     ProductSetupFeeFromJSON,
     ProductSetupFeeFromJSONTyped,
     ProductSetupFeeToJSON,
+    ProductSetupFeeToJSONTyped,
 } from './ProductSetupFee';
 
 /**
@@ -78,10 +79,15 @@ export function ProductSetupFeeListResponseFromJSONTyped(json: any, ignoreDiscri
     };
 }
 
-export function ProductSetupFeeListResponseToJSON(value?: Omit<ProductSetupFeeListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function ProductSetupFeeListResponseToJSON(json: any): ProductSetupFeeListResponse {
+    return ProductSetupFeeListResponseToJSONTyped(json, false);
+}
+
+export function ProductSetupFeeListResponseToJSONTyped(value?: Omit<ProductSetupFeeListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

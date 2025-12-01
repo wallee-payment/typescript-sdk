@@ -27,6 +27,7 @@ import {
     RestLanguageFromJSON,
     RestLanguageFromJSONTyped,
     RestLanguageToJSON,
+    RestLanguageToJSONTyped,
 } from './RestLanguage';
 
 /**
@@ -85,10 +86,15 @@ export function LanguageSearchResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function LanguageSearchResponseToJSON(value?: Omit<LanguageSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function LanguageSearchResponseToJSON(json: any): LanguageSearchResponse {
+    return LanguageSearchResponseToJSONTyped(json, false);
+}
+
+export function LanguageSearchResponseToJSONTyped(value?: Omit<LanguageSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

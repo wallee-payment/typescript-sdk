@@ -100,10 +100,15 @@ export function SubscriptionPendingFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function SubscriptionPendingToJSON(value?: SubscriptionPending | null): any {
+export function SubscriptionPendingToJSON(json: any): SubscriptionPending {
+    return SubscriptionPendingToJSONTyped(json, false);
+}
+
+export function SubscriptionPendingToJSONTyped(value?: SubscriptionPending | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'description': value['description'],

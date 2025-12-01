@@ -27,18 +27,21 @@ import {
     PaymentAppProcessorStateFromJSON,
     PaymentAppProcessorStateFromJSONTyped,
     PaymentAppProcessorStateToJSON,
+    PaymentAppProcessorStateToJSONTyped,
 } from './PaymentAppProcessorState';
 import type { PaymentProcessorConfiguration } from './PaymentProcessorConfiguration';
 import {
     PaymentProcessorConfigurationFromJSON,
     PaymentProcessorConfigurationFromJSONTyped,
     PaymentProcessorConfigurationToJSON,
+    PaymentProcessorConfigurationToJSONTyped,
 } from './PaymentProcessorConfiguration';
 import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
 import {
     ChargeAttemptEnvironmentFromJSON,
     ChargeAttemptEnvironmentFromJSONTyped,
     ChargeAttemptEnvironmentToJSON,
+    ChargeAttemptEnvironmentToJSONTyped,
 } from './ChargeAttemptEnvironment';
 
 /**
@@ -145,6 +148,8 @@ export interface PaymentAppProcessor {
     state?: PaymentAppProcessorState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppProcessor interface.
  */
@@ -181,10 +186,15 @@ export function PaymentAppProcessorFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function PaymentAppProcessorToJSON(value?: Omit<PaymentAppProcessor, 'documentationUrl'|'externalId'|'svgIcon'|'updatedOn'|'usableInProduction'|'createdOn'|'version'|'linkedSpaceId'|'usableInProductionSince'|'name'|'id'|'installationId'|'productionModeUrl'> | null): any {
+export function PaymentAppProcessorToJSON(json: any): PaymentAppProcessor {
+    return PaymentAppProcessorToJSONTyped(json, false);
+}
+
+export function PaymentAppProcessorToJSONTyped(value?: Omit<PaymentAppProcessor, 'documentationUrl'|'externalId'|'svgIcon'|'updatedOn'|'usableInProduction'|'createdOn'|'version'|'linkedSpaceId'|'usableInProductionSince'|'name'|'id'|'installationId'|'productionModeUrl'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'configuredEnvironment': ChargeAttemptEnvironmentToJSON(value['configuredEnvironment']),

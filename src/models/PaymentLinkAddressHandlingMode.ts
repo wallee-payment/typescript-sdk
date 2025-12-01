@@ -57,3 +57,7 @@ export function PaymentLinkAddressHandlingModeToJSON(value?: PaymentLinkAddressH
     return value as any;
 }
 
+export function PaymentLinkAddressHandlingModeToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentLinkAddressHandlingMode {
+    return value as PaymentLinkAddressHandlingMode;
+}
+

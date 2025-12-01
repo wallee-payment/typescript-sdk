@@ -71,10 +71,15 @@ export function PaymentAdjustmentTypeFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function PaymentAdjustmentTypeToJSON(value?: Omit<PaymentAdjustmentType, 'name'|'description'|'id'> | null): any {
+export function PaymentAdjustmentTypeToJSON(json: any): PaymentAdjustmentType {
+    return PaymentAdjustmentTypeToJSONTyped(json, false);
+}
+
+export function PaymentAdjustmentTypeToJSONTyped(value?: Omit<PaymentAdjustmentType, 'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     MetricUsageFromJSON,
     MetricUsageFromJSONTyped,
     MetricUsageToJSON,
+    MetricUsageToJSONTyped,
 } from './MetricUsage';
 
 /**
@@ -78,10 +79,15 @@ export function MetricUsageListResponseFromJSONTyped(json: any, ignoreDiscrimina
     };
 }
 
-export function MetricUsageListResponseToJSON(value?: Omit<MetricUsageListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function MetricUsageListResponseToJSON(json: any): MetricUsageListResponse {
+    return MetricUsageListResponseToJSONTyped(json, false);
+}
+
+export function MetricUsageListResponseToJSONTyped(value?: Omit<MetricUsageListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

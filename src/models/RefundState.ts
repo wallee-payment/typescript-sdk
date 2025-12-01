@@ -60,3 +60,7 @@ export function RefundStateToJSON(value?: RefundState | null): any {
     return value as any;
 }
 
+export function RefundStateToJSONTyped(value: any, ignoreDiscriminator: boolean): RefundState {
+    return value as RefundState;
+}
+

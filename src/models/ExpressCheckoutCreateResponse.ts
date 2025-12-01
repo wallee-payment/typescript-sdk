@@ -64,10 +64,15 @@ export function ExpressCheckoutCreateResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function ExpressCheckoutCreateResponseToJSON(value?: ExpressCheckoutCreateResponse | null): any {
+export function ExpressCheckoutCreateResponseToJSON(json: any): ExpressCheckoutCreateResponse {
+    return ExpressCheckoutCreateResponseToJSONTyped(json, false);
+}
+
+export function ExpressCheckoutCreateResponseToJSONTyped(value?: ExpressCheckoutCreateResponse | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'iframeSrc': value['iframeSrc'],

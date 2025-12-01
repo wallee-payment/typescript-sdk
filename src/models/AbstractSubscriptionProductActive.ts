@@ -27,6 +27,7 @@ import {
     SubscriptionProductStateFromJSON,
     SubscriptionProductStateFromJSONTyped,
     SubscriptionProductStateToJSON,
+    SubscriptionProductStateToJSONTyped,
 } from './SubscriptionProductState';
 
 /**
@@ -73,6 +74,8 @@ export interface AbstractSubscriptionProductActive {
     allowedPaymentMethodConfigurations?: Array<number>;
 }
 
+
+
 /**
  * Check if a given object implements the AbstractSubscriptionProductActive interface.
  */
@@ -99,10 +102,15 @@ export function AbstractSubscriptionProductActiveFromJSONTyped(json: any, ignore
     };
 }
 
-export function AbstractSubscriptionProductActiveToJSON(value?: AbstractSubscriptionProductActive | null): any {
+export function AbstractSubscriptionProductActiveToJSON(json: any): AbstractSubscriptionProductActive {
+    return AbstractSubscriptionProductActiveToJSONTyped(json, false);
+}
+
+export function AbstractSubscriptionProductActiveToJSONTyped(value?: AbstractSubscriptionProductActive | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'sortOrder': value['sortOrder'],

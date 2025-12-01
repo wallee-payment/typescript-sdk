@@ -27,30 +27,35 @@ import {
     LineItemCreateFromJSON,
     LineItemCreateFromJSONTyped,
     LineItemCreateToJSON,
+    LineItemCreateToJSONTyped,
 } from './LineItemCreate';
 import type { PaymentLinkAddressHandlingMode } from './PaymentLinkAddressHandlingMode';
 import {
     PaymentLinkAddressHandlingModeFromJSON,
     PaymentLinkAddressHandlingModeFromJSONTyped,
     PaymentLinkAddressHandlingModeToJSON,
+    PaymentLinkAddressHandlingModeToJSONTyped,
 } from './PaymentLinkAddressHandlingMode';
 import type { PaymentLinkProtectionMode } from './PaymentLinkProtectionMode';
 import {
     PaymentLinkProtectionModeFromJSON,
     PaymentLinkProtectionModeFromJSONTyped,
     PaymentLinkProtectionModeToJSON,
+    PaymentLinkProtectionModeToJSONTyped,
 } from './PaymentLinkProtectionMode';
 import type { CreationEntityState } from './CreationEntityState';
 import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 import type { PaymentMethodConfiguration } from './PaymentMethodConfiguration';
 import {
     PaymentMethodConfigurationFromJSON,
     PaymentMethodConfigurationFromJSONTyped,
     PaymentMethodConfigurationToJSON,
+    PaymentMethodConfigurationToJSONTyped,
 } from './PaymentMethodConfiguration';
 
 /**
@@ -158,6 +163,8 @@ export interface PaymentLinkCreate {
     state?: CreationEntityState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentLinkCreate interface.
  */
@@ -180,7 +187,7 @@ export function PaymentLinkCreateFromJSONTyped(json: any, ignoreDiscriminator: b
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemCreateFromJSON)),
         'availableUntil': json['availableUntil'] == null ? undefined : (new Date(json['availableUntil'])),
         'shippingAddressHandlingMode': json['shippingAddressHandlingMode'] == null ? undefined : PaymentLinkAddressHandlingModeFromJSON(json['shippingAddressHandlingMode']),
-        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : json['allowedRedirectionDomains'],
+        'allowedRedirectionDomains': json['allowedRedirectionDomains'] == null ? undefined : new Set(json['allowedRedirectionDomains']),
         'name': json['name'] == null ? undefined : json['name'],
         'currency': json['currency'] == null ? undefined : json['currency'],
         'language': json['language'] == null ? undefined : json['language'],
@@ -195,10 +202,15 @@ export function PaymentLinkCreateFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function PaymentLinkCreateToJSON(value?: PaymentLinkCreate | null): any {
+export function PaymentLinkCreateToJSON(json: any): PaymentLinkCreate {
+    return PaymentLinkCreateToJSONTyped(json, false);
+}
+
+export function PaymentLinkCreateToJSONTyped(value?: PaymentLinkCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(LineItemCreateToJSON)),

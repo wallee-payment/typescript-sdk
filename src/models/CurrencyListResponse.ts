@@ -27,6 +27,7 @@ import {
     RestCurrencyFromJSON,
     RestCurrencyFromJSONTyped,
     RestCurrencyToJSON,
+    RestCurrencyToJSONTyped,
 } from './RestCurrency';
 
 /**
@@ -78,10 +79,15 @@ export function CurrencyListResponseFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function CurrencyListResponseToJSON(value?: Omit<CurrencyListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function CurrencyListResponseToJSON(json: any): CurrencyListResponse {
+    return CurrencyListResponseToJSONTyped(json, false);
+}
+
+export function CurrencyListResponseToJSONTyped(value?: Omit<CurrencyListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     OneClickPaymentModeFromJSON,
     OneClickPaymentModeFromJSONTyped,
     OneClickPaymentModeToJSON,
+    OneClickPaymentModeToJSONTyped,
 } from './OneClickPaymentMode';
 
 /**
@@ -73,6 +74,8 @@ export interface AbstractPaymentMethodConfigurationUpdate {
     title?: { [key: string]: string; };
 }
 
+
+
 /**
  * Check if a given object implements the AbstractPaymentMethodConfigurationUpdate interface.
  */
@@ -99,10 +102,15 @@ export function AbstractPaymentMethodConfigurationUpdateFromJSONTyped(json: any,
     };
 }
 
-export function AbstractPaymentMethodConfigurationUpdateToJSON(value?: AbstractPaymentMethodConfigurationUpdate | null): any {
+export function AbstractPaymentMethodConfigurationUpdateToJSON(json: any): AbstractPaymentMethodConfigurationUpdate {
+    return AbstractPaymentMethodConfigurationUpdateToJSONTyped(json, false);
+}
+
+export function AbstractPaymentMethodConfigurationUpdateToJSONTyped(value?: AbstractPaymentMethodConfigurationUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'imageResourcePath': value['imageResourcePath'],

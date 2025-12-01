@@ -64,10 +64,15 @@ export function LocalizedStringFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function LocalizedStringToJSON(value?: Omit<LocalizedString, 'string'|'language'> | null): any {
+export function LocalizedStringToJSON(json: any): LocalizedString {
+    return LocalizedStringToJSONTyped(json, false);
+}
+
+export function LocalizedStringToJSONTyped(value?: Omit<LocalizedString, 'string'|'language'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

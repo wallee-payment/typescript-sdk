@@ -47,6 +47,7 @@ export interface PostExpressCheckoutCreateSessionRequest {
  * 
  */
 export class ExpressCheckoutService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -76,7 +77,6 @@ export class ExpressCheckoutService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -93,8 +93,8 @@ export class ExpressCheckoutService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/express-checkout/create-session`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: ExpressCheckoutSessionCreateToJSON(requestParameters['expressCheckoutSessionCreate']),

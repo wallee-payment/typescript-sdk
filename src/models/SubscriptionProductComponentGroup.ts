@@ -27,6 +27,7 @@ import {
     SubscriptionProductVersionFromJSON,
     SubscriptionProductVersionFromJSONTyped,
     SubscriptionProductVersionToJSON,
+    SubscriptionProductVersionToJSONTyped,
 } from './SubscriptionProductVersion';
 
 /**
@@ -106,10 +107,15 @@ export function SubscriptionProductComponentGroupFromJSONTyped(json: any, ignore
     };
 }
 
-export function SubscriptionProductComponentGroupToJSON(value?: Omit<SubscriptionProductComponentGroup, 'linkedSpaceId'|'sortOrder'|'name'|'optional'|'id'|'version'> | null): any {
+export function SubscriptionProductComponentGroupToJSON(json: any): SubscriptionProductComponentGroup {
+    return SubscriptionProductComponentGroupToJSONTyped(json, false);
+}
+
+export function SubscriptionProductComponentGroupToJSONTyped(value?: Omit<SubscriptionProductComponentGroup, 'linkedSpaceId'|'sortOrder'|'name'|'optional'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'productVersion': SubscriptionProductVersionToJSON(value['productVersion']),

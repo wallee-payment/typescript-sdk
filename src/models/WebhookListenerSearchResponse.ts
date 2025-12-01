@@ -27,6 +27,7 @@ import {
     WebhookListenerFromJSON,
     WebhookListenerFromJSONTyped,
     WebhookListenerToJSON,
+    WebhookListenerToJSONTyped,
 } from './WebhookListener';
 
 /**
@@ -85,10 +86,15 @@ export function WebhookListenerSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function WebhookListenerSearchResponseToJSON(value?: Omit<WebhookListenerSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function WebhookListenerSearchResponseToJSON(json: any): WebhookListenerSearchResponse {
+    return WebhookListenerSearchResponseToJSONTyped(json, false);
+}
+
+export function WebhookListenerSearchResponseToJSONTyped(value?: Omit<WebhookListenerSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

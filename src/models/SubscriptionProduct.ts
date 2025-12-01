@@ -27,6 +27,7 @@ import {
     SubscriptionProductStateFromJSON,
     SubscriptionProductStateFromJSONTyped,
     SubscriptionProductStateToJSON,
+    SubscriptionProductStateToJSONTyped,
 } from './SubscriptionProductState';
 
 /**
@@ -109,6 +110,8 @@ export interface SubscriptionProduct {
     readonly allowedPaymentMethodConfigurations?: Array<number>;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionProduct interface.
  */
@@ -141,10 +144,15 @@ export function SubscriptionProductFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function SubscriptionProductToJSON(value?: Omit<SubscriptionProduct, 'reference'|'linkedSpaceId'|'spaceId'|'sortOrder'|'name'|'plannedPurgeDate'|'productLocked'|'id'|'failedPaymentSuspensionPeriod'|'version'|'allowedPaymentMethodConfigurations'> | null): any {
+export function SubscriptionProductToJSON(json: any): SubscriptionProduct {
+    return SubscriptionProductToJSONTyped(json, false);
+}
+
+export function SubscriptionProductToJSONTyped(value?: Omit<SubscriptionProduct, 'reference'|'linkedSpaceId'|'spaceId'|'sortOrder'|'name'|'plannedPurgeDate'|'productLocked'|'id'|'failedPaymentSuspensionPeriod'|'version'|'allowedPaymentMethodConfigurations'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': SubscriptionProductStateToJSON(value['state']),

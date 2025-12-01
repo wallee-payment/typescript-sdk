@@ -27,24 +27,28 @@ import {
     PaymentTerminalTypeFromJSON,
     PaymentTerminalTypeFromJSONTyped,
     PaymentTerminalTypeToJSON,
+    PaymentTerminalTypeToJSONTyped,
 } from './PaymentTerminalType';
 import type { PaymentTerminalLocationVersion } from './PaymentTerminalLocationVersion';
 import {
     PaymentTerminalLocationVersionFromJSON,
     PaymentTerminalLocationVersionFromJSONTyped,
     PaymentTerminalLocationVersionToJSON,
+    PaymentTerminalLocationVersionToJSONTyped,
 } from './PaymentTerminalLocationVersion';
 import type { PaymentTerminalConfigurationVersion } from './PaymentTerminalConfigurationVersion';
 import {
     PaymentTerminalConfigurationVersionFromJSON,
     PaymentTerminalConfigurationVersionFromJSONTyped,
     PaymentTerminalConfigurationVersionToJSON,
+    PaymentTerminalConfigurationVersionToJSONTyped,
 } from './PaymentTerminalConfigurationVersion';
 import type { PaymentTerminalState } from './PaymentTerminalState';
 import {
     PaymentTerminalStateFromJSON,
     PaymentTerminalStateFromJSONTyped,
     PaymentTerminalStateToJSON,
+    PaymentTerminalStateToJSONTyped,
 } from './PaymentTerminalState';
 
 /**
@@ -139,6 +143,8 @@ export interface PaymentTerminal {
     state?: PaymentTerminalState;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentTerminal interface.
  */
@@ -173,10 +179,15 @@ export function PaymentTerminalFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function PaymentTerminalToJSON(value?: Omit<PaymentTerminal, 'identifier'|'plannedPurgeDate'|'externalId'|'deviceName'|'version'|'deviceSerialNumber'|'linkedSpaceId'|'defaultCurrency'|'name'|'id'> | null): any {
+export function PaymentTerminalToJSON(json: any): PaymentTerminal {
+    return PaymentTerminalToJSONTyped(json, false);
+}
+
+export function PaymentTerminalToJSONTyped(value?: Omit<PaymentTerminal, 'identifier'|'plannedPurgeDate'|'externalId'|'deviceName'|'version'|'deviceSerialNumber'|'linkedSpaceId'|'defaultCurrency'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'type': PaymentTerminalTypeToJSON(value['type']),

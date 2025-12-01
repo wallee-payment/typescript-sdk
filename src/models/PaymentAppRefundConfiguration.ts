@@ -71,10 +71,15 @@ export function PaymentAppRefundConfigurationFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function PaymentAppRefundConfigurationToJSON(value?: Omit<PaymentAppRefundConfiguration, 'refundTimeoutInMinutes'|'multipleRefundsSupported'|'refundEndpoint'> | null): any {
+export function PaymentAppRefundConfigurationToJSON(json: any): PaymentAppRefundConfiguration {
+    return PaymentAppRefundConfigurationToJSONTyped(json, false);
+}
+
+export function PaymentAppRefundConfigurationToJSONTyped(value?: Omit<PaymentAppRefundConfiguration, 'refundTimeoutInMinutes'|'multipleRefundsSupported'|'refundEndpoint'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

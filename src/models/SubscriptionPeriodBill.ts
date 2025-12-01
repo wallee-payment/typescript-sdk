@@ -27,12 +27,14 @@ import {
     SubscriptionPeriodBillStateFromJSON,
     SubscriptionPeriodBillStateFromJSONTyped,
     SubscriptionPeriodBillStateToJSON,
+    SubscriptionPeriodBillStateToJSONTyped,
 } from './SubscriptionPeriodBillState';
 import type { SubscriptionVersion } from './SubscriptionVersion';
 import {
     SubscriptionVersionFromJSON,
     SubscriptionVersionFromJSONTyped,
     SubscriptionVersionToJSON,
+    SubscriptionVersionToJSONTyped,
 } from './SubscriptionVersion';
 
 /**
@@ -109,6 +111,8 @@ export interface SubscriptionPeriodBill {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the SubscriptionPeriodBill interface.
  */
@@ -140,10 +144,15 @@ export function SubscriptionPeriodBillFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SubscriptionPeriodBillToJSON(value?: Omit<SubscriptionPeriodBill, 'linkedSpaceId'|'periodStartDate'|'plannedPurgeDate'|'effectivePeriodEndDate'|'language'|'id'|'createdOn'|'plannedPeriodEndDate'|'version'> | null): any {
+export function SubscriptionPeriodBillToJSON(json: any): SubscriptionPeriodBill {
+    return SubscriptionPeriodBillToJSONTyped(json, false);
+}
+
+export function SubscriptionPeriodBillToJSONTyped(value?: Omit<SubscriptionPeriodBill, 'linkedSpaceId'|'periodStartDate'|'plannedPurgeDate'|'effectivePeriodEndDate'|'language'|'id'|'createdOn'|'plannedPeriodEndDate'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'subscriptionVersion': SubscriptionVersionToJSON(value['subscriptionVersion']),

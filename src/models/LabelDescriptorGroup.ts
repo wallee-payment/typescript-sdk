@@ -78,10 +78,15 @@ export function LabelDescriptorGroupFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function LabelDescriptorGroupToJSON(value?: Omit<LabelDescriptorGroup, 'name'|'description'|'weight'|'id'> | null): any {
+export function LabelDescriptorGroupToJSON(json: any): LabelDescriptorGroup {
+    return LabelDescriptorGroupToJSONTyped(json, false);
+}
+
+export function LabelDescriptorGroupToJSONTyped(value?: Omit<LabelDescriptorGroup, 'name'|'description'|'weight'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

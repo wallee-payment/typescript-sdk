@@ -70,7 +70,7 @@ describe('TransactionCompletionsServiceTest — Transaction completions service 
             "State must be FULFILL"
         );
 
-        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOffline(
+        const transactionCompletion = await transactionsService.postPaymentTransactionsIdCompleteOnline(
             {
                 id: transaction.id!,
                 space: SPACE_ID

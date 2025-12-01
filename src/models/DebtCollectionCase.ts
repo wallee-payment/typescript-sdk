@@ -27,48 +27,56 @@ import {
     DebtCollectionCaseStateFromJSON,
     DebtCollectionCaseStateFromJSONTyped,
     DebtCollectionCaseStateToJSON,
+    DebtCollectionCaseStateToJSONTyped,
 } from './DebtCollectionCaseState';
 import type { Address } from './Address';
 import {
     AddressFromJSON,
     AddressFromJSONTyped,
     AddressToJSON,
+    AddressToJSONTyped,
 } from './Address';
 import type { FailureReason } from './FailureReason';
 import {
     FailureReasonFromJSON,
     FailureReasonFromJSONTyped,
     FailureReasonToJSON,
+    FailureReasonToJSONTyped,
 } from './FailureReason';
 import type { DebtCollectionCaseSource } from './DebtCollectionCaseSource';
 import {
     DebtCollectionCaseSourceFromJSON,
     DebtCollectionCaseSourceFromJSONTyped,
     DebtCollectionCaseSourceToJSON,
+    DebtCollectionCaseSourceToJSONTyped,
 } from './DebtCollectionCaseSource';
 import type { Label } from './Label';
 import {
     LabelFromJSON,
     LabelFromJSONTyped,
     LabelToJSON,
+    LabelToJSONTyped,
 } from './Label';
 import type { DebtCollectorConfiguration } from './DebtCollectorConfiguration';
 import {
     DebtCollectorConfigurationFromJSON,
     DebtCollectorConfigurationFromJSONTyped,
     DebtCollectorConfigurationToJSON,
+    DebtCollectorConfigurationToJSONTyped,
 } from './DebtCollectorConfiguration';
 import type { LineItem } from './LineItem';
 import {
     LineItemFromJSON,
     LineItemFromJSONTyped,
     LineItemToJSON,
+    LineItemToJSONTyped,
 } from './LineItem';
 import type { DebtCollectionEnvironment } from './DebtCollectionEnvironment';
 import {
     DebtCollectionEnvironmentFromJSON,
     DebtCollectionEnvironmentFromJSONTyped,
     DebtCollectionEnvironmentToJSON,
+    DebtCollectionEnvironmentToJSONTyped,
 } from './DebtCollectionEnvironment';
 
 /**
@@ -265,6 +273,8 @@ export interface DebtCollectionCase {
     readonly nextAttemptOn?: Date;
 }
 
+
+
 /**
  * Check if a given object implements the DebtCollectionCase interface.
  */
@@ -316,10 +326,15 @@ export function DebtCollectionCaseFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function DebtCollectionCaseToJSON(value?: Omit<DebtCollectionCase, 'contractDate'|'dueDate'|'closedOn'|'language'|'createdOn'|'lineItems'|'reference'|'currency'|'id'|'processingTimeoutOn'|'amount'|'creator'|'plannedPurgeDate'|'externalId'|'reviewer'|'spaceViewId'|'reviewStartedOn'|'version'|'labels'|'processingStartedOn'|'linkedSpaceId'|'reviewedOn'|'sourceEntityId'|'failedOn'|'nextAttemptOn'> | null): any {
+export function DebtCollectionCaseToJSON(json: any): DebtCollectionCase {
+    return DebtCollectionCaseToJSONTyped(json, false);
+}
+
+export function DebtCollectionCaseToJSONTyped(value?: Omit<DebtCollectionCase, 'contractDate'|'dueDate'|'closedOn'|'language'|'createdOn'|'lineItems'|'reference'|'currency'|'id'|'processingTimeoutOn'|'amount'|'creator'|'plannedPurgeDate'|'externalId'|'reviewer'|'spaceViewId'|'reviewStartedOn'|'version'|'labels'|'processingStartedOn'|'linkedSpaceId'|'reviewedOn'|'sourceEntityId'|'failedOn'|'nextAttemptOn'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'source': DebtCollectionCaseSourceToJSON(value['source']),

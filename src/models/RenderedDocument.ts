@@ -78,10 +78,15 @@ export function RenderedDocumentFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function RenderedDocumentToJSON(value?: Omit<RenderedDocument, 'documentTemplateType'|'data'|'mimeType'|'title'> | null): any {
+export function RenderedDocumentToJSON(json: any): RenderedDocument {
+    return RenderedDocumentToJSONTyped(json, false);
+}
+
+export function RenderedDocumentToJSONTyped(value?: Omit<RenderedDocument, 'documentTemplateType'|'data'|'mimeType'|'title'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

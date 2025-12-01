@@ -27,6 +27,7 @@ import {
     DebtCollectorConfigurationFromJSON,
     DebtCollectorConfigurationFromJSONTyped,
     DebtCollectorConfigurationToJSON,
+    DebtCollectorConfigurationToJSONTyped,
 } from './DebtCollectorConfiguration';
 
 /**
@@ -78,10 +79,15 @@ export function DebtCollectorConfigurationListResponseFromJSONTyped(json: any, i
     };
 }
 
-export function DebtCollectorConfigurationListResponseToJSON(value?: Omit<DebtCollectorConfigurationListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DebtCollectorConfigurationListResponseToJSON(json: any): DebtCollectorConfigurationListResponse {
+    return DebtCollectorConfigurationListResponseToJSONTyped(json, false);
+}
+
+export function DebtCollectorConfigurationListResponseToJSONTyped(value?: Omit<DebtCollectorConfigurationListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

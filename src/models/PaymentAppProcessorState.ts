@@ -56,3 +56,7 @@ export function PaymentAppProcessorStateToJSON(value?: PaymentAppProcessorState 
     return value as any;
 }
 
+export function PaymentAppProcessorStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentAppProcessorState {
+    return value as PaymentAppProcessorState;
+}
+

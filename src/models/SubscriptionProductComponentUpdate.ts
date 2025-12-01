@@ -135,10 +135,15 @@ export function SubscriptionProductComponentUpdateFromJSONTyped(json: any, ignor
     };
 }
 
-export function SubscriptionProductComponentUpdateToJSON(value?: SubscriptionProductComponentUpdate | null): any {
+export function SubscriptionProductComponentUpdateToJSON(json: any): SubscriptionProductComponentUpdate {
+    return SubscriptionProductComponentUpdateToJSONTyped(json, false);
+}
+
+export function SubscriptionProductComponentUpdateToJSONTyped(value?: SubscriptionProductComponentUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

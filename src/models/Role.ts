@@ -27,18 +27,21 @@ import {
     AccountFromJSON,
     AccountFromJSONTyped,
     AccountToJSON,
+    AccountToJSONTyped,
 } from './Account';
 import type { Permission } from './Permission';
 import {
     PermissionFromJSON,
     PermissionFromJSONTyped,
     PermissionToJSON,
+    PermissionToJSONTyped,
 } from './Permission';
 import type { RoleState } from './RoleState';
 import {
     RoleStateFromJSON,
     RoleStateFromJSONTyped,
     RoleStateToJSON,
+    RoleStateToJSONTyped,
 } from './RoleState';
 
 /**
@@ -97,6 +100,8 @@ export interface Role {
     readonly twoFactorRequired?: boolean;
 }
 
+
+
 /**
  * Check if a given object implements the Role interface.
  */
@@ -125,10 +130,15 @@ export function RoleFromJSONTyped(json: any, ignoreDiscriminator: boolean): Role
     };
 }
 
-export function RoleToJSON(value?: Omit<Role, 'permissions'|'name'|'plannedPurgeDate'|'id'|'version'|'twoFactorRequired'> | null): any {
+export function RoleToJSON(json: any): Role {
+    return RoleToJSONTyped(json, false);
+}
+
+export function RoleToJSONTyped(value?: Omit<Role, 'permissions'|'name'|'plannedPurgeDate'|'id'|'version'|'twoFactorRequired'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': RoleStateToJSON(value['state']),

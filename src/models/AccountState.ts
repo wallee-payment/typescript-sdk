@@ -60,3 +60,7 @@ export function AccountStateToJSON(value?: AccountState | null): any {
     return value as any;
 }
 
+export function AccountStateToJSONTyped(value: any, ignoreDiscriminator: boolean): AccountState {
+    return value as AccountState;
+}
+

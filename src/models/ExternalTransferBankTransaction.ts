@@ -27,6 +27,7 @@ import {
     BankTransactionFromJSON,
     BankTransactionFromJSONTyped,
     BankTransactionToJSON,
+    BankTransactionToJSONTyped,
 } from './BankTransaction';
 
 /**
@@ -106,10 +107,15 @@ export function ExternalTransferBankTransactionFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function ExternalTransferBankTransactionToJSON(value?: Omit<ExternalTransferBankTransaction, 'externalBankName'|'linkedSpaceId'|'externalAccountIdentifier'|'id'|'version'|'externalAccountType'> | null): any {
+export function ExternalTransferBankTransactionToJSON(json: any): ExternalTransferBankTransaction {
+    return ExternalTransferBankTransactionToJSONTyped(json, false);
+}
+
+export function ExternalTransferBankTransactionToJSONTyped(value?: Omit<ExternalTransferBankTransaction, 'externalBankName'|'linkedSpaceId'|'externalAccountIdentifier'|'id'|'version'|'externalAccountType'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'bankTransaction': BankTransactionToJSON(value['bankTransaction']),

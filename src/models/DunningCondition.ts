@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -79,6 +80,8 @@ export interface DunningCondition {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the DunningCondition interface.
  */
@@ -106,10 +109,15 @@ export function DunningConditionFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function DunningConditionToJSON(value?: Omit<DunningCondition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'type'|'version'> | null): any {
+export function DunningConditionToJSON(json: any): DunningCondition {
+    return DunningConditionToJSONTyped(json, false);
+}
+
+export function DunningConditionToJSONTyped(value?: Omit<DunningCondition, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'type'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

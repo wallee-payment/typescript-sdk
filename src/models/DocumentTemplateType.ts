@@ -27,12 +27,14 @@ import {
     DocumentTemplateTypeGroupFromJSON,
     DocumentTemplateTypeGroupFromJSONTyped,
     DocumentTemplateTypeGroupToJSON,
+    DocumentTemplateTypeGroupToJSONTyped,
 } from './DocumentTemplateTypeGroup';
 import type { Feature } from './Feature';
 import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureToJSONTyped,
 } from './Feature';
 
 /**
@@ -98,10 +100,15 @@ export function DocumentTemplateTypeFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function DocumentTemplateTypeToJSON(value?: Omit<DocumentTemplateType, 'description'|'id'|'title'> | null): any {
+export function DocumentTemplateTypeToJSON(json: any): DocumentTemplateType {
+    return DocumentTemplateTypeToJSONTyped(json, false);
+}
+
+export function DocumentTemplateTypeToJSONTyped(value?: Omit<DocumentTemplateType, 'description'|'id'|'title'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'feature': FeatureToJSON(value['feature']),

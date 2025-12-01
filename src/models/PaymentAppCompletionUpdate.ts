@@ -27,6 +27,7 @@ import {
     PaymentAppCompletionTargetStateFromJSON,
     PaymentAppCompletionTargetStateFromJSONTyped,
     PaymentAppCompletionTargetStateToJSON,
+    PaymentAppCompletionTargetStateToJSONTyped,
 } from './PaymentAppCompletionTargetState';
 
 /**
@@ -55,6 +56,8 @@ export interface PaymentAppCompletionUpdate {
     failureReason?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppCompletionUpdate interface.
  */
@@ -78,10 +81,15 @@ export function PaymentAppCompletionUpdateFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function PaymentAppCompletionUpdateToJSON(value?: PaymentAppCompletionUpdate | null): any {
+export function PaymentAppCompletionUpdateToJSON(json: any): PaymentAppCompletionUpdate {
+    return PaymentAppCompletionUpdateToJSONTyped(json, false);
+}
+
+export function PaymentAppCompletionUpdateToJSONTyped(value?: PaymentAppCompletionUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

@@ -27,6 +27,7 @@ import {
     SubscriptionSuspensionFromJSON,
     SubscriptionSuspensionFromJSONTyped,
     SubscriptionSuspensionToJSON,
+    SubscriptionSuspensionToJSONTyped,
 } from './SubscriptionSuspension';
 
 /**
@@ -78,10 +79,15 @@ export function SuspensionListResponseFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function SuspensionListResponseToJSON(value?: Omit<SuspensionListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function SuspensionListResponseToJSON(json: any): SuspensionListResponse {
+    return SuspensionListResponseToJSONTyped(json, false);
+}
+
+export function SuspensionListResponseToJSONTyped(value?: Omit<SuspensionListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

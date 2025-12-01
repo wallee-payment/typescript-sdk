@@ -27,12 +27,14 @@ import {
     CardCryptogramFromJSON,
     CardCryptogramFromJSONTyped,
     CardCryptogramToJSON,
+    CardCryptogramToJSONTyped,
 } from './CardCryptogram';
 import type { RecurringIndicator } from './RecurringIndicator';
 import {
     RecurringIndicatorFromJSON,
     RecurringIndicatorFromJSONTyped,
     RecurringIndicatorToJSON,
+    RecurringIndicatorToJSONTyped,
 } from './RecurringIndicator';
 
 /**
@@ -67,6 +69,8 @@ export interface TokenizedCardData {
     cryptogram?: CardCryptogram;
 }
 
+
+
 /**
  * Check if a given object implements the TokenizedCardData interface.
  */
@@ -91,10 +95,15 @@ export function TokenizedCardDataFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function TokenizedCardDataToJSON(value?: Omit<TokenizedCardData, 'initialRecurringTransaction'|'tokenRequestorId'> | null): any {
+export function TokenizedCardDataToJSON(json: any): TokenizedCardData {
+    return TokenizedCardDataToJSONTyped(json, false);
+}
+
+export function TokenizedCardDataToJSONTyped(value?: Omit<TokenizedCardData, 'initialRecurringTransaction'|'tokenRequestorId'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'recurringIndicator': RecurringIndicatorToJSON(value['recurringIndicator']),

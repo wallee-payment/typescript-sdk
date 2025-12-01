@@ -27,6 +27,7 @@ import {
     UserSpaceRoleFromJSON,
     UserSpaceRoleFromJSONTyped,
     UserSpaceRoleToJSON,
+    UserSpaceRoleToJSONTyped,
 } from './UserSpaceRole';
 
 /**
@@ -78,10 +79,15 @@ export function UserSpaceRoleListResponseFromJSONTyped(json: any, ignoreDiscrimi
     };
 }
 
-export function UserSpaceRoleListResponseToJSON(value?: Omit<UserSpaceRoleListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function UserSpaceRoleListResponseToJSON(json: any): UserSpaceRoleListResponse {
+    return UserSpaceRoleListResponseToJSONTyped(json, false);
+}
+
+export function UserSpaceRoleListResponseToJSONTyped(value?: Omit<UserSpaceRoleListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

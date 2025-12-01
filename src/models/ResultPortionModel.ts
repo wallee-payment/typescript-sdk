@@ -78,10 +78,15 @@ export function ResultPortionModelFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function ResultPortionModelToJSON(value?: Omit<ResultPortionModel, 'offset'|'limit'|'totalCount'|'items'> | null): any {
+export function ResultPortionModelToJSON(json: any): ResultPortionModel {
+    return ResultPortionModelToJSONTyped(json, false);
+}
+
+export function ResultPortionModelToJSONTyped(value?: Omit<ResultPortionModel, 'offset'|'limit'|'totalCount'|'items'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

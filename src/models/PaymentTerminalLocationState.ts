@@ -58,3 +58,7 @@ export function PaymentTerminalLocationStateToJSON(value?: PaymentTerminalLocati
     return value as any;
 }
 
+export function PaymentTerminalLocationStateToJSONTyped(value: any, ignoreDiscriminator: boolean): PaymentTerminalLocationState {
+    return value as PaymentTerminalLocationState;
+}
+

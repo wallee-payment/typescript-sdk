@@ -27,6 +27,7 @@ import {
     RefundFromJSON,
     RefundFromJSONTyped,
     RefundToJSON,
+    RefundToJSONTyped,
 } from './Refund';
 
 /**
@@ -127,10 +128,15 @@ export function RefundCommentFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function RefundCommentToJSON(value?: Omit<RefundComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null): any {
+export function RefundCommentToJSON(json: any): RefundComment {
+    return RefundCommentToJSONTyped(json, false);
+}
+
+export function RefundCommentToJSONTyped(value?: Omit<RefundComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'refund': RefundToJSON(value['refund']),

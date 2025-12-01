@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -61,6 +62,8 @@ export interface ApplicationUserCreate {
     primaryAccount: number;
 }
 
+
+
 /**
  * Check if a given object implements the ApplicationUserCreate interface.
  */
@@ -86,10 +89,15 @@ export function ApplicationUserCreateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ApplicationUserCreateToJSON(value?: ApplicationUserCreate | null): any {
+export function ApplicationUserCreateToJSON(json: any): ApplicationUserCreate {
+    return ApplicationUserCreateToJSONTyped(json, false);
+}
+
+export function ApplicationUserCreateToJSONTyped(value?: ApplicationUserCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'requestLimit': value['requestLimit'],

@@ -27,6 +27,7 @@ import {
     CreationEntityStateFromJSON,
     CreationEntityStateFromJSONTyped,
     CreationEntityStateToJSON,
+    CreationEntityStateToJSONTyped,
 } from './CreationEntityState';
 
 /**
@@ -73,6 +74,8 @@ export interface TaxClass {
     readonly version?: number;
 }
 
+
+
 /**
  * Check if a given object implements the TaxClass interface.
  */
@@ -99,10 +102,15 @@ export function TaxClassFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function TaxClassToJSON(value?: Omit<TaxClass, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null): any {
+export function TaxClassToJSON(json: any): TaxClass {
+    return TaxClassToJSONTyped(json, false);
+}
+
+export function TaxClassToJSONTyped(value?: Omit<TaxClass, 'linkedSpaceId'|'name'|'plannedPurgeDate'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'state': CreationEntityStateToJSON(value['state']),

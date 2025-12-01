@@ -78,10 +78,15 @@ export function RestCurrencyFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function RestCurrencyToJSON(value?: Omit<RestCurrency, 'name'|'fractionDigits'|'currencyCode'|'numericCode'> | null): any {
+export function RestCurrencyToJSON(json: any): RestCurrency {
+    return RestCurrencyToJSONTyped(json, false);
+}
+
+export function RestCurrencyToJSONTyped(value?: Omit<RestCurrency, 'name'|'fractionDigits'|'currencyCode'|'numericCode'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

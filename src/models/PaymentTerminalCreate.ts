@@ -94,10 +94,15 @@ export function PaymentTerminalCreateFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function PaymentTerminalCreateToJSON(value?: PaymentTerminalCreate | null): any {
+export function PaymentTerminalCreateToJSON(json: any): PaymentTerminalCreate {
+    return PaymentTerminalCreateToJSONTyped(json, false);
+}
+
+export function PaymentTerminalCreateToJSONTyped(value?: PaymentTerminalCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'name': value['name'],

@@ -59,3 +59,7 @@ export function CardAuthenticationResponseToJSON(value?: CardAuthenticationRespo
     return value as any;
 }
 
+export function CardAuthenticationResponseToJSONTyped(value: any, ignoreDiscriminator: boolean): CardAuthenticationResponse {
+    return value as CardAuthenticationResponse;
+}
+

@@ -27,6 +27,7 @@ import {
     TransactionFromJSON,
     TransactionFromJSONTyped,
     TransactionToJSON,
+    TransactionToJSONTyped,
 } from './Transaction';
 
 /**
@@ -127,10 +128,15 @@ export function TransactionCommentFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function TransactionCommentToJSON(value?: Omit<TransactionComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null): any {
+export function TransactionCommentToJSON(json: any): TransactionComment {
+    return TransactionCommentToJSONTyped(json, false);
+}
+
+export function TransactionCommentToJSONTyped(value?: Omit<TransactionComment, 'linkedSpaceId'|'pinned'|'editedBy'|'createdBy'|'id'|'editedOn'|'createdOn'|'version'|'content'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'transaction': TransactionToJSON(value['transaction']),

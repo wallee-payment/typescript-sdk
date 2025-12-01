@@ -27,6 +27,7 @@ import {
     TransactionCompletionFromJSON,
     TransactionCompletionFromJSONTyped,
     TransactionCompletionToJSON,
+    TransactionCompletionToJSONTyped,
 } from './TransactionCompletion';
 
 /**
@@ -85,10 +86,15 @@ export function CompletionSearchResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function CompletionSearchResponseToJSON(value?: Omit<CompletionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function CompletionSearchResponseToJSON(json: any): CompletionSearchResponse {
+    return CompletionSearchResponseToJSONTyped(json, false);
+}
+
+export function CompletionSearchResponseToJSONTyped(value?: Omit<CompletionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

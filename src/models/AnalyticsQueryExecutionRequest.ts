@@ -71,10 +71,15 @@ export function AnalyticsQueryExecutionRequestFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function AnalyticsQueryExecutionRequestToJSON(value?: AnalyticsQueryExecutionRequest | null): any {
+export function AnalyticsQueryExecutionRequestToJSON(json: any): AnalyticsQueryExecutionRequest {
+    return AnalyticsQueryExecutionRequestToJSONTyped(json, false);
+}
+
+export function AnalyticsQueryExecutionRequestToJSONTyped(value?: AnalyticsQueryExecutionRequest | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'sftpDispatchSettingsId': value['sftpDispatchSettingsId'],

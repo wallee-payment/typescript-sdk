@@ -27,6 +27,7 @@ import {
     TokenFromJSON,
     TokenFromJSONTyped,
     TokenToJSON,
+    TokenToJSONTyped,
 } from './Token';
 
 /**
@@ -85,10 +86,15 @@ export function TokenSearchResponseFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function TokenSearchResponseToJSON(value?: Omit<TokenSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function TokenSearchResponseToJSON(json: any): TokenSearchResponse {
+    return TokenSearchResponseToJSONTyped(json, false);
+}
+
+export function TokenSearchResponseToJSONTyped(value?: Omit<TokenSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

@@ -27,6 +27,7 @@ import {
     PersistableCurrencyAmountUpdateFromJSON,
     PersistableCurrencyAmountUpdateFromJSONTyped,
     PersistableCurrencyAmountUpdateToJSON,
+    PersistableCurrencyAmountUpdateToJSONTyped,
 } from './PersistableCurrencyAmountUpdate';
 
 /**
@@ -107,10 +108,15 @@ export function ProductPeriodFeeUpdateFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function ProductPeriodFeeUpdateToJSON(value?: ProductPeriodFeeUpdate | null): any {
+export function ProductPeriodFeeUpdateToJSON(json: any): ProductPeriodFeeUpdate {
+    return ProductPeriodFeeUpdateToJSONTyped(json, false);
+}
+
+export function ProductPeriodFeeUpdateToJSONTyped(value?: ProductPeriodFeeUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'periodFee': value['periodFee'] == null ? undefined : (Array.from(value['periodFee'] as Set<any>).map(PersistableCurrencyAmountUpdateToJSON)),

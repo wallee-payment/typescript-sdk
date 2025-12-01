@@ -27,12 +27,14 @@ import {
     PersistableCurrencyAmountFromJSON,
     PersistableCurrencyAmountFromJSONTyped,
     PersistableCurrencyAmountToJSON,
+    PersistableCurrencyAmountToJSONTyped,
 } from './PersistableCurrencyAmount';
 import type { ProductMeteredFee } from './ProductMeteredFee';
 import {
     ProductMeteredFeeFromJSON,
     ProductMeteredFeeFromJSONTyped,
     ProductMeteredFeeToJSON,
+    ProductMeteredFeeToJSONTyped,
 } from './ProductMeteredFee';
 
 /**
@@ -98,10 +100,15 @@ export function ProductMeteredTierFeeFromJSONTyped(json: any, ignoreDiscriminato
     };
 }
 
-export function ProductMeteredTierFeeToJSON(value?: Omit<ProductMeteredTierFee, 'startRange'|'fee'|'id'|'version'> | null): any {
+export function ProductMeteredTierFeeToJSON(json: any): ProductMeteredTierFee {
+    return ProductMeteredTierFeeToJSONTyped(json, false);
+}
+
+export function ProductMeteredTierFeeToJSONTyped(value?: Omit<ProductMeteredTierFee, 'startRange'|'fee'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'meteredFee': ProductMeteredFeeToJSON(value['meteredFee']),

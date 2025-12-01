@@ -27,6 +27,7 @@ import {
     BankTransactionFromJSON,
     BankTransactionFromJSONTyped,
     BankTransactionToJSON,
+    BankTransactionToJSONTyped,
 } from './BankTransaction';
 
 /**
@@ -85,10 +86,15 @@ export function BankTransactionSearchResponseFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function BankTransactionSearchResponseToJSON(value?: Omit<BankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function BankTransactionSearchResponseToJSON(json: any): BankTransactionSearchResponse {
+    return BankTransactionSearchResponseToJSONTyped(json, false);
+}
+
+export function BankTransactionSearchResponseToJSONTyped(value?: Omit<BankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

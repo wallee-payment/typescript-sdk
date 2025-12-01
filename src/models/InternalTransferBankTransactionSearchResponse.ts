@@ -27,6 +27,7 @@ import {
     InternalTransferBankTransactionFromJSON,
     InternalTransferBankTransactionFromJSONTyped,
     InternalTransferBankTransactionToJSON,
+    InternalTransferBankTransactionToJSONTyped,
 } from './InternalTransferBankTransaction';
 
 /**
@@ -85,10 +86,15 @@ export function InternalTransferBankTransactionSearchResponseFromJSONTyped(json:
     };
 }
 
-export function InternalTransferBankTransactionSearchResponseToJSON(value?: Omit<InternalTransferBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function InternalTransferBankTransactionSearchResponseToJSON(json: any): InternalTransferBankTransactionSearchResponse {
+    return InternalTransferBankTransactionSearchResponseToJSONTyped(json, false);
+}
+
+export function InternalTransferBankTransactionSearchResponseToJSONTyped(value?: Omit<InternalTransferBankTransactionSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

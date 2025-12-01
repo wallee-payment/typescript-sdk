@@ -27,6 +27,7 @@ import {
     PaymentAppChargeAttemptTargetStateFromJSON,
     PaymentAppChargeAttemptTargetStateFromJSONTyped,
     PaymentAppChargeAttemptTargetStateToJSON,
+    PaymentAppChargeAttemptTargetStateToJSONTyped,
 } from './PaymentAppChargeAttemptTargetState';
 
 /**
@@ -61,6 +62,8 @@ export interface PaymentAppChargeAttemptUpdate {
     endUserFailureMessage?: string;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppChargeAttemptUpdate interface.
  */
@@ -85,10 +88,15 @@ export function PaymentAppChargeAttemptUpdateFromJSONTyped(json: any, ignoreDisc
     };
 }
 
-export function PaymentAppChargeAttemptUpdateToJSON(value?: PaymentAppChargeAttemptUpdate | null): any {
+export function PaymentAppChargeAttemptUpdateToJSON(json: any): PaymentAppChargeAttemptUpdate {
+    return PaymentAppChargeAttemptUpdateToJSONTyped(json, false);
+}
+
+export function PaymentAppChargeAttemptUpdateToJSONTyped(value?: PaymentAppChargeAttemptUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

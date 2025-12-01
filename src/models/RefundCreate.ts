@@ -27,12 +27,14 @@ import {
     RefundTypeFromJSON,
     RefundTypeFromJSONTyped,
     RefundTypeToJSON,
+    RefundTypeToJSONTyped,
 } from './RefundType';
 import type { LineItemReductionCreate } from './LineItemReductionCreate';
 import {
     LineItemReductionCreateFromJSON,
     LineItemReductionCreateFromJSONTyped,
     LineItemReductionCreateToJSON,
+    LineItemReductionCreateToJSONTyped,
 } from './LineItemReductionCreate';
 
 /**
@@ -85,6 +87,8 @@ export interface RefundCreate {
     transaction?: number;
 }
 
+
+
 /**
  * Check if a given object implements the RefundCreate interface.
  */
@@ -114,10 +118,15 @@ export function RefundCreateFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function RefundCreateToJSON(value?: RefundCreate | null): any {
+export function RefundCreateToJSON(json: any): RefundCreate {
+    return RefundCreateToJSONTyped(json, false);
+}
+
+export function RefundCreateToJSONTyped(value?: RefundCreate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'completion': value['completion'],

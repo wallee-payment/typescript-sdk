@@ -27,6 +27,7 @@ import {
     PaymentAppVoidTargetStateFromJSON,
     PaymentAppVoidTargetStateFromJSONTyped,
     PaymentAppVoidTargetStateToJSON,
+    PaymentAppVoidTargetStateToJSONTyped,
 } from './PaymentAppVoidTargetState';
 
 /**
@@ -55,6 +56,8 @@ export interface PaymentAppVoidUpdate {
     failureReason?: number;
 }
 
+
+
 /**
  * Check if a given object implements the PaymentAppVoidUpdate interface.
  */
@@ -78,10 +81,15 @@ export function PaymentAppVoidUpdateFromJSONTyped(json: any, ignoreDiscriminator
     };
 }
 
-export function PaymentAppVoidUpdateToJSON(value?: PaymentAppVoidUpdate | null): any {
+export function PaymentAppVoidUpdateToJSON(json: any): PaymentAppVoidUpdate {
+    return PaymentAppVoidUpdateToJSONTyped(json, false);
+}
+
+export function PaymentAppVoidUpdateToJSONTyped(value?: PaymentAppVoidUpdate | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
         'reference': value['reference'],

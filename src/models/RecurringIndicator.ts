@@ -58,3 +58,7 @@ export function RecurringIndicatorToJSON(value?: RecurringIndicator | null): any
     return value as any;
 }
 
+export function RecurringIndicatorToJSONTyped(value: any, ignoreDiscriminator: boolean): RecurringIndicator {
+    return value as RecurringIndicator;
+}
+

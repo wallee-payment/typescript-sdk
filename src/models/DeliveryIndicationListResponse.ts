@@ -27,6 +27,7 @@ import {
     DeliveryIndicationFromJSON,
     DeliveryIndicationFromJSONTyped,
     DeliveryIndicationToJSON,
+    DeliveryIndicationToJSONTyped,
 } from './DeliveryIndication';
 
 /**
@@ -78,10 +79,15 @@ export function DeliveryIndicationListResponseFromJSONTyped(json: any, ignoreDis
     };
 }
 
-export function DeliveryIndicationListResponseToJSON(value?: Omit<DeliveryIndicationListResponse, 'data'|'hasMore'|'limit'> | null): any {
+export function DeliveryIndicationListResponseToJSON(json: any): DeliveryIndicationListResponse {
+    return DeliveryIndicationListResponseToJSONTyped(json, false);
+}
+
+export function DeliveryIndicationListResponseToJSONTyped(value?: Omit<DeliveryIndicationListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

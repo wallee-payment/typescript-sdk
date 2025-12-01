@@ -149,6 +149,7 @@ export interface PostPaymentWebAppsProcessorsExternalIdConnectorsRequest {
  * 
  */
 export class PaymentWebAppsService extends runtime.BaseAPI {
+
     constructor(configuration: runtime.Configuration) {
         super(configuration);
     }
@@ -177,7 +178,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -194,8 +194,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/connectors/{connectorExternalId}`.replace(`{${"connectorExternalId"}}`, encodeURIComponent(String(requestParameters['connectorExternalId']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -236,7 +236,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -253,8 +252,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/processors/{externalId}`.replace(`{${"externalId"}}`, encodeURIComponent(String(requestParameters['externalId']))),
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -308,7 +307,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -325,8 +323,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/charge-attempts/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppChargeAttemptUpdateToJSON(requestParameters['paymentAppChargeAttemptUpdate']),
@@ -382,7 +380,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -399,8 +396,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/completions/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppCompletionUpdateToJSON(requestParameters['paymentAppCompletionUpdate']),
@@ -455,7 +452,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -472,8 +468,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/connectors/{connectorExternalId}`.replace(`{${"connectorExternalId"}}`, encodeURIComponent(String(requestParameters['connectorExternalId']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppConnectorDetailsToJSON(requestParameters['paymentAppConnectorDetails']),
@@ -527,7 +523,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -544,8 +539,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/processors/{externalId}`.replace(`{${"externalId"}}`, encodeURIComponent(String(requestParameters['externalId']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppProcessorDetailsToJSON(requestParameters['paymentAppProcessorDetails']),
@@ -600,7 +595,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -617,8 +611,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/refunds/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppRefundUpdateToJSON(requestParameters['paymentAppRefundUpdate']),
@@ -674,7 +668,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -691,8 +684,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/voids/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppVoidUpdateToJSON(requestParameters['paymentAppVoidUpdate']),
@@ -740,7 +733,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -757,8 +749,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/processors`,
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppProcessorDetailsCreateToJSON(requestParameters['paymentAppProcessorDetailsCreate']),
@@ -803,7 +795,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -820,8 +811,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/processors/{externalId}/activate-for-production`.replace(`{${"externalId"}}`, encodeURIComponent(String(requestParameters['externalId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
         }, updatedInitOverrides);
@@ -874,7 +865,6 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
-
         if (requestParameters['space'] != null) {
             headerParameters['Space'] = String(requestParameters['space']);
         }
@@ -891,8 +881,8 @@ export class PaymentWebAppsService extends runtime.BaseAPI {
         const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
 
         const response = await this.request({
-            path: path,
-            method: method,
+            path: `/payment/web-apps/processors/{externalId}/connectors`.replace(`{${"externalId"}}`, encodeURIComponent(String(requestParameters['externalId']))),
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: PaymentAppConnectorDetailsCreateToJSON(requestParameters['paymentAppConnectorDetailsCreate']),

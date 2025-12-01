@@ -27,6 +27,7 @@ import {
     ChargeFlowFromJSON,
     ChargeFlowFromJSONTyped,
     ChargeFlowToJSON,
+    ChargeFlowToJSONTyped,
 } from './ChargeFlow';
 
 /**
@@ -85,10 +86,15 @@ export function ChargeFlowSearchResponseFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function ChargeFlowSearchResponseToJSON(value?: Omit<ChargeFlowSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null): any {
+export function ChargeFlowSearchResponseToJSON(json: any): ChargeFlowSearchResponse {
+    return ChargeFlowSearchResponseToJSONTyped(json, false);
+}
+
+export function ChargeFlowSearchResponseToJSONTyped(value?: Omit<ChargeFlowSearchResponse, 'data'|'offset'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };

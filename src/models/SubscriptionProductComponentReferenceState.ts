@@ -58,3 +58,7 @@ export function SubscriptionProductComponentReferenceStateToJSON(value?: Subscri
     return value as any;
 }
 
+export function SubscriptionProductComponentReferenceStateToJSONTyped(value: any, ignoreDiscriminator: boolean): SubscriptionProductComponentReferenceState {
+    return value as SubscriptionProductComponentReferenceState;
+}
+

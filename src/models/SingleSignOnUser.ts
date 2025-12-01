@@ -99,10 +99,15 @@ export function SingleSignOnUserFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function SingleSignOnUserToJSON(value?: Omit<SingleSignOnUser, 'firstname'|'provider'|'scope'|'timeZone'|'language'|'primaryAccount'|'lastname'> | null): any {
+export function SingleSignOnUserToJSON(json: any): SingleSignOnUser {
+    return SingleSignOnUserToJSONTyped(json, false);
+}
+
+export function SingleSignOnUserToJSONTyped(value?: Omit<SingleSignOnUser, 'firstname'|'provider'|'scope'|'timeZone'|'language'|'primaryAccount'|'lastname'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
+
     return {
         
     };
