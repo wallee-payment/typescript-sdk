@@ -24,3 +24,11 @@
 export * from './runtime';
 export * from './services/index';
 export * from './models/index';
+
+// Models exports
+export * from './models/ApiExceptionErrorCodes';
+export * from './models/SdkExceptionErrorCodes';
+export * from './models/WalleeSdkException';
+
+// Utils exports
+export * from './utils/EncryptionUtil';

@@ -24,7 +24,7 @@
 
 import { Ecdsa, PublicKey, Signature } from "starkbank-ecdsa";
 import { WalleeSdkException } from "../models/WalleeSdkException";
-import { ErrorCode } from "../models/ErrorCode";
+import { SdkExceptionErrorCodes } from "../models/SdkExceptionErrorCodes";
 
 abstract class EncryptionUtil {
   private constructor() {}
@@ -41,7 +41,7 @@ abstract class EncryptionUtil {
       publicKey = PublicKey.fromPem(pubKeyPem);
     } catch (error: any) {
       throw new WalleeSdkException(
-        ErrorCode.INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
+        SdkExceptionErrorCodes.INVALID_WEBHOOK_ENCRYPTION_PUBLIC_KEY,
         `Invalid public key: ${error.message}`
       );
     }
@@ -51,7 +51,7 @@ abstract class EncryptionUtil {
       signature = Signature.fromBase64(contentSignature);
     } catch (error: any) {
       throw new WalleeSdkException(
-        ErrorCode.INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
+        SdkExceptionErrorCodes.INVALID_WEBHOOK_ENCRYPTION_CONTENT_SIGNATURE,
         `Invalid webhook content signature: ${error.message}`
       );
     }
@@ -60,7 +60,7 @@ abstract class EncryptionUtil {
       return Ecdsa.verify(contentToVerify, signature, publicKey);
     } catch (error: any) {
       throw new WalleeSdkException(
-        ErrorCode.WEBHOOK_ENCRYPTION_SIGNATURE_VERIFICATION_FAILED,
+        SdkExceptionErrorCodes.WEBHOOK_ENCRYPTION_SIGNATURE_VERIFICATION_FAILED,
         `Content verification failed: ${error.message}`
       );
     }
