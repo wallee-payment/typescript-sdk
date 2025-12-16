@@ -50,6 +50,18 @@ export interface ExpressCheckoutSessionCreate {
      */
     lineItems?: Array<LineItem>;
     /**
+     * The URL to fetch the shipping options from.
+     * @type {string}
+     * @memberof ExpressCheckoutSessionCreate
+     */
+    merchantShippingCallbackUrl?: string;
+    /**
+     * The currency of the session.
+     * @type {string}
+     * @memberof ExpressCheckoutSessionCreate
+     */
+    currency?: string;
+    /**
      * 
      * @type {Array<ExpressCheckoutShippingOption>}
      * @memberof ExpressCheckoutSessionCreate
@@ -75,6 +87,8 @@ export function ExpressCheckoutSessionCreateFromJSONTyped(json: any, ignoreDiscr
     return {
         
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemFromJSON)),
+        'merchantShippingCallbackUrl': json['merchantShippingCallbackUrl'] == null ? undefined : json['merchantShippingCallbackUrl'],
+        'currency': json['currency'] == null ? undefined : json['currency'],
         'shippingOptions': json['shippingOptions'] == null ? undefined : ((json['shippingOptions'] as Array<any>).map(ExpressCheckoutShippingOptionFromJSON)),
     };
 }
@@ -91,6 +105,8 @@ export function ExpressCheckoutSessionCreateToJSONTyped(value?: ExpressCheckoutS
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(LineItemToJSON)),
+        'merchantShippingCallbackUrl': value['merchantShippingCallbackUrl'],
+        'currency': value['currency'],
         'shippingOptions': value['shippingOptions'] == null ? undefined : ((value['shippingOptions'] as Array<any>).map(ExpressCheckoutShippingOptionToJSON)),
     };
 }

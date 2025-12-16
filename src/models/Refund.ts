@@ -147,6 +147,12 @@ export interface Refund {
      */
     readonly lineItems?: Array<LineItem>;
     /**
+     * Allow to store additional information about the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof Refund
+     */
+    readonly metaData?: { [key: string]: string; };
+    /**
      * The date and time when the refund succeeded.
      * @type {Date}
      * @memberof Refund
@@ -314,6 +320,7 @@ export function RefundFromJSONTyped(json: any, ignoreDiscriminator: boolean): Re
         'type': json['type'] == null ? undefined : RefundTypeFromJSON(json['type']),
         'createdOn': json['createdOn'] == null ? undefined : (new Date(json['createdOn'])),
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemFromJSON)),
+        'metaData': json['metaData'] == null ? undefined : json['metaData'],
         'succeededOn': json['succeededOn'] == null ? undefined : (new Date(json['succeededOn'])),
         'reducedLineItems': json['reducedLineItems'] == null ? undefined : ((json['reducedLineItems'] as Array<any>).map(LineItemFromJSON)),
         'id': json['id'] == null ? undefined : json['id'],
@@ -344,7 +351,7 @@ export function RefundToJSON(json: any): Refund {
     return RefundToJSONTyped(json, false);
 }
 
-export function RefundToJSONTyped(value?: Omit<Refund, 'totalSettledAmount'|'reductions'|'baseLineItems'|'processingOn'|'taxes'|'language'|'createdOn'|'lineItems'|'succeededOn'|'reducedLineItems'|'id'|'merchantReference'|'completion'|'amount'|'plannedPurgeDate'|'externalId'|'timeZone'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'updatedInvoice'|'totalAppliedFees'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
+export function RefundToJSONTyped(value?: Omit<Refund, 'totalSettledAmount'|'reductions'|'baseLineItems'|'processingOn'|'taxes'|'language'|'createdOn'|'lineItems'|'metaData'|'succeededOn'|'reducedLineItems'|'id'|'merchantReference'|'completion'|'amount'|'plannedPurgeDate'|'externalId'|'timeZone'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'updatedInvoice'|'totalAppliedFees'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

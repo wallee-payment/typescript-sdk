@@ -32,6 +32,7 @@ export const TransactionUserInterfaceType = {
     PaymentPage: 'PAYMENT_PAGE',
     MobileSdk: 'MOBILE_SDK',
     Terminal: 'TERMINAL',
+    CloudTillInterface: 'CLOUD_TILL_INTERFACE',
     ExpressCheckout: 'EXPRESS_CHECKOUT'
 } as const;
 export type TransactionUserInterfaceType = typeof TransactionUserInterfaceType[keyof typeof TransactionUserInterfaceType];

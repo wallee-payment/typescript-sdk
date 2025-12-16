@@ -41,7 +41,7 @@ export interface ExpressCheckoutShippingOption {
      */
     readonly description?: string;
     /**
-     * Currency of the option
+     * Currency code (ISO-4217) of this shipping option.
      * @type {string}
      * @memberof ExpressCheckoutShippingOption
      */

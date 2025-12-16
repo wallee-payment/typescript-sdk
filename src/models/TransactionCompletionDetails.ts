@@ -43,6 +43,12 @@ export interface TransactionCompletionDetails {
      */
     lineItems?: Array<CompletionLineItemCreate>;
     /**
+     * Allow to store additional information about the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof TransactionCompletionDetails
+     */
+    metaData?: { [key: string]: string; };
+    /**
      * Whether this is the final completion for the transaction, meaning no further completions can occur, and the transaction will move to its completed state upon success.
      * @type {boolean}
      * @memberof TransactionCompletionDetails
@@ -66,6 +72,12 @@ export interface TransactionCompletionDetails {
      * @memberof TransactionCompletionDetails
      */
     invoiceMerchantReference?: string;
+    /**
+     * A unique identifier for the object.
+     * @type {number}
+     * @memberof TransactionCompletionDetails
+     */
+    id?: number;
 }
 
 /**
@@ -86,10 +98,12 @@ export function TransactionCompletionDetailsFromJSONTyped(json: any, ignoreDiscr
     return {
         
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(CompletionLineItemCreateFromJSON)),
+        'metaData': json['metaData'] == null ? undefined : json['metaData'],
         'lastCompletion': json['lastCompletion'] == null ? undefined : json['lastCompletion'],
         'statementDescriptor': json['statementDescriptor'] == null ? undefined : json['statementDescriptor'],
         'externalId': json['externalId'] == null ? undefined : json['externalId'],
         'invoiceMerchantReference': json['invoiceMerchantReference'] == null ? undefined : json['invoiceMerchantReference'],
+        'id': json['id'] == null ? undefined : json['id'],
     };
 }
 
@@ -105,10 +119,12 @@ export function TransactionCompletionDetailsToJSONTyped(value?: TransactionCompl
     return {
         
         'lineItems': value['lineItems'] == null ? undefined : ((value['lineItems'] as Array<any>).map(CompletionLineItemCreateToJSON)),
+        'metaData': value['metaData'],
         'lastCompletion': value['lastCompletion'],
         'statementDescriptor': value['statementDescriptor'],
         'externalId': value['externalId'],
         'invoiceMerchantReference': value['invoiceMerchantReference'],
+        'id': value['id'],
     };
 }
 

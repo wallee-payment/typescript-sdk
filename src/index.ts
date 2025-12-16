@@ -32,3 +32,7 @@ export * from './models/WalleeSdkException';
 
 // Utils exports
 export * from './utils/EncryptionUtil';
+export * from './utils/ServiceApiUtils';
+
+// Auth exports
+export * from './auth/HttpBearerAuth';

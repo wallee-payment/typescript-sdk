@@ -50,6 +50,12 @@ export interface RefundCreate {
      */
     completion?: number;
     /**
+     * Allow to store additional information about the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof RefundCreate
+     */
+    metaData?: { [key: string]: string; };
+    /**
      * The total monetary amount of the refund, representing the exact credit issued to the customer.
      * @type {number}
      * @memberof RefundCreate
@@ -109,6 +115,7 @@ export function RefundCreateFromJSONTyped(json: any, ignoreDiscriminator: boolea
     return {
         
         'completion': json['completion'] == null ? undefined : json['completion'],
+        'metaData': json['metaData'] == null ? undefined : json['metaData'],
         'amount': json['amount'] == null ? undefined : json['amount'],
         'reductions': json['reductions'] == null ? undefined : ((json['reductions'] as Array<any>).map(LineItemReductionCreateFromJSON)),
         'externalId': json['externalId'],
@@ -130,6 +137,7 @@ export function RefundCreateToJSONTyped(value?: RefundCreate | null, ignoreDiscr
     return {
         
         'completion': value['completion'],
+        'metaData': value['metaData'],
         'amount': value['amount'],
         'reductions': value['reductions'] == null ? undefined : ((value['reductions'] as Array<any>).map(LineItemReductionCreateToJSON)),
         'externalId': value['externalId'],

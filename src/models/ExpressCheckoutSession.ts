@@ -29,6 +29,13 @@ import {
     ExpressCheckoutWalletTypeToJSON,
     ExpressCheckoutWalletTypeToJSONTyped,
 } from './ExpressCheckoutWalletType';
+import type { Address } from './Address';
+import {
+    AddressFromJSON,
+    AddressFromJSONTyped,
+    AddressToJSON,
+    AddressToJSONTyped,
+} from './Address';
 import type { ExpressCheckoutSessionState } from './ExpressCheckoutSessionState';
 import {
     ExpressCheckoutSessionStateFromJSON,
@@ -64,6 +71,12 @@ export interface ExpressCheckoutSession {
      */
     readonly lineItems?: Array<LineItem>;
     /**
+     * The URL to fetch the shipping options from.
+     * @type {string}
+     * @memberof ExpressCheckoutSession
+     */
+    readonly merchantShippingCallbackUrl?: string;
+    /**
      * The spaceId linked to the entity.
      * @type {number}
      * @memberof ExpressCheckoutSession
@@ -81,6 +94,24 @@ export interface ExpressCheckoutSession {
      * @memberof ExpressCheckoutSession
      */
     walletType?: ExpressCheckoutWalletType;
+    /**
+     * 
+     * @type {Address}
+     * @memberof ExpressCheckoutSession
+     */
+    shippingAddress?: Address;
+    /**
+     * The currency of the session.
+     * @type {string}
+     * @memberof ExpressCheckoutSession
+     */
+    readonly currency?: string;
+    /**
+     * 
+     * @type {Address}
+     * @memberof ExpressCheckoutSession
+     */
+    billingAddress?: Address;
     /**
      * Id of the entity.
      * @type {number}
@@ -121,9 +152,13 @@ export function ExpressCheckoutSessionFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemFromJSON)),
+        'merchantShippingCallbackUrl': json['merchantShippingCallbackUrl'] == null ? undefined : json['merchantShippingCallbackUrl'],
         'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
         'metaData': json['metaData'] == null ? undefined : json['metaData'],
         'walletType': json['walletType'] == null ? undefined : ExpressCheckoutWalletTypeFromJSON(json['walletType']),
+        'shippingAddress': json['shippingAddress'] == null ? undefined : AddressFromJSON(json['shippingAddress']),
+        'currency': json['currency'] == null ? undefined : json['currency'],
+        'billingAddress': json['billingAddress'] == null ? undefined : AddressFromJSON(json['billingAddress']),
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : ExpressCheckoutSessionStateFromJSON(json['state']),
         'shippingOptions': json['shippingOptions'] == null ? undefined : ((json['shippingOptions'] as Array<any>).map(ExpressCheckoutShippingOptionFromJSON)),
@@ -134,7 +169,7 @@ export function ExpressCheckoutSessionToJSON(json: any): ExpressCheckoutSession 
     return ExpressCheckoutSessionToJSONTyped(json, false);
 }
 
-export function ExpressCheckoutSessionToJSONTyped(value?: Omit<ExpressCheckoutSession, 'lineItems'|'linkedSpaceId'|'metaData'|'id'|'shippingOptions'> | null, ignoreDiscriminator: boolean = false): any {
+export function ExpressCheckoutSessionToJSONTyped(value?: Omit<ExpressCheckoutSession, 'lineItems'|'merchantShippingCallbackUrl'|'linkedSpaceId'|'metaData'|'currency'|'id'|'shippingOptions'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -142,6 +177,8 @@ export function ExpressCheckoutSessionToJSONTyped(value?: Omit<ExpressCheckoutSe
     return {
         
         'walletType': ExpressCheckoutWalletTypeToJSON(value['walletType']),
+        'shippingAddress': AddressToJSON(value['shippingAddress']),
+        'billingAddress': AddressToJSON(value['billingAddress']),
         'state': ExpressCheckoutSessionStateToJSON(value['state']),
     };
 }

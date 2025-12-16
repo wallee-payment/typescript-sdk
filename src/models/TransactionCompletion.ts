@@ -132,6 +132,12 @@ export interface TransactionCompletion {
      */
     mode?: TransactionCompletionMode;
     /**
+     * Allow to store additional information about the object.
+     * @type {{ [key: string]: string; }}
+     * @memberof TransactionCompletion
+     */
+    readonly metaData?: { [key: string]: string; };
+    /**
      * The date and time when the transaction completion succeeded.
      * @type {Date}
      * @memberof TransactionCompletion
@@ -288,6 +294,7 @@ export function TransactionCompletionFromJSONTyped(json: any, ignoreDiscriminato
         'createdOn': json['createdOn'] == null ? undefined : (new Date(json['createdOn'])),
         'lineItems': json['lineItems'] == null ? undefined : ((json['lineItems'] as Array<any>).map(LineItemFromJSON)),
         'mode': json['mode'] == null ? undefined : TransactionCompletionModeFromJSON(json['mode']),
+        'metaData': json['metaData'] == null ? undefined : json['metaData'],
         'succeededOn': json['succeededOn'] == null ? undefined : (new Date(json['succeededOn'])),
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : TransactionCompletionStateFromJSON(json['state']),
@@ -316,7 +323,7 @@ export function TransactionCompletionToJSON(json: any): TransactionCompletion {
     return TransactionCompletionToJSONTyped(json, false);
 }
 
-export function TransactionCompletionToJSONTyped(value?: Omit<TransactionCompletion, 'statementDescriptor'|'baseLineItems'|'processingOn'|'invoiceMerchantReference'|'language'|'remainingLineItems'|'createdOn'|'lineItems'|'succeededOn'|'id'|'linkedTransaction'|'paymentInformation'|'amount'|'lastCompletion'|'plannedPurgeDate'|'externalId'|'timeZone'|'spaceViewId'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'taxAmount'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
+export function TransactionCompletionToJSONTyped(value?: Omit<TransactionCompletion, 'statementDescriptor'|'baseLineItems'|'processingOn'|'invoiceMerchantReference'|'language'|'remainingLineItems'|'createdOn'|'lineItems'|'metaData'|'succeededOn'|'id'|'linkedTransaction'|'paymentInformation'|'amount'|'lastCompletion'|'plannedPurgeDate'|'externalId'|'timeZone'|'spaceViewId'|'version'|'labels'|'linkedSpaceId'|'timeoutOn'|'createdBy'|'nextUpdateOn'|'taxAmount'|'failedOn'|'processorReference'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

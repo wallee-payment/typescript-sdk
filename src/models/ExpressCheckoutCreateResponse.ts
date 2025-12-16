@@ -40,6 +40,12 @@ export interface ExpressCheckoutCreateResponse {
      * @memberof ExpressCheckoutCreateResponse
      */
     session?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExpressCheckoutCreateResponse
+     */
+    sessionToken?: string;
 }
 
 /**
@@ -61,6 +67,7 @@ export function ExpressCheckoutCreateResponseFromJSONTyped(json: any, ignoreDisc
         
         'iframeSrc': json['iframeSrc'] == null ? undefined : json['iframeSrc'],
         'session': json['session'] == null ? undefined : json['session'],
+        'sessionToken': json['sessionToken'] == null ? undefined : json['sessionToken'],
     };
 }
 
@@ -77,6 +84,7 @@ export function ExpressCheckoutCreateResponseToJSONTyped(value?: ExpressCheckout
         
         'iframeSrc': value['iframeSrc'],
         'session': value['session'],
+        'sessionToken': value['sessionToken'],
     };
 }
 
