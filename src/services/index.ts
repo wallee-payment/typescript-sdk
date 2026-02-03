@@ -6,6 +6,7 @@ export * from './ApplicationUsersService';
 export * from './ApplicationUsersRolesService';
 export * from './BankAccountsService';
 export * from './BankTransactionsService';
+export * from './BogusExpressCheckoutService';
 export * from './ChargeAttemptsService';
 export * from './ChargeBankTransactionsService';
 export * from './ChargeFlowLevelsService';

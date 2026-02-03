@@ -249,6 +249,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-transactions/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search bank transactions
   <br><br>
+- <strong>BogusExpressCheckoutService</strong><br>
+  &nbsp;&nbsp;* <code>postBogusExpressCheckoutOnApprove</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /bogus-express-checkout/on-approve
+  &nbsp;&nbsp;&nbsp;&nbsp;Approve express checkout wallet payment
+  <br><br>
 - <strong>ChargeAttemptsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentChargeAttempts</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/charge-attempts
@@ -2693,6 +2698,8 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>BillingCycleModel</strong>
 * <strong>BillingCycleType</strong>
 * <strong>BillingDayCustomization</strong>
+* <strong>BogusExpressCheckoutApprovalRequest</strong>
+* <strong>BogusExpressCheckoutPaymentData</strong>
 * <strong>CardAuthenticationResponse</strong>
 * <strong>CardAuthenticationVersion</strong>
 * <strong>CardCryptogram</strong>
@@ -2814,6 +2821,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>DunningFlowSearchResponse</strong>
 * <strong>DunningFlowType</strong>
 * <strong>Environment</strong>
+* <strong>ExpressCheckoutApprovalResponse</strong>
 * <strong>ExpressCheckoutCreateResponse</strong>
 * <strong>ExpressCheckoutSession</strong>
 * <strong>ExpressCheckoutSessionCreate</strong>

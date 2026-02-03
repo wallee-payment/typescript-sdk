@@ -340,4 +340,21 @@ describe('QueryingTest — Api querying features test using transactions service
             resp.paymentConnectorConfiguration!.processorConfiguration!.linkedSpaceId
         ).to.exist;
     });
+
+    /**
+     * Querying with single quote sign.
+     */
+    it('should correctly process request with single quote signs', async function () {
+        const resp = await transactionsService.getPaymentTransactionsSearch(
+            {
+                space: SPACE_ID,
+                limit: 1,
+                offset: 0,
+                query: "completedOn:<'2026-01-15'",
+            }
+        );
+
+        expect(resp).to.exist;
+        expect(resp).to.be.an('object');
+    });
 });

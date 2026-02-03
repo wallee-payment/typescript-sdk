@@ -198,7 +198,7 @@ export class BaseAPI {
 
     private addMetaHeaders(headerParameters: HTTPHeaders) {
         let defaultHeaders = {
-            'x-meta-sdk-version': '5.4.0',
+            'x-meta-sdk-version': '5.5.0',
             'x-meta-sdk-language': 'typescript',
             'x-meta-sdk-provider': 'wallee',
             'x-meta-sdk-language-version': this.getVersion(),
@@ -337,7 +337,8 @@ export function querystring(params: HTTPQuery, prefix: string = ''): string {
     return Object.keys(params)
         .map(key => querystringSingleKey(key, params[key], prefix))
         .filter(part => part.length > 0)
-        .join('&');
+        .join('&')
+        .replace(/'/g, "%27");
 }
 
 function querystringSingleKey(key: string, value: string | number | null | undefined | boolean | Array<string | number | null | boolean> | Set<string | number | null | boolean> | HTTPQuery, keyPrefix: string = ''): string {
