@@ -49,6 +49,12 @@ export interface AbstractRoleUpdate {
      */
     name?: { [key: string]: string; };
     /**
+     * Additional information that describes the role.
+     * @type {{ [key: string]: string; }}
+     * @memberof AbstractRoleUpdate
+     */
+    description?: { [key: string]: string; };
+    /**
      * Whether users with this role are required to use two-factor authentication.
      * @type {boolean}
      * @memberof AbstractRoleUpdate
@@ -75,6 +81,7 @@ export function AbstractRoleUpdateFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'permissions': json['permissions'] == null ? undefined : (new Set((json['permissions'] as Array<any>).map(PermissionFromJSON))),
         'name': json['name'] == null ? undefined : json['name'],
+        'description': json['description'] == null ? undefined : json['description'],
         'twoFactorRequired': json['twoFactorRequired'] == null ? undefined : json['twoFactorRequired'],
     };
 }
@@ -92,6 +99,7 @@ export function AbstractRoleUpdateToJSONTyped(value?: AbstractRoleUpdate | null,
         
         'permissions': value['permissions'] == null ? undefined : (Array.from(value['permissions'] as Set<any>).map(PermissionToJSON)),
         'name': value['name'],
+        'description': value['description'],
         'twoFactorRequired': value['twoFactorRequired'],
     };
 }

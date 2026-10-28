@@ -21,44 +21,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { mapValues } from '../runtime';
+
 /**
  * 
  * @export
- * @interface SalesChannel
  */
-export interface SalesChannel {
-    /**
-     * When listing sales channels, they can be sorted by this number.
-     * @type {number}
-     * @memberof SalesChannel
-     */
-    readonly sortOrder?: number;
-    /**
-     * The localized name of the object.
-     * @type {{ [key: string]: string; }}
-     * @memberof SalesChannel
-     */
-    readonly name?: { [key: string]: string; };
-    /**
-     * The localized description of the object.
-     * @type {{ [key: string]: string; }}
-     * @memberof SalesChannel
-     */
-    readonly description?: { [key: string]: string; };
-    /**
-     * A unique identifier for the object.
-     * @type {number}
-     * @memberof SalesChannel
-     */
-    readonly id?: number;
-}
+export const SalesChannel = {
+    Terminal: 'TERMINAL',
+    Ecommerce: 'ECOMMERCE'
+} as const;
+export type SalesChannel = typeof SalesChannel[keyof typeof SalesChannel];
 
-/**
- * Check if a given object implements the SalesChannel interface.
- */
-export function instanceOfSalesChannel(value: object): value is SalesChannel {
-    return true;
+
+export function instanceOfSalesChannel(value: any): boolean {
+    for (const key in SalesChannel) {
+        if (Object.prototype.hasOwnProperty.call(SalesChannel, key)) {
+            if (SalesChannel[key as keyof typeof SalesChannel] === value) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 export function SalesChannelFromJSON(json: any): SalesChannel {
@@ -66,29 +49,14 @@ export function SalesChannelFromJSON(json: any): SalesChannel {
 }
 
 export function SalesChannelFromJSONTyped(json: any, ignoreDiscriminator: boolean): SalesChannel {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'sortOrder': json['sortOrder'] == null ? undefined : json['sortOrder'],
-        'name': json['name'] == null ? undefined : json['name'],
-        'description': json['description'] == null ? undefined : json['description'],
-        'id': json['id'] == null ? undefined : json['id'],
-    };
+    return json as SalesChannel;
 }
 
-export function SalesChannelToJSON(json: any): SalesChannel {
-    return SalesChannelToJSONTyped(json, false);
+export function SalesChannelToJSON(value?: SalesChannel | null): any {
+    return value as any;
 }
 
-export function SalesChannelToJSONTyped(value?: Omit<SalesChannel, 'sortOrder'|'name'|'description'|'id'> | null, ignoreDiscriminator: boolean = false): any {
-    if (value == null) {
-        return value;
-    }
-
-    return {
-        
-    };
+export function SalesChannelToJSONTyped(value: any, ignoreDiscriminator: boolean): SalesChannel {
+    return value as SalesChannel;
 }
 

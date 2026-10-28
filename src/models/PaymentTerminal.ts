@@ -64,6 +64,12 @@ export interface PaymentTerminal {
      */
     readonly identifier?: string;
     /**
+     * 
+     * @type {Date}
+     * @memberof PaymentTerminal
+     */
+    readonly deactivatedOn?: Date;
+    /**
      * The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      * @type {Date}
      * @memberof PaymentTerminal
@@ -118,6 +124,18 @@ export interface PaymentTerminal {
      */
     locationVersion?: PaymentTerminalLocationVersion;
     /**
+     * 
+     * @type {Date}
+     * @memberof PaymentTerminal
+     */
+    readonly activatedOn?: Date;
+    /**
+     * 
+     * @type {Date}
+     * @memberof PaymentTerminal
+     */
+    readonly decommissionedOn?: Date;
+    /**
      * The default currency of the terminal.
      * @type {string}
      * @memberof PaymentTerminal
@@ -129,6 +147,12 @@ export interface PaymentTerminal {
      * @memberof PaymentTerminal
      */
     readonly name?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentTerminal
+     */
+    readonly activationCode?: string;
     /**
      * A unique identifier for the object.
      * @type {number}
@@ -163,6 +187,7 @@ export function PaymentTerminalFromJSONTyped(json: any, ignoreDiscriminator: boo
     return {
         
         'identifier': json['identifier'] == null ? undefined : json['identifier'],
+        'deactivatedOn': json['deactivatedOn'] == null ? undefined : (new Date(json['deactivatedOn'])),
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
         'externalId': json['externalId'] == null ? undefined : json['externalId'],
         'type': json['type'] == null ? undefined : PaymentTerminalTypeFromJSON(json['type']),
@@ -172,8 +197,11 @@ export function PaymentTerminalFromJSONTyped(json: any, ignoreDiscriminator: boo
         'linkedSpaceId': json['linkedSpaceId'] == null ? undefined : json['linkedSpaceId'],
         'configurationVersion': json['configurationVersion'] == null ? undefined : PaymentTerminalConfigurationVersionFromJSON(json['configurationVersion']),
         'locationVersion': json['locationVersion'] == null ? undefined : PaymentTerminalLocationVersionFromJSON(json['locationVersion']),
+        'activatedOn': json['activatedOn'] == null ? undefined : (new Date(json['activatedOn'])),
+        'decommissionedOn': json['decommissionedOn'] == null ? undefined : (new Date(json['decommissionedOn'])),
         'defaultCurrency': json['defaultCurrency'] == null ? undefined : json['defaultCurrency'],
         'name': json['name'] == null ? undefined : json['name'],
+        'activationCode': json['activationCode'] == null ? undefined : json['activationCode'],
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : PaymentTerminalStateFromJSON(json['state']),
     };
@@ -183,7 +211,7 @@ export function PaymentTerminalToJSON(json: any): PaymentTerminal {
     return PaymentTerminalToJSONTyped(json, false);
 }
 
-export function PaymentTerminalToJSONTyped(value?: Omit<PaymentTerminal, 'identifier'|'plannedPurgeDate'|'externalId'|'deviceName'|'version'|'deviceSerialNumber'|'linkedSpaceId'|'defaultCurrency'|'name'|'id'> | null, ignoreDiscriminator: boolean = false): any {
+export function PaymentTerminalToJSONTyped(value?: Omit<PaymentTerminal, 'identifier'|'deactivatedOn'|'plannedPurgeDate'|'externalId'|'deviceName'|'version'|'deviceSerialNumber'|'linkedSpaceId'|'activatedOn'|'decommissionedOn'|'defaultCurrency'|'name'|'activationCode'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

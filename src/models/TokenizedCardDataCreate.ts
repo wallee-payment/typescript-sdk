@@ -87,6 +87,12 @@ export interface TokenizedCardDataCreate {
      */
     recurringIndicator?: RecurringIndicator;
     /**
+     * A reference specific to linking card transaction lifecycle events within the payment scheme.
+     * @type {string}
+     * @memberof TokenizedCardDataCreate
+     */
+    transactionLinkIdentifier?: string;
+    /**
      * A reference specific to the card's transaction within its payment scheme.
      * @type {string}
      * @memberof TokenizedCardDataCreate
@@ -132,6 +138,7 @@ export function TokenizedCardDataCreateFromJSONTyped(json: any, ignoreDiscrimina
         'cardVerificationCode': json['cardVerificationCode'] == null ? undefined : json['cardVerificationCode'],
         'primaryAccountNumber': json['primaryAccountNumber'],
         'recurringIndicator': json['recurringIndicator'] == null ? undefined : RecurringIndicatorFromJSON(json['recurringIndicator']),
+        'transactionLinkIdentifier': json['transactionLinkIdentifier'] == null ? undefined : json['transactionLinkIdentifier'],
         'schemeTransactionReference': json['schemeTransactionReference'] == null ? undefined : json['schemeTransactionReference'],
         'tokenRequestorId': json['tokenRequestorId'] == null ? undefined : json['tokenRequestorId'],
         'cryptogram': json['cryptogram'] == null ? undefined : CardCryptogramCreateFromJSON(json['cryptogram']),
@@ -155,6 +162,7 @@ export function TokenizedCardDataCreateToJSONTyped(value?: TokenizedCardDataCrea
         'cardVerificationCode': value['cardVerificationCode'],
         'primaryAccountNumber': value['primaryAccountNumber'],
         'recurringIndicator': RecurringIndicatorToJSON(value['recurringIndicator']),
+        'transactionLinkIdentifier': value['transactionLinkIdentifier'],
         'schemeTransactionReference': value['schemeTransactionReference'],
         'tokenRequestorId': value['tokenRequestorId'],
         'cryptogram': CardCryptogramCreateToJSON(value['cryptogram']),

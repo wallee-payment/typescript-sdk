@@ -25,7 +25,8 @@
 import * as runtime from '../runtime';
 import type {
   PaymentTerminal,
-  PaymentTerminalCreate,
+  PaymentTerminalActivationStatusDetailSearchResponse,
+  PaymentTerminalCreationRequest,
   PaymentTerminalTransactionSummaryReference,
   PaymentTerminalUpdate,
   RestApiErrorResponse,
@@ -33,12 +34,15 @@ import type {
   TerminalListResponse,
   TerminalSearchResponse,
   Transaction,
+  TransactionVoid,
 } from '../models/index';
 import {
     PaymentTerminalFromJSON,
     PaymentTerminalToJSON,
-    PaymentTerminalCreateFromJSON,
-    PaymentTerminalCreateToJSON,
+    PaymentTerminalActivationStatusDetailSearchResponseFromJSON,
+    PaymentTerminalActivationStatusDetailSearchResponseToJSON,
+    PaymentTerminalCreationRequestFromJSON,
+    PaymentTerminalCreationRequestToJSON,
     PaymentTerminalTransactionSummaryReferenceFromJSON,
     PaymentTerminalTransactionSummaryReferenceToJSON,
     PaymentTerminalUpdateFromJSON,
@@ -53,6 +57,8 @@ import {
     TerminalSearchResponseToJSON,
     TransactionFromJSON,
     TransactionToJSON,
+    TransactionVoidFromJSON,
+    TransactionVoidToJSON,
 } from '../models/index';
 import {ServiceApiUtils} from "../utils/ServiceApiUtils";
 
@@ -68,6 +74,17 @@ export interface GetPaymentTerminalsRequest {
     expand?: Set<string>;
     limit?: number;
     order?: SortingOrder;
+}
+
+export interface GetPaymentTerminalsActivationStatusRequest {
+    space: number;
+    activationCodeActive?: boolean;
+    configurationId?: number;
+    environment?: string;
+    hasActivationCode?: boolean;
+    limit?: number;
+    locationId?: number;
+    offset?: number;
 }
 
 export interface GetPaymentTerminalsIdRequest {
@@ -101,7 +118,7 @@ export interface PatchPaymentTerminalsIdRequest {
 
 export interface PostPaymentTerminalsRequest {
     space: number;
-    paymentTerminalCreate: PaymentTerminalCreate;
+    paymentTerminalCreationRequest: PaymentTerminalCreationRequest;
     expand?: Set<string>;
 }
 
@@ -111,6 +128,17 @@ export interface PostPaymentTerminalsByIdentifierIdentifierPerformTransactionReq
     space: number;
     language?: string;
     expand?: Set<string>;
+}
+
+export interface PostPaymentTerminalsByIdentifierIdentifierRefreshRequest {
+    identifier: string;
+    space: number;
+    expand?: Set<string>;
+}
+
+export interface PostPaymentTerminalsByIdentifierIdentifierTriggerConfigurationRequest {
+    identifier: string;
+    space: number;
 }
 
 export interface PostPaymentTerminalsByIdentifierIdentifierTriggerFinalBalanceRequest {
@@ -132,6 +160,17 @@ export interface PostPaymentTerminalsIdPerformTransactionRequest {
     expand?: Set<string>;
 }
 
+export interface PostPaymentTerminalsIdRefreshRequest {
+    id: number;
+    space: number;
+    expand?: Set<string>;
+}
+
+export interface PostPaymentTerminalsIdTriggerConfigurationRequest {
+    id: number;
+    space: number;
+}
+
 export interface PostPaymentTerminalsIdTriggerFinalBalanceRequest {
     id: number;
     space: number;
@@ -140,6 +179,12 @@ export interface PostPaymentTerminalsIdTriggerFinalBalanceRequest {
 export interface PostPaymentTerminalsIdUnlinkRequest {
     id: number;
     space: number;
+}
+
+export interface PostPaymentTerminalsTriggerReversalRequest {
+    transactionId: number;
+    space: number;
+    expand?: Set<string>;
 }
 
 /**
@@ -176,7 +221,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'DELETE';
@@ -246,7 +291,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -280,6 +325,84 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
     }
 
     /**
+     * Search payment terminal activation status
+     
+     */
+    async getPaymentTerminalsActivationStatusRaw(requestParameters: GetPaymentTerminalsActivationStatusRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentTerminalActivationStatusDetailSearchResponse>> {
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling getPaymentTerminalsActivationStatus().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['activationCodeActive'] != null) {
+            queryParameters['activationCodeActive'] = requestParameters['activationCodeActive'];
+        }
+
+        if (requestParameters['configurationId'] != null) {
+            queryParameters['configurationId'] = requestParameters['configurationId'];
+        }
+
+        if (requestParameters['environment'] != null) {
+            queryParameters['environment'] = requestParameters['environment'];
+        }
+
+        if (requestParameters['hasActivationCode'] != null) {
+            queryParameters['hasActivationCode'] = requestParameters['hasActivationCode'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['locationId'] != null) {
+            queryParameters['locationId'] = requestParameters['locationId'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'GET';
+        const path = `/payment/terminals/activation-status`;
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/activation-status`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentTerminalActivationStatusDetailSearchResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Search payment terminal activation status
+     
+     */
+    async getPaymentTerminalsActivationStatus(requestParameters: GetPaymentTerminalsActivationStatusRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentTerminalActivationStatusDetailSearchResponse> {
+        const response = await this.getPaymentTerminalsActivationStatusRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a payment terminal
      
      */
@@ -307,7 +430,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -379,7 +502,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -453,7 +576,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -523,7 +646,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'PATCH';
@@ -569,10 +692,10 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['paymentTerminalCreate'] == null) {
+        if (requestParameters['paymentTerminalCreationRequest'] == null) {
             throw new runtime.RequiredError(
-                'paymentTerminalCreate',
-                'Required parameter "paymentTerminalCreate" was null or undefined when calling postPaymentTerminals().'
+                'paymentTerminalCreationRequest',
+                'Required parameter "paymentTerminalCreationRequest" was null or undefined when calling postPaymentTerminals().'
             );
         }
 
@@ -587,7 +710,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -606,7 +729,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PaymentTerminalCreateToJSON(requestParameters['paymentTerminalCreate']),
+            body: PaymentTerminalCreationRequestToJSON(requestParameters['paymentTerminalCreationRequest']),
         }, updatedInitOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PaymentTerminalFromJSON(jsonValue));
@@ -666,7 +789,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -702,6 +825,125 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
     }
 
     /**
+     * Refresh a physical terminal state by identifier
+     
+     * (The read time out for this request is 30 seconds)
+     */
+    async postPaymentTerminalsByIdentifierIdentifierRefreshRaw(requestParameters: PostPaymentTerminalsByIdentifierIdentifierRefreshRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentTerminal>> {
+        if (requestParameters['identifier'] == null) {
+            throw new runtime.RequiredError(
+                'identifier',
+                'Required parameter "identifier" was null or undefined when calling postPaymentTerminalsByIdentifierIdentifierRefresh().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTerminalsByIdentifierIdentifierRefresh().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/terminals/by-identifier/{identifier}/refresh`.replace(`{${"identifier"}}`, encodeURIComponent(String(requestParameters['identifier'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = 30;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/by-identifier/{identifier}/refresh`.replace(`{${"identifier"}}`, encodeURIComponent(String(requestParameters['identifier']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentTerminalFromJSON(jsonValue));
+    }
+
+    /**
+     * Refresh a physical terminal state by identifier
+     
+     * (The read time out for this request is 30 seconds)
+     */
+    async postPaymentTerminalsByIdentifierIdentifierRefresh(requestParameters: PostPaymentTerminalsByIdentifierIdentifierRefreshRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentTerminal> {
+        const response = await this.postPaymentTerminalsByIdentifierIdentifierRefreshRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Remotely trigger the configuration by identifier
+     
+     */
+    async postPaymentTerminalsByIdentifierIdentifierTriggerConfigurationRaw(requestParameters: PostPaymentTerminalsByIdentifierIdentifierTriggerConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['identifier'] == null) {
+            throw new runtime.RequiredError(
+                'identifier',
+                'Required parameter "identifier" was null or undefined when calling postPaymentTerminalsByIdentifierIdentifierTriggerConfiguration().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTerminalsByIdentifierIdentifierTriggerConfiguration().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/terminals/by-identifier/{identifier}/trigger-configuration`.replace(`{${"identifier"}}`, encodeURIComponent(String(requestParameters['identifier'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/by-identifier/{identifier}/trigger-configuration`.replace(`{${"identifier"}}`, encodeURIComponent(String(requestParameters['identifier']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remotely trigger the configuration by identifier
+     
+     */
+    async postPaymentTerminalsByIdentifierIdentifierTriggerConfiguration(requestParameters: PostPaymentTerminalsByIdentifierIdentifierTriggerConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.postPaymentTerminalsByIdentifierIdentifierTriggerConfigurationRaw(requestParameters, initOverrides);
+    }
+
+    /**
      * Remotely trigger the final balance by identifier
      
      */
@@ -725,7 +967,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -793,7 +1035,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -870,7 +1112,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -906,6 +1148,125 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
     }
 
     /**
+     * Refresh a physical terminal state
+     
+     * (The read time out for this request is 30 seconds)
+     */
+    async postPaymentTerminalsIdRefreshRaw(requestParameters: PostPaymentTerminalsIdRefreshRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentTerminal>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling postPaymentTerminalsIdRefresh().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTerminalsIdRefresh().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/terminals/{id}/refresh`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = 30;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/{id}/refresh`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentTerminalFromJSON(jsonValue));
+    }
+
+    /**
+     * Refresh a physical terminal state
+     
+     * (The read time out for this request is 30 seconds)
+     */
+    async postPaymentTerminalsIdRefresh(requestParameters: PostPaymentTerminalsIdRefreshRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentTerminal> {
+        const response = await this.postPaymentTerminalsIdRefreshRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Remotely trigger the configuration
+     
+     */
+    async postPaymentTerminalsIdTriggerConfigurationRaw(requestParameters: PostPaymentTerminalsIdTriggerConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling postPaymentTerminalsIdTriggerConfiguration().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTerminalsIdTriggerConfiguration().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/terminals/{id}/trigger-configuration`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/{id}/trigger-configuration`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Remotely trigger the configuration
+     
+     */
+    async postPaymentTerminalsIdTriggerConfiguration(requestParameters: PostPaymentTerminalsIdTriggerConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.postPaymentTerminalsIdTriggerConfigurationRaw(requestParameters, initOverrides);
+    }
+
+    /**
      * Remotely trigger the final balance
      
      */
@@ -929,7 +1290,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -986,7 +1347,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -1016,6 +1377,75 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
      */
     async postPaymentTerminalsIdUnlink(requestParameters: PostPaymentTerminalsIdUnlinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.postPaymentTerminalsIdUnlinkRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * This function communicates with the payment terminal to cancel the authorization hold and remove the transaction from the current open batch. It must be executed before the settlement (Submission) occurs.
+     * Revert terminal transaction
+     
+     * (The read time out for this request is 90 seconds)
+     */
+    async postPaymentTerminalsTriggerReversalRaw(requestParameters: PostPaymentTerminalsTriggerReversalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionVoid>> {
+        if (requestParameters['transactionId'] == null) {
+            throw new runtime.RequiredError(
+                'transactionId',
+                'Required parameter "transactionId" was null or undefined when calling postPaymentTerminalsTriggerReversal().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTerminalsTriggerReversal().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['transactionId'] != null) {
+            queryParameters['transactionId'] = requestParameters['transactionId'];
+        }
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/terminals/trigger-reversal`;
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = 90;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/terminals/trigger-reversal`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionVoidFromJSON(jsonValue));
+    }
+
+    /**
+     * This function communicates with the payment terminal to cancel the authorization hold and remove the transaction from the current open batch. It must be executed before the settlement (Submission) occurs.
+     * Revert terminal transaction
+     
+     * (The read time out for this request is 90 seconds)
+     */
+    async postPaymentTerminalsTriggerReversal(requestParameters: PostPaymentTerminalsTriggerReversalRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionVoid> {
+        const response = await this.postPaymentTerminalsTriggerReversalRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
 

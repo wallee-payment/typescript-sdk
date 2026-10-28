@@ -43,7 +43,7 @@ export interface PaymentTerminalLocation {
      */
     readonly linkedSpaceId?: number;
     /**
-     * 
+     * The production merchant identifier assigned to the location.
      * @type {string}
      * @memberof PaymentTerminalLocation
      */

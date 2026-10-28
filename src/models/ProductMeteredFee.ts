@@ -82,6 +82,12 @@ export interface ProductMeteredFee {
      */
     metric?: SubscriptionMetric;
     /**
+     * The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
+     * @type {number}
+     * @memberof ProductMeteredFee
+     */
+    readonly numberOfFreeTrialPeriods?: number;
+    /**
      * The localized name of the fee that is displayed to the customer.
      * @type {{ [key: string]: string; }}
      * @memberof ProductMeteredFee
@@ -136,6 +142,7 @@ export function ProductMeteredFeeFromJSONTyped(json: any, ignoreDiscriminator: b
         'component': json['component'] == null ? undefined : SubscriptionProductComponentFromJSON(json['component']),
         'tierPricing': json['tierPricing'] == null ? undefined : ProductMeteredTierPricingFromJSON(json['tierPricing']),
         'metric': json['metric'] == null ? undefined : SubscriptionMetricFromJSON(json['metric']),
+        'numberOfFreeTrialPeriods': json['numberOfFreeTrialPeriods'] == null ? undefined : json['numberOfFreeTrialPeriods'],
         'name': json['name'] == null ? undefined : json['name'],
         'description': json['description'] == null ? undefined : json['description'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -148,7 +155,7 @@ export function ProductMeteredFeeToJSON(json: any): ProductMeteredFee {
     return ProductMeteredFeeToJSONTyped(json, false);
 }
 
-export function ProductMeteredFeeToJSONTyped(value?: Omit<ProductMeteredFee, 'linkedSpaceId'|'name'|'description'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
+export function ProductMeteredFeeToJSONTyped(value?: Omit<ProductMeteredFee, 'linkedSpaceId'|'numberOfFreeTrialPeriods'|'name'|'description'|'id'|'version'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

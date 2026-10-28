@@ -1,0 +1,95 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ * Wallee AG TypeScript SDK
+ *
+ * This library allows to interact with the Wallee AG payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://en.wallee.com
+ * Developer email: ecosystem-team@wallee.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { mapValues } from '../runtime';
+import type { WalleejoinPartnershipResponseDto } from './WalleejoinPartnershipResponseDto';
+import {
+    WalleejoinPartnershipResponseDtoFromJSON,
+    WalleejoinPartnershipResponseDtoFromJSONTyped,
+    WalleejoinPartnershipResponseDtoToJSON,
+    WalleejoinPartnershipResponseDtoToJSONTyped,
+} from './WalleejoinPartnershipResponseDto';
+
+/**
+ * 
+ * @export
+ * @interface WalleejoinPartnershipResponseDtoListResponse
+ */
+export interface WalleejoinPartnershipResponseDtoListResponse {
+    /**
+     * An array containing the actual response objects.
+     * @type {Array<WalleejoinPartnershipResponseDto>}
+     * @memberof WalleejoinPartnershipResponseDtoListResponse
+     */
+    readonly data?: Array<WalleejoinPartnershipResponseDto>;
+    /**
+     * Whether there are more objects available after this set. If false, there are no more objects to retrieve.
+     * @type {boolean}
+     * @memberof WalleejoinPartnershipResponseDtoListResponse
+     */
+    readonly hasMore?: boolean;
+    /**
+     * The applied limit on the number of objects returned.
+     * @type {number}
+     * @memberof WalleejoinPartnershipResponseDtoListResponse
+     */
+    readonly limit?: number;
+}
+
+/**
+ * Check if a given object implements the WalleejoinPartnershipResponseDtoListResponse interface.
+ */
+export function instanceOfWalleejoinPartnershipResponseDtoListResponse(value: object): value is WalleejoinPartnershipResponseDtoListResponse {
+    return true;
+}
+
+export function WalleejoinPartnershipResponseDtoListResponseFromJSON(json: any): WalleejoinPartnershipResponseDtoListResponse {
+    return WalleejoinPartnershipResponseDtoListResponseFromJSONTyped(json, false);
+}
+
+export function WalleejoinPartnershipResponseDtoListResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): WalleejoinPartnershipResponseDtoListResponse {
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'data': json['data'] == null ? undefined : ((json['data'] as Array<any>).map(WalleejoinPartnershipResponseDtoFromJSON)),
+        'hasMore': json['hasMore'] == null ? undefined : json['hasMore'],
+        'limit': json['limit'] == null ? undefined : json['limit'],
+    };
+}
+
+export function WalleejoinPartnershipResponseDtoListResponseToJSON(json: any): WalleejoinPartnershipResponseDtoListResponse {
+    return WalleejoinPartnershipResponseDtoListResponseToJSONTyped(json, false);
+}
+
+export function WalleejoinPartnershipResponseDtoListResponseToJSONTyped(value?: Omit<WalleejoinPartnershipResponseDtoListResponse, 'data'|'hasMore'|'limit'> | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
+    }
+
+    return {
+        
+    };
+}
+

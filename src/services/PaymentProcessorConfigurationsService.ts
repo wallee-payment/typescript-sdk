@@ -92,6 +92,13 @@ export interface PostPaymentProcessorConfigurationsRequest {
     expand?: Set<string>;
 }
 
+export interface PostPaymentProcessorConfigurationsIdLinkContractRequest {
+    id: number;
+    contractId: number;
+    space: number;
+    expand?: Set<string>;
+}
+
 /**
  * 
  */
@@ -126,7 +133,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'DELETE';
@@ -196,7 +203,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -257,7 +264,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -327,7 +334,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -397,7 +404,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'PATCH';
@@ -461,7 +468,7 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -492,6 +499,78 @@ export class PaymentProcessorConfigurationsService extends runtime.BaseAPI {
      */
     async postPaymentProcessorConfigurations(requestParameters: PostPaymentProcessorConfigurationsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentProcessorConfiguration> {
         const response = await this.postPaymentProcessorConfigurationsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Link a contract with a payment processor configuration
+     
+     */
+    async postPaymentProcessorConfigurationsIdLinkContractRaw(requestParameters: PostPaymentProcessorConfigurationsIdLinkContractRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaymentProcessorConfiguration>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling postPaymentProcessorConfigurationsIdLinkContract().'
+            );
+        }
+
+        if (requestParameters['contractId'] == null) {
+            throw new runtime.RequiredError(
+                'contractId',
+                'Required parameter "contractId" was null or undefined when calling postPaymentProcessorConfigurationsIdLinkContract().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentProcessorConfigurationsIdLinkContract().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['contractId'] != null) {
+            queryParameters['contractId'] = requestParameters['contractId'];
+        }
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/processor-configurations/{id}/link-contract`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/processor-configurations/{id}/link-contract`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentProcessorConfigurationFromJSON(jsonValue));
+    }
+
+    /**
+     * Link a contract with a payment processor configuration
+     
+     */
+    async postPaymentProcessorConfigurationsIdLinkContract(requestParameters: PostPaymentProcessorConfigurationsIdLinkContractRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaymentProcessorConfiguration> {
+        const response = await this.postPaymentProcessorConfigurationsIdLinkContractRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

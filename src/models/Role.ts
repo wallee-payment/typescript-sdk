@@ -69,6 +69,12 @@ export interface Role {
      */
     readonly plannedPurgeDate?: Date;
     /**
+     * Additional information that describes the role.
+     * @type {{ [key: string]: string; }}
+     * @memberof Role
+     */
+    readonly description?: { [key: string]: string; };
+    /**
      * A unique identifier for the object.
      * @type {number}
      * @memberof Role
@@ -122,6 +128,7 @@ export function RoleFromJSONTyped(json: any, ignoreDiscriminator: boolean): Role
         'permissions': json['permissions'] == null ? undefined : (new Set((json['permissions'] as Array<any>).map(PermissionFromJSON))),
         'name': json['name'] == null ? undefined : json['name'],
         'plannedPurgeDate': json['plannedPurgeDate'] == null ? undefined : (new Date(json['plannedPurgeDate'])),
+        'description': json['description'] == null ? undefined : json['description'],
         'id': json['id'] == null ? undefined : json['id'],
         'state': json['state'] == null ? undefined : RoleStateFromJSON(json['state']),
         'version': json['version'] == null ? undefined : json['version'],
@@ -134,7 +141,7 @@ export function RoleToJSON(json: any): Role {
     return RoleToJSONTyped(json, false);
 }
 
-export function RoleToJSONTyped(value?: Omit<Role, 'permissions'|'name'|'plannedPurgeDate'|'id'|'version'|'twoFactorRequired'> | null, ignoreDiscriminator: boolean = false): any {
+export function RoleToJSONTyped(value?: Omit<Role, 'permissions'|'name'|'plannedPurgeDate'|'description'|'id'|'version'|'twoFactorRequired'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

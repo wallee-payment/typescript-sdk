@@ -122,7 +122,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'DELETE';
@@ -191,7 +191,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -252,7 +252,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -322,7 +322,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -392,7 +392,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'PATCH';
@@ -456,7 +456,7 @@ export class SubscriptionProductMeteredFeesService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';

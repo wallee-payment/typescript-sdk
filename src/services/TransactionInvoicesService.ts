@@ -90,6 +90,14 @@ export interface PostPaymentTransactionsInvoicesIdDerecognizeRequest {
     expand?: Set<string>;
 }
 
+export interface PostPaymentTransactionsInvoicesIdInstantPaymentUrlRequest {
+    id: number;
+    space: number;
+    successUrl?: string;
+    failureUrl?: string;
+    ttlInMinutes?: number;
+}
+
 export interface PostPaymentTransactionsInvoicesIdMarkPaidRequest {
     id: number;
     space: number;
@@ -149,7 +157,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -210,7 +218,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -267,7 +275,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -328,7 +336,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -398,7 +406,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -459,7 +467,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -493,6 +501,79 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
     }
 
     /**
+     * Create an instant invoice payment URL
+     
+     */
+    async postPaymentTransactionsInvoicesIdInstantPaymentUrlRaw(requestParameters: PostPaymentTransactionsInvoicesIdInstantPaymentUrlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<string>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling postPaymentTransactionsInvoicesIdInstantPaymentUrl().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling postPaymentTransactionsInvoicesIdInstantPaymentUrl().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['successUrl'] != null) {
+            queryParameters['successUrl'] = requestParameters['successUrl'];
+        }
+
+        if (requestParameters['failureUrl'] != null) {
+            queryParameters['failureUrl'] = requestParameters['failureUrl'];
+        }
+
+        if (requestParameters['ttlInMinutes'] != null) {
+            queryParameters['ttlInMinutes'] = requestParameters['ttlInMinutes'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'POST';
+        const path = `/payment/transactions/invoices/{id}/instant-payment-url`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/transactions/invoices/{id}/instant-payment-url`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        if (this.isJsonMime(response.headers.get('content-type'))) {
+            return new runtime.JSONApiResponse<string>(response);
+        } else {
+            return new runtime.TextApiResponse(response) as any;
+        }
+    }
+
+    /**
+     * Create an instant invoice payment URL
+     
+     */
+    async postPaymentTransactionsInvoicesIdInstantPaymentUrl(requestParameters: PostPaymentTransactionsInvoicesIdInstantPaymentUrlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
+        const response = await this.postPaymentTransactionsInvoicesIdInstantPaymentUrlRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Mark a transaction invoice as paid
      
      */
@@ -520,7 +601,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -590,7 +671,7 @@ export class TransactionInvoicesService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';

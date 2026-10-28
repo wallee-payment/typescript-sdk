@@ -86,6 +86,12 @@ export interface Scope {
      */
     readonly themes?: Array<string>;
     /**
+     * Trusted external origins (e.g. merchant shops) for browser API access (CORS on /api/) and absolute target redirect URLs.
+     * @type {Array<string>}
+     * @memberof Scope
+     */
+    readonly trustedExternalOrigins?: Array<string>;
+    /**
      * The port where the scope can be accessed.
      * @type {number}
      * @memberof Scope
@@ -155,6 +161,7 @@ export function ScopeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sco
         'url': json['url'] == null ? undefined : json['url'],
         'features': json['features'] == null ? undefined : (new Set((json['features'] as Array<any>).map(FeatureFromJSON))),
         'themes': json['themes'] == null ? undefined : json['themes'],
+        'trustedExternalOrigins': json['trustedExternalOrigins'] == null ? undefined : json['trustedExternalOrigins'],
         'port': json['port'] == null ? undefined : json['port'],
         'preprodDomainName': json['preprodDomainName'] == null ? undefined : json['preprodDomainName'],
         'domainName': json['domainName'] == null ? undefined : json['domainName'],
@@ -169,7 +176,7 @@ export function ScopeToJSON(json: any): Scope {
     return ScopeToJSONTyped(json, false);
 }
 
-export function ScopeToJSONTyped(value?: Omit<Scope, 'plannedPurgeDate'|'sslActive'|'version'|'machineName'|'url'|'features'|'themes'|'port'|'preprodDomainName'|'domainName'|'name'|'id'|'sandboxDomainName'> | null, ignoreDiscriminator: boolean = false): any {
+export function ScopeToJSONTyped(value?: Omit<Scope, 'plannedPurgeDate'|'sslActive'|'version'|'machineName'|'url'|'features'|'themes'|'trustedExternalOrigins'|'port'|'preprodDomainName'|'domainName'|'name'|'id'|'sandboxDomainName'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

@@ -29,6 +29,7 @@ import type {
   RestApiErrorResponse,
   RestCountry,
   RestCountryState,
+  StateListResponse,
 } from '../models/index';
 import {
     CountryListResponseFromJSON,
@@ -41,6 +42,8 @@ import {
     RestCountryToJSON,
     RestCountryStateFromJSON,
     RestCountryStateToJSON,
+    StateListResponseFromJSON,
+    StateListResponseToJSON,
 } from '../models/index';
 import {ServiceApiUtils} from "../utils/ServiceApiUtils";
 
@@ -55,6 +58,7 @@ export interface GetCountriesCodeRequest {
 
 export interface GetCountriesCountryCodeStatesRequest {
     countryCode: string;
+    expand?: Set<string>;
 }
 
 export interface GetCountriesSearchRequest {
@@ -65,8 +69,13 @@ export interface GetCountriesSearchRequest {
     query?: string;
 }
 
+export interface GetCountriesStatesRequest {
+    expand?: Set<string>;
+}
+
 export interface GetCountriesStatesIdRequest {
     id: string;
+    expand?: Set<string>;
 }
 
 /**
@@ -175,7 +184,7 @@ export class CountriesService extends runtime.BaseAPI {
      * List all states for a country
      
      */
-    async getCountriesCountryCodeStatesRaw(requestParameters: GetCountriesCountryCodeStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RestCountryState>>> {
+    async getCountriesCountryCodeStatesRaw(requestParameters: GetCountriesCountryCodeStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StateListResponse>> {
         if (requestParameters['countryCode'] == null) {
             throw new runtime.RequiredError(
                 'countryCode',
@@ -184,6 +193,10 @@ export class CountriesService extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -205,14 +218,14 @@ export class CountriesService extends runtime.BaseAPI {
             query: queryParameters,
         }, updatedInitOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RestCountryStateFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StateListResponseFromJSON(jsonValue));
     }
 
     /**
      * List all states for a country
      
      */
-    async getCountriesCountryCodeStates(requestParameters: GetCountriesCountryCodeStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RestCountryState>> {
+    async getCountriesCountryCodeStates(requestParameters: GetCountriesCountryCodeStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StateListResponse> {
         const response = await this.getCountriesCountryCodeStatesRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -280,8 +293,12 @@ export class CountriesService extends runtime.BaseAPI {
      * List all country states
      
      */
-    async getCountriesStatesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<RestCountryState>>> {
+    async getCountriesStatesRaw(requestParameters: GetCountriesStatesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StateListResponse>> {
         const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -303,15 +320,15 @@ export class CountriesService extends runtime.BaseAPI {
             query: queryParameters,
         }, updatedInitOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(RestCountryStateFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => StateListResponseFromJSON(jsonValue));
     }
 
     /**
      * List all country states
      
      */
-    async getCountriesStates(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<RestCountryState>> {
-        const response = await this.getCountriesStatesRaw(initOverrides);
+    async getCountriesStates(requestParameters: GetCountriesStatesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StateListResponse> {
+        const response = await this.getCountriesStatesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -328,6 +345,10 @@ export class CountriesService extends runtime.BaseAPI {
         }
 
         const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 

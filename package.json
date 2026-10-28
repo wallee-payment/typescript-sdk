@@ -1,7 +1,7 @@
 {
   "name": "wallee",
   "title": "wallee",
-  "version": "5.5.0",
+  "version": "6.0.0",
   "description": "TypeScript/JavaScript client for wallee",
   "author": "wallee AG",
   "repository": {

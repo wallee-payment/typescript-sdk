@@ -26,6 +26,7 @@ import * as runtime from '../runtime';
 import type {
   AuthenticatedCardRequest,
   Charge,
+  ChargeAttemptLookupResult,
   PaymentMethodConfigurationListResponse,
   RenderedDocument,
   RenderedTerminalReceiptListResponse,
@@ -40,6 +41,7 @@ import type {
   TransactionCreate,
   TransactionLineItemVersion,
   TransactionListResponse,
+  TransactionOverview,
   TransactionPending,
   TransactionSearchResponse,
   TransactionVoid,
@@ -49,6 +51,8 @@ import {
     AuthenticatedCardRequestToJSON,
     ChargeFromJSON,
     ChargeToJSON,
+    ChargeAttemptLookupResultFromJSON,
+    ChargeAttemptLookupResultToJSON,
     PaymentMethodConfigurationListResponseFromJSON,
     PaymentMethodConfigurationListResponseToJSON,
     RenderedDocumentFromJSON,
@@ -77,6 +81,8 @@ import {
     TransactionLineItemVersionToJSON,
     TransactionListResponseFromJSON,
     TransactionListResponseToJSON,
+    TransactionOverviewFromJSON,
+    TransactionOverviewToJSON,
     TransactionPendingFromJSON,
     TransactionPendingToJSON,
     TransactionSearchResponseFromJSON,
@@ -176,6 +182,11 @@ export interface GetPaymentTransactionsIdLightboxJavascriptUrlRequest {
     space: number;
 }
 
+export interface GetPaymentTransactionsIdOverviewRequest {
+    id: number;
+    space: number;
+}
+
 export interface GetPaymentTransactionsIdPackingSlipDocumentRequest {
     id: number;
     space: number;
@@ -189,6 +200,11 @@ export interface GetPaymentTransactionsIdPaymentMethodConfigurationsRequest {
 }
 
 export interface GetPaymentTransactionsIdPaymentPageUrlRequest {
+    id: number;
+    space: number;
+}
+
+export interface GetPaymentTransactionsIdSuccessfulChargeAttemptRequest {
     id: number;
     space: number;
 }
@@ -357,7 +373,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'DELETE';
@@ -426,7 +442,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -487,7 +503,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -544,7 +560,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -609,7 +625,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -681,7 +697,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -752,7 +768,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -814,7 +830,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -871,7 +887,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -932,7 +948,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -994,7 +1010,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1056,7 +1072,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1117,7 +1133,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1178,7 +1194,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1235,7 +1251,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1273,6 +1289,65 @@ export class TransactionsService extends runtime.BaseAPI {
     }
 
     /**
+     * Returns the transaction with the given id together with the successful charge attempt that authorized it, including its labels, attached under \'successfulChargeAttempt\'. When the transaction has no successful charge attempt yet, only the transaction is returned.
+     * Retrieve a transaction overview
+     
+     */
+    async getPaymentTransactionsIdOverviewRaw(requestParameters: GetPaymentTransactionsIdOverviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TransactionOverview>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling getPaymentTransactionsIdOverview().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling getPaymentTransactionsIdOverview().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'GET';
+        const path = `/payment/transactions/{id}/overview`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/transactions/{id}/overview`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TransactionOverviewFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the transaction with the given id together with the successful charge attempt that authorized it, including its labels, attached under \'successfulChargeAttempt\'. When the transaction has no successful charge attempt yet, only the transaction is returned.
+     * Retrieve a transaction overview
+     
+     */
+    async getPaymentTransactionsIdOverview(requestParameters: GetPaymentTransactionsIdOverviewRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TransactionOverview> {
+        const response = await this.getPaymentTransactionsIdOverviewRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
      * Retrieve a packing slip document
      
      */
@@ -1296,7 +1371,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1368,7 +1443,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1425,7 +1500,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1459,6 +1534,65 @@ export class TransactionsService extends runtime.BaseAPI {
      */
     async getPaymentTransactionsIdPaymentPageUrl(requestParameters: GetPaymentTransactionsIdPaymentPageUrlRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<string> {
         const response = await this.getPaymentTransactionsIdPaymentPageUrlRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns the successful charge attempt that authorized the transaction with the given id. When the transaction has no successful charge attempt yet, the transaction status is returned instead, so the endpoint can be polled until the charge attempt appears. Note that a successful charge attempt confirms the authorization of the transaction, not its completion. When the transaction is charged with deferred payment, a successful charge attempt does not guarantee that the transaction will be completed and fulfilled, so this operation is not suited to confirming the final fulfillment of such a transaction. In that case, we recommend confirming that the transaction has been captured and is successful, using either the completion read API or the transaction read API.
+     * Retrieve the successful charge attempt
+     
+     */
+    async getPaymentTransactionsIdSuccessfulChargeAttemptRaw(requestParameters: GetPaymentTransactionsIdSuccessfulChargeAttemptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ChargeAttemptLookupResult>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling getPaymentTransactionsIdSuccessfulChargeAttempt().'
+            );
+        }
+
+        if (requestParameters['space'] == null) {
+            throw new runtime.RequiredError(
+                'space',
+                'Required parameter "space" was null or undefined when calling getPaymentTransactionsIdSuccessfulChargeAttempt().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['space'] != null) {
+            headerParameters['space'] = String(requestParameters['space']);
+        }
+
+        const method = 'GET';
+        const path = `/payment/transactions/{id}/successful-charge-attempt`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/payment/transactions/{id}/successful-charge-attempt`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ChargeAttemptLookupResultFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the successful charge attempt that authorized the transaction with the given id. When the transaction has no successful charge attempt yet, the transaction status is returned instead, so the endpoint can be polled until the charge attempt appears. Note that a successful charge attempt confirms the authorization of the transaction, not its completion. When the transaction is charged with deferred payment, a successful charge attempt does not guarantee that the transaction will be completed and fulfilled, so this operation is not suited to confirming the final fulfillment of such a transaction. In that case, we recommend confirming that the transaction has been captured and is successful, using either the completion read API or the transaction read API.
+     * Retrieve the successful charge attempt
+     
+     */
+    async getPaymentTransactionsIdSuccessfulChargeAttempt(requestParameters: GetPaymentTransactionsIdSuccessfulChargeAttemptRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ChargeAttemptLookupResult> {
+        const response = await this.getPaymentTransactionsIdSuccessfulChargeAttemptRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -1508,7 +1642,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1578,7 +1712,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'GET';
@@ -1648,7 +1782,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'PATCH';
@@ -1712,7 +1846,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -1778,7 +1912,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -1844,7 +1978,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -1905,7 +2039,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -1984,7 +2118,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2044,7 +2178,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2105,7 +2239,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2175,7 +2309,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2246,7 +2380,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2317,7 +2451,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2388,7 +2522,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2456,7 +2590,7 @@ export class TransactionsService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2523,7 +2657,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2584,7 +2718,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2645,7 +2779,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';
@@ -2706,7 +2840,7 @@ export class TransactionsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['space'] != null) {
-            headerParameters['Space'] = String(requestParameters['space']);
+            headerParameters['space'] = String(requestParameters['space']);
         }
 
         const method = 'POST';

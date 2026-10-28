@@ -30,6 +30,7 @@ export const PaymentTerminalLocationVersionState = {
     Pending: 'PENDING',
     Scheduling: 'SCHEDULING',
     Active: 'ACTIVE',
+    Obsolete: 'OBSOLETE',
     Deleting: 'DELETING',
     Deleted: 'DELETED'
 } as const;

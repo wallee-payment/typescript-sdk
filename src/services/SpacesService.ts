@@ -82,6 +82,7 @@ export interface PatchSpacesIdRequest {
 }
 
 export interface PostSpacesRequest {
+    account: number;
     spaceCreate: SpaceCreate;
     expand?: Set<string>;
 }
@@ -375,6 +376,13 @@ export class SpacesService extends runtime.BaseAPI {
      
      */
     async postSpacesRaw(requestParameters: PostSpacesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Space>> {
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling postSpaces().'
+            );
+        }
+
         if (requestParameters['spaceCreate'] == null) {
             throw new runtime.RequiredError(
                 'spaceCreate',
@@ -391,6 +399,10 @@ export class SpacesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['account'] != null) {
+            headerParameters['account'] = String(requestParameters['account']);
+        }
 
         const method = 'POST';
         const path = `/spaces`;

@@ -119,7 +119,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'DELETE';
@@ -175,7 +175,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'DELETE';
@@ -246,7 +246,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'GET';
@@ -305,7 +305,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'GET';
@@ -365,7 +365,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'GET';
@@ -438,7 +438,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'GET';
@@ -498,7 +498,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'GET';
@@ -582,7 +582,7 @@ export class AnalyticsQueriesService extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (requestParameters['account'] != null) {
-            headerParameters['Account'] = String(requestParameters['account']);
+            headerParameters['account'] = String(requestParameters['account']);
         }
 
         const method = 'POST';

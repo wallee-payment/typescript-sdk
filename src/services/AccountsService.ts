@@ -25,7 +25,7 @@
 import * as runtime from '../runtime';
 import type {
   Account,
-  AccountCreate,
+  AccountCreateWithOwner,
   AccountListResponse,
   AccountSearchResponse,
   AccountUpdate,
@@ -35,8 +35,8 @@ import type {
 import {
     AccountFromJSON,
     AccountToJSON,
-    AccountCreateFromJSON,
-    AccountCreateToJSON,
+    AccountCreateWithOwnerFromJSON,
+    AccountCreateWithOwnerToJSON,
     AccountListResponseFromJSON,
     AccountListResponseToJSON,
     AccountSearchResponseFromJSON,
@@ -82,7 +82,8 @@ export interface PatchAccountsIdRequest {
 }
 
 export interface PostAccountsRequest {
-    accountCreate: AccountCreate;
+    account: number;
+    accountCreateWithOwner: AccountCreateWithOwner;
     expand?: Set<string>;
 }
 
@@ -383,10 +384,17 @@ export class AccountsService extends runtime.BaseAPI {
      
      */
     async postAccountsRaw(requestParameters: PostAccountsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Account>> {
-        if (requestParameters['accountCreate'] == null) {
+        if (requestParameters['account'] == null) {
             throw new runtime.RequiredError(
-                'accountCreate',
-                'Required parameter "accountCreate" was null or undefined when calling postAccounts().'
+                'account',
+                'Required parameter "account" was null or undefined when calling postAccounts().'
+            );
+        }
+
+        if (requestParameters['accountCreateWithOwner'] == null) {
+            throw new runtime.RequiredError(
+                'accountCreateWithOwner',
+                'Required parameter "accountCreateWithOwner" was null or undefined when calling postAccounts().'
             );
         }
 
@@ -399,6 +407,10 @@ export class AccountsService extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['account'] != null) {
+            headerParameters['account'] = String(requestParameters['account']);
+        }
 
         const method = 'POST';
         const path = `/accounts`;
@@ -416,7 +428,7 @@ export class AccountsService extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AccountCreateToJSON(requestParameters['accountCreate']),
+            body: AccountCreateWithOwnerToJSON(requestParameters['accountCreateWithOwner']),
         }, updatedInitOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AccountFromJSON(jsonValue));

@@ -94,6 +94,12 @@ export interface AuthenticatedCardDataCreate {
      */
     recurringIndicator?: RecurringIndicator;
     /**
+     * A reference specific to linking card transaction lifecycle events within the payment scheme.
+     * @type {string}
+     * @memberof AuthenticatedCardDataCreate
+     */
+    transactionLinkIdentifier?: string;
+    /**
      * A reference specific to the card's transaction within its payment scheme.
      * @type {string}
      * @memberof AuthenticatedCardDataCreate
@@ -145,6 +151,7 @@ export function AuthenticatedCardDataCreateFromJSONTyped(json: any, ignoreDiscri
         'cardVerificationCode': json['cardVerificationCode'] == null ? undefined : json['cardVerificationCode'],
         'primaryAccountNumber': json['primaryAccountNumber'],
         'recurringIndicator': json['recurringIndicator'] == null ? undefined : RecurringIndicatorFromJSON(json['recurringIndicator']),
+        'transactionLinkIdentifier': json['transactionLinkIdentifier'] == null ? undefined : json['transactionLinkIdentifier'],
         'schemeTransactionReference': json['schemeTransactionReference'] == null ? undefined : json['schemeTransactionReference'],
         'cardholderAuthentication': json['cardholderAuthentication'] == null ? undefined : CardholderAuthenticationCreateFromJSON(json['cardholderAuthentication']),
         'tokenRequestorId': json['tokenRequestorId'] == null ? undefined : json['tokenRequestorId'],
@@ -169,6 +176,7 @@ export function AuthenticatedCardDataCreateToJSONTyped(value?: AuthenticatedCard
         'cardVerificationCode': value['cardVerificationCode'],
         'primaryAccountNumber': value['primaryAccountNumber'],
         'recurringIndicator': RecurringIndicatorToJSON(value['recurringIndicator']),
+        'transactionLinkIdentifier': value['transactionLinkIdentifier'],
         'schemeTransactionReference': value['schemeTransactionReference'],
         'cardholderAuthentication': CardholderAuthenticationCreateToJSON(value['cardholderAuthentication']),
         'tokenRequestorId': value['tokenRequestorId'],

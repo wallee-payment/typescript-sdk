@@ -55,6 +55,12 @@ export interface ProductMeteredFeeUpdate {
      */
     metric?: number;
     /**
+     * The number of subscription billing cycles that count as a trial phase and during which no fees are charged.
+     * @type {number}
+     * @memberof ProductMeteredFeeUpdate
+     */
+    numberOfFreeTrialPeriods?: number;
+    /**
      * The localized name of the fee that is displayed to the customer.
      * @type {{ [key: string]: string; }}
      * @memberof ProductMeteredFeeUpdate
@@ -97,6 +103,7 @@ export function ProductMeteredFeeUpdateFromJSONTyped(json: any, ignoreDiscrimina
         'component': json['component'] == null ? undefined : json['component'],
         'tierPricing': json['tierPricing'] == null ? undefined : ProductMeteredTierPricingFromJSON(json['tierPricing']),
         'metric': json['metric'] == null ? undefined : json['metric'],
+        'numberOfFreeTrialPeriods': json['numberOfFreeTrialPeriods'] == null ? undefined : json['numberOfFreeTrialPeriods'],
         'name': json['name'] == null ? undefined : json['name'],
         'description': json['description'] == null ? undefined : json['description'],
         'version': json['version'],
@@ -117,6 +124,7 @@ export function ProductMeteredFeeUpdateToJSONTyped(value?: ProductMeteredFeeUpda
         'component': value['component'],
         'tierPricing': ProductMeteredTierPricingToJSON(value['tierPricing']),
         'metric': value['metric'],
+        'numberOfFreeTrialPeriods': value['numberOfFreeTrialPeriods'],
         'name': value['name'],
         'description': value['description'],
         'version': value['version'],

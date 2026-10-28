@@ -38,16 +38,34 @@ import {
 export interface WalletType {
     /**
      * 
+     * @type {Set<Feature>}
+     * @memberof WalletType
+     */
+    readonly requiredFeatures?: Set<Feature>;
+    /**
+     * 
      * @type {Feature}
      * @memberof WalletType
      */
     feature?: Feature;
     /**
      * 
+     * @type {boolean}
+     * @memberof WalletType
+     */
+    readonly standardCheckoutSupported?: boolean;
+    /**
+     * 
      * @type {number}
      * @memberof WalletType
      */
     readonly sortOrder?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WalletType
+     */
+    readonly expressCheckoutSupported?: boolean;
     /**
      * The localized name of the object.
      * @type {{ [key: string]: string; }}
@@ -91,8 +109,11 @@ export function WalletTypeFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
+        'requiredFeatures': json['requiredFeatures'] == null ? undefined : (new Set((json['requiredFeatures'] as Array<any>).map(FeatureFromJSON))),
         'feature': json['feature'] == null ? undefined : FeatureFromJSON(json['feature']),
+        'standardCheckoutSupported': json['standardCheckoutSupported'] == null ? undefined : json['standardCheckoutSupported'],
         'sortOrder': json['sortOrder'] == null ? undefined : json['sortOrder'],
+        'expressCheckoutSupported': json['expressCheckoutSupported'] == null ? undefined : json['expressCheckoutSupported'],
         'name': json['name'] == null ? undefined : json['name'],
         'description': json['description'] == null ? undefined : json['description'],
         'navigationPath': json['navigationPath'] == null ? undefined : json['navigationPath'],
@@ -104,7 +125,7 @@ export function WalletTypeToJSON(json: any): WalletType {
     return WalletTypeToJSONTyped(json, false);
 }
 
-export function WalletTypeToJSONTyped(value?: Omit<WalletType, 'sortOrder'|'name'|'description'|'navigationPath'|'id'> | null, ignoreDiscriminator: boolean = false): any {
+export function WalletTypeToJSONTyped(value?: Omit<WalletType, 'requiredFeatures'|'standardCheckoutSupported'|'sortOrder'|'expressCheckoutSupported'|'name'|'description'|'navigationPath'|'id'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
