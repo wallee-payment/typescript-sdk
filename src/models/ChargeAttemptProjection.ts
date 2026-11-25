@@ -29,6 +29,41 @@ import {
     CustomersPresenceToJSON,
     CustomersPresenceToJSONTyped,
 } from './CustomersPresence';
+import type { TransactionAmounts } from './TransactionAmounts';
+import {
+    TransactionAmountsFromJSON,
+    TransactionAmountsFromJSONTyped,
+    TransactionAmountsToJSON,
+    TransactionAmountsToJSONTyped,
+} from './TransactionAmounts';
+import type { Charge } from './Charge';
+import {
+    ChargeFromJSON,
+    ChargeFromJSONTyped,
+    ChargeToJSON,
+    ChargeToJSONTyped,
+} from './Charge';
+import type { Label } from './Label';
+import {
+    LabelFromJSON,
+    LabelFromJSONTyped,
+    LabelToJSON,
+    LabelToJSONTyped,
+} from './Label';
+import type { PaymentTerminal } from './PaymentTerminal';
+import {
+    PaymentTerminalFromJSON,
+    PaymentTerminalFromJSONTyped,
+    PaymentTerminalToJSON,
+    PaymentTerminalToJSONTyped,
+} from './PaymentTerminal';
+import type { TokenVersion } from './TokenVersion';
+import {
+    TokenVersionFromJSON,
+    TokenVersionFromJSONTyped,
+    TokenVersionToJSON,
+    TokenVersionToJSONTyped,
+} from './TokenVersion';
 import type { PaymentConnectorConfiguration } from './PaymentConnectorConfiguration';
 import {
     PaymentConnectorConfigurationFromJSON,
@@ -71,34 +106,6 @@ import {
     TransactionCompletionBehaviorToJSON,
     TransactionCompletionBehaviorToJSONTyped,
 } from './TransactionCompletionBehavior';
-import type { Charge } from './Charge';
-import {
-    ChargeFromJSON,
-    ChargeFromJSONTyped,
-    ChargeToJSON,
-    ChargeToJSONTyped,
-} from './Charge';
-import type { Label } from './Label';
-import {
-    LabelFromJSON,
-    LabelFromJSONTyped,
-    LabelToJSON,
-    LabelToJSONTyped,
-} from './Label';
-import type { PaymentTerminal } from './PaymentTerminal';
-import {
-    PaymentTerminalFromJSON,
-    PaymentTerminalFromJSONTyped,
-    PaymentTerminalToJSON,
-    PaymentTerminalToJSONTyped,
-} from './PaymentTerminal';
-import type { TokenVersion } from './TokenVersion';
-import {
-    TokenVersionFromJSON,
-    TokenVersionFromJSONTyped,
-    TokenVersionToJSON,
-    TokenVersionToJSONTyped,
-} from './TokenVersion';
 import type { ChargeAttemptEnvironment } from './ChargeAttemptEnvironment';
 import {
     ChargeAttemptEnvironmentFromJSON,
@@ -287,6 +294,12 @@ export interface ChargeAttemptProjection {
      * @memberof ChargeAttemptProjection
      */
     readonly failedOn?: Date;
+    /**
+     * 
+     * @type {TransactionAmounts}
+     * @memberof ChargeAttemptProjection
+     */
+    transactionAmounts?: TransactionAmounts;
 }
 
 
@@ -337,6 +350,7 @@ export function ChargeAttemptProjectionFromJSONTyped(json: any, ignoreDiscrimina
         'failureReason': json['failureReason'] == null ? undefined : FailureReasonFromJSON(json['failureReason']),
         'customersPresence': json['customersPresence'] == null ? undefined : CustomersPresenceFromJSON(json['customersPresence']),
         'failedOn': json['failedOn'] == null ? undefined : (new Date(json['failedOn'])),
+        'transactionAmounts': json['transactionAmounts'] == null ? undefined : TransactionAmountsFromJSON(json['transactionAmounts']),
     };
 }
 
@@ -362,6 +376,7 @@ export function ChargeAttemptProjectionToJSONTyped(value?: Omit<ChargeAttemptPro
         'connectorConfiguration': PaymentConnectorConfigurationToJSON(value['connectorConfiguration']),
         'failureReason': FailureReasonToJSON(value['failureReason']),
         'customersPresence': CustomersPresenceToJSON(value['customersPresence']),
+        'transactionAmounts': TransactionAmountsToJSON(value['transactionAmounts']),
     };
 }
 

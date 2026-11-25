@@ -32,6 +32,7 @@ import type {
   SubscriptionCreateRequest,
   SubscriptionInitializeSubscriberPresentRequest,
   SubscriptionListResponse,
+  SubscriptionPartialUpdateRequest,
   SubscriptionSearchResponse,
   SubscriptionSuspension,
   SubscriptionUpdateRequest,
@@ -55,6 +56,8 @@ import {
     SubscriptionInitializeSubscriberPresentRequestToJSON,
     SubscriptionListResponseFromJSON,
     SubscriptionListResponseToJSON,
+    SubscriptionPartialUpdateRequestFromJSON,
+    SubscriptionPartialUpdateRequestToJSON,
     SubscriptionSearchResponseFromJSON,
     SubscriptionSearchResponseToJSON,
     SubscriptionSuspensionFromJSON,
@@ -105,7 +108,7 @@ export interface GetSubscriptionsSearchRequest {
 export interface PatchSubscriptionsIdRequest {
     id: number;
     space: number;
-    subscriptionUpdateRequest: SubscriptionUpdateRequest;
+    subscriptionPartialUpdateRequest: SubscriptionPartialUpdateRequest;
     expand?: Set<string>;
 }
 
@@ -466,10 +469,10 @@ export class SubscriptionsService extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['subscriptionUpdateRequest'] == null) {
+        if (requestParameters['subscriptionPartialUpdateRequest'] == null) {
             throw new runtime.RequiredError(
-                'subscriptionUpdateRequest',
-                'Required parameter "subscriptionUpdateRequest" was null or undefined when calling patchSubscriptionsId().'
+                'subscriptionPartialUpdateRequest',
+                'Required parameter "subscriptionPartialUpdateRequest" was null or undefined when calling patchSubscriptionsId().'
             );
         }
 
@@ -503,7 +506,7 @@ export class SubscriptionsService extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: SubscriptionUpdateRequestToJSON(requestParameters['subscriptionUpdateRequest']),
+            body: SubscriptionPartialUpdateRequestToJSON(requestParameters['subscriptionPartialUpdateRequest']),
         }, updatedInitOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SubscriptionFromJSON(jsonValue));

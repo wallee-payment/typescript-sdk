@@ -26,6 +26,8 @@ import * as runtime from '../runtime';
 import type {
   MerchantApplicationDataDto,
   MerchantApplicationStatusDto,
+  MerchantApplicationSubmitRequestDto,
+  MerchantApplicationSubmittedDto,
   RestApiErrorResponse,
 } from '../models/index';
 import {
@@ -33,10 +35,19 @@ import {
     MerchantApplicationDataDtoToJSON,
     MerchantApplicationStatusDtoFromJSON,
     MerchantApplicationStatusDtoToJSON,
+    MerchantApplicationSubmitRequestDtoFromJSON,
+    MerchantApplicationSubmitRequestDtoToJSON,
+    MerchantApplicationSubmittedDtoFromJSON,
+    MerchantApplicationSubmittedDtoToJSON,
     RestApiErrorResponseFromJSON,
     RestApiErrorResponseToJSON,
 } from '../models/index';
 import {ServiceApiUtils} from "../utils/ServiceApiUtils";
+
+export interface GetOnboardingMerchantApplicationsByAccountRequest {
+    account: number;
+    expand?: Set<string>;
+}
 
 export interface GetOnboardingMerchantApplicationsIdStatusRequest {
     id: number;
@@ -62,6 +73,13 @@ export interface PostOnboardingMerchantApplicationsRequest {
     merchantApplicationDataDto?: MerchantApplicationDataDto;
 }
 
+export interface PostOnboardingMerchantApplicationsIdSubmitRequest {
+    id: number;
+    account: number;
+    merchantApplicationSubmitRequestDto: MerchantApplicationSubmitRequestDto;
+    expand?: Set<string>;
+}
+
 /**
  * 
  */
@@ -69,6 +87,62 @@ export class MerchantApplicationsService extends runtime.BaseAPI {
 
     constructor(configuration: runtime.Configuration) {
         super(configuration);
+    }
+
+    /**
+     * Returns the merchant application for the account specified in the account header.
+     * Retrieve a merchant application by account
+     
+     */
+    async getOnboardingMerchantApplicationsByAccountRaw(requestParameters: GetOnboardingMerchantApplicationsByAccountRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MerchantApplicationDataDto>> {
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling getOnboardingMerchantApplicationsByAccount().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['account'] != null) {
+            headerParameters['account'] = String(requestParameters['account']);
+        }
+
+        const method = 'GET';
+        const path = `/onboarding/merchant-applications/by-account`;
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/onboarding/merchant-applications/by-account`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MerchantApplicationDataDtoFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns the merchant application for the account specified in the account header.
+     * Retrieve a merchant application by account
+     
+     */
+    async getOnboardingMerchantApplicationsByAccount(requestParameters: GetOnboardingMerchantApplicationsByAccountRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MerchantApplicationDataDto> {
+        const response = await this.getOnboardingMerchantApplicationsByAccountRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**
@@ -322,6 +396,77 @@ export class MerchantApplicationsService extends runtime.BaseAPI {
      */
     async postOnboardingMerchantApplications(requestParameters: PostOnboardingMerchantApplicationsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MerchantApplicationDataDto> {
         const response = await this.postOnboardingMerchantApplicationsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Submit a merchant application and create an organization
+     
+     */
+    async postOnboardingMerchantApplicationsIdSubmitRaw(requestParameters: PostOnboardingMerchantApplicationsIdSubmitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MerchantApplicationSubmittedDto>> {
+        if (requestParameters['id'] == null) {
+            throw new runtime.RequiredError(
+                'id',
+                'Required parameter "id" was null or undefined when calling postOnboardingMerchantApplicationsIdSubmit().'
+            );
+        }
+
+        if (requestParameters['account'] == null) {
+            throw new runtime.RequiredError(
+                'account',
+                'Required parameter "account" was null or undefined when calling postOnboardingMerchantApplicationsIdSubmit().'
+            );
+        }
+
+        if (requestParameters['merchantApplicationSubmitRequestDto'] == null) {
+            throw new runtime.RequiredError(
+                'merchantApplicationSubmitRequestDto',
+                'Required parameter "merchantApplicationSubmitRequestDto" was null or undefined when calling postOnboardingMerchantApplicationsIdSubmit().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['expand'] != null) {
+            queryParameters['expand'] = requestParameters['expand'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['account'] != null) {
+            headerParameters['account'] = String(requestParameters['account']);
+        }
+
+        const method = 'POST';
+        const path = `/onboarding/merchant-applications/{id}/submit`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id'])));
+
+        if (this.configuration.httpBearerAuth) {
+            await this.configuration.httpBearerAuth.applyToRequest(path, method, queryParameters, headerParameters);
+        }
+
+        // Set per-request timeout in initOverrides: use the incoming parameter or fall back to the Configuration value
+        const requestTimeoutInSeconds = this.configuration.requestTimeout;
+        const updatedInitOverrides = await ServiceApiUtils.adjustRequestSignalAsync(initOverrides, requestTimeoutInSeconds);
+
+        const response = await this.request({
+            path: `/onboarding/merchant-applications/{id}/submit`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: MerchantApplicationSubmitRequestDtoToJSON(requestParameters['merchantApplicationSubmitRequestDto']),
+        }, updatedInitOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MerchantApplicationSubmittedDtoFromJSON(jsonValue));
+    }
+
+    /**
+     * Submit a merchant application and create an organization
+     
+     */
+    async postOnboardingMerchantApplicationsIdSubmit(requestParameters: PostOnboardingMerchantApplicationsIdSubmitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MerchantApplicationSubmittedDto> {
+        const response = await this.postOnboardingMerchantApplicationsIdSubmitRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

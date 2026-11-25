@@ -22,6 +22,14 @@
  * limitations under the License.
  */
 import { mapValues } from '../runtime';
+import type { SpaceAddressCreate } from './SpaceAddressCreate';
+import {
+    SpaceAddressCreateFromJSON,
+    SpaceAddressCreateFromJSONTyped,
+    SpaceAddressCreateToJSON,
+    SpaceAddressCreateToJSONTyped,
+} from './SpaceAddressCreate';
+
 /**
  * 
  * @export
@@ -40,6 +48,18 @@ export interface WalleejoinCreatePartnershipApiRequestDto {
      * @memberof WalleejoinCreatePartnershipApiRequestDto
      */
     partnerAccountId?: number;
+    /**
+     * The name of the subaccount created for the merchant. Only used for ISV partnerships when a merchant email address is provided. If empty, a generated name is used.
+     * @type {string}
+     * @memberof WalleejoinCreatePartnershipApiRequestDto
+     */
+    merchantAccountName?: string;
+    /**
+     * 
+     * @type {SpaceAddressCreate}
+     * @memberof WalleejoinCreatePartnershipApiRequestDto
+     */
+    merchantAddress?: SpaceAddressCreate;
     /**
      * 
      * @type {number}
@@ -79,6 +99,8 @@ export function WalleejoinCreatePartnershipApiRequestDtoFromJSONTyped(json: any,
         
         'emailMessage': json['emailMessage'] == null ? undefined : json['emailMessage'],
         'partnerAccountId': json['partnerAccountId'] == null ? undefined : json['partnerAccountId'],
+        'merchantAccountName': json['merchantAccountName'] == null ? undefined : json['merchantAccountName'],
+        'merchantAddress': json['merchantAddress'] == null ? undefined : SpaceAddressCreateFromJSON(json['merchantAddress']),
         'pricingProfileSellRateId': json['pricingProfileSellRateId'] == null ? undefined : json['pricingProfileSellRateId'],
         'subscriptionProductId': json['subscriptionProductId'] == null ? undefined : json['subscriptionProductId'],
         'merchantEmailAddress': json['merchantEmailAddress'] == null ? undefined : json['merchantEmailAddress'],
@@ -98,6 +120,8 @@ export function WalleejoinCreatePartnershipApiRequestDtoToJSONTyped(value?: Wall
         
         'emailMessage': value['emailMessage'],
         'partnerAccountId': value['partnerAccountId'],
+        'merchantAccountName': value['merchantAccountName'],
+        'merchantAddress': SpaceAddressCreateToJSON(value['merchantAddress']),
         'pricingProfileSellRateId': value['pricingProfileSellRateId'],
         'subscriptionProductId': value['subscriptionProductId'],
         'merchantEmailAddress': value['merchantEmailAddress'],

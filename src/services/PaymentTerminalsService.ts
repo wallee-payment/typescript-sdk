@@ -28,7 +28,7 @@ import type {
   PaymentTerminalActivationStatusDetailSearchResponse,
   PaymentTerminalCreationRequest,
   PaymentTerminalTransactionSummaryReference,
-  PaymentTerminalUpdate,
+  PaymentTerminalUpdateRequest,
   RestApiErrorResponse,
   SortingOrder,
   TerminalListResponse,
@@ -45,8 +45,8 @@ import {
     PaymentTerminalCreationRequestToJSON,
     PaymentTerminalTransactionSummaryReferenceFromJSON,
     PaymentTerminalTransactionSummaryReferenceToJSON,
-    PaymentTerminalUpdateFromJSON,
-    PaymentTerminalUpdateToJSON,
+    PaymentTerminalUpdateRequestFromJSON,
+    PaymentTerminalUpdateRequestToJSON,
     RestApiErrorResponseFromJSON,
     RestApiErrorResponseToJSON,
     SortingOrderFromJSON,
@@ -112,7 +112,7 @@ export interface GetPaymentTerminalsSearchRequest {
 export interface PatchPaymentTerminalsIdRequest {
     id: number;
     space: number;
-    paymentTerminalUpdate: PaymentTerminalUpdate;
+    paymentTerminalUpdateRequest: PaymentTerminalUpdateRequest;
     expand?: Set<string>;
 }
 
@@ -628,10 +628,10 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['paymentTerminalUpdate'] == null) {
+        if (requestParameters['paymentTerminalUpdateRequest'] == null) {
             throw new runtime.RequiredError(
-                'paymentTerminalUpdate',
-                'Required parameter "paymentTerminalUpdate" was null or undefined when calling patchPaymentTerminalsId().'
+                'paymentTerminalUpdateRequest',
+                'Required parameter "paymentTerminalUpdateRequest" was null or undefined when calling patchPaymentTerminalsId().'
             );
         }
 
@@ -665,7 +665,7 @@ export class PaymentTerminalsService extends runtime.BaseAPI {
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: PaymentTerminalUpdateToJSON(requestParameters['paymentTerminalUpdate']),
+            body: PaymentTerminalUpdateRequestToJSON(requestParameters['paymentTerminalUpdateRequest']),
         }, updatedInitOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PaymentTerminalFromJSON(jsonValue));

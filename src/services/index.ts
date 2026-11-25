@@ -29,6 +29,7 @@ export * from './DunningCaseLevelsService';
 export * from './DunningCasesService';
 export * from './DunningFlowLevelsService';
 export * from './DunningFlowsService';
+export * from './ExpressCheckoutSessionService';
 export * from './ExternalTransferBankTransactionsService';
 export * from './FulfillmentsService';
 export * from './HumanUsersService';

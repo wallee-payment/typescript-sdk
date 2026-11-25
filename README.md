@@ -749,6 +749,21 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/dunning-flows/search
   &nbsp;&nbsp;&nbsp;&nbsp;Search dunning flows
   <br><br>
+- <strong>ExpressCheckoutSessionService</strong><br>
+  &nbsp;&nbsp;* <code>getExpressCheckoutSession</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /express-checkout/session
+  &nbsp;&nbsp;&nbsp;&nbsp;Get Express Checkout Session details
+  <br><br>
+- <strong>ExpressCheckoutSessionService</strong><br>
+  &nbsp;&nbsp;* <code>postExpressCheckoutSessionCreate</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /express-checkout/session/create
+  &nbsp;&nbsp;&nbsp;&nbsp;Create a new Express Checkout Session
+  <br><br>
+- <strong>ExpressCheckoutSessionService</strong><br>
+  &nbsp;&nbsp;* <code>postExpressCheckoutSessionProcess</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /express-checkout/session/process
+  &nbsp;&nbsp;&nbsp;&nbsp;Process Express Checkout Session
+  <br><br>
 - <strong>ExternalTransferBankTransactionsService</strong><br>
   &nbsp;&nbsp;* <code>getPaymentBankTransactionsExternalTransfers</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /payment/bank-transactions/external-transfers
@@ -1065,6 +1080,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;&nbsp;&nbsp;List all members of the space
   <br><br>
 - <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>getOnboardingMerchantApplicationsByAccount</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /onboarding/merchant-applications/by-account
+  &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a merchant application by account
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
   &nbsp;&nbsp;* <code>getOnboardingMerchantApplicationsIdStatus</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>GET</strong> /onboarding/merchant-applications/{id}/status
   &nbsp;&nbsp;&nbsp;&nbsp;Retrieve a merchant application status
@@ -1083,6 +1103,11 @@ Web Api client: [*link*](https://app-wallee.com//api/client)<br>
   &nbsp;&nbsp;* <code>postOnboardingMerchantApplications</code>
   &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /onboarding/merchant-applications
   &nbsp;&nbsp;&nbsp;&nbsp;Create a merchant application
+  <br><br>
+- <strong>MerchantApplicationsService</strong><br>
+  &nbsp;&nbsp;* <code>postOnboardingMerchantApplicationsIdSubmit</code>
+  &nbsp;&nbsp;&nbsp;&nbsp;<strong>POST</strong> /onboarding/merchant-applications/{id}/submit
+  &nbsp;&nbsp;&nbsp;&nbsp;Submit a merchant application and create an organization
   <br><br>
 - <strong>OAuthClientsService</strong><br>
   &nbsp;&nbsp;* <code>deleteOauth2ClientsClientIdSecretsId</code>
@@ -3073,6 +3098,14 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>DunningFlowSearchResponse</strong>
 * <strong>DunningFlowType</strong>
 * <strong>Environment</strong>
+* <strong>ExpressCheckoutSession</strong>
+* <strong>ExpressCheckoutSessionCreate</strong>
+* <strong>ExpressCheckoutSessionCreateResponse</strong>
+* <strong>ExpressCheckoutSessionProcessRequest</strong>
+* <strong>ExpressCheckoutSessionProcessResponse</strong>
+* <strong>ExpressCheckoutSessionState</strong>
+* <strong>ExpressCheckoutShippingOption</strong>
+* <strong>ExpressCheckoutWalletType</strong>
 * <strong>ExtendedRestOAuthClient</strong>
 * <strong>ExternalTransferBankTransaction</strong>
 * <strong>ExternalTransferBankTransactionListResponse</strong>
@@ -3148,6 +3181,8 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>MerchantApplicationDataDto</strong>
 * <strong>MerchantApplicationState</strong>
 * <strong>MerchantApplicationStatusDto</strong>
+* <strong>MerchantApplicationSubmitRequestDto</strong>
+* <strong>MerchantApplicationSubmittedDto</strong>
 * <strong>MerchantBankDetailsDto</strong>
 * <strong>MerchantCompanyDetailsDto</strong>
 * <strong>MerchantContractRevenueDto</strong>
@@ -3264,7 +3299,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>PaymentTerminalTransactionSummary</strong>
 * <strong>PaymentTerminalTransactionSummaryReference</strong>
 * <strong>PaymentTerminalType</strong>
-* <strong>PaymentTerminalUpdate</strong>
+* <strong>PaymentTerminalUpdateRequest</strong>
 * <strong>PayoutAccountInfo</strong>
 * <strong>Permission</strong>
 * <strong>PermissionListResponse</strong>
@@ -3422,6 +3457,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>SubscriptionMetricUpdate</strong>
 * <strong>SubscriptionMetricUsageReport</strong>
 * <strong>SubscriptionMetricUsageReportCreate</strong>
+* <strong>SubscriptionPartialUpdateRequest</strong>
 * <strong>SubscriptionPending</strong>
 * <strong>SubscriptionPeriodBill</strong>
 * <strong>SubscriptionPeriodBillListResponse</strong>
@@ -3487,6 +3523,7 @@ Additional Api models documentation: [*link*](https://app-wallee.com/en-us/doc/a
 * <strong>TokenizedCardRequest</strong>
 * <strong>TrackingNumberRequest</strong>
 * <strong>Transaction</strong>
+* <strong>TransactionAmounts</strong>
 * <strong>TransactionClientPlatformInformation</strong>
 * <strong>TransactionComment</strong>
 * <strong>TransactionCommentActive</strong>

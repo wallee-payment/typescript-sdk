@@ -30,7 +30,8 @@ export const FulfillmentState = {
     Creating: 'CREATING',
     Tracking: 'TRACKING',
     Fulfilled: 'FULFILLED',
-    Failed: 'FAILED'
+    Failed: 'FAILED',
+    Canceled: 'CANCELED'
 } as const;
 export type FulfillmentState = typeof FulfillmentState[keyof typeof FulfillmentState];
 
